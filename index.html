@@ -1,280 +1,168 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <title>Deadpool Front-end</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Deadpool Front-end">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deadpool Front-end">
-<meta name="twitter:description">
-  
-    <link rel="alternate" href="/atom.xml" title="Deadpool Front-end" type="application/atom+xml">
+  <meta name="description" content="前端分享" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta name="generator" content="Deadpool Front-end">
+
   
   
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
   
 
+  
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Deadpool Front-end</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">前端分享</a>
-        </h2>
-      
+<!--
+<body class="home-template">
+-->
+<body class="home-template">
+<div id="perspective" class="perspective effect-movedown">
+  <div class="container">
+    <!-- wrapper -->
+    <div class="wrapper">
+
+      <header class="site-head"  style="background: #24282b url(/img/img-bg.jpg) 0 -20%" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/logo.svg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Deadpool Front-end</h1>
+            <h2 class="blog-description">前端分享<button id="showMenu">Show Menu</button></h2>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
 </header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-我的sublime text 3 配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/03/我的sublime text 3 配置/" class="article-date">
-  <time datetime="2016-07-03T08:00:00.206Z" itemprop="datePublished">2016-07-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="sublime-text-3-配置"><a href="#sublime-text-3-配置" class="headerlink" title="sublime text 3 配置"></a>sublime text 3 配置</h2><h3 id="sublime-养成记"><a href="#sublime-养成记" class="headerlink" title="sublime 养成记"></a>sublime 养成记</h3><p>&gt;<br>    {<br>        “auto_find_in_selection”: true,    // 开启选中范围内搜索<br>        “bold_folder_labels”: true,   // 侧边栏文件夹显示加粗<br>        “caret_style”: “smooth”,<br>        “color_scheme”: “Packages/Colorsublime - Themes/Easyballs.tmTheme”,<br>        “default_encoding”: “UTF-8”,<br>        “default_line_ending”: “unix”,   // 使用unix风格的换行符<br>        “draw_minimap_border”: true,   // 右侧代码预览时给所在区域加上边框<br>        “ensure_newline_at_eof_on_save”: true,   // 保证在文件保存时，在结尾插入一个换行符。这样git提交时不会产生额外的diff<br>        “fade_fold_buttons”: true,   // 默认显示行号右侧的代码段闭合展开三角号<br>        “font_face”: “Monaco”,   // 个人最钟爱的字体<br>        “font_size”: 19,<br>        “font_weight”: 700,<br>        “highlight_line”: true,   // 当前行高亮<br>        “highlight_modified_tabs”: true,   // 高亮未保存文件<br>        “ignored_packages”:<br>        [<br>            “Vintage”<br>        ],<br>        “save_on_focus_lost”: true,   // 窗口失焦立即保存文件<br>        “tab_size”: 2,<br>        “theme”: “Spacegray.sublime-theme”,  //主题推荐，除了使用的以外，Material和Seti_UI 这两款都很美，比太空灰更美<br>        “translate_tabs_to_spaces”: true,   // 将tabs转换为space<br>        “trim_automatic_white_space”: true,   // 自动移除多余空格<br>        “trim_trailing_white_space_on_save”: true // 保存时移除多余空格<br>    }</p>
-<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><ul>
-<li><p>插件安装包 <a href="https://packagecontrol.io/installation" target="_blank" rel="external">package control</a></p>
-<ul>
-<li>ConvertToUTF8: GBK编码兼容</li>
-<li>JsFormat: javascript格式化，包括json.切换Syntax后按 Ctrl+Shift+A?格式化</li>
-<li>ColorSublime:用来安装官网的所有主题。</li>
-<li>Color Highlighter: 高亮CSS中的颜色，可以设置成用背景色或者边框提示颜色<ul>
-<li>`{<pre><code>&quot;ha_style&quot;: &quot;filled&quot;,
-&quot;icons&quot;: false
-</code></pre>  }`</li>
-</ul>
-</li>
-<li>DocBlockr: 代码块注释<ul>
-<li><code>/*</code>:回车创建一个代码块注释</li>
-<li><code>/**</code>:回车在自动查找函数中的形参等等。 </li>
-</ul>
-</li>
-<li>Git: 还没学会用。</li>
-<li>Modific: 高亮文件上次提交后的改动，适合git和svn</li>
-<li>BracketHighlighter 括号高亮</li>
-<li>BracketGuard 高亮错误的括号</li>
-<li>better coffeescript</li>
-<li>ColorPicker 拾色器</li>
-<li>CSS Format css格式化插件 // 先<code>cmd+shift+p</code> 然后个人习惯选择 <code>Format CSS: Expanded</code></li>
-<li>CSS3 支持CSS3 调整属性位置</li>
-<li>Ctags 跳进方法内部</li>
-<li>Jade</li>
-<li>Javascript Next: 支持es6，还未使用</li>
-<li>LiveStyle 支持实时调整CSS属性 需要文件路径 chrome也要安装插件 不常用</li>
-<li>SCSS</li>
-<li>SyncedSidebarBg 让侧边栏和中间背景色相同</li>
-<li>typescript</li>
-<li>Babel ES6/2015 和 React JSX上添加语法高亮</li>
-<li><p>ES6语法检查 <a href="http://javascript.ruanyifeng.com/tool/lint.html#toc3" target="_blank" rel="external">eslint</a></p>
-<ul>
-<li>首先是要系统全局安装eslint, 运行<code>npm install -g eslint</code>，<code>npm install -g babel-eslint</code> </li>
-<li>下载插件 <code>sublimeLinter</code></li>
-<li>下载 <code>sublimelinter-contrib-eslint</code></li>
-<li>下载完成后修改Sublimelinter 配置，Preferences-&gt;Package Settings-&gt;SublimeLinter-&gt;Settings-User,</li>
-<li>debug: true 开启 debug 模式 paths: 根据具体环境，设置 ESLint 路径</li>
-<li><p>例如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "user": &#123;</span><br><span class="line">        "debug": true,</span><br><span class="line">        ...</span><br><span class="line">        "linters": &#123;</span><br><span class="line">            "eslint": &#123;</span><br><span class="line">                ...</span><br><span class="line">                "excludes": ["*.html"]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">        "paths": &#123;</span><br><span class="line">            ....</span><br><span class="line">            "osx": [</span><br><span class="line">                "/usr/local/node/v0.12.7/bin"</span><br><span class="line">                // 如果用nvm装的会是这个</span><br><span class="line">                "/Users/kyriejoshua/.nvm/v0.10.30/bin/"</span><br><span class="line">            ],</span><br><span class="line">            "windows": [</span><br><span class="line">             "C:\\Users\\用户名\\AppData\\Roaming\\npm"</span><br><span class="line">            ]</span><br><span class="line">        &#125; </span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后在项目根目录下生成eslintrc.json文件</p>
-</li>
-<li>运行<code>eslint --init</code></li>
-<li>选择一些基本配置生成文件</li>
-<li>具体配置看<a href="https://github.com/y8n/ESLint-rules-docs-cn" target="_blank" rel="external">这里</a></li>
-<li>‘off’ or 0 关闭规则</li>
-<li>‘warn’ or 1 将规则视为警告</li>
-<li>‘error’ or 2 将规则视为错误</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="更换图标方法"><a href="#更换图标方法" class="headerlink" title="更换图标方法"></a>更换图标方法</h3><p>&gt;<br>    – You got the replacement icon (whatever file type, not neccessarily icns) somewhere, open it with Preview.点击准备替换的图标。<br>    – Cmd + Option + 2 to open Preview’s Thumbnail pane.<br>    – Select the image in the Thumbnail pane and Cmd + C  复制选中图标<br>    – Use Cmd + I to open the Info panel for the App. 打开app的图标预览<br>    – You see the small icon at the top left of the Info panel. Click to select and Cmd + V 选中粘贴</p>
-<pre><code>That’s it! It might take longer than your method, but it doesn’t require the icon to be with “.icns” extension.
-</code></pre><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><ul>
-<li><a href="http://sublime-text.readthedocs.org/en/latest/index.html" target="_blank" rel="external">sublime中文文档</a></li>
-<li><a href="https://www.zybuluo.com/king/note/47271" target="_blank" rel="external">sublime text3配置</a></li>
-</ul>
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/03/我的sublime text 3 配置/" data-id="ciq6b4zpq00014fcsizcxjckp" class="article-share-link">Share</a>
+<main class="content" role="main">
+  
+  <article class="post">
+    <header class="post-header">
+      <span class="post-meta">
+      <time datetime="2016-07-03T08:31:19.800Z" itemprop="datePublished">
+          2016-07-03
+      </time>
+    
+</span>
+      <h2 class="post-title"><a href="/2016/07/03/js诞生与ES6/"></a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
       
+        js诞生与ES61.JavaScript
+JavaScript，一种直译式脚本语言，是一种动态类型、基于原型的语言，内置支持类别。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML网页上使用，用来给HTML网页增加动态功能。然而现在JavaScript也可被用于网络服务器，如Node.js。
+在1995年时，由网景公司的布兰登·艾克，在网景导航者浏览器上首次设计实现而成。因为网景公司与
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/03/hello-world/" class="article-date">
-  <time datetime="2016-07-03T08:00:00.201Z" itemprop="datePublished">2016-07-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/03/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+      </p>
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+      <p>
+          <a href="/2016/07/03/js诞生与ES6/" class="excerpt-link">Read More...</a>
+      </p>
+      
+    </section>
+  </article>
+  
+  <article class="post">
+    <header class="post-header">
+      <span class="post-meta">
+      <time datetime="2016-07-03T08:31:19.796Z" itemprop="datePublished">
+          2016-07-03
+      </time>
+    
+</span>
+      <h2 class="post-title"><a href="/2016/07/03/我的sublime text 3 配置/"></a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+      
+        sublime text 3 配置sublime 养成记1234567891011121314151617181920212223242526&#123;	&quot;auto_find_in_selection&quot;: true,    // 开启选中范围内搜索	&quot;bold_folder_labels&quot;: true,   // 侧边栏文件夹显示加粗	&quot;caret_style&quot;: &quot
+      
+      </p>
+      
+      <p>
+          <a href="/2016/07/03/我的sublime text 3 配置/" class="excerpt-link">Read More...</a>
+      </p>
+      
+    </section>
+  </article>
+  
+  <article class="post">
+    <header class="post-header">
+      <span class="post-meta">
+      <time datetime="2016-06-16T10:23:32.783Z" itemprop="datePublished">
+          2016-06-16
+      </time>
+    
+</span>
+      <h2 class="post-title"><a href="/2016/06/16/hello-world/">Hello World</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+      
+        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new p
+      
+      </p>
+      
+      <p>
+          <a href="/2016/06/16/hello-world/" class="excerpt-link">Read More...</a>
+      </p>
+      
+    </section>
+  </article>
+  
+  <nav class="pagination" role="pagination">
+    
+    <span class="page-number">Page 1 of 1</span>
+    
+  </nav>
+</main>
+
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/03/hello-world/" data-id="ciq6b4zpm00004fcsjxbmi1tb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
+<footer class="site-footer">
   
-</article>
-
-
-  
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/07/03/我的sublime text 3 配置/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/03/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 朱征原<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Deadpool Front-end</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js"></script>
 
   </div>
+</div>
+
+<nav  class="outer-nav top horizontal">
+
+          <a class="icon-home"  href="/"><span>Home</span></a>
+
+          <a class="icon-news"  href="/archive"><span>Archive</span></a>
+
+          <a class="icon-image"  href="/images"><span>Images</span></a>
+
+          <a class="icon-wiki"  href="/wiki/2014-10-28-wiki/"><span>Wiki</span></a>
+
+          <a class="icon-Favorites"  href="/favorites"><span>Favorites</span></a>
+
+          <a class="icon-mail"  href="/about/2014-09-11-mabao/"><span>Contact</span></a>
+
+</nav>
+
+</div>
 </body>
 </html>
