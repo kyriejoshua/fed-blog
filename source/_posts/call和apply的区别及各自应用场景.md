@@ -60,88 +60,95 @@ tags:
 *  前者或许更好理解。来看看这样一个例子。
 
    ```javascript
-          const a = {
-            name: 'mdzz',
-            say: (name) => {
-              console.log(name)
-              window.alert(`我是 ${name}`);
-            }
-          }
-          const b = {};
-          // b也是zz,但没有相应的say方法，所以此时b想借用a的方法。
-          // 调用a的方法给b使用
-          a.say.call(b);
-          b.name = 'yrmdzz';
-          // 传入参数时
-          a.say.call(b, b.name);
-          a.say.apply(b, [b.name]);
+           const a = {
+             name: 'mdzz',
+             say: (name) => {
+               console.log(name)
+               window.alert(`我是 ${name}`);
+             }
+           }
+           const b = {};
+           // b也是zz,但没有相应的say方法，所以此时b想借用a的方法。
+           // 调用a的方法给b使用
+           a.say.call(b);
+           b.name = 'yrmdzz';
+           // 传入参数时
+           a.say.call(b, b.name);
+           a.say.apply(b, [b.name]);
    ```
 
    ```javascript
-     /* 或者这样定义更为明显 */
-      function Foo(){};
-      // 添加原型属性
-      Foo.prototype = {
-        name: 'mdzz',
-        say: function() {
-          console.log(this); // 当前调用的对象Foo
-          alert(`I am ${this.name}`);
-        }
+      /* 或者这样定义更为明显 */
+       function Foo(){};
+       // 添加原型属性
+       Foo.prototype = {
+         name: 'mdzz',
+         say: function() {
+           console.log(this); // 当前调用的对象Foo
+           alert(`I am ${this.name}`);
+         }
+       }
+
+      // new 生成一个实例对象
+       const people = new Foo();
+       console.info(people);
+       people.say();
+
+       // 定义一个没有say方法的对象animal
+       // 让它调用people的say方法
+       const animal = {
+         name: 'kitty'
+       }
+       people.say.call(animal);
+
+      /* 一个更显而易见的例子 */
+      // 定义一个函数，可以判断传入参数的基本类型
+        function type(obj) {
+          let toString = Object.prototype.toString;
+          let map = [
+             '[object Boolean]': 'boolean',
+             '[object Object]': 'Object',
+             '[object Array]': 'array',
+             '[object Number]': 'number',
+             '[object String]': 'string',
+             '[object RegExp]': 'regExp',
+             '[object Function]': 'function',
+             '[object Date]': 'data',
+             '[object Undefined]': 'undefined',
+             '[object Null]': 'null',
+          ];
+          return map[toString.call(obj)];
       }
-
-     // new 生成一个实例对象
-      const people = new Foo();
-      console.info(people);
-      people.say();
-
-      // 定义一个没有say方法的对象animal
-      // 让它调用people的say方法
-      const animal = {
-        name: 'kitty'
-      }
-      people.say.call(animal);
-
-     /* 一个更显而易见的例子 */
-     // 定义一个函数，可以判断传入参数的基本类型
-       function type(obj) {
-         let toString = Object.prototype.toString;
-         let map = [
-            '[object Boolean]': 'boolean',
-            '[object Object]': 'Object',
-            '[object Array]': 'array',
-            '[object Number]': 'number',
-            '[object String]': 'string',
-            '[object RegExp]': 'regExp',
-            '[object Function]': 'function',
-            '[object Date]': 'data',
-            '[object Undefined]': 'undefined',
-            '[object Null]': 'null',
-         ];
-         return map[toString.call(obj)];
-     }
    ```
 
    ```javascript
-            /* 在参数不定时，则可使用apply */
-              // 这里的例子改写自权威指南
-              // 内置Math对象有一个max方法，接受任意个参数，返回其中的最大值
-              // 但有时我们调用时，无法预知参数的个数，而且这种取最大值的情况通常在数组中发生
+             /* 在参数不定时，则可使用apply */
+               // 这里的例子改写自权威指南
+               // 内置Math对象有一个max方法，接受任意个参数，返回其中的最大值
+               // 但有时我们调用时，无法预知参数的个数，而且这种取最大值的情况通常在数组中发生
 
-              // 假如有这样一个数组
-              let arr = [4,98,34,90,41,78];
+               // 假如有这样一个数组
+               let arr = [4,98,34,90,41,78];
 
-              // 直接Math.max会返回NaN,因为它不接受数组作为参数
-              Math.max(arr); // 返回NaN
+               // 直接Math.max会返回NaN,因为它不接受数组作为参数
+               Math.max(arr); // 返回NaN
 
-              // apply方法接受数组作为参数
-              let biggest = Math.max.apply(Math, arr);
-              console.info(biggest); // 98
+               // apply方法接受数组作为参数
+               let biggest = Math.max.apply(Math, arr);
+               console.info(biggest); // 98
 
-              // 第一个参数Math可以替换为任何其他值，如下的也都可以
-              let biggest2 = Math.max.apply(this, arr);
-              let biggest3 = Math.max.apply(null, arr);
-              console.info(biggest2); // 98
-              console.info(biggest3); // 98
+               // 第一个参数Math可以替换为任何其他值，如下的也都可以
+               let biggest2 = Math.max.apply(this, arr);
+               let biggest3 = Math.max.apply(null, arr);
+               console.info(biggest2); // 98
+               console.info(biggest3); // 98
+
+             /* 还有一个比较有意思的apply使用场景 */
+               // 使用push方法来合并数组
+               let arrayA = ['say', 'hello'];
+               let arrayB = ['ok', 'master'];
+               Array.prototype.push.apply(arrayA, arrayB);
+               // arrayA: ['say', 'hello', 'ok', 'master']
    ```
 
 
