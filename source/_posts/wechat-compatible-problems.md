@@ -58,3 +58,23 @@ input {
 - 18878898922会被自动修改为`<a href="tel:18878898922"></a>`,就有了自动拨号功能。
 - 但有时是不需要这个鸡肋功能的，解决办法是在页面顶部添加一行`<meta name="format-detection" content="telephone=no">`禁用该功能。
 - `format-detection`决定启用或禁用该功能
+
+6.微信分享的缩略图
+
+* 微信中分享网页时会有缩略图，该缩略图默认是网页中的第一张图片，无论显不显示
+
+* 但是图片大小小于400px * 400px 时，或者直接将图片隐藏会导致无法显示
+
+* 所以较好的解决方案是在标签 img 外面加父元素 div ,给 div 设置:
+
+  ```html
+  <div style="margin: 0 auto;width: 0;height: 0; overflow: hidden"></div>
+  ```
+
+* 而图片无需处理，最终可写成如下:
+
+  ```html
+  <div style="margin: 0 aut0; width: 0; height: 0; overflow: hidden;">
+    <img src="./images/pic.png"/>
+  </div>
+  ```
