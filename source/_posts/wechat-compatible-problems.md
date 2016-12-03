@@ -29,10 +29,10 @@ document.body.addEventListener('touchstart',function(){})
 - [appearance CSS规范](http://www.w3school.com.cn/cssref/pr_appearance.asp)
   *解决办法：给input添加以下样式
 
-```javascript
+```css
 input {
     appearance: none;
-	-webkit-appearance: none; /* safari */
+    -webkit-appearance: none; /* safari */
     -moz-appearance: none;
 }
 ```
