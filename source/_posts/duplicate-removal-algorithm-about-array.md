@@ -21,7 +21,7 @@ tags: JavaScript
 
 ```javascript
 function unique(arr) {
-  let res = [];
+  var res = [];
   for (var i = 0; i < arr.length; i++) {
     var isUnique = true; // 标识该元素是否唯一
     for (var j = i + 1; j < arr.length - i; j++) {
@@ -39,8 +39,6 @@ function unique(arr) {
 var arr = [0, 0, 1, 1, 2, '2'];
 unique(arr);
 ```
-
-
 
 ### ES5实现
 
@@ -71,7 +69,7 @@ function unique(arr) {
   })
 }
 
-var arr = [0, '0', 0, 1, '1'];
+var arr = [0, '0', 0, 1, 1, '1'];
 unique(arr); // [0, '0', 1, '1'];
 ```
 
@@ -93,6 +91,38 @@ function filter(value, index, arr) {
 function unique(arr) {
   return arr.filter(filter);
 }
+```
+
+3.方法三：采用属性哈希值的方法.如果当前元素在对象中没有对应的属性存在，则设置该属性值为true.
+
+*  该方法可以用于去重由纯数字类型的元素组成的数组。
+
+```javascript
+function unique(arr) {
+  var obj = {};
+  return arr.filter(function(value) {
+    return obj.hasOwnProperty(value) ? false : (obj[value] = true);
+  });
+}
+
+var arr = [1, 1, 2, 2, 3];
+unique(arr); // [1, 2, 3];
+```
+
+* 但是该方法无法判断含字符串类型的元素的内容, 因为对象的属性默认会保存为字符串类型。(该方法可能有限制，暂未发现)
+
+```javascript
+var arr = [1, 1, '1', 2, '2', 3];
+unique(arr); // [1, 2, 3]; 无法区分数字类型和字符串类型
+
+// 加上类型保存
+function unique(arr) {
+  var obj = {};
+  return arr.filter(function(value) {
+    return obj.hasOwnProperty(typeof(value) + value) ? false : (obj[typeof(value) + value] = true);
+  });
+}
+unique(arr); // [1, '1', 2, '2', 3];
 ```
 
 ### ES6实现
@@ -139,7 +169,7 @@ unique(arr); // [1, '1', 2]; 不会进行类型转换
 
 2.方法二：扩展运算符(**…**)与**Set**
 
-* 首先使用Set定义一个没有重复值的可遍历对象。再使用ES6新增的扩展运算符`...`将其转化为数组。
+* 首先使用Set定义一个没有重复值的可遍历对象。再使用ES6新增的扩展运算符`...`将其转化为参数序列并作为数组的内容。
 
 ```javascript
 function unique(arr) {
