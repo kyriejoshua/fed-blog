@@ -12,12 +12,11 @@
 	#webpack
 	#nodejs略知皮毛
 	
-	未来是javascript攻城狮 or 全栈攻城狮？
-	不知道，先做好前端。
-	
-	**对一切事物充满好奇心。**
+	**0. 对一切事物充满好奇心。**
+	**1. 凡事怎么能不折腾。 **
 	
 	欢迎交流--- kj2046@outlook.com
+	github: https://github.com/kyriejoshua
 
 </blockquote>
 
