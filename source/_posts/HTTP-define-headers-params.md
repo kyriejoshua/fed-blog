@@ -6,7 +6,7 @@ tags: HTTP
 
 <hr>
 
-{% asset_img unphoto.jpeg  lake %}
+{% asset_img unphoto.jpg  l %}
 
 <blockquote><br/>近期和我司服务端对接时发现藏在headers里的参数，并不是HTTP的response里的常规参数。几经折腾后发现是自定义的参数。供前端ajax调用时提取使用。
 
