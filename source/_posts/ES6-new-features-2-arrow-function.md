@@ -6,7 +6,7 @@ tags:
 
 <hr>
 
-{% asset_img unphoto.jpeg hey %}
+{% asset_img unphoto.jpg hey %}
 
 <blockquote>
 	最近在准备一个新项目，引入了ES6，平时也常写ts，在越来越多的实战中发现箭头函数确实是ES6里最实用的新特性之一。
@@ -43,7 +43,7 @@ var tensquared = (function(x) {return x * x}(10))
 ```
 
 *	如果代码中的函数较少，也还好接受。但当函数较多时，满屏的function有些让人烦扰。
-*	让我们来试试ES6吧。
+   *让我们来试试ES6吧。
 
 #### ES6箭头函数
 
@@ -104,7 +104,7 @@ var init = () => {
 
 1.最大的好处就是使得代码更简洁,尤其是涉及回调的函数。
 
-	```javascript
+	​```javascript
 	var timer = setInterval(function() {
 	  console.log(new Date());
 	}, 1000);
@@ -121,11 +121,11 @@ var init = () => {
 	});
 	是不是简洁清爽了很多。
 	
-	```
-	
+	​```
+
 2.还有this只指代定义时的对象，而不是当前对象，所以再也不需要用that来替代this。
 
-	```javascript
+	​```javascript
 	我在写angular时便会遇到，所有定义的变量都相当于是属性，需要用this.prop去访问。
 	这里使用了ts。
 	export class OrderBatchController {
@@ -151,7 +151,7 @@ var init = () => {
 	    this.order = res.data;
 	  })
 	}
-	```
+	​```
 
 ### 注意点
 
@@ -177,6 +177,6 @@ getOrder() {
 *  总体来说，个人觉得ES6的箭头函数和coffee中的箭头函数很相似，使用起来也很方便。最需要注意的地方则是这个this不会再三心二意了。
 *  后续如果有其他注意点，再补充。
 
->	参考
-	[ES6入门](http://es6.ruanyifeng.com/#README)
+   >参考
+   >[ES6入门](http://es6.ruanyifeng.com/#README)
 
