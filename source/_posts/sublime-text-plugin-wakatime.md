@@ -6,7 +6,7 @@ tags: 编辑利器
 
 <hr>
 
-{% asset_img WakaTime.png waketime %}
+{% asset_img WakaTime.png Waketime %}
 
 <blockquote>
 	今天发现一款十分优秀的插件，可在各种编辑器中使用,我在sublime中首先使用了它。

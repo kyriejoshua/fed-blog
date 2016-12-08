@@ -6,7 +6,7 @@ tags: css
 
 <hr>
 
-{% asset_img unphoto.jpg input%}
+{% asset_img unphoto.jpg Input...%}
 
 <blockquote><br/>有注意到input在不同状态下，或者不同浏览器下都会有显示的问题。例如ios下的浏览器里input有边框显示问题，设置input属性appearance为none即可解决。但input仍然留下许多样式坑。
 
@@ -49,19 +49,19 @@ input[type=number]::-webkit-outer-spin-button {
 *  1.修改自动填充的样式（推荐）:
 
    ```javascript
-     // 使用以下样式来覆盖原有的，更改了背景和字体颜色
-     input: -webkit-autofill,
-     textarea: -webkit-autofill,
-     select: -webkit-autofill {
-       -webkit-box-shadow: 0 0 0 1000px #323339 inset;
-       -webkit-text-fill-color: white;
-     }
-     // 覆盖以下的chrome自带样式
-     input: -webkit-autofill, textarea: -webkit-autofill, select: -webkit-autofill {
-       background-color: rgb(250, 255, 189);
-       background-image: none;
-       color: rgb(0, 0, 0);
-     }
+      // 使用以下样式来覆盖原有的，更改了背景和字体颜色
+      input: -webkit-autofill,
+      textarea: -webkit-autofill,
+      select: -webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #323339 inset;
+        -webkit-text-fill-color: white;
+      }
+      // 覆盖以下的chrome自带样式
+      input: -webkit-autofill, textarea: -webkit-autofill, select: -webkit-autofill {
+        background-color: rgb(250, 255, 189);
+        background-image: none;
+        color: rgb(0, 0, 0);
+      }
    ```
 
 *  原理是通过打补丁来解决自定义样式——是不是优雅了很多~

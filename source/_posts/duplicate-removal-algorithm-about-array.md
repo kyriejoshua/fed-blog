@@ -6,7 +6,7 @@ tags: JavaScript
 
 <hr/>
 
-{% asset_img unphoto.jpg mac desk %}
+{% asset_img unphoto.jpg Array Array Array %}
 
 <blockquote>
   整理了部分常用的数组去重方法。

@@ -10,7 +10,8 @@
 	#scss
 	#jade
 	#webpack
-	#nodejs略知皮毛
+	#nodejs入坑中
+	#git
 	
 	**0. 对一切事物充满好奇心。**
 	**1. 凡事怎么能不折腾。 **

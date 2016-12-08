@@ -6,11 +6,11 @@ tags: tools
 
 <hr>
 
-{% asset_img unphoto.jpeg unphoto %}
+{% asset_img unphoto.jpeg Awesome-Chrome %}
 
 <blockquote>
 	作为chrome重度用户，在日常工作中少不了用浏览器做些各种各样的事。作为一名前端攻城狮，也少不了用chrome进行开发和调试。这期我整理了部分自认为好用到飞起的插件，希望看到的人也喜欢，也和我一样爽到飞起。
-	
+
 </blockquote>
 
 <!-- more -->
