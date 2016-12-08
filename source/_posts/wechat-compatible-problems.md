@@ -6,7 +6,7 @@ tags: 兼容性
 
 <hr>
 
-{% asset_img unphoto.jpeg unphoto %}
+{% asset_img unphoto.jpeg Actually I dont like wechat %}
 
 <blockquote><br>本文列举了个人在微信公众号里开发时所遇到的浏览器兼容性问题。不定期更新。
 

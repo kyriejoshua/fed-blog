@@ -6,7 +6,7 @@ tags:
 
 <hr>
 
-{% asset_img unphoto.jpg hey %}
+{% asset_img unphoto.jpg Arrow-Function %}
 
 <blockquote>
 	最近在准备一个新项目，引入了ES6，平时也常写ts，在越来越多的实战中发现箭头函数确实是ES6里最实用的新特性之一。
@@ -177,6 +177,6 @@ getOrder() {
 *  总体来说，个人觉得ES6的箭头函数和coffee中的箭头函数很相似，使用起来也很方便。最需要注意的地方则是这个this不会再三心二意了。
 *  后续如果有其他注意点，再补充。
 
-   >参考
-   >[ES6入门](http://es6.ruanyifeng.com/#README)
+    >参考
+    >[ES6入门](http://es6.ruanyifeng.com/#README)
 
