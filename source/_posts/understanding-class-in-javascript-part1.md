@@ -8,7 +8,7 @@ tags: javscript
 
 {% asset_img unphoto.jpg Class%}
 
-<blockquote><br/>整理了部分类的知识点。
+<blockquote><br/>整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。
 
 </blockquote>
 
@@ -31,7 +31,7 @@ tags: javscript
 
 - 为方便标识，字符串相关部分使用了ES6的模板字符串。
 
-- 编程约定：构造函数(类名)首字母大写:构造函数就是用来构造新对象的，必须通过关键字new调用，开发者可以通过命名约定来判断是否是构造函数。
+- **编程约定**：构造函数(类名)首字母大写:构造函数就是用来构造新对象的，必须通过关键字new调用，开发者可以通过命名约定来判断是否是构造函数。
 
 ```javascript
 /**
@@ -199,4 +199,4 @@ Girl2.random(); // 随机生成 例如：'36C'
 
 * 毕竟不是灵魂画手，大概便是这样……
 
-{% asset_img understand.png understanding prototype %}
+{% asset_img understand-prototype.jpeg understanding prototype %}
