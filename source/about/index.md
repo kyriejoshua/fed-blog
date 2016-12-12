@@ -15,6 +15,7 @@
 	
 	**0. 对一切事物充满好奇心。**
 	**1. 凡事怎么能不折腾。 **
+	**2. Geeeeek一点，再Geeeeek一点**
 	
 	欢迎交流--- kj2046@outlook.com
 	github: https://github.com/kyriejoshua
