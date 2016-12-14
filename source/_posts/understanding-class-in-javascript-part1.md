@@ -148,7 +148,7 @@ function defineClass(constructor, method, static) {
   if (method) {
     extend(constructor.prototype, method);
   }
-  if (static) {
+  if (static) { // static 在严格模式下是保留字，之后请谨慎使用
     extend(constructor, static);
   }
   return constructor;
