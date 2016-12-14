@@ -8,7 +8,7 @@ tags: javscript
 
 {% asset_img unphoto.jpg Class%}
 
-<blockquote><br/>整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。
+<blockquote><br/>整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。基于ES3, ES5.
 
 </blockquote>
 
@@ -178,8 +178,8 @@ var Girl2 = defineClass(
   // 随机生成一个性感的妹子
   {
     random: function() {
-      var hour = new Date().getMinutes();
-      var type = (hour % 3) === 0 ? 'A': (hour % 3) === 1 ? 'B' : 'C';
+      var min = new Date().getMinutes();
+      var type = (min % 3) === 0 ? 'A': (min % 3) === 1 ? 'B' : 'C';
       return `${Math.ceil(Math.random() * 10) + 30}${type}`;
     }
   }
@@ -190,7 +190,7 @@ var monika = new Girl2('D', 34, 38);
 monika.foreach(console.info); // D 34 38
 monika.include(31); // false
 monika.include(35); // true
-monika.toString(); // [Object Object] 因extend不会覆盖原方法，所以这里仍然是Object.prototype.toString自带方法, 如果要去掉，将extend中的if条件判断去除即可
+monika.toString(); // [object Object] 因extend不会覆盖原方法，所以这里仍然是Object.prototype.toString自带方法, 如果要去掉，将extend中的if条件判断去除即可
 monika.random(); // 报错 Uncaught TypeError: monika.random is not a function(...) 因为monika实例未继承类自身的方法
 Girl2.random(); // 随机生成 例如：'36C'
 ```
@@ -200,3 +200,5 @@ Girl2.random(); // 随机生成 例如：'36C'
 * 毕竟不是灵魂画手，大概便是这样……
 
 {% asset_img understand-prototype.jpeg understanding prototype %}
+
+​	
