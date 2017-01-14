@@ -70,6 +70,34 @@ tags: interview
    
   ```
 
+* 以下代码输出什么：
+
+  ```javascript
+  function b() {
+    console.log(myVar1);
+    console.log(myVar2);
+  }
+  
+  function a() {
+    var myVar1 = 1;
+    var myVar2 = 2;
+    b();
+  }
+  
+  var myVar1 = 11;
+  a();
+  console.log(myVar2);
+  
+  // 11;
+  // myVar2未定义，报错;
+  /* 理解：
+    注意这里b不是闭包，无法访问到a函数内的变量。
+    所以myVar1会从函数作用域内向全局作用域寻找，输出11
+    而myVar2在全局下没有定义，就会报错。
+   */
+
+  ```
+
 * 控制台内执行以下代码，然后用户在10秒内连续点击页面三次，请问会输出什么:
 
   ```javascript
@@ -88,14 +116,14 @@ tags: interview
   console.log('hello');
 
   // 会依次输出如下
-  "don't wait, it's ok"
+  "don't wait, it's ok";
   'hello';
   'why click me';
   'why click me';
   'why click me';
   /* 理解如下(待完善):
     由于函数体内的逻辑是顺序执行的, while因条件不对不会触发，所以直接跳过，执行下一句。
-  */
+   */
   // 因为紧张，这题本来对了被面试官又误导错了。输在心理素质上。
 
   ```
