@@ -87,3 +87,7 @@ categories: Interview
 #### 末尾
 
 写在2017年初，去下一个公司报到前一天晚。
+
+<div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top"><div class="tooltip tooltip-east"><span class="tooltip-item">赏</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
+
+{% asset_img reward.jpeg Thanks %}
