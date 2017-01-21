@@ -1,7 +1,8 @@
 ---
 title: 理解JavaScript中的类
 date: 2016-12-12 17:01:53
-tags: javscript
+tags: JavaScript
+categories: JavaScript
 ---
 
 <hr>
@@ -201,4 +202,4 @@ Girl2.random(); // 随机生成 例如：'36C'
 
 {% asset_img understand-prototype.jpeg understanding prototype %}
 
-​	
+​

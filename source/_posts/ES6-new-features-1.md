@@ -1,7 +1,8 @@
 ---
 title: ES6 简单特性尝鲜-1
 date: 2016-07-24 17:40:54
-tags: ES6
+tags: ES2015
+categories: JavaScript
 ---
 
 <hr>
@@ -42,7 +43,7 @@ __1.Block-Scoped Constructs Let and Const (构造let和const及块作用域)__
     }
     return money;
   }
-	
+
   console.log(checkYourMoney(true));
 ```
 
@@ -64,7 +65,7 @@ __1.Block-Scoped Constructs Let and Const (构造let和const及块作用域)__
     }
     return money;
   }
-  
+
   console.log(checkYourMoney(true));
 ```
 

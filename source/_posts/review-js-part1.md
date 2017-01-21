@@ -2,6 +2,7 @@
 title: 回顾JS——第一部分
 date: 2017-01-15 15:14:56
 tags: JavaScript
+categories: JavaScript
 ---
 
 <hr>

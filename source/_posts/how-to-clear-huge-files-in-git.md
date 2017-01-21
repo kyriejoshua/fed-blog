@@ -2,6 +2,7 @@
 title: 如何在git仓库中彻底清除大文件
 date: 2016-07-17 18:58:52
 tags: git
+categories: Git
 ---
 
 <hr>
@@ -63,15 +64,15 @@ __真相只有一个__，那就是其实所有的版本，不管是否存在了�
 	52565aeb9009bb4d07ca8d7c130425d9bf31f7b2 blob   201567615 181006235 788162224
 	98c5dc977918aaf3b45a999ae92e031b4b15191b blob   590381017 589431074 198731150
 	```
-	
+
 *	__unbelievable!__都是huge的文件!最底下的那家伙，到底是什么啊！
 * 	让我们用rev-list命令来查看commit 的 SHA值和文件路径：
 *  `git rev-list --objects --all | grep 98c5dc9779`
-	
+
 	```javascript
 	98c5dc977918aaf3b45a999ae92e031b4b15191b public/video/feng-mv.mp4
 	```
-	
+
 *	这次倒很快，答案揭晓——是公司宣传视频。我们明明有七牛。这玩意儿就不该出现在这里。
 * 	再来看看所有包含这家伙的提交历史:
 *  `git log --pretty=oneline --branches -- public/video/feng.mp4`
@@ -80,9 +81,9 @@ __真相只有一个__，那就是其实所有的版本，不管是否存在了�
 	9364a4f65f03d3a6d0873106ba21bd3172418176 chore: 删除视频文件
 	da24a01e46876a495518f9617501b4b360177f2b improve(官网首页)
 	```
-	
+
 *	一个大文件的一删一减两个操作，就会占据很多空间，更何况还有其他的较大文件。
-	
+
 *	找到了根源所在，是时候让我们大干一场:
 
 	* 	`git filter-branch --index-filter 'git rm --ignore-unmatch --cached public/video/feng.mp4' -- da24a01^..`
@@ -98,14 +99,14 @@ __真相只有一个__，那就是其实所有的版本，不管是否存在了�
 	Rewrite 38f2b11070b7e21cbce465b5f6b384156e3a8e61 (475/475)
 	Ref 'refs/heads/master' was rewritten
 	```
-	
+
 *	此时的历史提交记录中已经不再会有指向那位大文件的引用了。
 * 	但仍然需要以下两条命令来删除refs对他的引用(关于这部分的理解我也有待深究)。
-	
+
 	**_你的历史中将不再包含对那个文件的引用。 不过，你的引用日志和你在 .git/refs/original 通过 	filter-branch 选项添加的新引用中还存有对这个文件的引用，所以你必须移除它们然后重新打包数据	库。 在重新打包前需要移除任何包含指向那些旧提交的指针的文件:_**
-	
+
 	```javascript
-	
+
 	rm -Rf .git/refs/original
 	rm -Rf .git/logs/
 	git gc
@@ -115,9 +116,9 @@ __真相只有一个__，那就是其实所有的版本，不管是否存在了�
 	Writing objects: 100% (21406/21406), done.
 	Total 21406 (delta 11867), reused 20640 (delta 11348)
 	```
-	
+
 *	再看看节约了多少空间:
-	
+
 	```javascript
 	git count-objects -v
 	warning: garbage found: .git/objects/pack/tmp_pack_zG7GCb
@@ -130,7 +131,7 @@ __真相只有一个__，那就是其实所有的版本，不管是否存在了�
 	garbage: 1
 	size-garbage: 136679
 	```
-	
+
 *	尽管表面上看去没有什么软用，但是当我运行`du -sh .git`查看大小时，发现.  git文件夹确实缩小了。
 *	现在这个视频文件存在于松散对象(size)中。虽然它没有彻底消失，但已经不再出现于推送或克隆中。
 * 	如果需要彻底移除，运行`git prune --expire now`。

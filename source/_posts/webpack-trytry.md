@@ -1,7 +1,8 @@
 ---
 title: webpack小试牛刀
 date: 2016-07-03 16:03:09
-tags: tools
+tags: webpack
+categories: Tools
 ---
 
 <hr>
@@ -26,13 +27,13 @@ tags: tools
 	* 能替代部分gulp/grunt的工作
 	* 支持开发过程中实时打包
 	* 插件机制完善，扩展性强
-	
-	
+
+
 * 安装：
 	* `npm install webpack -g`
 	* 或者一般把依赖写入package.json
 	* 依次运行`npm init` `npm install webpack --save-dev`
-	
+
 * 目录结构
 	```javascript
 		build
@@ -53,19 +54,19 @@ tags: tools
 		webpack.config.js
 		readme.md
 	```
-		
+
 * src下是开发文件，用于开发环境
 	* page下的是各个模块，每个模块内有自己的js、img、html、less
 	* img存放公用的图片
 	* common存放公用的js
 * build下是src的文件编译好的文件，用于生产环境
-	
+
 * 项目设计思路
 	* 这是个比较简单的项目，没有使用像angularjs，react这样的框架，只用了jQuery，最初的构想就是简单，上手快
 	* 基于现在流行的模块化思想，将所有模块放在src下的page里，每个文件夹即一个模块，也就是一个页面
 	* 一个common存放公用的方法和配置文件等
 	* index.html是入口页面，all.less是共用的样式，每个页面(模块里)都自己独立的css样式，只是先在每个样式文件里先引入all.less
-	
+
 * 配置：
 	* 通常项目下会配置一个webpack.config.js的文件，作用类似gulp中的gulpfile.js ，这是默认配置文件，当然也可以修改，这是我的配置
 
@@ -136,13 +137,13 @@ tags: tools
 		  }
 		};
 ```
-		
+
 * 这个项目最初的考虑是利用模块化思想，将每个页面都分割成一个个模块，然后每个模块有着自己独立的js和img还有样式文件
-	
+
 * **entry**：入口可以是一个或多个资源合并而成。接受数组和对象，这里以对象的形式放入。然后这里因为加入了实时刷新的webpack-dev-server插件，所以加了生产环境还是线上环境的判断.webpack-dev-server下文详细述说
 
 * **chunk**:被entry所依赖的额外的代码块，也可以包含一个或多个文件
-	
+
 * webpack的入口文件是多个的。这里引用了nodejs的方法，利用nodejs可以操控文件的优势，先复制不需要编译的文件，节约编译时间。然后找出所有index.js来编译并存放在各自的文件夹下。**这里要说明是一开始的思路可能没有考虑全面，用复制文件的方式来写会导致html无法随编译刷新，用html-webpack-plugin也无济于事，日后再解决** ——已解决，看最下。
 
 	```javascript
@@ -171,8 +172,8 @@ tags: tools
 
 
 * **output**: 指输出到哪个目录下，我的项目里就是每个模块对应有着自己的index.js文件，path指的是生成文件的存放目录，filename文件赋值`[name].js`，会生成相应的文件名，最终存放在build/下
-	
-	
+
+
 ```javascript
 	output:{
 	    path: path.resolve(__dirname + '/build'),
@@ -213,7 +214,7 @@ tags: tools
 		  }
 		})
 	```
-	
+
 * **providePlugin**: 通常情况下我们都需要先require相关资源，并赋值给变量才可以使用，比如要在js顶部引入`var $ = require('jquery')`才可以使用$,而在每个页面都这样操作很繁琐。于是可以利用该插件一次定义，处处使用。无须再在页面顶部引入。
 
 	```javascript
@@ -243,30 +244,30 @@ tags: tools
 	```javascript
 		new webpack.optimize.CommonsChunkPlugin('vendors.js)
 	```
-	
+
 * **uglifyjs**:将生产环境中的js代码进行压缩和混淆,缩小文件加快请求速度
-	
+
 	```javascript
 		webpack.optimize.UglifyJsPlugin({minimize: true})
 	```
 
-	
+
 * **externals**:为避免第三方库或框架被合成或打包成公共模块浪费资源。可以采用cdn引入的方式。这就需要进行一些设置
-	
+
 	* 首先在页面的html里引入cdn上的文件
 
 	```javascript
     	<script src="https://code.jquery.com/jquery-1.11.1.min.js" integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE=" crossorigin="anonymous"></script>
     ```
-	
+
 * 然后在webpack.config.js里设置
-	
+
 	```javascript
 		externals: {
 			'jquery': 'jQuery'	// 将jQuery赋值为jquery
 		}
 	```
-	
+
 ### 运行 webpack
 
 * 可以直接运行`webpack`执行一次性编译，建议运行时加上以下参数
@@ -283,11 +284,11 @@ tags: tools
 * HTML中不引入样式，是因为在这里就引入了。在页面顶部加上`require('../[name].less')`
 * `[name]`指代当前less的文件名，我的做法是在每个less里引入一个公用的all.less,然后不同页面的js里引入各自的less，webpack会自动编译less并放在页面的style里
 	*	其实还尝试过使用`ExtractTextPlugin.extract('style-loader', 'css-loader')}` 插件，将页面顶部的样式改为外部文件引入，但因为开始时设计的偏差，改动起来比较麻烦，最后作罢
-	
+
 * 这是个小项目，只引入了jquery和自己的公用的一个库 `reqiure('feed')`
 * 通过process.env.NODE_ENV的值判断开发环境的接口，是引用测试的接口还是线上的接口，它的值不同时会引用不同的js文件
 * 所以最终每个index.js的顶部会有这么几行
-	
+
 	```javascript
 		require('./style.less');
 		var feed = require('feed');
@@ -322,8 +323,8 @@ tags: tools
 		[HMR] Waiting for update signal from WDS...
 		[WDS] Hot Module Replacement enabled.
 	```
-	
-* 采用 --inline 模式，它的工作其实就是把`webpack-dev-server/client?http://localhost:8080`加到entry中 
+
+* 采用 --inline 模式，它的工作其实就是把`webpack-dev-server/client?http://localhost:8080`加到entry中
 * --content-base 把build/下的内容作为静态资源服务
 * --devtool eval 配置devtool的值为eval，用于查看编译后的源代码，eval 不支持生产环境查看源代码，但编译速度快，另一个常用的值是source-map，支持生产环境，但相对慢
 * 打开 `localhost:8080/webpack-dev-server/page/index.html`查看
@@ -338,10 +339,10 @@ tags: tools
    "web": "NODE_ENV=development webpack --progress --colors --display-error-details",
 	}
 ```
-	
+
 * 运行`npm run dev` 开发环境下
 * `npm run web` 测试环境下
-	
+
 
 #### 目前遗留问题
 

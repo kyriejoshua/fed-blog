@@ -1,7 +1,8 @@
 ---
 title: chrome插件指南——程序员篇
 date: 2016-09-18 19:13:27
-tags: tools
+tags: chrome
+categories: Browser
 ---
 
 <hr>

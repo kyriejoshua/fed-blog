@@ -2,6 +2,7 @@
 title: JavaScript数组去重
 date: 2016-12-05 09:36:02
 tags: JavaScript
+categories: JavaScript
 ---
 
 <hr/>
@@ -84,7 +85,7 @@ unique(arr); // [0, '0', 1, '1'];
  * @return {[type]}     [description]
  */
 function filter(value, index, arr) {
-  return arr.indexOf(value) === index;  
+  return arr.indexOf(value) === index;
 }
 
 // 所以以上的去重函数可简化为：

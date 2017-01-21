@@ -2,6 +2,7 @@
 title: 个人git使用手册
 date: 2016-03-03 19:03:09
 tags: git
+categories: Git
 ---
 
 <hr>
@@ -269,7 +270,7 @@ __*图例说明*__
 	fatal: reference is not a tree: 16effe6cfd27ff78b04ff95e9103514e6dcf5cb3
 	Unable to checkout '16effe6cfd27ff78b04ff95e9103514e6dcf5cb3' in submodule path 	'gezbox/lib/NotificationStyles'
 	Failed to recurse into submodule path 'src/ui'
-	切换分支到master,再拷贝一个分支作为对比，这是子模块有修改导致的。确认修改后再在那个分支上提交更新。	
+	切换分支到master,再拷贝一个分支作为对比，这是子模块有修改导致的。确认修改后再在那个分支上提交更新。
 ```
 
 ### 服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）

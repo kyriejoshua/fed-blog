@@ -1,7 +1,8 @@
 ---
 title: call和apply的区别及各自应用场景
 date: 2016-11-04 16:16:10
-tags:
+tags: JavaScript
+categories: JavaScript
 ---
 
 <hr>

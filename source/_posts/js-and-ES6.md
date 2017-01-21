@@ -2,6 +2,7 @@
 title: js诞生与ES6
 date: 2016-06-20 16:03:09
 tags: JavaScript
+categories: JavaScript
 ---
 
 

@@ -2,6 +2,7 @@
 title:  前端入坑周年记——野蛮生长
 date: 2016-12-26 19:46:58
 tags: JavaScript
+categories: Front-end
 ---
 
 <hr>

@@ -1,7 +1,8 @@
 ---
 title: /* @ngInject */介绍
 date: 2016-08-18 19:49:24
-tags: Angular 
+tags: Angular
+categories: Library
 ---
 
 <hr>
@@ -62,5 +63,5 @@ WindController.$inject = ['$uibModal', 'url']
 	参考:
 	[angular中文规范](https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md)
 
-</blockquote> 
+</blockquote>
 

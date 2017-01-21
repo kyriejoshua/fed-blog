@@ -1,7 +1,8 @@
 ---
 title: 如何让你的Sublime Text独具一格
 date: 2016-05-03 16:03:09
-tags: 编辑利器
+tags: sublime
+categories: Tools
 ---
 
 <hr>
@@ -61,7 +62,7 @@ tags: 编辑利器
 
   * DocBlockr: 代码块注释
     * `/*`:回车创建一个代码块注释
-    * `/**`:回车在自动查找函数中的形参等等。 
+    * `/**`:回车在自动查找函数中的形参等等。
 
   * Git: 还没学会用。
 
@@ -98,7 +99,7 @@ tags: 编辑利器
   * Babel ES6/2015 和 React JSX上添加语法高亮
 
   * ES6语法检查 [eslint](http://javascript.ruanyifeng.com/tool/lint.html#toc3)
-    *	首先是要系统全局安装eslint, 运行`npm install -g eslint`，`npm install -g babel-eslint` 
+    *	首先是要系统全局安装eslint, 运行`npm install -g eslint`，`npm install -g babel-eslint`
     *	下载插件 `sublimeLinter`
     *	下载 `sublimelinter-contrib-eslint`
     *	下载完成后修改Sublimelinter 配置，Preferences->Package Settings->SublimeLinter->Settings-User,
@@ -127,7 +128,7 @@ tags: 编辑利器
             "windows": [
              "C:\\Users\\用户名\\AppData\\Roaming\\npm"
             ]
-        } 
+        }
         ...
     }
     }
@@ -149,7 +150,7 @@ tags: 编辑利器
 	– Select the image in the Thumbnail pane and Cmd + C  复制选中图标
 	– Use Cmd + I to open the Info panel for the App. 打开app的图标预览
 	– You see the small icon at the top left of the Info panel. Click to select and Cmd + V 选中粘贴
-	
+
 	That’s it! It might take longer than your method, but it doesn’t require the icon to be with “.icns” extension.
 
 </blockquote>

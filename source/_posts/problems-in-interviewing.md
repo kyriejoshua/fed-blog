@@ -2,6 +2,7 @@
 title: 面试题整理
 date: 2017-01-05 22:12:58
 tags: interview
+categories: Interview
 ---
 
 <hr>
@@ -67,7 +68,7 @@ tags: interview
    这样for循环结束，一共有四次循环，产生四个结果。
    而setTimeout打印每次的结果，所以是4个4。
    */
-   
+
   ```
 
 * 以下代码输出什么：
@@ -77,17 +78,17 @@ tags: interview
     console.log(myVar1);
     console.log(myVar2);
   }
-  
+
   function a() {
     var myVar1 = 1;
     var myVar2 = 2;
     b();
   }
-  
+
   var myVar1 = 11;
   a();
   console.log(myVar2);
-  
+
   // 11;
   // myVar2未定义，报错;
   /* 理解：

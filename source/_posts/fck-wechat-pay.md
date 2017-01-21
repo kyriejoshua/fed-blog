@@ -1,7 +1,8 @@
 ---
 title: 微信支付开发日志
 date: 2016-12-22 11:55:48
-tags: wx
+tags: wepay
+categories: Wechat
 ---
 
 <hr>

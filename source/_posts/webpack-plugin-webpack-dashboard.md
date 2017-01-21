@@ -1,7 +1,8 @@
 ---
 title: webpack实用插件安利之webpack-dashboard
 date: 2016-09-23 16:48:45
-tags: tools
+tags: webpack
+categories: Tools
 ---
 
 <hr>

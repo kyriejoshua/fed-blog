@@ -2,6 +2,7 @@
 title: 微信内置浏览器兼容性问题汇总
 date: 2016-11-01 14:34:11
 tags: 兼容性
+categories: Browser
 ---
 
 <hr>

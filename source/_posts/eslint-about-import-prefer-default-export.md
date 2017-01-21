@@ -2,6 +2,7 @@
 title: eslint有关import/prefer-default-export报错的解决
 date: 2016-08-08 21:11:39
 tags: eslint
+categories: JavaScript
 ---
 
 <hr>
@@ -12,7 +13,7 @@ tags: eslint
 	今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错
 	*`error Prefer default export    ......     import/prefer-default-export`*
 		查了半天资料终于发现如何解决。
-	
+
 </blockquote>
 
 <!-- more -->

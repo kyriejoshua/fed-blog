@@ -1,7 +1,8 @@
 ---
 title: sublime text插件安利之wakatime
 date: 2016-09-21 21:30:48
-tags: 编辑利器
+tags: sublime
+categories: Tools
 ---
 
 <hr>

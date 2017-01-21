@@ -1,7 +1,8 @@
 ---
 title: ES6改写cookies.js及分析
 date: 2016-12-19 19:19:07
-tags: JavaScript
+tags: ES2015
+categories: JavaScript
 ---
 
 <hr>
@@ -236,7 +237,7 @@ const cookies = function(data, opt) {
 
 
 <blockquote>
-参考: 
+参考:
   1. [源码分析之：cookies.js](https://gold.xitu.io/entry/57dfa28c0e3dd90069771c2c)
   2. [cookies.js](https://github.com/franciscop/cookies.js)
 

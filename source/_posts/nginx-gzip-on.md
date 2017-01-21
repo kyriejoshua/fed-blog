@@ -1,7 +1,8 @@
 ---
 title: 前端性能加快之nginx开启gzip压缩
 date: 2016-08-02 15:22:21
-tags:	性能
+tags:	nginx
+categories: Server
 ---
 
 <hr>
@@ -10,7 +11,7 @@ tags:	性能
 
 <blockquote>
   近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……
-  
+
 </blockquote>
 
 <!-- more -->
@@ -54,7 +55,7 @@ PS：公司缺少运维，真心锻炼前端的全栈能力……
 
 <blockquote>
 	参考：[开启Nginx的Gzip压缩功能](https://www.insp.top/article/open-nginx-gzip-module)
-	
+
 </blockquote>
 
 

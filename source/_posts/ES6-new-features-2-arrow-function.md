@@ -1,7 +1,8 @@
 ---
 title: ES6 新特性尝鲜-2之箭头函数
 date: 2016-08-31 17:17:11
-tags:
+tags: ES2015
+categories: JavaScript
 ---
 
 <hr>
@@ -120,7 +121,7 @@ var init = () => {
 		// do something
 	});
 	是不是简洁清爽了很多。
-	
+
 	​```
 
 2.还有this只指代定义时的对象，而不是当前对象，所以再也不需要用that来替代this。
@@ -142,7 +143,7 @@ var init = () => {
 	    })
 	  }
 	}
-	
+
 	用箭头函数则无须这一步
 	getOrder() {
 	  this.$http('api.123feng.com/test')

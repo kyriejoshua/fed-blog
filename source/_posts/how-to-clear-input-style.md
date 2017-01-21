@@ -2,6 +2,7 @@
 title: 如何清除input元素自定义样式
 date: 2016-10-01 23:28:16
 tags: css
+categories: CSS
 ---
 
 <hr>
@@ -22,7 +23,7 @@ tags: css
 
 * 因强迫症和需求以及正常的审美观要求，一致确定去掉这个丑陋的多余项。
 
-* 查阅部分资料后找到解决办法如下： 
+* 查阅部分资料后找到解决办法如下：
 
 ```javascript
 input[type=number]::-webkit-inner-spin-button,
