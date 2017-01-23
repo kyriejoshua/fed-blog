@@ -22,11 +22,11 @@ categories: HTTP
 
   ```javascript
   events.js:72
-  	throw err;
+    throw err;
 
   Error: getaddrinfo ENOTFOUND talk.bb
-  	at errnoException (dns.js:37:11)
-      at Object.onanswer [as oncomplete] (dns.js:124:16)
+    at errnoException (dns.js:37:11)
+    at Object.onanswer [as oncomplete] (dns.js:124:16)
   ```
 
 
@@ -42,7 +42,7 @@ categories: HTTP
     cb()
   ```
 
-* 这里的 talk.bb 实际上是替代了 localhost 作用，虽然目前在接手这项目的时候还不知它的作用，但就此去解决报错的方法就是在 host 文件下增加 talk.bb 配置。
+* 这里的 talk.bb 实际上是替代了 localhost 作用，虽然目前在接手这项目的时候还不知它的作用，但就此去解决的方法就是在 host 文件下增加 talk.bb 配置。
 
 
 ### 解决
