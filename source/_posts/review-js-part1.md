@@ -138,9 +138,29 @@ categories: JavaScript
 ### 函数
 
 *  在JS中，函数是一等公民，它不仅像对象一样拥有属性和方法，还可以被调用。
-*  函数名(name).
-*  函数参数列表(params).
-*  函数功能(statements).
+
+*  一个函数定义(函数声明，函数语句)由以下三部分组成:
+
+   *  函数名(name).
+
+   *  函数参数列表(params): 包围在括号`()`中并由`,`分隔。
+
+   *  函数功能(statements): 包围在花括号`{}`中，用于定义函数功能的一些 JavaScript 语句。
+
+      ```javascript
+      /**
+       * [square 输入一个数，返回该数的平方的函数]
+       * @param  {Number} number [description]
+       * @return {Number}        [description]
+       */
+      function square(number) {
+        return number * number;
+      }
+
+      ```
+
+      ​
+
 *  变量作用域
    1. 全局作用域
    * 保存在全局window对象下，任何位置都可以访问
@@ -149,6 +169,7 @@ categories: JavaScript
    * 保存在函数内：随每次函数调用时，临时创建。函数调用完即释放内存空间。再次调用再次创建。
 
 *  声明提前：JS程序正式执行前，引擎会预读`var`和`function`到当前作用域的顶部，而赋值留在原地。
+
 *  按值传递：在向函数传入参数时，外部变量仅将值复制一个副本给函数的参数变量。
    * 函数内修改参数变量，不影响函数外原变量(原始类型)的值。理论同赋值运算。
 
@@ -220,8 +241,7 @@ categories: JavaScript
 
 #### 数组常用API
 
-* `toString`,`join`,`sort`,'concat','slice',`splice`,`reverse`
-* `reduce`,`reduceRight`,`map`,`filter`...
+* `toString`、 `join`、 `sort` 、 `concat`、 `slice`、 `splice`、 `reverse`、 `reduce`、 `reduceRight`、 `map`、 `filter`...
 * 控制台里看一下
 
 #### 栈和队列(数据结构)
