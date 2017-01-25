@@ -275,7 +275,7 @@ categories: JavaScript
     2. 调用构造函数，在对象中添加属性和功能。
     3. 将新对象的 `__proto__` 属性指向构造函数的 prototype 对象。
     4. 将新对象地址，返回调用者。
-    
+
 3. 创建空对象，再设置属性。
 ```javascript
  var obj = new Object();
@@ -377,3 +377,7 @@ categories: JavaScript
    // 可以简写成以下这样
    Array.prototype.indexOf = Array.prototype.indexOf || indexOf;
   ```
+
+<div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top"><div class="tooltip tooltip-east"><span class="tooltip-item">赏</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
+
+{% asset_img reward.jpeg Thanks %}
