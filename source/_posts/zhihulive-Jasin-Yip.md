@@ -2,7 +2,7 @@
 title: Jasin Yip 计蒜客前端知乎 Live 笔记
 date: 2017-02-05 17:23:04
 tags: zhihu live
-categories: zhihu live
+categories: Zhihu Live
 ---
 
 <hr>

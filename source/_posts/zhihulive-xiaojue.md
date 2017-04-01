@@ -2,7 +2,7 @@
 title: 小爝前端自我提升知乎 Live 笔记
 date: 2017-02-05 17:36:05
 tags: zhihu live
-categories: zhihu live
+categories: Zhihu Live
 ---
 
 <hr>
