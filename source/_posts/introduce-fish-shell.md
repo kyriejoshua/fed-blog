@@ -119,6 +119,21 @@ categories: Shell
 	alias fuck-it='export THEFUCK_REQUIRE_CONFITMATION=True; fuck; export THEFUCK_REQUIRE_CONFIRMATION=False'
 ```
 
+* 也许你也装了 autojump 插件，是的，同样可以在这里使用。加入以下代码：
+
+```shell
+	begin
+	  set --local AUTOJUMP_PATH $HOME/autojump/bin/autojump.fish
+	  if test -e $AUTOJUMP_PATH
+	    source $AUTOJUMP_PATH
+	  end
+	end
+```
+
+* 这里主要是核对 autojump.fish 这个文件。路径对即可生效。
+
+* 如果以上两个插件还未安装的话，首先使用 homebrew 安装即可，`brew install thefuck`, `brew install autojump`.
+
 #### 一些工具
 
 ##### [oh my fish](https://github.com/oh-my-fish/oh-my-fish)
