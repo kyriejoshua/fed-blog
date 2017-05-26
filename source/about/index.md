@@ -15,7 +15,8 @@
 
 	**0. 对一切事物充满好奇心。**
 	**1. 凡事怎么能不折腾。 **
-	**2. Geeeeek 一点，再 Geeeeek 一点**
+	**2. Geeeeek 一点，再 Geeeeek 一点。**
+	**3. 能用键盘搞定的事，绝不动鼠标。**
 
 	欢迎交流 -- kj2046@outlook.com
 	github: https://github.com/kyriejoshua
