@@ -66,7 +66,7 @@ unique(arr); // [1, 2, 3];
 ```javascript
 function unique(arr) {
   return arr.filter(function(value, index, array) {
-    array.indexOf(value) === index;
+    return array.indexOf(value) === index;
   })
 }
 
