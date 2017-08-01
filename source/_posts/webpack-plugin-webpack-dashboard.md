@@ -162,7 +162,8 @@ module.exports = {
   devServer: {
     inline: true,
     port: 2333,
-    quite: true // Add quite option for webpack dashboard
+    // quite: true // 拼写错误
+    quiet: true // Add quiet option for webpack dashboard
   },
   module: {
     loaders: [
