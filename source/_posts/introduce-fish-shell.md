@@ -166,6 +166,5 @@ categories: Shell
 
 * 以上就是我使用 fish 的记录和基本教程。事实上还有很多地方可探索，不过到此为止日常使用是没有问题了。希望大家也可以在使用 fish 的过程中感到愉悦快乐！
 
-<div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top"><div class="tooltip tooltip-east"><span class="tooltip-item">赏</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
-
+<hr>
 {% asset_img reward.jpeg Thanks %}

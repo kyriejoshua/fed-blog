@@ -208,6 +208,5 @@ categories: Git
 
 * 希望大家都可以学好 git, 善待 git, 然后在 CLI 里尽情使用 git 吧.
 
-<div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top"><div class="tooltip tooltip-east"><span class="tooltip-item">赏</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
-
+<hr>
 {% asset_img reward.jpeg Thanks %}

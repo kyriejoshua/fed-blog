@@ -378,6 +378,5 @@ categories: JavaScript
    Array.prototype.indexOf = Array.prototype.indexOf || indexOf;
   ```
 
-<div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top"><div class="tooltip tooltip-east"><span class="tooltip-item">赏</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
-
+<hr>
 {% asset_img reward.jpeg Thanks %}
