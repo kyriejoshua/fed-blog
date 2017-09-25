@@ -76,3 +76,13 @@ deploy:
   type: git
   repo: https://github.com/kyriejoshua/jo.github.io.git
   branch: gh-pages
+
+douban:
+  user: kyriejoshua
+  book:
+    title: '不是所有的书都在这里'
+    quote: '我自以为我在写作，但事实上我从来就不曾写过，我以为在爱，但我从来也不曾爱过，我什么也没有做，不过是站在那紧闭的门前等待罢了。 ——《情人》'
+  movie:
+    title: '所有的电影都在这里了'
+    quote: '我们读诗写诗 并不是因为它好玩 我们读诗写诗是因为我们是人类的一份子 而人类是充满激情的
+没错 医学 法律 商业 工程 这些都是崇高的追求 足以支撑人的一生 但诗歌 美丽 浪漫 爱情 这些才是我们生活的意义 ——《死亡诗社》'
