@@ -182,8 +182,14 @@ categories: CSS
 
 * 这里我们采用第一种方式。然后开始对每个面加以处理。
 
+* 在旋转前需要一个原点作为参数，元素会围绕这个点旋转，在这里这个点是立方体的正中心。
+
+```css
+  transform-origin: 50% 50% 0; /* 也是默认值 */
+```
+
 * 我们使用 `transform` 属性的 `rotate` 来实现旋转，用 `translate` 来实现平移。
-* 6个面里，前后面的改动是最小的。立体形象中，我们以立方体的正中心作为中心点。那么正面需往前平移，然后背面要离正面一个面的长度大小，所以背面沿三维面的 Z 轴向后平移。
+* 6个面里，前后面的改动是最小的。围绕着原点，那么正面需往前平移，然后背面要离正面一个面的长度大小，所以背面沿三维面的 Z 轴向后平移。
 
 ```css
   .dice-pos-front {
@@ -440,6 +446,14 @@ categories: CSS
 </body>
 </html>
 ```
+
+<blockquote>
+  参考:
+    1. [transform(web)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)
+    2. [transform(css)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Transforms)
+    3. [flex](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+
+</blockquote>
 
 <hr>
 {% asset_img reward.jpeg Thanks %}
