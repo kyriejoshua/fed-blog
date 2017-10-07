@@ -1,5 +1,5 @@
 ---
-title: 如何让你的Sublime Text独具一格
+title: 如何让你的 Sublime Text 独具一格
 date: 2016-05-03 16:03:09
 tags: sublime
 categories: Tools
