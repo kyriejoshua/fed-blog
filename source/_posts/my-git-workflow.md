@@ -7,11 +7,9 @@ categories: Git
 
 <hr>
 
-{% asset_img unphoto.jpg git %}
+![](/jo.github.io/2017/07/07/my-git-workflow/unphoto.jpg)
 
-<blockquote><br/>这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。
-
-</blockquote>
+这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。
 
 <!--more-->
 
@@ -67,7 +65,7 @@ categories: Git
 * 这时通过`git status`来查看文件状态。
 
   {% asset_img gitStatus.png git status %}
- 
+
 * 不过，正因为频繁使用。完全可以简化查看内容。
 * `git status -sb(git status -short -branch)`查看分支情况并简化信息。
 
@@ -122,7 +120,7 @@ categories: Git
   {% asset_img gitCommitMessage.png git commit message %}
 
 * 例如刚才的改动，使用`git commit -m 'feat: 完成 demo4'`来提交。
- 
+
   {% asset_img gitCommit.png git commit -m 'feat: demo4' %}
 
 * 这里我写错了，少写了*完成*两字，不过没关系，下一节有说明。
@@ -153,7 +151,7 @@ categories: Git
 
   {% asset_img gitRebase.png git log --pretty=oneline  %}
 
-* 现在我们将最近两次提交合并`git rebase -i HEAD~2`: 
+* 现在我们将最近两次提交合并`git rebase -i HEAD~2`:
 * 这里清楚显示了各命令用法，我们使用`squash`来合并，把第二个 pick 改为 squash.
 
   {% asset_img gitRebase2.png git rebase -i HEAD~2  %}
@@ -184,13 +182,13 @@ categories: Git
 
 * `git log --stat`查看提交记录的时候显示文件改动信息——也很适合 review 或排查错误.
 
-  {% asset_img gitLogStat.png git log -stat %} 
- 
-* `git log --auther=zhengyuan zhu`查看某个家伙的提交记录——我没改这部分代码啊，看看那个家伙做了什么(这家伙究竟有没有好好工作)。 
+  {% asset_img gitLogStat.png git log -stat %}
+
+* `git log --auther=zhengyuan zhu`查看某个家伙的提交记录——我没改这部分代码啊，看看那个家伙做了什么(这家伙究竟有没有好好工作)。
 * `git shortlog`简化版提交记录。
 * `git shortlog -s -n`查看所有人提交次数并排序——或许这样看更加简洁方便。
- 
-  {% asset_img gitShortlog.png git shortlog -s -n %} 
+
+  {% asset_img gitShortlog.png git shortlog -s -n %}
 
 * 很高兴看到在这个项目里我贡献的部分较多。
 
@@ -200,7 +198,7 @@ categories: Git
 * `git pull --rebase`过程中可能会遇到冲突，解决后用`git rebase --continue`来继续。或者觉得这次不稳，可以用`git rebase --abort`来取消。
 * 如图所示的`f6c5d08`和`6cbd73f`提交就可以通过`git pull --rebase`避免。
 
-  {% asset_img gitPullRebase.png git pull --rebase %} 
+  {% asset_img gitPullRebase.png git pull --rebase %}
 
 ### 小结
 
