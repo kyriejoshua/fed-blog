@@ -9,7 +9,9 @@ categories: Tools
 
 {% asset_img unphoto.jpg webpack-dev-server %}
 
-> <br/>记一次工作中踩的坑。坑不大，但耗时非常长。
+{% blockquote %}
+记一次工作中踩的坑。坑不大，但耗时非常长。
+{% endblockquote %}
 
 <!--more-->
 
@@ -32,7 +34,7 @@ gulp.task 'webpack-dev', (cb) ->
     proxy:
       '/api/':
       	target: 'http://localhost:8000'
-        
+
 ```
 
 * 这里使用了 webpack-dev-server 的 proxy 配置来代理请求，将原 `/api/`发起的请求发往 `localhost:8000`, 看起来似乎没有什么问题，实际上也并没有问题所在。
@@ -49,7 +51,7 @@ gulp.task 'webpack-dev', (cb) ->
   proxy:
     '/api/':
       target: 'http://chat.dev.cn'
-  
+
 ```
 
 * 本以为不会有任何问题，小小的改动怎会引起巨变。然而，坑就这样产生了。开发环境中的 xhr 请求无法请求到原来的接口。但在浏览器中直接打开 `http://chatops.dev.cn/api/user` 却能得到应有的结果。这让人烦躁，让我心慌。
@@ -82,7 +84,7 @@ gulp.task 'webpack-dev', (cb) ->
       ignorePath: true
       changeOrigin: true
       secure: false
-      
+
 ```
 
 * 这时我怀着激动的心情重启服务，却得到了失望的结果——接口请求到了，返回的格式却是'text/html'. 一定是有哪里出了问题，但无从得知。心情更加烦躁。

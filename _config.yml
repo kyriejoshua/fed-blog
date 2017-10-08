@@ -67,7 +67,7 @@ pagination_dir: page
 # theme: spfk
 # theme: yilia
 theme: minos
-
+disqus_shortname: deadpool-frontend # comment
 google_analytics: UA-80993347-1
 
 # Deployment
