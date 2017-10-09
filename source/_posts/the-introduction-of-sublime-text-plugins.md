@@ -1,5 +1,5 @@
 ---
-title: Sublime Text 插件鼓捣
+title: Sublime Text 3 高效插件配置
 date: 2017-10-07 20:52:57
 tags: sublime
 categories: Tools
