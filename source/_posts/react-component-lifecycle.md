@@ -44,7 +44,7 @@ categories: React
 #### componentWillMount
 
 * **执行阶段**: 组件将要挂载的阶段。在 `render` 前调用，只会调用一次。
-* 这里可能可以添加一些接口请求数据的逻辑，但在这里进行 state 的更新是异步的，它并不会触发 `re-render` 也就是 `render` 重新渲染。通常情况下，更推荐使用 `constructor` 来处理请求.
+* 这里或许可以添加一些接口请求数据的逻辑，但在这里进行 state 的更新是异步的，它并不会触发 `re-render` 也就是 `render` 重新渲染。通常情况下，更推荐使用 `constructor` 来替代.
 * **Note**: 如果要避免一些副作用，更好的办法是将这里面的逻辑放在 `componentDidMount` 里来处理。
 
 #### render
@@ -134,7 +134,8 @@ categories: React
 ##### *PS: 截止 9 月份，`React` 宣布将会随着 16 版本更新，修改原有的 `license`， 将原专利许可和 BSD 协议改为 MIT 协议。算是给这场风波一个较为圆满的结果。*
 
 {% blockquote %}
-  1.[react](https://devhints.io/react)
-  2.[reactchectsheet](https://reactcheatsheet.com/)
-  3.[reactjs](https://reactjs.org/docs/react-component.html)
+  参考：
+    1.[react](https://devhints.io/react)
+    2.[reactchectsheet](https://reactcheatsheet.com/)
+    3.[reactjs](https://reactjs.org/docs/react-component.html)
 {% endblockquote %}
