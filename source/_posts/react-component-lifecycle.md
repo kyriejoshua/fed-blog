@@ -131,6 +131,11 @@ categories: React
 * `try/catch` 固然很好，但它会立即捕获异常。在 `React` 中，有时我们虽然遇到错误，但不希望影响挂载或渲染过程。所以统一在这个回调里进行处理。对用户来说，业务仍然是正常的，错误维护了 `React` 的生态，并不会影响组件挂载。
 * `React` 组件都必须是纯函数，并禁止修改其自身 props.
 
+### 这里以图片形式更直观地来理解这整个生命周期流程
+
+* 组件的生命周期流程图
+{% asset_img react-lifecycle.jpeg React LifeCycle %}
+
 ##### *PS: 截止 9 月份，`React` 宣布将会随着 16 版本更新，修改原有的 `license`， 将原专利许可和 BSD 协议改为 MIT 协议。算是给这场风波一个较为圆满的结果。*
 
 {% blockquote %}
