@@ -7,7 +7,7 @@ categories: JavaScript
 
 <hr>
 
-![](/jo.github.io/2017/11/23/unphoto.jpg)
+![](/jo.github.io/2017/11/23/the-usage-of-threejs/unphoto.jpg)
 
 近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获。
 
