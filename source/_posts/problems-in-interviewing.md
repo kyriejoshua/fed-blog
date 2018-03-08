@@ -132,34 +132,62 @@ categories: Interview
 * 将一个二叉树反向打印:
 
   ```javascript
+  /* 二叉树反序
       a
      / \
     b   c
    / \   \
   d   e   f
 
-  var a = {value: 'a', left: null, right: null};
-  var b = {value: 'b', left: null, right: null};
-  var c = {value: 'c', left: null, right: null};
-  var d = {value: 'd', left: null, right: null};
-  var e = {value: 'e', left: null, right: null};
-  var f = {value: 'f', left: null, right: null};
-
+      a
+     / \
+    c   b
+   /   / \
+  f   e   d
+  */
+  var a = { value: 'a', left: null, right: null };
+  var b = { value: 'b', left: null, right: null };
+  var c = { value: 'c', left: null, right: null };
+  var d = { value: 'd', left: null, right: null };
+  var e = { value: 'e', left: null, right: null };
+  var f = { value: 'f', left: null, right: null };
   a.left = b;
   a.right = c;
   b.left = d;
   b.right = e;
   c.right = f;
 
-  // 也许有更好解法
+  // bad idea but useful
+  function walkTree(root, current) {
+    var obj = current ? current : root;
+    if (obj.left || obj.right) {
+      var temp = obj.left;
+      obj.left = obj.right;
+      obj.right = temp;
+      walkTree(root, obj.left);
+    } else {
+      // 一侧或者两侧已经遍历完的情况
+      if (!this.shouldStop) {
+        this.shouldStop = true;
+        walkTree(root, root.right);
+      } else {
+        console.info(JSON.stringify(root, null, 2));
+      }
+    }
+  }
+
+  // better idea
   function walkTree(root) {
     if (root.left || root.right) {
       var temp = root.left;
       root.left = root.right;
       root.right = temp;
-      walkTree(root.left);
+      root.left && walkTree(root.left);
+      root.right && walkTree(root.right);
     }
+    console.info(JSON.stringify(root, null, 2));
   }
+  walkTree(a);
 
   ```
 
