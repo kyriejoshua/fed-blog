@@ -39,7 +39,7 @@
 	var earthPic = 'https://kyriejoshua.github.io/jo.github.io/about/satelite.jpg'
 	var texture = new THREE.TextureLoader().load(earthPic || '')
 	var sphereGeometry = new THREE.SphereGeometry(4, 32, 32)
-	var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00d1ff, map: texture })
+	var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xfafaf6, map: texture })
 	var earth = new THREE.Mesh(sphereGeometry, sphereMaterial)
 	scene.add(earth)
 	earthDom.appendChild(renderer.domElement)
@@ -48,7 +48,8 @@
 	var threeAnimation = function() {
 		window.requestAnimationFrame(threeAnimation)
 		renderer.render(scene, camera)
-		earth.rotation.x += 0.01
+		earth.rotation.y += 0.003
+		earth.rotation.z += 0.0001
 	}
 	threeAnimation()
 </script>
