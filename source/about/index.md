@@ -36,7 +36,7 @@
 	var renderer = new THREE.WebGLRenderer()
 	var camera = new THREE.PerspectiveCamera(75, earthRect.width / earthRect.height, 1, 500)
 	renderer.setSize(earthRect.width, earthRect.height)
-	var earthPic = 'https://github.com/kyriejoshua/jo.github.io/about/satelite.jpg'
+	var earthPic = 'https://kyriejoshua.github.io/jo.github.io/about/satelite.jpg'
 	var texture = new THREE.TextureLoader().load(earthPic || '')
 	var sphereGeometry = new THREE.SphereGeometry(4, 32, 32)
 	var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00d1ff, map: texture })
