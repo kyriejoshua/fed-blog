@@ -1,20 +1,19 @@
 ##	About Me
 
-<blockquote>
+<blockquote id="regular" style="display: none">
 	**平淡无奇的前端攻城狮。**
 	偏爱美好的设计，注重用户体验。
 	遵循简洁的代码规范，拥有良好的代码习惯。
 
 	#Mac 重度用户
-	#ES6 #typescript #coffeescript
-	#React
-	#Redux
+	#ES6 && Typescript && Coffeescript
+	#React && Redux
 	#Git
 	#Nodejs 入坑中
 	#Webpack #Gulp #Parcel
+	#WebGL 会一点点点
 	#Scss #Less
 	#Jade
-	#WebGL 会一点点点
 	[更多的在这里](https://github.com/kyriejoshua/my-frontend-stack)
 
 	**0. 对一切事物充满好奇心。**
@@ -27,29 +26,8 @@
 
 </blockquote>
 
-<div id="myEarth" style="width: 100%;height: 250px" title="我也不知道为什么要放个地球🌎在这里" alt="This is for a lovely girl"></div>
+<div id="starwar" style="width: 100%;height: 520px;cursor: pointer" title="我也不知道为什么要放个地球🌎在这里" alt="This is for a lovely girl"></div>
 <script src="https://cdn.bootcss.com/three.js/87/three.min.js"></script>
-<script>
-	var scene = new THREE.Scene()
-	var earthDom = document.querySelector('#myEarth')
-	var earthRect = earthDom.getBoundingClientRect()
-	var renderer = new THREE.WebGLRenderer()
-	var camera = new THREE.PerspectiveCamera(75, earthRect.width / earthRect.height, 1, 500)
-	renderer.setSize(earthRect.width, earthRect.height)
-	var earthPic = 'https://kyriejoshua.github.io/jo.github.io/about/satelite.jpg'
-	var texture = new THREE.TextureLoader().load(earthPic || '')
-	var sphereGeometry = new THREE.SphereGeometry(4, 32, 32)
-	var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xfafaf6, map: texture })
-	var earth = new THREE.Mesh(sphereGeometry, sphereMaterial)
-	scene.add(earth)
-	earthDom.appendChild(renderer.domElement)
-	camera.position.set(0, 0, 10)
-	camera.lookAt(scene.position)
-	var threeAnimation = function() {
-		window.requestAnimationFrame(threeAnimation)
-		renderer.render(scene, camera)
-		earth.rotation.y += 0.003
-		earth.rotation.z += 0.0001
-	}
-	threeAnimation()
+<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<script src="./index.js">
 </script>
