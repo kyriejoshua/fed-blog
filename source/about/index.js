@@ -8,20 +8,59 @@ var earthRect = starwar.getBoundingClientRect()
 var renderer = new THREE.WebGLRenderer()
 var camera = new THREE.PerspectiveCamera(75, earthRect.width / earthRect.height, 1, 500)
 renderer.setSize(earthRect.width, earthRect.height)
-// earth part
-// var earthPic = 'https://kyriejoshua.github.io/jo.github.io/about/satelite.jpg'
-var earthPic = './satelite.jpg'
-var texture = new THREE.TextureLoader().load(earthPic || '')
-var sphereGeometry = new THREE.SphereGeometry(5, 32, 32)
-var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xfafaf6, map: texture })
-var earth = new THREE.Mesh(sphereGeometry, sphereMaterial)
-earth.position.set(0, -1, -3.2)
-scene.add(earth)
 
-// light part
-var light = new THREE.PointLight(0xfafaf6, 1.5, 100)
-light.position.set(-2, 3, 10)
-scene.add(light)
+/**
+ * [initEarth earth part]
+ * @return {Object} [description]
+ */
+var initEarth = function() {
+  // var earthPic = 'https://kyriejoshua.github.io/jo.github.io/about/satelite.jpg'
+  var earthPic = './satelite.jpg'
+  var textureEarth = new THREE.TextureLoader().load(earthPic || '')
+  var sphereGeometry = new THREE.SphereGeometry(5, 32, 32)
+  var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xfafaf6, map: textureEarth })
+  var earth = window.earth = new THREE.Mesh(sphereGeometry, sphereMaterial)
+  earth.position.set(0, -1, -3.2)
+  scene.add(earth)
+  return window
+}
+
+/**
+ * [initStars stars]
+ * @return {Object} [description]
+ */
+var initStars = function() {
+  var starPic = './star.png'
+  var textureStar = new THREE.TextureLoader().load(starPic)
+  var starsGeometry = new THREE.Geometry()
+  for (var i = 0; i < 200; i++) {
+    var star = new THREE.Vector3()
+    star.x = THREE.Math.randFloatSpread(50)
+    star.y = THREE.Math.randFloatSpread(50)
+    star.z = THREE.Math.randFloatSpread(50)
+    starsGeometry.vertices.push(star)
+  }
+  var starsMaterial = new THREE.PointsMaterial({
+    color: 0xcfee90, map: textureStar, size: 1,
+    transparent: true, opacity: 1, blending: THREE.AdditiveBlending, depthTest: false
+  })
+  var starField = new THREE.Points(starsGeometry, starsMaterial)
+  scene.add(starField)
+  return window
+}
+
+/**
+ * [initLight light part]
+ * @return {Object} [description]
+ */
+var initLight = function() {
+  var light = new THREE.PointLight(0xfafaf6, 1.5, 100)
+  light.position.set(-2, 3, 10)
+  scene.add(light)
+  return window
+}
+
+initEarth().initStars().initLight()
 
 // text part
 var textMaterial = new THREE.MeshLambertMaterial({ color: 0xffff9d })
@@ -77,8 +116,6 @@ scene.add(tipsGroup)
 // cube.position.set(10, -7.2, -1)
 // cube.name = 'tips'
 // scene.add(cube)
-
-console.info(tipsGroup)
 
 starwar.appendChild(renderer.domElement)
 camera.position.set(0, 0, 10)
