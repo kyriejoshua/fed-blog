@@ -78,7 +78,7 @@ var tipsMesh = {}
 fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
   var textParams = {
     font: font,
-    size: 1,
+    size: 0.8,
     height: 0.12,
     curveSegments: 12,
     bevelEnabled: false,
@@ -90,7 +90,7 @@ fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.
     var textGeometry = new THREE.TextGeometry(text, textParams)
     textsMesh[index] = new THREE.Mesh(textGeometry, textMaterial)
     textsMesh[index].name = text
-    textsMesh[index].position.set(-5, -10.2 + index * (1 + 0.2), 3.2)
+    textsMesh[index].position.set(-4, -10.5 + index * (0.8 + 0.2), 3.2)
     textGroup.add(textsMesh[index])
   })
   var tipsParams = Object.assign({}, textParams, { size: 0.32, height: 0, bevelThickness: 1, bevelSize: 0.8 })
@@ -105,7 +105,7 @@ fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.
   tipsGroup.visible = false
   tipsGroup.name = 'tips'
 })
-textGroup.rotation.x -= Math.PI * 0.08
+textGroup.rotation.x -= Math.PI * 0.15
 scene.add(textGroup)
 scene.add(tipsGroup)
 

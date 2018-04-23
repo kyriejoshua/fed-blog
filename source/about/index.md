@@ -26,7 +26,7 @@
 
 </blockquote>
 
-<div id="starwar" style="width: 100%;height: 520px;cursor: pointer" title="我也不知道为什么要放个地球🌎在这里" alt="This is for a lovely girl"></div>
+<div id="starwar" style="width: 100%;height: 520px;cursor: pointer" title="starwar" alt="This is for a lovely girl"></div>
 <script src="https://cdn.bootcss.com/three.js/87/three.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
 <script src="./index.js">
