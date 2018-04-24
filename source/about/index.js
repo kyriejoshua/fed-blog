@@ -1,4 +1,4 @@
-// TODO 点击展示更多星星
+// TODO 点击展示
 var starwar = document.querySelector('#starwar')
 var block = document.body.querySelector('#regular')
 var $starwar = $(starwar)
@@ -75,7 +75,8 @@ var textsMesh = {}
 var tipsMesh = {}
 // 放在本地有毒，解析会出现问题
 // fontLoader.load('./helvetiker_regular.typeface.json', function(font) {
-fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+// fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+fontLoader.load('https://raw.githubusercontent.com/kyriejoshua/jo.github.io/gh-raw/source/about/helvetiker_regular.typeface.json', function(font) {
   var textParams = {
     font: font,
     size: 0.8,
