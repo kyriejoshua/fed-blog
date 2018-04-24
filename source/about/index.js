@@ -63,12 +63,13 @@ var initLight = function() {
 initEarth().initStars().initLight()
 
 // text part
-var textMaterial = new THREE.MeshLambertMaterial({ color: 0xffff9d })
+var textMaterial = new THREE.MeshBasicMaterial({ color: 0xF5C236 })
+// var textMaterial = new THREE.MeshLambertMaterial({ color: 0xF5C236 })
 var fontLoader = new THREE.FontLoader()
 var textGroup = new THREE.Group()
 var tipsGroup = new THREE.Group()
-var texts = ['Mac deep user', 'ES6 && Typescript', 'React && Redux', 'Git', 'Nodejs', 'Webpack && Gulp', 'WebGL']
-var tips = ['ok, fine!', 'show me more!']
+var texts = ['Mac deep user', 'ES6 && Typescript', 'React && Redux', 'Git && Github', 'Nodejs', 'Webpack && Gulp', 'WebGL']
+var tips = ['show me more!']
 texts = texts.reverse()
 tips = tips.reverse()
 var textsMesh = {}
@@ -79,8 +80,8 @@ var tipsMesh = {}
 fontLoader.load('https://raw.githubusercontent.com/kyriejoshua/jo.github.io/gh-raw/source/about/helvetiker_regular.typeface.json', function(font) {
   var textParams = {
     font: font,
-    size: 0.8,
-    height: 0.12,
+    size: 0.5,
+    height: 0.02,
     curveSegments: 12,
     bevelEnabled: false,
     bevelThickness: 10,
@@ -91,11 +92,11 @@ fontLoader.load('https://raw.githubusercontent.com/kyriejoshua/jo.github.io/gh-r
     var textGeometry = new THREE.TextGeometry(text, textParams)
     textsMesh[index] = new THREE.Mesh(textGeometry, textMaterial)
     textsMesh[index].name = text
-    textsMesh[index].position.set(-4, -10.5 + index * (0.8 + 0.2), 3.2)
+    textsMesh[index].position.set(-2.5, -10.5 + index * (0.5 + 0.25), 3.2)
     textGroup.add(textsMesh[index])
   })
   var tipsParams = Object.assign({}, textParams, { size: 0.32, height: 0, bevelThickness: 1, bevelSize: 0.8 })
-  var tipMaterial = new THREE.MeshBasicMaterial({ color: 0xffff9d })
+  var tipMaterial = new THREE.MeshBasicMaterial({ color: 0xF5C236 })
   tips.map(function(tip, index) {
     var textGeometry = new THREE.TextGeometry(tip, tipsParams)
     tipsMesh[index] = new THREE.Mesh(textGeometry, tipMaterial)
@@ -106,7 +107,7 @@ fontLoader.load('https://raw.githubusercontent.com/kyriejoshua/jo.github.io/gh-r
   tipsGroup.visible = false
   tipsGroup.name = 'tips'
 })
-textGroup.rotation.x -= Math.PI * 0.15
+textGroup.rotation.x -= Math.PI * 0.24
 scene.add(textGroup)
 scene.add(tipsGroup)
 

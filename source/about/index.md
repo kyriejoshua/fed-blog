@@ -8,7 +8,7 @@
 	#Mac 重度用户
 	#ES6 && Typescript && Coffeescript
 	#React && Redux
-	#Git
+	#Git && Github
 	#Nodejs 入坑中
 	#Webpack #Gulp #Parcel
 	#WebGL 会一点点点
