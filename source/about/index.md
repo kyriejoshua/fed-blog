@@ -10,7 +10,7 @@
 	#React && Redux
 	#Git && Github
 	#Nodejs 入坑中
-	#Webpack #Gulp #Parcel
+	#Webpack && Gulp && Parcel
 	#WebGL 会一点点点
 	#Scss #Less
 	#Jade
