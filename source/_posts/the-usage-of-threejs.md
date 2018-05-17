@@ -62,17 +62,19 @@ categories: JavaScript
 
 #### [Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
 
-* 形状是构成物体的基本元素。它决定物体的形式。每个几何模型都基于基础类[Geometry](https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js).
-* 基于此，拓展出了球，立方体等几何模型。例如使用`const sphereGeometry = new THREE.SphereGeometry(6, 6, 1)` 来创建一个球体形状或使用`const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)`立方体形状。
+* 模型是构成物体的基本元素。它决定物体的形式。每个几何模型都基于基础类[Geometry](https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js).
+* 常见的几何模型有球模型(`SphereGeometry`)、盒子模型(`BoxGeometry`)、平面模型(`PlaneGeometry`)、环状模型(`RingGeometry`)、文本模型(`TextGeometry`)等等。
+* 我们可以使用`const sphereGeometry = new THREE.SphereGeometry(6, 6, 1)` 来创建一个球体模型或使用`const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)`立方体模型。
 * [Geometry](https://github.com/mrdoob/three.js/blob/master/src/geometries/Geometries.js)
 
 #### [Material](https://threejs.org/docs/index.html#api/materials/Material)
 
 * 材料用来描述物体的外观和构成部分。用于决定一个物体以何种形式来渲染。例如球体的颜色，表面光滑度。
 * `Material`是材料的基础类。其他材料都基于此类。
+* 常用的材料有基础网孔材料(MeshBasicMaterial)、兰伯特网孔材料(MeshLambertMaterial)、Phong网孔材料(MeshPhongMaterial)等等。
 * 使用`const sphereMaterial = new THREE.MeshBasicMaterial({color: '0x000000'})` 来渲染黑色的表面。
-* 当两项都满足的时候，就可以来创建一个完整的物体。
-* `const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)`
+* 当形状和材料两项都创建好的时候，就可以来创建一个完整的物体。
+  * `const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)`
 * [源码](https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js)
 
 #### [Light](https://threejs.org/docs/index.html#api/lights/Light)
