@@ -18,8 +18,8 @@ categories: JavaScript
 - [简单介绍](#Three.js 是什么)
 - [基础概念](#基础概念)
   - [Scene(场景)](#Scene)
-  - [Camera(相机)](#Camera)
   - [Renderer(渲染器)](#Renderer)
+  - [Camera(相机)](#Camera)
   - [Geometry(几何模型)](#Geometry)
   - [Material(材料)](#Material)
   - [Light(光源)](#Light)
@@ -43,6 +43,12 @@ categories: JavaScript
 * `const scene = new THREE.scene()`
 * [源码](https://github.com/mrdoob/three.js/blob/master/src/scenes/Scene.js)
 
+#### [Renderer](https://threejs.org/docs/index.html#api/constants/Renderer)
+
+* `WebGLRenderer` 渲染器使用 WebGL 来绘制场景。这个渲染器比 `CanvasRenderer`有着更好的性能。
+* `const renderer = new THREE.WebGLRenderer()` 使用 `webgl` 来渲染。
+* [WebGLRenderer](https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js)
+
 #### [Camera](https://threejs.org/docs/index.html#api/cameras/Camera)
 
 * Three 为我们提供了多个相机，包括正交相机，透视相机，还有立方体相机等等。
@@ -54,17 +60,11 @@ categories: JavaScript
 * 四个参数的含义分别为*相机视锥体垂直视角*，*相机视锥体宽高比*，*相机视锥体近裁剪面*，*相机视锥体远裁剪面*。
 * [源码](https://github.com/mrdoob/three.js/blob/master/src/cameras/Camera.js)
 
-#### [Renderer](https://threejs.org/docs/index.html#api/constants/Renderer)
-
-* `WebGLRenderer` 渲染器使用 WebGL 来绘制场景。这个渲染器比 `CanvasRenderer`有着更好的性能。
-* `const renderer = new THREE.WebGLRenderer()` 使用 `webgl` 来渲染。
-* [WebGLRenderer](https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js)
-
 #### [Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
 
 * 模型是构成物体的基本元素。它决定物体的形式。每个几何模型都基于基础类[Geometry](https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js).
 * 常见的几何模型有球模型(`SphereGeometry`)、盒子模型(`BoxGeometry`)、平面模型(`PlaneGeometry`)、环状模型(`RingGeometry`)、文本模型(`TextGeometry`)等等。
-* 我们可以使用`const sphereGeometry = new THREE.SphereGeometry(6, 6, 1)` 来创建一个球体模型或使用`const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)`立方体模型。
+* 我们可以使用`const sphereGeometry = new THREE.SphereGeometry(1, 1, 8)` 来创建一个球体模型或使用`const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)`立方体模型。
 * [Geometry](https://github.com/mrdoob/three.js/blob/master/src/geometries/Geometries.js)
 
 #### [Material](https://threejs.org/docs/index.html#api/materials/Material)
