@@ -57,7 +57,7 @@ categories: JavaScript
 * *每个参数分别代表相机视锥体左面，右面，上面，下面，前面，后面。*
 * **透视相机**，遵循近大远小的原则。和人肉眼所见相似。我们用以下方法来创建一个视角为 75°，占满屏幕大小，并且从离相机 1 个单位处开始渲染，到 500 的地方停止。
   * `const camera = new THREE.PerpestiveCamera(75, window.innerHeight/window.innerWidth, 1, 500)`
-* 四个参数的含义分别为*相机视锥体垂直视角*，*相机视锥体宽高比*，*相机视锥体近裁剪面*，*相机视锥体远裁剪面*。
+  * 四个参数的含义分别为*相机视锥体垂直视角*，*相机视锥体宽高比*，*相机视锥体近裁剪面*，*相机视锥体远裁剪面*。
 * [源码](https://github.com/mrdoob/three.js/blob/master/src/cameras/Camera.js)
 
 #### [Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
@@ -152,3 +152,6 @@ animation()
 {% blockquote %}
 [中文文档](http://techbrood.com/threejs/docs/#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF(Scene)
 {% endblockquote %}
+
+<hr>
+{% asset_img reward.jpeg Thanks %}

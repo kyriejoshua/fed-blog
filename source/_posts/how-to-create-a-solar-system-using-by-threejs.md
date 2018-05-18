@@ -380,3 +380,6 @@ categories: threejs
 * gif 显示的较为简陋。当然，更清楚的效果还是直接跑项目吧~
 
 {% asset_img solar-system.gif solar system %}
+
+<hr>
+{% asset_img reward.jpeg Thanks %}
