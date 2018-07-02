@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>call和apply的区别及各自应用场景 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            call和apply的区别及各自应用场景
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-11-04T08:16:10.000Z" itemprop="datePublished">2 年前</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 分钟 read (About 1176 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2016/11/04/call-and-apply-difference-and-application/unphoto.jpeg" title="Call and Apply">
+<blockquote><br>call和apply是js里非常常见的两个概念。但自己从来没有好好的深入理解这两者，尤其是在何时使用，如何使用才适合这两个问题上，没有进一步的思考。这里写一篇笔记来反思。<br><br></blockquote>
+
+<a id="more"></a>
+<h3 id="call和apply的定义"><a href="#call和apply的定义" class="headerlink" title="call和apply的定义"></a>call和apply的定义</h3><ul>
+<li><p>在JavaScript权威指南上是这么定义的：</p>
+</li>
+<li><p>call()和apply()可以看做是某个对象的方法，通过调用方法的形式来简洁调用函数。</p>
+</li>
+<li><p>call, apply都属于Function.prototype的方法。因此所有函数都有该方法。</p>
+</li>
+<li><p>call()和apply()的第一个实参是要调用函数的母对象，是调用上下文，在函数体内通过this来获得对它的引用。要想以对象o的方法来调用函数f(),可以这样使用它们。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f.call(o);</span><br><span class="line">f.apply(o);</span><br><span class="line">等同于</span><br><span class="line">o.m = f;</span><br><span class="line">o.m();</span><br><span class="line"><span class="keyword">delete</span> o.m;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码可以理解，但描述理解起来实在困难。</p>
+</li>
+</ul>
+<h3 id="具体说明"><a href="#具体说明" class="headerlink" title="具体说明"></a>具体说明</h3><ul>
+<li><p>定义都是用来考试时死记硬背的。所以来看看实例。</p>
+</li>
+<li><p>首先要明确一点：<strong>call()和apply()的作用是一样的，只是调用方式不同。</strong></p>
+</li>
+<li><p>例如：<code>foo.call(this, arg1, arg2, arg3) == foo.apply(this, arguments) == this.foo(arg1, arg2, arg3/* arguments */)</code></p>
+</li>
+<li><p>两者唯一的不同点在于第二个传入的参数。</p>
+</li>
+<li><p>第一个实参指代当前调用的对象，如果在ES5严格模式下，第一个实参不管传入什么null或undefined或其他，都会变成this。</p>
+</li>
+<li><p>第二个实参，call方法可以传入任意的实参，不论数量长度。如<code>foo.call(this, arg1, arg2, arg3…)</code></p>
+</li>
+<li><p>apply方法则传入的是数组，可以是任意长度的数组，而且传入的数组包括类数组对象。如<code>foo.apply(this, arguments)</code></p>
+</li>
+</ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><p>我觉得这部分才是要深入理解的，何时去调用它们，使用它们有什么方便之处。</p>
+</li>
+<li><p>call和apply的用途是借用别人的方法来调用，或者说，是动态改变this这个对象。</p>
+</li>
+<li><p>前者或许更好理解。来看看这样一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123;</span><br><span class="line">  name: <span class="string">'mdzz'</span>,</span><br><span class="line">  say: <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">    <span class="built_in">window</span>.alert(<span class="string">`我是 <span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> b = &#123;&#125;;</span><br><span class="line"><span class="comment">// b也是zz,但没有相应的say方法，所以此时b想借用a的方法。</span></span><br><span class="line"><span class="comment">// 调用a的方法给b使用</span></span><br><span class="line">a.say.call(b);</span><br><span class="line">b.name = <span class="string">'yrmdzz'</span>;</span><br><span class="line"><span class="comment">// 传入参数时</span></span><br><span class="line">a.say.call(b, b.name);</span><br><span class="line">a.say.apply(b, [b.name]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 或者这样定义更为明显 */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"> <span class="comment">// 添加原型属性</span></span><br><span class="line"> Foo.prototype = &#123;</span><br><span class="line">   name: <span class="string">'mdzz'</span>,</span><br><span class="line">   say: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// 当前调用的对象Foo</span></span><br><span class="line">     alert(<span class="string">`I am <span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>`</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// new 生成一个实例对象</span></span><br><span class="line"> <span class="keyword">const</span> people = <span class="keyword">new</span> Foo();</span><br><span class="line"> <span class="built_in">console</span>.info(people);</span><br><span class="line"> people.say();</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 定义一个没有say方法的对象animal</span></span><br><span class="line"> <span class="comment">// 让它调用people的say方法</span></span><br><span class="line"> <span class="keyword">const</span> animal = &#123;</span><br><span class="line">   name: <span class="string">'kitty'</span></span><br><span class="line"> &#125;</span><br><span class="line"> people.say.call(animal);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 一个更显而易见的例子 */</span></span><br><span class="line"><span class="comment">// 定义一个函数，可以判断传入参数的基本类型</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">type</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> toString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line">    <span class="keyword">let</span> map = [</span><br><span class="line">       <span class="string">'[object Boolean]'</span>: <span class="string">'boolean'</span>,</span><br><span class="line">       <span class="string">'[object Object]'</span>: <span class="string">'Object'</span>,</span><br><span class="line">       <span class="string">'[object Array]'</span>: <span class="string">'array'</span>,</span><br><span class="line">       <span class="string">'[object Number]'</span>: <span class="string">'number'</span>,</span><br><span class="line">       <span class="string">'[object String]'</span>: <span class="string">'string'</span>,</span><br><span class="line">       <span class="string">'[object RegExp]'</span>: <span class="string">'regExp'</span>,</span><br><span class="line">       <span class="string">'[object Function]'</span>: <span class="string">'function'</span>,</span><br><span class="line">       <span class="string">'[object Date]'</span>: <span class="string">'data'</span>,</span><br><span class="line">       <span class="string">'[object Undefined]'</span>: <span class="string">'undefined'</span>,</span><br><span class="line">       <span class="string">'[object Null]'</span>: <span class="string">'null'</span>,</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">return</span> map[toString.call(obj)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 在参数不定时，则可使用apply */</span></span><br><span class="line">  <span class="comment">// 这里的例子改写自权威指南</span></span><br><span class="line">  <span class="comment">// 内置Math对象有一个max方法，接受任意个参数，返回其中的最大值</span></span><br><span class="line">  <span class="comment">// 但有时我们调用时，无法预知参数的个数，而且这种取最大值的情况通常在数组中发生</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 假如有这样一个数组</span></span><br><span class="line">  <span class="keyword">let</span> arr = [<span class="number">4</span>,<span class="number">98</span>,<span class="number">34</span>,<span class="number">90</span>,<span class="number">41</span>,<span class="number">78</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 直接Math.max会返回NaN,因为它不接受数组作为参数</span></span><br><span class="line">  <span class="built_in">Math</span>.max(arr); <span class="comment">// 返回NaN</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// apply方法接受数组作为参数</span></span><br><span class="line">  <span class="keyword">let</span> biggest = <span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>, arr);</span><br><span class="line">  <span class="built_in">console</span>.info(biggest); <span class="comment">// 98</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第一个参数Math可以替换为任何其他值，如下的也都可以</span></span><br><span class="line">  <span class="keyword">let</span> biggest2 = <span class="built_in">Math</span>.max.apply(<span class="keyword">this</span>, arr);</span><br><span class="line">  <span class="keyword">let</span> biggest3 = <span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, arr);</span><br><span class="line">  <span class="built_in">console</span>.info(biggest2); <span class="comment">// 98</span></span><br><span class="line">  <span class="built_in">console</span>.info(biggest3); <span class="comment">// 98</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 还有一个比较有意思的apply使用场景 */</span></span><br><span class="line">  <span class="comment">// 使用push方法来合并数组</span></span><br><span class="line">  <span class="keyword">let</span> arrayA = [<span class="string">'say'</span>, <span class="string">'hello'</span>];</span><br><span class="line">  <span class="keyword">let</span> arrayB = [<span class="string">'ok'</span>, <span class="string">'master'</span>];</span><br><span class="line">  <span class="built_in">Array</span>.prototype.push.apply(arrayA, arrayB);</span><br><span class="line">  <span class="comment">// arrayA: ['say', 'hello', 'ok', 'master']</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所以我的理解是以下在两种情况下使用call(), apply():</p>
+<p>1.动态改变调用的对象，或者说使<strong>没有该方法的对象</strong>调用<strong>有该方法的对象</strong>的方法。</p>
+<p>2.改变方法的传入参数为数组。</p>
+</li>
+<li><p>就目前看来，肯定还有更多的使用场景。但我还未遇到，等遇到或理解的更深一步的时候，再来补充。</p>
+</li>
+</ul>
+<blockquote><br> 参考：<br><br>《JavaScript权威指南》<br><br></blockquote>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/JavaScript/">#JavaScript</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2016/12/05/duplicate-removal-algorithm-about-array/">JavaScript数组去重</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2016/11/01/wechat-compatible-problems/">微信内置浏览器兼容性问题汇总</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/11/04/call-and-apply-difference-and-application/';
+        this.page.identifier = '2016/11/04/call-and-apply-difference-and-application/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2018 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

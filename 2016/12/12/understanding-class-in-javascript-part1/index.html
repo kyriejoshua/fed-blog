@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>理解JavaScript中的类 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            理解JavaScript中的类
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-12-12T09:01:53.000Z" itemprop="datePublished">2 年前</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            9 分钟 read (About 1345 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg" title="Class">
+<blockquote><br>整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。基于ES3, ES5.<br><br></blockquote>
+
+<a id="more"></a>
+<h3 id="理解JavaScript中的类"><a href="#理解JavaScript中的类" class="headerlink" title="理解JavaScript中的类"></a>理解JavaScript中的类</h3><ul>
+<li><p><strong>类的作用</strong>：让每个对象都共享某些属性。</p>
+</li>
+<li><p><strong>类的实现</strong>：基于JavaScript的原型继承机制。</p>
+</li>
+<li><p><strong>类的特性</strong>：动态可继承(编程哲学——鸭式辩型)。</p>
+</li>
+<li><p><strong>类的核心</strong>：原型对象。所有类的实例都会从同一个原型对象中继承。属性</p>
+</li>
+<li><p><strong>类的定义</strong>：通常使用构造函数:</p>
+<ul>
+<li>调用构造函数会自动创建一个新对象，构造函数只需初始化这个新对象的状态，而新对象的原型正是构造函数的prototype</li>
+<li>意味着同一个构造函数创建的所有对象都继承自一个相同的对象,因此他们都是同一个类的成员</li>
+<li>构造函数可看做是类的’外在表现’</li>
+</ul>
+</li>
+<li><p>为方便标识，字符串相关部分使用了ES6的模板字符串。</p>
+</li>
+<li><p><strong>编程约定</strong>：构造函数(类名)首字母大写:构造函数就是用来构造新对象的，必须通过关键字new调用，开发者可以通过命名约定来判断是否是构造函数。</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [Girl 定义一个拥有几个属性的妹子类]</span></span><br><span class="line"><span class="comment"> * @param &#123;[String]&#125; pretty [可爱属性，以字符串标识]</span></span><br><span class="line"><span class="comment"> * @param &#123;[Number]&#125; sexualLow [性感属性，以数字标识]</span></span><br><span class="line"><span class="comment"> * @param &#123;[Number]&#125; sexualHigh [性感属性，以数字标识]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Girl</span>(<span class="params">pretty, sexualLow, sexualHigh</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 类型检查</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">isNaN</span>(sexualHigh) || <span class="built_in">isNaN</span>(sexualLow)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.pretty = pretty;</span><br><span class="line">  <span class="keyword">this</span>.sexualLow = sexualLow;</span><br><span class="line">  <span class="keyword">this</span>.sexualHigh = sexualHigh;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>在原型对象上定义类方法。</p>
+</li>
+<li><p>该prototype是每个JavaScript函数都自动拥有的,它本身的值就是一个<strong>对象</strong>，这个对象包含一个唯一一个不可枚举的属性constructor。</p>
+</li>
+<li><p>constructor的值是一个<strong>函数对象</strong>。</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [foreach 传入方法处理每个属性]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; f [description]</span></span><br><span class="line"><span class="comment"> * @return &#123;[type]&#125;   [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Girl.prototype.foreach = <span class="function"><span class="keyword">function</span>(<span class="params">f</span>) </span>&#123;</span><br><span class="line">  f.call(<span class="keyword">this</span>, <span class="keyword">this</span>.pretty, <span class="keyword">this</span>.sexualLow, <span class="keyword">this</span>.sexualHigh);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [include 是否在Girl的性感区间内(判断妹子是否性感)]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; sexual [description]</span></span><br><span class="line"><span class="comment"> * @return &#123;[type]&#125;        [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Girl.prototype.include = <span class="function"><span class="keyword">function</span>(<span class="params">sexual</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> sexual &gt; <span class="keyword">this</span>.sexualLow &amp;&amp; sexual &lt; <span class="keyword">this</span>.sexualHigh;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [toString 查看这个妹子类的平均水平]</span></span><br><span class="line"><span class="comment"> * @return &#123;[type]&#125; [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Girl.prototype.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">`This girl: <span class="subst">$&#123;(<span class="keyword">this</span>.sexualLow + <span class="keyword">this</span>.sexualHigh) <span class="regexp">/ 2&#125;$&#123;this.pretty&#125;`);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">&#125;;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">/</span><span class="regexp">/ 声明一个妹子类的实例</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">var lisa = new Girl('B', 32, 36);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">lisa.include(34); /</span><span class="regexp">/ 查看该妹子是否在区间内</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">lisa.foreach(console.warn); /</span><span class="regexp">/ 打印出该妹子实例的各个属性</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">lisa.toString(); /</span><span class="regexp">/ 查看该妹子平均指标</span></span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Girl.prototype; <span class="comment">// 定义一个原型对象</span></span><br><span class="line"><span class="keyword">var</span> c = p.constructor;  <span class="comment">// 该原型对象的构造函数</span></span><br><span class="line">c === Girl; <span class="comment">// true Girl.prototype.constructor === Girl 原型对象的构造函数指向其本身</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对实例对象来说，它的构造函数就是它的类</span></span><br><span class="line">lisa.constructor === Girl; <span class="comment">// true</span></span><br><span class="line">lisa.__proto__ === Girl.prototype; <span class="comment">// __proto__指向构造函数的原型对象</span></span><br><span class="line">lisa <span class="keyword">instanceof</span> Girl <span class="comment">// true 继承自Girl类</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>构造函数对象</strong>：用于生成类的函数，为JavaScript的类定义了名字。</p>
+</li>
+<li><p><strong>原型对象</strong>：类的唯一标识————原型对象的属性被所有实例所继承。如果某个属性是函数的话，就会作为类的实例的方法来使用。</p>
+</li>
+<li><p><strong>实例对象</strong>：类的实例，每一个都是独立的对象。在该实例上添加属性是不会影响其他实例的，但在原型对象上添加方法会影响所有实例。</p>
+</li>
+<li><p>定义在实例上的非函数属性，实际上是实例字段。</p>
+</li>
+</ul>
+<ul>
+<li><p>下面定义一个函数，分三步定义一个类。</p>
+</li>
+<li><p>我们将定义类的步骤封装成一个函数。</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需要提前声明一个函数</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [extend 合并对象属性，复制p中对象属性到o中]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; o [description]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; p [description]</span></span><br><span class="line"><span class="comment"> * @return &#123;[type]&#125;   [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">o, p</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (prop <span class="keyword">in</span> p) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 并不会覆盖对象中原有属性</span></span><br><span class="line">    <span class="keyword">if</span> (o[prop] === <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">      o[prop] = p[prop];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [defineClass 定义类的函数]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; constructor [构造函数]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; method      [在原型对象上添加属性，可继承]</span></span><br><span class="line"><span class="comment"> * @param  &#123;[type]&#125; static      [直接在类上添加属性， 不可继承]</span></span><br><span class="line"><span class="comment"> * @return &#123;[type]&#125;             [返回构造函数]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineClass</span>(<span class="params">constructor, method, static</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (method) &#123;</span><br><span class="line">    extend(<span class="keyword">constructor</span>.prototype, method);</span><br><span class="line">  &#125;</span><br><span class="line">  if (static) &#123; <span class="comment">// static 在严格模式下是保留字，之后请谨慎使用</span></span><br><span class="line">    extend(<span class="keyword">constructor</span>, static);</span><br><span class="line">  &#125;</span><br><span class="line">  return <span class="keyword">constructor</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 调用该方法生成另一个类</span><br><span class="line">var Girl2 = defineClass(</span><br><span class="line">  function(pretty, sexualLow, sexualHigh) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isNaN</span>(sexualLow) || <span class="built_in">isNaN</span>(sexualHigh)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.pretty = pretty;</span><br><span class="line">    <span class="keyword">this</span>.sexualLow = sexualLow;</span><br><span class="line">    <span class="keyword">this</span>.sexualHigh = sexualHigh;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    foreach: <span class="function"><span class="keyword">function</span>(<span class="params">f</span>) </span>&#123;</span><br><span class="line">      f.call(<span class="keyword">this</span>, <span class="keyword">this</span>.pretty, <span class="keyword">this</span>.sexualLow, <span class="keyword">this</span>.sexualHigh);</span><br><span class="line">    &#125;,</span><br><span class="line">    include: <span class="function"><span class="keyword">function</span>(<span class="params">sexual</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> sexual &gt; <span class="keyword">this</span>.sexualLow &amp;&amp; sexual &lt; <span class="keyword">this</span>.sexualHigh;</span><br><span class="line">    &#125;,</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.info(<span class="string">`This girl: <span class="subst">$&#123;(<span class="keyword">this</span>.sexualLow + <span class="keyword">this</span>.sexualHigh) <span class="regexp">/ 2&#125;$&#123;this.pretty&#125;`);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  &#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  /</span><span class="regexp">/ 随机生成一个性感的妹子</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    random: function() &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      var min = new Date().getMinutes();</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      var type = (min % 3) === 0 ? 'A': (min % 3) === 1 ? 'B' : 'C';</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      return `$&#123;Math.ceil(Math.random() * 10) + 30&#125;$&#123;type&#125;`;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">/</span><span class="regexp">/ 生成一个Girl2的实例</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">var monika = new Girl2('D', 34, 38);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">monika.foreach(console.info); /</span><span class="regexp">/ D 34 38</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">monika.include(31); /</span><span class="regexp">/ false</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">monika.include(35); /</span><span class="regexp">/ true</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">monika.toString(); /</span><span class="regexp">/ [object Object] 因extend不会覆盖原方法，所以这里仍然是Object.prototype.toString自带方法, 如果要去掉，将extend中的if条件判断去除即可</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">monika.random(); /</span><span class="regexp">/ 报错 Uncaught TypeError: monika.random is not a function(...) 因为monika实例未继承类自身的方法</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">Girl2.random(); /</span><span class="regexp">/ 随机生成 例如：'36C'</span></span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>毕竟不是灵魂画手，大概便是这样……</li>
+</ul>
+<img src="/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/understand-prototype.jpeg" title="understanding prototype">
+<p>​</p>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/JavaScript/">#JavaScript</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2016/12/19/transform-cookies-into-es6/">ES6改写cookies.js及分析</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2016/12/05/duplicate-removal-algorithm-about-array/">JavaScript数组去重</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/';
+        this.page.identifier = '2016/12/12/understanding-class-in-javascript-part1/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2018 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

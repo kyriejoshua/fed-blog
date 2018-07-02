@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>初识 Threejs(下) —— 实现一个太阳系模型 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            初识 Threejs(下) —— 实现一个太阳系模型
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-12-19T12:56:12.000Z" itemprop="datePublished">6 个月前</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/threejs/">threejs</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            21 分钟 read (About 3128 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/unphoto.png" alt=""></p>
+<p>在上一篇文章中，我整理了 Threejs 中的一些基本概念。现在这一篇，就使用上次所整理的内容加上一些不复杂的算法，来实现一个运转着的太阳系模型。这里的所有行星大小及公转时间，尽量贴合实际。</p>
+<a id="more"></a>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#实现思路">实现思路</a></li>
+<li><a href="#场景初始化">场景初始化</a></li>
+<li><a href="#创建行星">创建行星</a></li>
+<li><a href="#创建轨道">创建轨道</a></li>
+<li><a href="#创建文本">创建文本</a></li>
+<li><a href="#行星添加公转效果">行星添加公转效果</a></li>
+<li><a href="#行星添加光照效果">行星添加光照效果</a></li>
+<li><a href="#场景添加鼠标事件"> 鼠标交互事件</a></li>
+</ul>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
+<li><p>这篇文章于早前发出，收到了前辈的指教。反思后发现确实后面的内容比较流水账，欠缺一个思路的总结和梳理，而只是一味实现。这里我先将整体的实现方案梳理出来，接着我们再分解并一步步去实现它。</p>
+</li>
+<li><p>我将其主要分为两个部分，静态的实现，以及动态的鼠标交互。</p>
+</li>
+</ul>
+<h4 id="静态实现"><a href="#静态实现" class="headerlink" title="静态实现"></a>静态实现</h4><ul>
+<li>太阳系模型的核心是八大行星围绕着太阳做<strong>公转运动</strong>。涉及到两点，一是运动，二是公转。运动使用动画即可完成。至于公转，实际上行星的运转是做椭圆周运动，我们在这里将其简化为圆周运动，那么核心就是计算圆周运动的坐标点。</li>
+<li>那么实现这个静态的太阳系模型就有一定的思路了，首先我们用球体初始化行星，按照距离远近摆放在场景中。然后添加环状图形来当做轨道，辅助观察。接着文本采用外部引入的方式，加载后位置基本与行星相同，减去一定大小将其放在正上方。最后，将行星按照计算出的坐标信息，每一帧去设置位置。最终的效果就是动态的公转效果。</li>
+<li>这里有几点值得注意：<ul>
+<li>字体在 Threejs 中需要另外加载，格外引入。</li>
+<li>行星的初始化位置可以用随机的方式来分布，使其更真实。当然，有精力的话可以参考实际去计算坐标，摆放接近真实的位置。</li>
+<li>后来在行星中添加了月亮，涉及的计算就是把以太阳左标为原点改为了以地球坐标为原点，其他计算方式则相同。</li>
+<li>为行星添加光照效果，就是在太阳的位置上放一个点光源，然后在周围的地方摆放一个环境光光源优化视觉效果。</li>
+<li>采用图片纹理的方式优化行星的视觉效果。</li>
+</ul>
+</li>
+</ul>
+<h4 id="动态交互"><a href="#动态交互" class="headerlink" title="动态交互"></a>动态交互</h4><ul>
+<li>场景基本完成后。我会添加一个鼠标交互，即鼠标移到行星位置上时，显示行星的名字。</li>
+<li>这里主要的复杂点在于坐标系的转化。3d 的坐标系和浏览器平时的坐标系原点及坐标位置不一。这点在下文我详细说明。</li>
+</ul>
+<h3 id="场景初始化"><a href="#场景初始化" class="headerlink" title="场景初始化"></a>场景初始化</h3><ul>
+<li>首先，创建一个场景用来渲染这一切。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> scene = <span class="keyword">new</span> THREE.Scene()</span><br><span class="line"><span class="keyword">let</span> renderer = <span class="keyword">new</span> THREE.WebGLRender()</span><br><span class="line"><span class="keyword">let</span> camera = <span class="keyword">new</span> THREE.Perpestive(<span class="number">40</span>, <span class="keyword">this</span>.el.clientHeight / <span class="keyword">this</span>.el.clientWidth, <span class="number">1</span>, <span class="number">500</span>)</span><br><span class="line">renderer.setSize(<span class="keyword">this</span>.el.clientHeight, <span class="keyword">this</span>.el.clientWidth)</span><br><span class="line"><span class="keyword">this</span>.el.appendChild(renderer.domElement)</span><br><span class="line">renderer.render(scene, camera)</span><br></pre></td></tr></table></figure>
+<h3 id="创建行星"><a href="#创建行星" class="headerlink" title="创建行星"></a>创建行星</h3><ul>
+<li>初始化各大星球，即创建球体。在参考了真实大小和距离后，我们尽量按接近真实的比例来创建。</li>
+<li>首先我们创建一个对象数组来保存各星球的相关数据。包括名字，大小，位置，颜色等等属性。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planets = [&#123;</span><br><span class="line">  name: <span class="string">'Sun'</span>,</span><br><span class="line">  size: [<span class="number">5</span>, <span class="number">16</span>, <span class="number">16</span>],</span><br><span class="line">  dis: <span class="number">0</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">0</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Mercury'</span>,</span><br><span class="line">  size: [<span class="number">0.4</span>, <span class="number">10</span>, <span class="number">10</span>],</span><br><span class="line">  dis: <span class="number">4</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">9</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">0.3</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Venus'</span>,</span><br><span class="line">  size: [<span class="number">0.85</span>, <span class="number">10</span>, <span class="number">10</span>],</span><br><span class="line">  dis: <span class="number">7.5</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">12.75</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">0.6</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Earth'</span>,</span><br><span class="line">  size: [<span class="number">1</span>, <span class="number">10</span>, <span class="number">10</span>],</span><br><span class="line">  dis: <span class="number">10</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">15</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">1</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Moon'</span>,</span><br><span class="line">  size: [<span class="number">0.4</span>, <span class="number">10</span>, <span class="number">10</span>],</span><br><span class="line">  dis: <span class="number">1</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">17</span>],</span><br><span class="line">  color: <span class="number">0xC0C0C0</span>,</span><br><span class="line">  rev: <span class="number">0.2</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Mars'</span>,</span><br><span class="line">  size: [<span class="number">0.6</span>, <span class="number">10</span>, <span class="number">10</span>],</span><br><span class="line">  dis: <span class="number">15</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">1.8</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Jupiter'</span>,</span><br><span class="line">  size: [<span class="number">4</span>, <span class="number">32</span>, <span class="number">32</span>],</span><br><span class="line">  dis:  <span class="number">20</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">25</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">5</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Saturn'</span>,</span><br><span class="line">  size: [<span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>],</span><br><span class="line">  dis:  <span class="number">25</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">30</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">10</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Uranus'</span>,</span><br><span class="line">  size: [<span class="number">2</span>, <span class="number">32</span>, <span class="number">32</span>],</span><br><span class="line">  dis:  <span class="number">30</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">36</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">15</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'Neptune'</span>,</span><br><span class="line">  size: [<span class="number">1.8</span>, <span class="number">32</span>, <span class="number">32</span>],</span><br><span class="line">  dis:  <span class="number">35</span>,</span><br><span class="line">  pos: [<span class="number">0</span>, <span class="number">10</span>, <span class="number">45</span>],</span><br><span class="line">  color: <span class="number">0xFFFFFF</span>,</span><br><span class="line">  rev: <span class="number">0.5</span></span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>根据这些属性，我们再用形状和材质来创建球体。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initPlanet</span>(<span class="params">size, color</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sphereGeometry = <span class="keyword">new</span> THREE.SphereGeometry(...size)</span><br><span class="line">  <span class="keyword">const</span> sphereMaterial = <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123; color &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh(sphereGeometry, sphereMaterial)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里我采用遍历数组的数据的方式来依次创建球体。并用一个 THREE.Group 对象来统一保存。</li>
+<li>在初始化的数据里，我们可以拿到位置等信息，在这里给球体也加上相应的位置。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initPlanets</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> planetsGroup = <span class="keyword">new</span> THREE.Group()</span><br><span class="line">  planets.map(<span class="function">(<span class="params">planetObj</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> planet = initPlanet(planetObj.size, planetObj.color)</span><br><span class="line">    planet.name = planetObj.name</span><br><span class="line">    planetsGroup.add(planet)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> planetsGroup</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> planetsGroup = <span class="keyword">this</span>.initPlanets()</span><br><span class="line">scene.add(planetsGroup)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>场景中添加球体物体后，理论上应该能看到九个球体了。但是，这里只能见到一个球体。因为像机的默认视角是正对着球，而此时的球的位置正好连成一条线。我们来调整一下，让相机从高处俯视。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camera.position.set(<span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">camera.lookAt(scene.position)</span><br></pre></td></tr></table></figure>
+<h3 id="创建轨道"><a href="#创建轨道" class="headerlink" title="创建轨道"></a>创建轨道</h3><ul>
+<li>为了更清晰得看清行星运转，我们添加一些轨道线来辅助。</li>
+<li>所用的是 <code>RingGeometry</code> 几何形状。创建的方式类似行星。</li>
+<li>但是需要注意的是，创建的环默认是垂直于水平面的，我们需要将它做一个旋转，转到水平面上来。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initTrack</span>(<span class="params">size, color</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> ringGeometry = <span class="keyword">new</span> THREE.RingGeometry()</span><br><span class="line">  <span class="keyword">const</span> ringMaterial = <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123; color &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh(ringGeometry, ringMaterial) <span class="comment">// todo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统一创建 </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initTracks</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> tracksGroup = <span class="keyword">new</span> THREE.Group()</span><br><span class="line">  planets.map(<span class="function">(<span class="params">planet</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> outer = planet.pos[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">const</span> inner = outer - <span class="number">0.05</span></span><br><span class="line">    <span class="keyword">const</span> size = [outer, inner, <span class="number">100</span>]</span><br><span class="line">    <span class="keyword">const</span> track = <span class="keyword">this</span>.initTrack(size, <span class="number">0xffffff</span>)</span><br><span class="line">    track.rotation.x = <span class="built_in">Math</span>.PI * <span class="number">0.5</span></span><br><span class="line">    track.position.set(<span class="number">0</span>, <span class="number">10</span>, <span class="number">0</span>)</span><br><span class="line">    tracksGroup.add(track)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> tracksGroup</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tracksGroup = <span class="keyword">this</span>.initTracks()</span><br><span class="line">scene.add(tracksGroup)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样就可以在场景中看到行星在轨道上了。</li>
+</ul>
+<h3 id="创建文本"><a href="#创建文本" class="headerlink" title="创建文本"></a>创建文本</h3><ul>
+<li>我们使用文本来标识行星的名字，位置在行星正上方。</li>
+<li>THREE 创建文本需要先加载字体。通常使用字体是先通过官方的方法加载 json 文件。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> textLoader = <span class="keyword">new</span> THREE.FontLoader()</span><br><span class="line">textLoader.load(<span class="string">'./assets/fonts/helvetiker_regular.typeface.json'</span>, (font) =&gt; &#123;</span><br><span class="line">  <span class="comment">// do sth</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在自己的案例中，parcel 打包后似乎没有静态文件目录，于是这里了解了下 THREE.Font 部分代码后，发现只需要重新构造一个就可以。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Font <span class="keyword">from</span> <span class="string">'./assets/fonts/helvetiker_regular.typeface.json'</span></span><br><span class="line"><span class="keyword">const</span> font = <span class="keyword">new</span> THREE.Font(Font)</span><br><span class="line"><span class="comment">// 封装一下</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadFont</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Font(Font)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 除去字体包以外，字体还有一些必要的样式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initFont</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;</span><br><span class="line">    size: <span class="number">0.5</span>,</span><br><span class="line">    height: <span class="number">0</span>,</span><br><span class="line">    curveSegments: <span class="number">12</span>,</span><br><span class="line">    bevelEnabled: <span class="literal">false</span>,</span><br><span class="line">    bevelThickness: <span class="number">1</span>,</span><br><span class="line">    bevelSize: <span class="number">0.8</span></span><br><span class="line">  &#125;, &#123; <span class="attr">font</span>: loadFont() &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最终创建文本的方式和其他物体相似，也是形状和纹理。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initText</span>(<span class="params">content</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> textGeometry = <span class="keyword">new</span> THREE.TextGeometry(content, initFont())</span><br><span class="line">  <span class="keyword">const</span> textMaterial = <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123; <span class="attr">color</span>: <span class="number">0xffffff</span> &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh(textGeometry, textMaterial)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后，只要让文本使用对应行星的位置，再做一些小小的位移即可。</li>
+</ul>
+<h3 id="行星添加公转效果"><a href="#行星添加公转效果" class="headerlink" title="行星添加公转效果"></a>行星添加公转效果</h3><ul>
+<li>在场景里添加以上图形后，我们能看到部分物体了，虽然可能位置有部分重叠。现在我们来给每个行星添加动态效果，让所有行星运转。</li>
+<li>公转的本质是改变行星的坐标位置，每一帧进行一次重定位，那么球体看起来就是运动的。</li>
+<li>这里的公转，就是围绕太阳做圆周运动，以太阳为中心，距离为半径，圆周上的点就是位置。所以每个行星的位置计算就是半径和弧度的计算。</li>
+<li>例如距离为 5 的星球，圆周长则为 <code>2π * r</code>, 即 <code>Math.PI * 2 * 5</code>，计算每<strong><em>帧</em></strong>的弧度则为 <code>2π * r  / 60 / 60 / r</code> 即 <code>Math.PI * 2 * 5 / 60 / 60 / 5</code>.</li>
+<li>所有行星在同一水平面，所以 y 的坐标固定，具体的位置就是 <code>Math.sin(Math.PI * 2 / 3600) * r, 5, Math.cos(Math.PI * 2 / 3600) * r</code></li>
+<li>因为每个行星的公转速度不一，所以我们再加一个变量来控制速度，整理后如下</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calcSpeed</span>(<span class="params">rev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.PI * <span class="number">2</span> / <span class="number">3600</span> / rev</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 然后来调用动画的函数里执行</span></span><br><span class="line">planetsGroup.children.map(<span class="function">(<span class="params">planet</span>) =&gt;</span> &#123;</span><br><span class="line">  planet.angle += calcSpeed(planet.rev)</span><br><span class="line">  planet.angle = planet.angle &gt; <span class="number">2</span> * <span class="built_in">Math</span>.PI ? planet.angle - <span class="number">2</span> * <span class="built_in">Math</span>.PI : planet.angle</span><br><span class="line">  planet.position.set(<span class="built_in">Math</span>.sin(planet.angle) * planet.distance, <span class="number">5</span>, <span class="built_in">Math</span>.cos(planet.angle) * planet.distance)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>文字的移动效果同行星，只是位置要在行星的上方，并且水平方向上减去文本大小的一半。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> r = text &amp;&amp; text.geometry &amp;&amp; text.geometry.boundingSphere.radius || <span class="number">0</span></span><br><span class="line">text.position.set(<span class="built_in">Math</span>.sin(planet.angle) * planet.distance - r, <span class="number">5</span> + <span class="number">1</span>, <span class="built_in">Math</span>.cos(planet.angle) * planet.distance)</span><br></pre></td></tr></table></figure>
+<h3 id="行星添加光照效果"><a href="#行星添加光照效果" class="headerlink" title="行星添加光照效果"></a>行星添加光照效果</h3><ul>
+<li>为了使行星看起来更加真实，我们使用另一种材质来创建行星。并给太阳一个光照效果。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 受光照影响的材质</span></span><br><span class="line"><span class="keyword">const</span> planetMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0x123321</span> &#125;)</span><br><span class="line"><span class="comment">// 添加一个白色，光照强度为 1，光照距离为 100 的点光源，位置在太阳中心</span></span><br><span class="line"><span class="keyword">const</span> pointLight = <span class="keyword">new</span> THREE.PointLight(<span class="number">0xffffff</span>, <span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment">// 再添加一点环境光，使我们可以更清楚的观察所有行星</span></span><br><span class="line"><span class="keyword">const</span> ambient = <span class="keyword">new</span> THREE.AmbientLight(<span class="number">0xffffff</span>, <span class="number">0.7</span>)</span><br><span class="line">pointLight.position.set(Sun.position)</span><br><span class="line">scene.add(pointLight)</span><br><span class="line">scene.add(ambientLight)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>至此，一个有点像模像样的太阳系微缩模型完成了。</li>
+<li>接下来我们为这个模型加点动态交互效果。</li>
+</ul>
+<h3 id="场景添加鼠标事件"><a href="#场景添加鼠标事件" class="headerlink" title="场景添加鼠标事件"></a>场景添加鼠标事件</h3><ul>
+<li>我们在这里做一个较为简易的交互，即鼠标移到相应的行星上就显示该行星的名字。</li>
+<li>3d 空间中，鼠标的交互事件的本质是获取鼠标点的坐标，然后转化为 3d  坐标系里的坐标，然后判断位置是否在物体内，然后做一些处理。</li>
+<li>这部分的重点就在于将鼠标坐标转化为 3d 坐标系里的坐标。即<strong>坐标换算</strong>。</li>
+<li>首先我们要创建一个鼠标对象，然后获取鼠标的坐标。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mouse = <span class="keyword">new</span> THREE.Vector2()</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onDomMouseMove</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.info(event.clientX, event.clientY)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">this</span>.el.addEventListener(<span class="string">'mousemove'</span>, onDomMouseMove)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3d 坐标系的不同在于他是以场景中心作为原点的。而鼠标坐标是以左上角为原点的。转换后要将坐标赋值给鼠标对象。所以这里的坐标换算计算公式为：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onDomMouseMove</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  mouse.x = (<span class="keyword">this</span>.el.clientX - (<span class="keyword">this</span>.el.getBoundingClientRect().width / <span class="number">2</span>)) / (<span class="keyword">this</span>.el.getBoundingClientRect().width / <span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line">mouse.y = - (<span class="keyword">this</span>.el.clientY - <span class="keyword">this</span>.el.getBoundingClientRect().height / <span class="number">2</span>)) / (<span class="keyword">this</span>.el.getBoundingClientRect().height / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优化后</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onDomMouseMove</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> rect = <span class="keyword">this</span>.el.getBoundingClientRect()</span><br><span class="line">  <span class="keyword">const</span> &#123; width, height &#125; = rect</span><br><span class="line">  mouse.x = (<span class="number">2</span> * <span class="keyword">this</span>.el.clientX - width) / width</span><br><span class="line">  mouse.y = - (<span class="number">2</span> * <span class="keyword">this</span>.el.clientY - height) / height</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取场景中的鼠标位置后。接下去就是判断位置是否在物体上。这里的逻辑是，由相机发往一个射线到鼠标位置处，期间相交的第一个物体就是鼠标点中的物体。即 raycatser 对象中。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> raycaster = <span class="keyword">new</span> THREE.Raycaster()</span><br><span class="line">raycaster.setFromCamera(mouse, camera)</span><br><span class="line"><span class="comment">// 获取相交的所有物体</span></span><br><span class="line"><span class="keyword">const</span> intersects = raycaster.instersectObjects(scene.children, <span class="literal">true</span>)</span><br><span class="line"><span class="keyword">if</span> (intersects.length &gt; <span class="number">0</span> &amp;&amp; intersects[<span class="number">0</span>].object &amp;&amp; intersects[<span class="number">0</span>].object <span class="keyword">instanceof</span> THREE.Mesh) &#123;</span><br><span class="line">  <span class="comment">// do sth</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>现在我们已经能获取到鼠标位置所在的物体了。剩下是完成这个交互，先将文字默认隐藏，然后在鼠标滑过的时候再显示出来。</li>
+<li>首先将文本存在同一个组里，便于查找。然后在鼠标滑过行星时，使用行星名字来找出对应的文本，然后显示。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initTexts</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> textGroup = <span class="keyword">new</span> THREE.Group()</span><br><span class="line">  planets.map(<span class="function">(<span class="params">planet</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> text = initText(planet.name)</span><br><span class="line">    text.visible = <span class="literal">false</span></span><br><span class="line">    textGroup.add(text)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> textGroup</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示文本逻辑</span></span><br><span class="line"><span class="keyword">if</span> (intersects.length &gt; <span class="number">0</span> &amp;&amp; intersects[<span class="number">0</span>].object &amp;&amp; intersects[<span class="number">0</span>].object <span class="keyword">instanceof</span> THREE.Mesh &amp;&amp; intersects[<span class="number">0</span>].object.name) &#123;</span><br><span class="line">  <span class="keyword">const</span> name = intersects[<span class="number">0</span>].object.name</span><br><span class="line">  scene.children.map(<span class="function">(<span class="params">obj</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.name !== <span class="string">'texts'</span>) &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    obj.children.map(<span class="function">(<span class="params">text</span>) =&gt;</span> &#123;</span><br><span class="line">      text.visible = text.name === name</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>到这儿一个差不多的太阳系模型就完成啦。</li>
+<li>后续还可以给各行星的初始位置添加随机位置，给行星添加纹理效果，给土星加上土星环，给地球加上月亮，再加上些星星背景，那就挺好看了。</li>
+<li>具体的代码在这里<strong><a href="https://github.com/kyriejoshua/threejs-learning" target="_blank" rel="noopener">threejs-learning</a></strong></li>
+</ul>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><ul>
+<li>gif 显示的较为简陋。当然，更清楚的效果还是直接跑项目吧~</li>
+</ul>
+<img src="/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/solar-system.gif" title="solar system">
+<p><hr><br><img src="/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/reward.jpeg" title="Thanks"></p>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/WebGl/">#WebGl</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2018/01/07/how-to-use-parcel-with-react-in-15-mins/">15 分钟快速上手 Parcel 中使用 React</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2017/11/23/the-usage-of-threejs/">初识 Three.js(上) —— 基础概念一览</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/';
+        this.page.identifier = '2017/12/19/how-to-create-a-solar-system-using-by-threejs/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2018 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

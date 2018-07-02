@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>从 zsh 到 fish, 让你的 shell 更可爱更友好 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            从 zsh 到 fish, 让你的 shell 更可爱更友好
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-05-21T06:01:17.000Z" itemprop="datePublished">1 年前</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/Shell/">Shell</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 分钟 read (About 1664 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/unphoto.jpg" title="terminal">
+<blockquote><br>前阵子关注到阮老师更新了一篇博文，内容是介绍一个 shell —— fish.自己去尝试之后发现确实值得推荐，准备当做主力 shell 来替代原有的 zsh.<br><br></blockquote>
+
+<a id="more"></a>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#介绍">介绍</a></li>
+<li><a href="#安装和使用">安装(想吃热豆腐的点这里)</a></li>
+</ul>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h3 id="为什么抛弃-zsh-投向-fish-的怀抱"><a href="#为什么抛弃-zsh-投向-fish-的怀抱" class="headerlink" title="为什么抛弃 zsh 投向 fish 的怀抱"></a>为什么抛弃 zsh 投向 fish 的怀抱</h3><ul>
+<li><p>zsh 作为我的主力 shell 用了很久，而且没有什么做不到，那为什么我要抛弃呢。这并不是恋爱中的喜新厌旧。也并不是 zsh 不好，而是 fish 太好了。在简短的试用之后，我决定留下它。因为体验实在是太丝滑流畅了。</p>
+</li>
+<li><p>这里列几点最直观的感受。</p>
+</li>
+</ul>
+<h4 id="1-自动补全和自动建议"><a href="#1-自动补全和自动建议" class="headerlink" title="1. 自动补全和自动建议"></a>1. 自动补全和自动建议</h4><ul>
+<li>zsh 固然有着强大的自动补全命令。不过和 fish 相比，就是小巫见大巫了。fish 的命令，除了在自动补全以外，还会标记命令的对错，输入命令的正确与否，通过颜色显示地一目了然。这里因为配色的关系，颜色对比可能不明显，但仍可以看到，红色清楚的标识了无效命令。</li>
+</ul>
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish1@2x.png" title="fish wrong command">
+<ul>
+<li>下面这张图显示的是有效命令：</li>
+</ul>
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish2@2x.png" title="fish correct command">
+<ul>
+<li>细心的朋友可能还发现了刚才图中灰色的完整命令。这属于 fish 的自动建议。下面这张图可能显示地更直观(点击查看大图)：</li>
+</ul>
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish3@2x.png" title="fish command">
+<ul>
+<li><p>尽管 zsh 有着模糊匹配历史命令的功能，但显而易见，这里的 fish 在你输入第一个字母就知道你要做什么的体贴，让用户体验有了极大的提升。就像贴心的女友，知心的姐姐一样为你包办所有。</p>
+</li>
+<li><p>除此之外，fish 在匹配历史命令的同时，也能标识无效命令。红色醒目地标出：</p>
+</li>
+</ul>
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish4@2x.png" title="fish wrong command">
+<h4 id="2-效率"><a href="#2-效率" class="headerlink" title="2. 效率"></a>2. 效率</h4><ul>
+<li><p>使用终端 shell 的一大原因，就是效率高。有时有人问我，为什么明明有 git 图形化工具，却还要使用命令行。我想来想去，虽然图形化工具显示直观，但比起命令行，操作起来太慢，况且有许多命令并不支持。</p>
+</li>
+<li><p>那么既然使用 shell 本身就是为了提升效率，那怎么能忍受一个速度奇慢的 shell 呢。这里的两幅图清晰地说明了各自的效率：</p>
+</li>
+</ul>
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish5@2x.png" title="fish">
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish6@2x.png" title="zsh">
+<ul>
+<li>在两种 shell 下连续按下回车键，可以看到以上两个结果。前者是 fish, 后者是 zsh. 可以看到后者有明显的卡顿。也许正是因为 zsh 过于强大，功能过多，导致运行起来奇慢无比。最终让我无法忍受。</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>对我个人来说，以上两点足够我切换 zsh 到 fish 了。也许其他人有着自己的看法，但我目前还没有发现 fish 使我不爽的地方，因此近期会继续用下去。</li>
+</ul>
+<h3 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h3><h4 id="安装-fish"><a href="#安装-fish" class="headerlink" title="安装 fish"></a>安装 <a href="https://github.com/fish-shell/fish-shell" target="_blank" rel="noopener">fish</a></h4><ul>
+<li>在 macOS 下，安装有多种方式，这里列出采用 homebrew 安装的方式，十分简便。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> brew install fish</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>安装成功后，输入 <code>fish</code> 后，就可以开启全新的奇妙历程了。</p>
+</li>
+<li><p>如果你已经迫不及待想要把他设为默认 shell 的话：</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/local/bin/fish</span><br></pre></td></tr></table></figure>
+<ul>
+<li>假如有提示说 fish 并不是标准 shell. 运行如下命令将 fish 加到系统的默认 shells 中。再运行上面的命令设置即可。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo /usr/local/bin/fish | sudo tee -a /etc/shells</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置完之后，重启你的 iterm/terminal, 就能看到全新的 fish shell 了！</li>
+</ul>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ul>
+<li><p>fish 的基本配置在 <code>~/.config/fish/config.fish</code> 文件里. 如果安装好 fish 后没有这个文件，可以新建一个。</p>
+</li>
+<li><p>fish 支持通过 web 界面更改配置文件。运行 <code>fish_config</code> 可查看。</p>
+</li>
+<li><p>可以通过更改如下配置来设置 fish 的问候语，它会在每次进入时输出。</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set fish_greeting 'Talk is cheap. Show me the code.'</span><br></pre></td></tr></table></figure>
+<ul>
+<li>zsh 有许多好用的 alias, fish 同样可以。最快捷的方式也是在配置文件里直接输入，以下是我的 git alias.</li>
+</ul>
+<img src="/jo.github.io/2017/05/21/introduce-fish-shell/fish7@2x.png" title="git alias">
+<ul>
+<li>如果你和我一样是前端，那么很有可能也使用 nvm 来管理 node. fish 没有相关的工具，不过可以通过更改配置来使其生效。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bass source ~/.nvm/nvm.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>也许你在 zsh 中安装了 thefuck 插件，是的，在 fish 中也可以使用。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eval(thefuck --alias | tr '\n' ';')</span><br><span class="line">alias fuck-it='export THEFUCK_REQUIRE_CONFITMATION=True; fuck; export THEFUCK_REQUIRE_CONFIRMATION=False'</span><br></pre></td></tr></table></figure>
+<ul>
+<li>也许你也装了 autojump 插件，是的，同样可以在这里使用。加入以下代码：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin</span><br><span class="line">  set --local AUTOJUMP_PATH $HOME/autojump/bin/autojump.fish</span><br><span class="line">  if test -e $AUTOJUMP_PATH</span><br><span class="line">    source $AUTOJUMP_PATH</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>这里主要是核对 autojump.fish 这个文件。路径对即可生效。</p>
+</li>
+<li><p>如果以上两个插件还未安装的话，首先使用 homebrew 安装即可，<code>brew install thefuck</code>, <code>brew install autojump</code>.</p>
+</li>
+</ul>
+<h4 id="一些工具"><a href="#一些工具" class="headerlink" title="一些工具"></a>一些工具</h4><h5 id="oh-my-fish"><a href="#oh-my-fish" class="headerlink" title="oh my fish"></a><a href="https://github.com/oh-my-fish/oh-my-fish" target="_blank" rel="noopener">oh my fish</a></h5><ul>
+<li>和 zsh 有着 <code>oh my zsh</code> 一样，fish 也有 <code>oh my fish</code>. 可以在终端中输入如下命令安装：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.oh-my.fish | fish</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>oh my fish</code> 通过运行 <code>omf install [&lt;name&gt;/&lt;url&gt;]</code> 来安装插件。例如运行 <code>omf install ocean</code> 安装主题。<ul>
+<li><code>omf list</code>: 列出当前安装的包。</li>
+<li><code>omf theme &lt;theme&gt;</code>: 列出所有主题/应用某个主题。</li>
+<li><code>omf remove &lt;name&gt;</code>: 移除某个包。</li>
+</ul>
+</li>
+</ul>
+<h5 id="fisherman"><a href="#fisherman" class="headerlink" title="fisherman"></a><a href="https://github.com/fisherman/fisherman" target="_blank" rel="noopener">fisherman</a></h5><ul>
+<li>fish 还有一个管理插件的工具 fisherman. 直接在终端中运行如下命令安装：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>fisherman</code> 通过运行 <code>fisher &lt;name&gt;</code> 安装插件。例如运行 <code>fisher z</code>.<ul>
+<li><code>fisher ls</code>: 查看当前插件。</li>
+<li><code>fisher ls-remote</code>: 查看所有插件。</li>
+<li><code>fisher rm &lt;name&gt;</code>: 移除插件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>以上就是我使用 fish 的记录和基本教程。事实上还有很多地方可探索，不过到此为止日常使用是没有问题了。希望大家也可以在使用 fish 的过程中感到愉悦快乐！</li>
+</ul>
+<p><hr><br><img src="/jo.github.io/2017/05/21/introduce-fish-shell/reward.jpeg" title="Thanks"></p>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/Shell/">#Shell</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2017/07/07/my-git-workflow/">我的 git 工作流</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2017/04/01/zhihulive-vczero/">前端 vczero 三年从前端小工到架构分享</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/05/21/introduce-fish-shell/';
+        this.page.identifier = '2017/05/21/introduce-fish-shell/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2018 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>
