@@ -18,6 +18,7 @@ categories: Unit-Testing
 - [单测是什么](#单测是什么)
 - [单测框架概览](#单测框架概览)
 - [上手 Jest](#上手Jest)
+- [断言](#断言)
 - [使用匹配器](#使用匹配器)
 - [在 React 中使用](#在React中使用)
 - [小结](#小结)
@@ -95,7 +96,19 @@ npm install babel-jest babel-core regenerator-runtime babel-presets-env babel-pr
 }
 ```
 
-* 然后我们就可以使用 ES6 语法了。可以将原来的 `require`改为 `import`等。
+* 然后我们就可以使用 ES6 语法了。可以将原来的 `require` 改为 `import` 等。
+
+### 断言
+
+* 在上述的测试用例中，有一句断言 —— `expect(sum(1, 2)).toBe(2)`
+* 实际上，在每个测试中，都至少有一句断言来判断执行结果是否与预期的一致。目前的断言库语义化都做的很好，如同上面这句话，很容易理解这是期望的结果和执行的结果的比较逻辑。
+* 像常用的 Mocha 有着自己的断言库 Chai, 而 Jest 我目前还不确定是引用了什么断言库，看起来好像它本身就支持。
+* 而断言的写法，也是以 `expect` 开头，然后以匹配器方法调用作为结果。包括下文提到的一些匹配器方法 `toEqual` 等等。
+
+```javascript
+expect(func(..args)).toBe(res)
+expect(func(..args)).toEqual(obj)
+```
 
 ### 使用匹配器
 
@@ -118,13 +131,13 @@ test('比较对象相等', () => {
 })
 ```
 
-* 相应的，在各类型中还有对应的方法，例如使用 `toBeNull` 来匹配 `null`，使用 `toBeCloseTo` 来匹配浮点数，使用 `toMatch` 来匹配正则字符串，使用 `toContain` 来匹配数组是否包含某项等等。这些都可在 `Jest` 官网上找到。
+* 相应的，在各类型中还有对应的匹配器方法，例如使用 `toBeNull` 来匹配 `null`，使用 `toBeCloseTo` 来匹配浮点数，使用 `toMatch` 来匹配正则字符串，使用 `toContain` 来匹配数组是否包含某项等等。这些都可在 [Jest](http://jestjs.io/docs/zh-Hans/getting-started) 官网上找到。
 
 ### 在React中使用
 
 * 通过以上的内容，我们对单测有了一个比较初步的了解。
-* 但在实际项目中，我们通常会在 React 中来使用 Jest。而在 React 中书写单测，通常是基于 Reducer 的。
-* 下面来写一个 React 中的单测，假设我们有一个列表数据获取逻辑，然后我们要对它进行一个验证。
+* 但在实际项目中，我们通常会在 React 中来使用 Jest。而在 React 中书写单测，自己接触较多的是基于 Reducer 的。
+* 下面来写一个 React 中的单测，假设我们有一个列表数据获取逻辑(假设没有异步请求)，然后我们要对它进行一个验证。
 * 首先是 Reducer. 会有一个 reducer.js 文件
 
 ```javascript
@@ -140,6 +153,7 @@ export default function ListReducer(state = initialState, action) {
     case: 'LIST_DATA':
       return Object.assign({}, state, {
         listData: action.data
+        listStatus: 'success'
       })
   }
 }
@@ -175,7 +189,8 @@ const listDataReducer = {
       name: 'kyrie',
       age: 21
     }
-  }
+  },
+  listStatus: 'success'
 }
 
 test('获取列表', () => {
@@ -184,7 +199,25 @@ test('获取列表', () => {
 })
 ```
 
-* 当然，这里的例子非常简单，运行 `npm run test` 也能轻易通过。但在实际项目里，Reducer 的处理可能会复杂的多，相应的书写也会更加复杂。这是值得注意的。
+* 当然，这里的例子非常简单，运行 `npm run test` 也能轻易通过。但在实际项目里，Reducer 的处理可能会复杂的多，相应的书写也会更加复杂。上述是一个单个的测试，真实项目中，或许是按模块来组织的。每个模块中有相应的多个 Reducer. 那就需要用到测试套件(test suite) —— `describe` 块，其中会含有多个测试用例(test case), 即 `it` 块。
+* `describe` 函数的第一个参数是测试套件名，第二个是要执行的回调函数。
+* `it` 函数同理，它作为独立的测试用例，是测试的最小单位。
+* 于是整理后如下：
+
+```javascript
+describe('获取列表模块测试', () => {
+  it('获取列表', () => {
+    const state = ListReducer(initialState, listData)
+    expect(state).toEqual(listDataReducer)
+  })
+  it('获取列表失败', () => {
+    // do sth
+  })
+  // 更多的测试用例
+})
+```
+
+* 整理后整个模块的内容都在 `describe` 套件内，组织起一个个测试用例。显而易见，这样更容易梳理和回顾。
 
 ### 小结
 
