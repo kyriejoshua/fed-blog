@@ -84,11 +84,10 @@
 
     <section class="section">
     <div class="container">
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/jo.github.io/2018/07/05/learning-unit-testing/" itemprop="url"></a>
+            
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -1169,12 +1168,252 @@ body .markdown-body
 
 <p><img alt="" src="/jo.github.io/2018/06/29/learning-unit-testing/unphoto.jpeg"></p>
 <p>以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2018/07/05/learning-unit-testing/#more">Read More</a>
-        </p>
+<a id="more"></a>
+
+<h2 id="_1">索引<a class="headerlink" href="#_1" title="Permanent link"></a></h2>
+<ul>
+<li><a href="#单测是什么">单测是什么</a></li>
+<li><a href="#单测框架概览">单测框架概览</a></li>
+<li><a href="#上手Jest">上手 Jest</a></li>
+<li><a href="#断言">断言</a></li>
+<li><a href="#使用匹配器">使用匹配器</a></li>
+<li><a href="#在React中使用">在 React 中使用</a></li>
+<li><a href="#小结">小结</a></li>
+<li><a href="#Issues">Issues</a></li>
+</ul>
+<h3 id="_2">单测是什么<a class="headerlink" href="#_2" title="Permanent link"></a></h3>
+<ul>
+<li>单测是至对程序中最小单元的验证和检查。具体化些，就是对一个模块，一个函数的验证。再应用到 React 项目中，通常是对 reducer 的验证。</li>
+</ul>
+<h3 id="_3">单测框架概览<a class="headerlink" href="#_3" title="Permanent link"></a></h3>
+<ul>
+<li>js 的单测框架选择也并不少，常用的有 Mocha，Jest，Jasmine 等。最近的项目里主要是 Jest 和 Mocha，其中 Jest 更多。下面说下自己对这两者的区别的一些初步理解。</li>
+<li>Mocha 是现在较为成熟，生态较完善的单测框架。</li>
+<li>Jest 由 Facebook 出品，由 Jasmine 演化而来。相对 Mocha 诞生较晚，但背后有着 Facebook 的支持，可见生态社区也会越来越完善。而且和 React 搭配使用也会更友好。</li>
+</ul>
+<h3 id="jest">上手<a href="http://jestjs.io/docs/zh-Hans/getting-started" target="_blank" rel="noopener">Jest</a><a class="headerlink" href="#jest" title="Permanent link"></a></h3>
+<ul>
+<li>项目中 Mocha 和 Jest 都有，但 Jest 似乎更多。目前准备写的也是应用了 Jest 的项目，所以准备先入门 Jest。</li>
+<li>首先新建一个项目 unit-test 并初始化，然后安装相关依赖。</li>
+</ul>
+<div class="codehilite"><pre>mkdir unit-test
+npm init
+npm install jest
+</pre></div>
+
+<ul>
+<li>在 package 中添加相应脚本。</li>
+</ul>
+<div class="codehilite"><pre>scripts: <span class="o">{</span>
+  <span class="s2">&quot;test&quot;</span>: <span class="s2">&quot;jest&quot;</span>
+<span class="o">}</span>
+</pre></div>
+
+<ul>
+<li>项目中已有了 Jest. 此时我们来测试一个简单的加法函数。</li>
+<li>新建一个 index.js.</li>
+</ul>
+<div class="codehilite"><pre><span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">sum</span>
+</pre></div>
+
+<ul>
+<li>再创建一个 index.test.js 用于验证。</li>
+</ul>
+<div class="codehilite"><pre><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./index&#39;</span><span class="p">)</span>
+<span class="nx">test</span><span class="p">(</span><span class="s1">&#39;1 + 2 equals to 3&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+<ul>
+<li>然后运行测试，观察输出。</li>
+</ul>
+<div class="codehilite"><pre>npm run <span class="nb">test</span>
+</pre></div>
+
+<ul>
+<li>如果验证通过的话，可以在终端看到如下通过提示。</li>
+</ul>
+<p></p>
+<ul>
+<li>至此，一个简单的测试完成了。</li>
+<li>不过通常情况下，我们会结合 ES6，React 使用，所以会配合上 Babel，需要安装其他依赖。</li>
+</ul>
+<div class="codehilite"><pre>npm install babel-jest babel-core regenerator-runtime babel-preset-env babel-preset-react
+</pre></div>
+
+<ul>
+<li>然后添加一个 babel 配置文件 .babelrc.</li>
+</ul>
+<div class="codehilite"><pre><span class="p">{</span>
+  <span class="nt">&quot;presets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;env&quot;</span><span class="p">,</span> <span class="s2">&quot;react&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>然后我们就可以使用 ES6 语法了。可以将原来的 <code>require</code> 改为 <code>import</code> 等。</li>
+</ul>
+<h3 id="_4">断言<a class="headerlink" href="#_4" title="Permanent link"></a></h3>
+<ul>
+<li>在上述的测试用例中，有一句断言 —— <code>expect(sum(1, 2)).toBe(2)</code></li>
+<li>实际上，在每个测试中，都至少有一句断言来判断执行结果是否与预期的一致。目前的断言库语义化都做的很好，如同上面这句话，很容易理解这是期望的结果和执行的结果的比较逻辑。</li>
+<li>像常用的 Mocha 有着自己的断言库 Chai, 而 Jest 我目前还不确定是引用了什么断言库，看起来好像它本身就支持。</li>
+<li>而断言的写法，也是以 <code>expect</code> 开头，然后以匹配器方法调用作为结果。包括下文提到的一些匹配器方法 <code>toEqual</code> 等等。</li>
+</ul>
+<div class="codehilite"><pre><span class="nx">expect</span><span class="p">(</span><span class="nx">func</span><span class="p">(..</span><span class="nx">args</span><span class="p">)).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+<span class="nx">expect</span><span class="p">(</span><span class="nx">func</span><span class="p">(..</span><span class="nx">args</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="_5">使用匹配器<a class="headerlink" href="#_5" title="Permanent link"></a></h3>
+<ul>
+<li>刚才我们使用 expect(sum(1, 2)) 来输出期望的值，再用 toBe 方法来比较值是否相等。这里 toBe 就是相应的匹配器。</li>
+<li>toBe 内部使用 Object.is 方法来判断，该方法和全等(===)判断类似，但略有不同。例如 Object.is 会区分 -0 和 +0，但不会区分 Number.NaN 和 NaN.</li>
+</ul>
+<div class="codehilite"><pre><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// false</span>
+<span class="o">-</span><span class="mi">0</span> <span class="o">===</span> <span class="mi">0</span> <span class="c1">// true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nb">Number</span><span class="p">.</span><span class="kc">NaN</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">)</span> <span class="c1">// true</span>
+<span class="nb">Number</span><span class="p">.</span><span class="kc">NaN</span> <span class="o">===</span> <span class="kc">NaN</span> <span class="c1">// false</span>
+</pre></div>
+
+<ul>
+<li>toBe 方法通常可以用来比较数字，字符串等基本类型。但如果要比较对象等引用类型。可以使用 toEqual,它会递归比较对象中的值。下面来试着使用下 toEqual 方法。</li>
+</ul>
+<div class="codehilite"><pre><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;比较对象相等&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s1">&#39;2&#39;</span> <span class="p">}</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">({</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s1">&#39;2&#39;</span> <span class="p">})</span>
+<span class="p">})</span>
+</pre></div>
+
+<ul>
+<li>相应的，在各类型中还有对应的匹配器方法，例如使用 <code>toBeNull</code> 来匹配 <code>null</code>，使用 <code>toBeCloseTo</code> 来匹配浮点数，使用 <code>toMatch</code> 来匹配正则字符串，使用 <code>toContain</code> 来匹配数组是否包含某项等等。这些都可在 <a href="http://jestjs.io/docs/zh-Hans/getting-started" target="_blank" rel="noopener">Jest</a> 官网上找到。</li>
+</ul>
+<h3 id="react">在React中使用<a class="headerlink" href="#react" title="Permanent link"></a></h3>
+<ul>
+<li>通过以上的内容，我们对单测有了一个比较初步的了解。</li>
+<li>但在实际项目中，我们通常会在 React 中来使用 Jest。而在 React 中书写单测，自己接触较多的是基于 Reducer 的。</li>
+<li>下面来写一个 React 中的单测，假设我们有一个列表数据获取逻辑(假设没有异步请求)，然后我们要对它进行一个验证。</li>
+<li>首先是 Reducer. 会有一个 reducer.js 文件</li>
+</ul>
+<div class="codehilite"><pre><span class="c1">// 初始数据</span>
+<span class="kr">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">listData</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// reducer 将 listData 保存</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">ListReducer</span><span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span><span class="o">:</span> <span class="s1">&#39;LIST_DATA&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">state</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">listData</span><span class="o">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span>
+        <span class="nx">listStatus</span><span class="o">:</span> <span class="s1">&#39;success&#39;</span>
+      <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>然后编写相应的单测。reducer.test.js</li>
+</ul>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">ListReducer</span> <span class="nx">from</span> <span class="s1">&#39;./reducer&#39;</span>
+
+<span class="c1">// mock 数据</span>
+<span class="kr">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">listData</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// action</span>
+<span class="kr">const</span> <span class="nx">listData</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;LIST_DATA&#39;</span><span class="p">,</span>
+  <span class="nx">listData</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;kyrie&#39;</span><span class="p">,</span>
+      <span class="nx">age</span><span class="o">:</span> <span class="mi">21</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 处理后的数据</span>
+<span class="kr">const</span> <span class="nx">listDataReducer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">listData</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;kyrie&#39;</span><span class="p">,</span>
+      <span class="nx">age</span><span class="o">:</span> <span class="mi">21</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">listStatus</span><span class="o">:</span> <span class="s1">&#39;success&#39;</span>
+<span class="p">}</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">&#39;获取列表&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">ListReducer</span><span class="p">(</span><span class="nx">initialState</span><span class="p">,</span> <span class="nx">listData</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">state</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">listDataReducer</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+<ul>
+<li>当然，这里的例子非常简单，运行 <code>npm run test</code> 也能轻易通过。但在实际项目里，Reducer 的处理可能会复杂的多，相应的书写也会更加复杂。上述是一个单个的测试，真实项目中，或许是按模块来组织的。每个模块中有相应的多个 Reducer. 那就需要用到测试套件(test suite) —— <code>describe</code> 块，其中会含有多个测试用例(test case), 即 <code>it</code> 块。</li>
+<li><code>describe</code> 函数的第一个参数是测试套件名，第二个是要执行的回调函数。</li>
+<li><code>it</code> 函数同理，它作为独立的测试用例，是测试的最小单位。</li>
+<li>于是整理后如下：</li>
+</ul>
+<div class="codehilite"><pre><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;获取列表模块测试&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;获取列表&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">ListReducer</span><span class="p">(</span><span class="nx">initialState</span><span class="p">,</span> <span class="nx">listData</span><span class="p">)</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">state</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">listDataReducer</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;获取列表失败&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// do sth</span>
+  <span class="p">})</span>
+  <span class="c1">// 更多的测试用例</span>
+<span class="p">})</span>
+</pre></div>
+
+<ul>
+<li>整理后整个模块的内容都在 <code>describe</code> 套件内，组织起一个个测试用例。显而易见，这样更容易梳理和回顾。</li>
+</ul>
+<h3 id="_6">小结<a class="headerlink" href="#_6" title="Permanent link"></a></h3>
+<ul>
+<li>有些时候，项目里没有单测也能基本良好运行，就像我从前做过的项目一样。但这未必是好事。因为单测带来的，其实更多的是对业务的思考和设计。假如我们决定要写单测，那么在写该模块时，就应提前想到多个可能的场景，从而避免未知的错误，同时自己也会对当前业务有着更好的理解。另一方面，就像我现在所做的，其实通过写单测，可以去熟悉相应的业务模块的<strong>所有场景</strong>，这会比直接阅读业务代码会更熟悉的多。</li>
+</ul>
+<h3 id="issues"><a href="https://github.com/facebook/jest/issues" target="_blank" rel="noopener">Issues</a><a class="headerlink" href="#issues" title="Permanent link"></a></h3>
+<ul>
+<li>目前碰到的一些问题整理，基于 ^22.4.3.</li>
+<li>在运行 <code>npm run test</code> 时</li>
+</ul>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="p">{</span> <span class="nx">Modal</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;antd&#39;</span> <span class="c1">// 这样引入时会报 CSS 相关的报错</span>
+<span class="kr">import</span> <span class="nx">Modal</span> <span class="nx">from</span> <span class="s1">&#39;antd/lib/modal&#39;</span> <span class="c1">// 这样才不会报错</span>
+<span class="kr">import</span> <span class="nx">Modal</span> <span class="nx">from</span> <span class="s1">&#39;../../../node_modules/antd/lib/modal&#39;</span> <span class="c1">// 或者这样也不会报错</span>
+</pre></div>
+
+<ul>
+<li>排查发现是 jest 无法解析 CSS。搜索部分结果，有人给出了<a href="https://www.jianshu.com/p/bf8070c33824" target="_blank" rel="noopener">方案</a>，官方也提供了解决<a href="https://jestjs.io/docs/en/webpack" target="_blank" rel="noopener">方案</a>。但试过均无效果。</li>
+</ul>
+<h3 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link"></a></h3>
+<ul>
+<li>异步处理的单测方法。</li>
+<li>redux-mock-store 了解。</li>
+</ul></article></body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
     
     </div>
     
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2018/06/29/learning-unit-testing/">单测入门笔记</a>
+            
+        </span>
+    </div>
     
     <script>
     // 打赏相关逻辑
@@ -1199,712 +1438,32 @@ body .markdown-body
 
 
 
-
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2018/07/05/learning-unit-testing/';
+        this.page.identifier = '2018/07/05/learning-unit-testing/';
         
-            <a href="/jo.github.io/2018/06/29/learning-unit-testing/" itemprop="url">单测入门笔记</a>
+        this.language = 'zh';
         
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-06-29T02:02:28.000Z" itemprop="datePublished">7 天前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Unit-Testing/">Unit-Testing</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            13 分钟 read (About 2014 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
     
-        <hr>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-<p><img src="/jo.github.io/2018/06/29/learning-unit-testing/unphoto.jpeg" alt=""></p>
-<p>以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2018/06/29/learning-unit-testing/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
 
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2018/06/11/questions-in-interview-part2/" itemprop="url">面试题整理2</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-06-11T11:46:55.000Z" itemprop="datePublished">24 天前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Interview/">Interview</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            4 分钟 read (About 555 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2018/06/11/questions-in-interview-part2/unphoto.jpg" alt=""></p>
-<p>这些题目答不上的话，应该感到羞愧啊！</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2018/06/11/questions-in-interview-part2/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2018/01/07/how-to-use-parcel-with-react-in-15-mins/" itemprop="url">15 分钟快速上手 Parcel 中使用 React</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-01-07T05:29:00.000Z" itemprop="datePublished">6 个月前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Tools/">Tools</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            4 分钟 read (About 575 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2018/01/07/how-to-use-parcel-with-react-in-15-mins/unphoto.jpeg" alt=""></p>
-<p>最近准备新开一个 Threejs 学习的坑，因为重点在 Threejs 上，所以想构建一个简易方便的环境。于是我自然而然的想到了最近火热的 parcel 来替代以往的 webpack. 在我自己尝试了之后，这简直比我想象中的还要简单方便——当然是指搭建一个基本环境啦。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2018/01/07/how-to-use-parcel-with-react-in-15-mins/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/" itemprop="url">初识 Threejs(下) —— 实现一个太阳系模型</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-12-19T12:56:12.000Z" itemprop="datePublished">7 个月前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/threejs/">threejs</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            21 分钟 read (About 3128 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/unphoto.png" alt=""></p>
-<p>在上一篇文章中，我整理了 Threejs 中的一些基本概念。现在这一篇，就使用上次所整理的内容加上一些不复杂的算法，来实现一个运转着的太阳系模型。这里的所有行星大小及公转时间，尽量贴合实际。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/11/23/the-usage-of-threejs/" itemprop="url">初识 Three.js(上) —— 基础概念一览</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-11-23T11:45:14.000Z" itemprop="datePublished">7 个月前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            12 分钟 read (About 1762 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2017/11/23/the-usage-of-threejs/unphoto.jpg" alt=""></p>
-<p>近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/11/23/the-usage-of-threejs/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/" itemprop="url">Sublime Text 3 高效插件配置</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-10-07T12:52:57.000Z" itemprop="datePublished">9 个月前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Tools/">Tools</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            8 分钟 read (About 1181 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/unphoto.jpg" alt=""></p>
-<p>不久前，sublime text 官方推出了一次大更新。这次更新几乎时隔一年，而且有重大改动，虽然我早用 dev 版提前体验了新版本，但也借此机会再鼓捣了下自己的工具。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/09/23/css3d-study/" itemprop="url">CSS3 实现🎲旋转教程</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-09-23T09:03:18.000Z" itemprop="datePublished">9 个月前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/CSS/">CSS</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            14 分钟 read (About 2078 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2017/09/23/css3d-study/unphoto.jpg" alt=""></p>
-<p>最近的工作开始接触到可视化的 3D 部分，因此自己也抽时间温习了以前学习的 css3 知识点，顺便完成一个入门小 demo —— 实现一个旋转的骰子。这个例子里有重温 css3 的一些知识点——用它来实现立体和旋转效果，然后用 flex 布局来实现骰子的点的排列。这个案例对于以后熟练使用 css 和 flex 有一定的帮助，所以这里也做一份教程和总结。最终效果就在页面右下角，相信眼不尖的人也注意到了。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/09/23/css3d-study/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/08/30/react-component-lifecycle/" itemprop="url">理解 React 组件的生命周期</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-08-30T09:03:30.000Z" itemprop="datePublished">10 个月前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            10 分钟 read (About 1544 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2017/08/30/react-component-lifecycle/unphoto.jpg" alt=""></p>
-<p>近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/08/30/react-component-lifecycle/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/07/07/my-git-workflow/" itemprop="url">我的 git 工作流</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-07-07T10:58:44.000Z" itemprop="datePublished">1 年前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Git/">Git</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            18 分钟 read (About 2719 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/jo.github.io/2017/07/07/my-git-workflow/unphoto.jpg" alt=""></p>
-<p>这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。</p>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/07/07/my-git-workflow/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/05/21/introduce-fish-shell/" itemprop="url">从 zsh 到 fish, 让你的 shell 更可爱更友好</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-05-21T06:01:17.000Z" itemprop="datePublished">1 年前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Shell/">Shell</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            11 分钟 read (About 1664 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<img src="/jo.github.io/2017/05/21/introduce-fish-shell/unphoto.jpg" title="terminal">
-<blockquote><br>前阵子关注到阮老师更新了一篇博文，内容是介绍一个 shell —— fish.自己去尝试之后发现确实值得推荐，准备当做主力 shell 来替代原有的 zsh.<br><br></blockquote>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/05/21/introduce-fish-shell/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2017/04/01/zhihulive-vczero/" itemprop="url">前端 vczero 三年从前端小工到架构分享</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-04-01T09:39:25.000Z" itemprop="datePublished">1 年前</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Zhihu-Live/">Zhihu Live</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            12 分钟 read (About 1754 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<img src="/jo.github.io/2017/04/01/zhihulive-vczero/unphoto.jpeg" title="zhihu live">
-<blockquote><br>知乎 live：三年从前端小工到架构分享的笔记及感悟<br><br></blockquote>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2017/04/01/zhihulive-vczero/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-    
-        
-<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
-    <div class="pagination-previous is-invisible is-hidden-mobile">
-        <a href="/jo.github.io/page/0/">Prev</a>
-    </div>
-    <div class="pagination-next">
-        <a href="/jo.github.io/page/2/">Next</a>
-    </div>
-    <ul class="pagination-list is-hidden-mobile">
-        
-        <li><a class="pagination-link is-current" href="/jo.github.io/">1</a></li>
-        
-        <li><a class="pagination-link" href="/jo.github.io/page/2/">2</a></li>
-        
-        <li><a class="pagination-link" href="/jo.github.io/page/3/">3</a></li>
-        
-        <li><a class="pagination-link" href="/jo.github.io/page/4/">4</a></li>
-        
-    </ul>
-</nav>
-    
     </div>
 </section>
     <footer class="footer">
