@@ -15,7 +15,9 @@
 ### Usage
 
 * `hexo s` 启动服务
-* `hexo clean` 清除 `public` 文件夹
+* `hexo clean` 清除 `public` 目录
+* `hexo douban -b` 生成豆瓣阅读页面
+* `hexo g` 生成 public 目录
 * `hexo d` 部署
 
 #### Others
