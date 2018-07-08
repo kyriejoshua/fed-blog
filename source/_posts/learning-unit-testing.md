@@ -20,6 +20,9 @@ categories: Unit-Testing
 - [上手 Jest](#上手Jest)
 - [断言](#断言)
 - [使用匹配器](#使用匹配器)
+- [测试异步代码](#测试异步代码)
+  - [测试回调](#测试回调)
+  - [测试Promise](#测试Promise)
 - [在 React 中使用](#在React中使用)
 - [小结](#小结)
 - [Issues](#Issues)
@@ -113,8 +116,8 @@ categories: Unit-Testing
 
 ### 使用匹配器
 
-* 刚才我们使用 expect(sum(1, 2)) 来输出期望的值，再用 toBe 方法来比较值是否相等。这里 toBe 就是相应的匹配器。
-* toBe 内部使用 Object.is 方法来判断，该方法和全等(===)判断类似，但略有不同。例如 Object.is 会区分 -0 和 +0，但不会区分 Number.NaN 和 NaN.
+* 刚才我们使用 `expect(sum(1, 2))` 来输出期望的值，再用 `toBe` 方法来比较值是否相等。这里 `toBe` 就是相应的匹配器。
+* `toBe` 内部使用 `Object.is` 方法来判断，该方法和全等(`===`)判断类似，但略有不同。例如 `Object.is` 会区分 -0 和 +0，但不会区分 `Number.NaN` 和 `NaN`.
 
   ```javascript
   Object.is(-0, 0) // false
@@ -123,7 +126,7 @@ categories: Unit-Testing
   Number.NaN === NaN // false
   ```
 
-* toBe 方法通常可以用来比较数字，字符串等基本类型。但如果要比较对象等引用类型。可以使用 toEqual,它会递归比较对象中的值。下面来试着使用下 toEqual 方法。
+* `toBe` 方法通常可以用来比较数字，字符串等基本类型。但如果要比较对象等引用类型。可以使用 `toEqual`,它会递归比较对象中的值。下面来试着使用下 `toEqual` 方法。
 
   ```javascript
   test('比较对象相等', () => {
@@ -133,6 +136,101 @@ categories: Unit-Testing
   ```
 
 * 相应的，在各类型中还有对应的匹配器方法，例如使用 `toBeNull` 来匹配 `null`，使用 `toBeCloseTo` 来匹配浮点数，使用 `toMatch` 来匹配正则字符串，使用 `toContain` 来匹配数组是否包含某项等等。这些都可在 [Jest](http://jestjs.io/docs/zh-Hans/getting-started) 官网上找到。
+
+### 测试异步代码
+
+#### 测试回调
+
+* 异步代码中常见的有测试回调，例如有 `fetchData` 的函数，传入 `callback` 回调函数。按照之前的理解，测试方式是这样的
+
+  ```javascript
+  function fetchData(callback) {
+    const data = 'async data'
+    callback(data)
+  }
+  // 有问题的写法
+  test('测试回调', () => {
+    function callback(data) {
+      expect(callback(data)).toBe('async data')
+    }
+    fetchData(callback)
+  })
+  ```
+
+* 由于 `fetchData` 的执行是异步的，所以当该测试执行完毕时，它还没有执行结束，也就无法测试。
+* Jest 本身在测试回调函数时提供了一个参数用来标识内部函数是否执行行结束。
+
+  ```javascript
+  test('测试回调', (done) => {
+    function callback(data) {
+      expect(data).toBe('async data')
+      done()
+    }
+    fetchData(callback)
+  })
+  ```
+
+* 这样，当 `done` 函数执行结束时，测试才执行完毕。而如果 `done` 没有执行，那也意味着其中哪里出现了问题。
+
+#### 测试Promise
+
+* 同样的，这样测试 `Promise` 也无法生效，结果并不会报错。
+
+  ```javascript
+  function handleData(data) {
+    return new Promise((resolve, reject) => {
+      window.setTimeout(() => resolve({ res: data.res + 1 }, 3000))
+    })
+  }
+  // 错误示范
+  test('测试 Promise 代码', () => {
+    handleData({ res: 2 }).then((data) => {
+      expect(data).toEqual({ res: 2 })
+    })
+  })
+  ```
+
+* 要测试 `Promise`, 只需要在 Jest 测试中返回一个 `Promise` 即可。
+
+  ```javascript
+  test('测试 Promise 代码', () => {
+    return handleData({ res: 2 }).then((data) => {
+      expect(data).toEqual({ res: 2 })
+    })
+  })
+  ```
+
+* 当然，`Promise` 还会有刻意测试错误的情况。于是我们想当然的又会觉得加上 `return` 就可以了。下面这段代码，我们来测试是否执行了 `reject` 方法，这时我们传入一个错误的参数再执行。
+
+  ```javascript
+  function handleDataReject(data) {
+    return new Promise((resolve, reject) => {
+      window.setTimeout(() => {
+        if (Object.prototype.toString.call(data) !== '[object Object]') {
+          reject('Type Error!!!')
+        }
+        resolve({ res: data.res + 1})
+      }, 3000)
+    })
+  }
+  test('测试 Promise reject 代码', () => {
+    return handleDataReject('test rejected').catch((data) => {
+      expect(data).toMatch('Type Error!!!')
+    })
+  })
+  ```
+
+* 这里确实执行通过了。但如果我们把一个正确的参数传进去，是否能验证错误的情况呢，答案是不会的。例如我们把刚刚的 **`test rejected`** 字符串改为 **`{ res: 1 }`** 作为参数传入的时候，其实也检测不出错误的执行。
+* 因为在测试错误的情况的时候，`fulfilled` 状态也是不会在测试中被检出的。换句话说，当执行正确的时候，`Promise` 不会跑到 `catch` 后续这个函数中，也就会被检测通过。但这里我们需要测试的是异常的情况，所以必须还是需要补充上一句后续断言是否执行的语句 `expect.assertions(1)`。它并不会抛出测试的错误，但它会提示你有一句断言没有执行，这时候你就知道了，刚才那段对象作为参数执行的代码并没有走到 `catch` 函数中。
+
+  ```javascript
+  test('测试 Promise reject 代码', () => {
+    return handleDataReject('test rejected').catch((data) => {
+      expect.assertions(1)
+      expect(data).toMatch('Type Error!!!')
+    })
+  })
+  ```
 
 ### 在React中使用
 
@@ -223,10 +321,11 @@ categories: Unit-Testing
 ### 小结
 
 * 有些时候，项目里没有单测也能基本良好运行，就像我从前做过的项目一样。但这未必是好事。因为单测带来的，其实更多的是对业务的思考和设计。假如我们决定要写单测，那么在写该模块时，就应提前想到多个可能的场景，从而避免未知的错误，同时自己也会对当前业务有着更好的理解。另一方面，就像我现在所做的，其实通过写单测，可以去熟悉相应的业务模块的***所有场景***，这会比直接阅读业务代码会更熟悉的多。
+* **上述代码对应的仓库 [unit-testing](https://github.com/kyriejoshua/unit-testing)**.
 
 ### [Issues](https://github.com/facebook/jest/issues)
 
-#### 目前碰到的一些问题整理，基于 ^22.4.3. 
+#### 目前碰到的一些问题整理，基于 ^22.4.3.
 
 1. 在运行 `npm run test` 时
 
@@ -236,7 +335,7 @@ categories: Unit-Testing
   import Modal from '../../../node_modules/antd/lib/modal' // 或者这样也不会报错
   ```
 
-* 排查发现是 jest 无法解析 CSS。搜索部分结果，有人给出了[方案](https://www.jianshu.com/p/bf8070c33824)，官方也提供了解决[方案](https://jestjs.io/docs/en/webpack)。但试过均无效果。
+* 排查发现是 Jest 无法解析 CSS。搜索部分结果，有人给出了[方案](https://www.jianshu.com/p/bf8070c33824)，官方也提供了解决[方案](https://jestjs.io/docs/en/webpack)。但试过均无效果。
 
 ### TODO
 
