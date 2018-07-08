@@ -218,7 +218,7 @@
 <li><p>这里确实执行通过了。但如果我们把一个正确的参数传进去，是否能验证错误的情况呢，答案是不会的。例如我们把刚刚的 <strong><code>test rejected</code></strong> 字符串改为 <strong><code>{ res: 1 }</code></strong> 作为参数传入的时候，其实也检测不出错误的执行。</p>
 </li>
 <li><p>因为在测试错误的情况的时候，<code>fulfilled</code> 状态也是不会在测试中被检出的。换句话说，当执行正确的时候，<code>Promise</code> 不会跑到 <code>catch</code> 后续这个函数中，也就会被检测通过。但这里我们需要测试的是异常的情况，所以必须还是需要补充上一句后续断言是否执行的语句 <code>expect.assertions(1)</code>。它并不会抛出测试的错误，但它会提示你有一句断言没有执行，这时候你就知道了，刚才那段对象作为参数执行的代码并没有走到 <code>catch</code> 函数中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">'测试 Promise reject 代码'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> handleDataReject(<span class="string">'test rejected'</span>).catch(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    expect.assertions(<span class="number">1</span>)</span><br><span class="line">    expect(data).toMatch(<span class="string">'Type Error!!!'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">'测试 Promise reject 代码'</span>, () =&gt; &#123;</span><br><span class="line">  expect.assertions(<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> handleDataReject(<span class="string">'test rejected'</span>).catch(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    expect(data).toMatch(<span class="string">'Type Error!!!'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="在React中使用"><a href="#在React中使用" class="headerlink" title="在React中使用"></a>在React中使用</h3><ul>
@@ -305,7 +305,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Комментарии</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
