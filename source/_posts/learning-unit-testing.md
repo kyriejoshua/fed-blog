@@ -225,8 +225,8 @@ categories: Unit-Testing
 
   ```javascript
   test('测试 Promise reject 代码', () => {
+    expect.assertions(1)
     return handleDataReject('test rejected').catch((data) => {
-      expect.assertions(1)
       expect(data).toMatch('Type Error!!!')
     })
   })
