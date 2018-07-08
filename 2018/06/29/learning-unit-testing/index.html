@@ -92,7 +92,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-06-29T02:02:28.000Z" itemprop="datePublished">7 天前</time>
+            <time datetime="2018-06-29T02:02:28.000Z" itemprop="datePublished">9 天前</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +104,7 @@
         <span class="column is-narrow">
             
             
-            13 分钟 read (About 2014 words)
+            18 分钟 read (About 2774 words)
         </span>
         
     </div>
@@ -121,6 +121,11 @@
 <li><a href="#上手Jest">上手 Jest</a></li>
 <li><a href="#断言">断言</a></li>
 <li><a href="#使用匹配器">使用匹配器</a></li>
+<li><a href="#测试异步代码">测试异步代码</a><ul>
+<li><a href="#测试回调">测试回调</a></li>
+<li><a href="#测试Promise">测试Promise</a></li>
+</ul>
+</li>
 <li><a href="#在React中使用">在 React 中使用</a></li>
 <li><a href="#小结">小结</a></li>
 <li><a href="#Issues">Issues</a></li>
@@ -178,14 +183,42 @@
 </li>
 </ul>
 <h3 id="使用匹配器"><a href="#使用匹配器" class="headerlink" title="使用匹配器"></a>使用匹配器</h3><ul>
-<li>刚才我们使用 expect(sum(1, 2)) 来输出期望的值，再用 toBe 方法来比较值是否相等。这里 toBe 就是相应的匹配器。</li>
-<li><p>toBe 内部使用 Object.is 方法来判断，该方法和全等(===)判断类似，但略有不同。例如 Object.is 会区分 -0 和 +0，但不会区分 Number.NaN 和 NaN.</p>
+<li>刚才我们使用 <code>expect(sum(1, 2))</code> 来输出期望的值，再用 <code>toBe</code> 方法来比较值是否相等。这里 <code>toBe</code> 就是相应的匹配器。</li>
+<li><p><code>toBe</code> 内部使用 <code>Object.is</code> 方法来判断，该方法和全等(<code>===</code>)判断类似，但略有不同。例如 <code>Object.is</code> 会区分 -0 和 +0，但不会区分 <code>Number.NaN</code> 和 <code>NaN</code>.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.is(<span class="number">-0</span>, <span class="number">0</span>) <span class="comment">// false</span></span><br><span class="line"><span class="number">-0</span> === <span class="number">0</span> <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="built_in">Number</span>.NaN, <span class="literal">NaN</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.NaN === <span class="literal">NaN</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>toBe 方法通常可以用来比较数字，字符串等基本类型。但如果要比较对象等引用类型。可以使用 toEqual,它会递归比较对象中的值。下面来试着使用下 toEqual 方法。</p>
+<li><p><code>toBe</code> 方法通常可以用来比较数字，字符串等基本类型。但如果要比较对象等引用类型。可以使用 <code>toEqual</code>,它会递归比较对象中的值。下面来试着使用下 <code>toEqual</code> 方法。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">'比较对象相等'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="string">'2'</span> &#125;</span><br><span class="line">  expect(data).toEqual(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="string">'2'</span> &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>相应的，在各类型中还有对应的匹配器方法，例如使用 <code>toBeNull</code> 来匹配 <code>null</code>，使用 <code>toBeCloseTo</code> 来匹配浮点数，使用 <code>toMatch</code> 来匹配正则字符串，使用 <code>toContain</code> 来匹配数组是否包含某项等等。这些都可在 <a href="http://jestjs.io/docs/zh-Hans/getting-started" target="_blank" rel="noopener">Jest</a> 官网上找到。</p>
+</li>
+</ul>
+<h3 id="测试异步代码"><a href="#测试异步代码" class="headerlink" title="测试异步代码"></a>测试异步代码</h3><h4 id="测试回调"><a href="#测试回调" class="headerlink" title="测试回调"></a>测试回调</h4><ul>
+<li><p>异步代码中常见的有测试回调，例如有 <code>fetchData</code> 的函数，传入 <code>callback</code> 回调函数。按照之前的理解，测试方式是这样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchData</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="string">'async data'</span></span><br><span class="line">  callback(data)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 有问题的写法</span></span><br><span class="line">test(<span class="string">'测试回调'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    expect(callback(data)).toBe(<span class="string">'async data'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  fetchData(callback)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由于 <code>fetchData</code> 的执行是异步的，所以当该测试执行完毕时，它还没有执行结束，也就无法测试。</p>
+</li>
+<li><p>Jest 本身在测试回调函数时提供了一个参数用来标识内部函数是否执行行结束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">'测试回调'</span>, (done) =&gt; &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    expect(data).toBe(<span class="string">'async data'</span>)</span><br><span class="line">    done()</span><br><span class="line">  &#125;</span><br><span class="line">  fetchData(callback)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样，当 <code>done</code> 函数执行结束时，测试才执行完毕。而如果 <code>done</code> 没有执行，那也意味着其中哪里出现了问题。</p>
+</li>
+</ul>
+<h4 id="测试Promise"><a href="#测试Promise" class="headerlink" title="测试Promise"></a>测试Promise</h4><ul>
+<li><p>同样的，这样测试 <code>Promise</code> 也无法生效，结果并不会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleData</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> resolve(&#123; <span class="attr">res</span>: data.res + <span class="number">1</span> &#125;, <span class="number">3000</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 错误示范</span></span><br><span class="line">test(<span class="string">'测试 Promise 代码'</span>, () =&gt; &#123;</span><br><span class="line">  handleData(&#123; <span class="attr">res</span>: <span class="number">2</span> &#125;).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    expect(data).toEqual(&#123; <span class="attr">res</span>: <span class="number">2</span> &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要测试 <code>Promise</code>, 只需要在 Jest 测试中返回一个 <code>Promise</code> 即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">'测试 Promise 代码'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> handleData(&#123; <span class="attr">res</span>: <span class="number">2</span> &#125;).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    expect(data).toEqual(&#123; <span class="attr">res</span>: <span class="number">2</span> &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当然，<code>Promise</code> 还会有刻意测试错误的情况。于是我们想当然的又会觉得加上 <code>return</code> 就可以了。下面这段代码，我们来测试是否执行了 <code>reject</code> 方法，这时我们传入一个错误的参数再执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDataReject</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.toString.call(data) !== <span class="string">'[object Object]'</span>) &#123;</span><br><span class="line">        reject(<span class="string">'Type Error!!!'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      resolve(&#123; <span class="attr">res</span>: data.res + <span class="number">1</span>&#125;)</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">test(<span class="string">'测试 Promise reject 代码'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> handleDataReject(<span class="string">'test rejected'</span>).catch(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    expect(data).toMatch(<span class="string">'Type Error!!!'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里确实执行通过了。但如果我们把一个正确的参数传进去，是否能验证错误的情况呢，答案是不会的。例如我们把刚刚的 <strong><code>test rejected</code></strong> 字符串改为 <strong><code>{ res: 1 }</code></strong> 作为参数传入的时候，其实也检测不出错误的执行。</p>
+</li>
+<li><p>因为在测试错误的情况的时候，<code>fulfilled</code> 状态也是不会在测试中被检出的。换句话说，当执行正确的时候，<code>Promise</code> 不会跑到 <code>catch</code> 后续这个函数中，也就会被检测通过。但这里我们需要测试的是异常的情况，所以必须还是需要补充上一句后续断言是否执行的语句 <code>expect.assertions(1)</code>。它并不会抛出测试的错误，但它会提示你有一句断言没有执行，这时候你就知道了，刚才那段对象作为参数执行的代码并没有走到 <code>catch</code> 函数中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">'测试 Promise reject 代码'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> handleDataReject(<span class="string">'test rejected'</span>).catch(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    expect.assertions(<span class="number">1</span>)</span><br><span class="line">    expect(data).toMatch(<span class="string">'Type Error!!!'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="在React中使用"><a href="#在React中使用" class="headerlink" title="在React中使用"></a>在React中使用</h3><ul>
@@ -210,6 +243,7 @@
 </ul>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>有些时候，项目里没有单测也能基本良好运行，就像我从前做过的项目一样。但这未必是好事。因为单测带来的，其实更多的是对业务的思考和设计。假如我们决定要写单测，那么在写该模块时，就应提前想到多个可能的场景，从而避免未知的错误，同时自己也会对当前业务有着更好的理解。另一方面，就像我现在所做的，其实通过写单测，可以去熟悉相应的业务模块的<strong><em>所有场景</em></strong>，这会比直接阅读业务代码会更熟悉的多。</li>
+<li><strong>上述代码对应的仓库 <a href="https://github.com/kyriejoshua/unit-testing" target="_blank" rel="noopener">unit-testing</a></strong>.</li>
 </ul>
 <h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a><a href="https://github.com/facebook/jest/issues" target="_blank" rel="noopener">Issues</a></h3><h4 id="目前碰到的一些问题整理，基于-22-4-3"><a href="#目前碰到的一些问题整理，基于-22-4-3" class="headerlink" title="目前碰到的一些问题整理，基于 ^22.4.3."></a>目前碰到的一些问题整理，基于 ^22.4.3.</h4><ol>
 <li><p>在运行 <code>npm run test</code> 时</p>
@@ -217,7 +251,7 @@
 </li>
 </ol>
 <ul>
-<li>排查发现是 jest 无法解析 CSS。搜索部分结果，有人给出了<a href="https://www.jianshu.com/p/bf8070c33824" target="_blank" rel="noopener">方案</a>，官方也提供了解决<a href="https://jestjs.io/docs/en/webpack" target="_blank" rel="noopener">方案</a>。但试过均无效果。</li>
+<li>排查发现是 Jest 无法解析 CSS。搜索部分结果，有人给出了<a href="https://www.jianshu.com/p/bf8070c33824" target="_blank" rel="noopener">方案</a>，官方也提供了解决<a href="https://jestjs.io/docs/en/webpack" target="_blank" rel="noopener">方案</a>。但试过均无效果。</li>
 </ul>
 <h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><ul>
 <li>异步处理的单测方法。</li>
@@ -271,7 +305,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comments</h3>
+    <h3 class="title is-4">Комментарии</h3>
     
 <script>
     var disqus_config = function () {
