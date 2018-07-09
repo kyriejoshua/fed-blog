@@ -23,6 +23,8 @@ categories: Unit-Testing
 - [测试异步代码](#测试异步代码)
   - [测试回调](#测试回调)
   - [测试Promise](#测试Promise)
+  - [`.resolves/.rejects`](#resolves-rejects)
+  - [async/await](#.resolves/.rejects)
 - [在 React 中使用](#在React中使用)
 - [小结](#小结)
 - [Issues](#Issues)
@@ -229,6 +231,54 @@ categories: Unit-Testing
     return handleDataReject('test rejected').catch((data) => {
       expect(data).toMatch('Type Error!!!')
     })
+  })
+  ```
+
+#### `.resolves/.rejects`
+
+* `.resolves/.rejects` 是对上述更简化的写法。
+
+  ```javascript
+  test('测试 resolves 代码', () => {
+    expect.assertions(1)
+    return expect(handleDataReject({ res: 1 })).resolves.toEqual({ res: 2 })
+  })
+  test('测试 rejects 代码', () => {
+    expect.assertions(1)
+    return expect(handleDataReject('test rejected')).rejects.toMatch('Type Error!!!')
+  })
+  ```
+
+#### Async/Await
+
+* 这里的用法其实与它们本身的用法类似。
+
+  ```javascript
+  test('测试 async 代码', async () => {
+    expect.assertions(1)
+    const data = await handleDataReject({ res: 1 })
+    expect(data).toEqual({ res: 2 })
+  })
+  test('测试 async error 代码', async () => {
+    expect.assertions(1)
+    try {
+      await handleDataReject('test rejected')
+    } catch(e) {
+      expect(e).toMatch('Type Error!!!')  
+    }
+  })
+  ```
+
+* 由于使用了同步写法，这时候不需要再 `return` 了。当然，我们还是可以使用 `.resolves/rejects` 来做一些写法上的优化。
+
+  ```javascript
+  test('测试 async 代码', async () => {
+    expect.assertions(1)
+    await expect(handleDataReject({ res: 1 })).resolves.toEqual({ res: 2 })
+  })
+  test('测试 async error 代码', async () => {
+    expect.assertions(1)
+    await expect(handleDataReject('test rejected')).rejects.toMatch('Type Error!!!')
   })
   ```
 
