@@ -389,5 +389,4 @@ categories: Unit-Testing
 
 ### TODO
 
-* 异步处理的单测方法。
 * redux-mock-store 了解。
