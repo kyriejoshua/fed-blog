@@ -387,6 +387,9 @@ categories: Unit-Testing
 
 * 排查发现是 Jest 无法解析 CSS。搜索部分结果，有人给出了[方案](https://www.jianshu.com/p/bf8070c33824)，官方也提供了解决[方案](https://jestjs.io/docs/en/webpack)。但试过均无效果。
 
-### TODO
+##### TODO
 
 * redux-mock-store 了解。
+
+<hr>
+{% asset_img reward.jpeg Thanks %}
