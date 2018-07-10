@@ -416,7 +416,8 @@ figure.highlight {
   figure.highlight table {
     width: auto; }
   figure.highlight pre {
-    padding: 0; }
+    padding: 0;
+    overflow: visible; }
     figure.highlight pre .line {
       line-height: 1.5rem; }
   figure.highlight figcaption,

@@ -92,7 +92,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-01-07T05:29:00.000Z" itemprop="datePublished">6 个月前</time>
+            <time datetime="2018-01-07T05:29:00.000Z" itemprop="datePublished">1月 7 2018</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -357,6 +357,7 @@
 </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
 <!-- test if the browser is outdated -->
 <div id="outdated">
@@ -367,7 +368,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
     $(document).ready(function () {
-        //plugin function, place inside DOM ready function
+        // plugin function, place inside DOM ready function
         outdatedBrowser({
             bgColor: '#f25648',
             color: '#ffffff',
@@ -380,6 +381,7 @@
     window.FontAwesomeConfig = {
         searchPseudoElements: true
     }
+    moment.locale("zh-CN");
 </script>
 
 
