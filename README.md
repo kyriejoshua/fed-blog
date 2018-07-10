@@ -18,8 +18,8 @@
 * `hexo clean`或 `npm run clean` 清除 `public` 目录
 * `hexo douban -b` 或 `npm run douban` 生成豆瓣阅读页面
 * `hexo g` 或 `npm run generate` 生成 public 目录
-* `hexo d` 或 `npm run pre-deploy` 部署
-* 一键部署：`npm run deploy`
+* `hexo d` 或 `npm run deploy` 部署
+* 一键部署：`npm run build`
 
 #### Others
 

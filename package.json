@@ -10,8 +10,8 @@
     "clean": "hexo clean",
     "douban": "hexo douban -b",
     "generate": "hexo g",
-    "pre-deploy": "hexo deploy",
-    "deploy": "hexo clean & hexo douban -b & hexo g & hexo deploy"
+    "deploy": "hexo deploy",
+    "build": "hexo clean & hexo douban -b & hexo g & hexo deploy"
   },
   "dependencies": {
     "hexo": "^3.2.0",
