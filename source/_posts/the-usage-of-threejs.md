@@ -100,7 +100,7 @@ scene.add(light)
 * 最后，让这一切动起来，需要动画来运行。
 
 ```javascript
-functoin animation() => {
+function animation() {
   window.requestAnimationFrame(animation)
   renderer.render(scene, camera)
   // do something

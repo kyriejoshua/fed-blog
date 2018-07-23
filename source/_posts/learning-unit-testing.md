@@ -385,7 +385,7 @@ categories: Unit-Testing
   import Modal from '../../../node_modules/antd/lib/modal' // 或者这样也不会报错
   ```
 
-* 排查发现是 Jest 无法解析 CSS。搜索部分结果，有人给出了[方案](https://www.jianshu.com/p/bf8070c33824)，官方也提供了解决[方案](https://jestjs.io/docs/en/webpack)。但试过均无效果。
+* 排查发现是 Jest 无法解析 CSS。搜索部分结果，有人给出了[方案](https://www.jianshu.com/p/bf8070c33824)，官方也提供了解决[方案](https://jestjs.io/docs/en/webpack)。目前发现可以解决。
 
 ##### TODO
 
