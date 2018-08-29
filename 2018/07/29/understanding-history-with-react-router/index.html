@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>理解 react-router 中的 history - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Buscar" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            理解 react-router 中的 history
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-07-29T13:47:38.000Z" itemprop="datePublished">7月 29 2018</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 分钟 de lectura (Alrededor de 1098 palabras)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/jo.github.io/2018/07/29/understanding-history-with-react-router/unphoto.jpg" alt=""></p>
+<!-- 实际时间: 2018-08-29 21:47:38 -->
+<p>对 <code>react-router</code> 的分析，目前准备主要集中在三点：<br>a. <code>history</code> 的分析<br>b. <code>react-router</code> 原理分析<br>c. <code>react-router</code> 内部匹配原理<br>这篇文章准备着重理解 <code>history</code></p>
+<a id="more"></a>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#引子">引子</a></li>
+<li><a href="#history核心">history核心</a></li>
+<li><a href="#走进createBrowserHistory">走进createBrowserHistory</a></li>
+<li><a href="#TODO">TODO</a></li>
+</ul>
+<h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
+<li><p>一段显而易见出现在各大 react v16+ 项目中的代码是这样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; render &#125; <span class="keyword">from</span> <span class="string">'react-dom'</span></span><br><span class="line"><span class="keyword">import</span> AppRouter <span class="keyword">from</span> <span class="string">'./routes/'</span></span><br><span class="line"><span class="keyword">import</span> &#123; createBrowserHistory &#125; <span class="keyword">from</span> <span class="string">'history'</span></span><br><span class="line"><span class="keyword">const</span> history = createBrowserHistory()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;AppRouter history=&#123;history&#125; /&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">render(<span class="xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, <span class="built_in">document</span>.body.querySelector(<span class="string">'#app'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>react</code> v16+ 版本里，通常 <code>react-router</code> 也升级到了 4 以上</p>
+</li>
+<li>而 <code>react-router</code> v4+ 通常是配合 <code>history</code> 使用的</li>
+<li>下面就先从 <code>history</code> 开始，让我们一步一步走近 <code>react-router</code> 的神秘世界</li>
+</ul>
+<h3 id="history核心"><a href="#history核心" class="headerlink" title="history核心"></a>history核心</h3><ul>
+<li>history v4.6+ 在内部主要导出了三个方法:<ul>
+<li><code>createBrowserHistory</code>,<code>createHashHistory</code>,<code>createMemoryHistory</code></li>
+<li>它们分别有着自己的作用:<ul>
+<li><code>createBrowserHistory</code> 是为现代主流浏览器提供的 api</li>
+<li><code>createHashHistory</code> 是为不支持 <code>history</code> 功能的浏览器提供的 api</li>
+<li><code>createMemoryHistory</code> 则是为 <code>node</code> 环境提供的 api</li>
+</ul>
+</li>
+<li>我们就先从最接地气的 <code>createBrowserHistory</code> 也就是我们上文中使用的方法开始看起</li>
+</ul>
+</li>
+</ul>
+<h3 id="走进createBrowserHistory"><a href="#走进createBrowserHistory" class="headerlink" title="走进createBrowserHistory"></a>走进createBrowserHistory</h3><ul>
+<li><p>话不多说，直接走进源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Creates a history object that uses the HTML5 history API including</span><br><span class="line"> * pushState, replaceState, and the popstate event.</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在它自己方法开始的注释里，它说明了是基于 H5 的 <code>history</code> 创建对象，对象内包括了一些常用的方法譬如</p>
+<ul>
+<li><code>pushState</code>,<code>replaceState</code>,<code>popstate</code> 等</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>那么它具体返回了什么对象呢，下面就是它目前所有的方法和属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> globalHistory = <span class="built_in">window</span>.history;</span><br><span class="line"><span class="keyword">const</span> history = &#123;</span><br><span class="line">  length: globalHistory.length,</span><br><span class="line">  action: <span class="string">"POP"</span>,</span><br><span class="line">  location: initialLocation,</span><br><span class="line">  createHref,</span><br><span class="line">  push,</span><br><span class="line">  replace,</span><br><span class="line">  go,</span><br><span class="line">  goBack,</span><br><span class="line">  goForward,</span><br><span class="line">  block,</span><br><span class="line">  listen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>globalHistory.length</code> 显而易见是当前存的历史栈的数量</p>
+</li>
+<li><code>createHref</code> 根据根路径创建新路径，在根路径上添加原地址所带的 <code>search</code>, <code>pathname</code>, <code>path</code> 参数, 推测作用是将路径简化</li>
+<li>其中，<code>go</code>,<code>goBack</code>,<code>goForward</code> 是对原生 <code>history.go</code> 的简单封装</li>
+<li><code>push</code>, <code>replace</code> 方法则是原生方法的扩展，但相对逻辑较多，两者同样是跳转逻辑，而且内部有较多逻辑相同</li>
+<li><p>这里以 <code>push</code> 为例, 它其实就是对原生的 <code>history.pushState</code> 做了判断和优化，具体的过渡实现则使用了 <code>transitionManager</code>(下文说明)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> push = <span class="function">(<span class="params">path, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> action = <span class="string">"PUSH"</span>;</span><br><span class="line">  <span class="keyword">const</span> location = createLocation(path, state, createKey(), history.location);</span><br><span class="line">  <span class="comment">// 过渡内容</span></span><br><span class="line">  transitionManager.confirmTransitionTo(</span><br><span class="line">    location,</span><br><span class="line">    action,</span><br><span class="line">    getUserConfirmation,</span><br><span class="line">    ok =&gt; &#123;</span><br><span class="line">       <span class="comment">// 布尔值，用于判断是否需要执行</span></span><br><span class="line">      <span class="keyword">if</span> (!ok) <span class="keyword">return</span>;</span><br><span class="line">      <span class="keyword">const</span> href = createHref(location);</span><br><span class="line">      <span class="keyword">const</span> &#123; key, state &#125; = location;</span><br><span class="line">      <span class="comment">// 在支持 history 的地方则使用 history.pushState 方法实现</span></span><br><span class="line">      <span class="keyword">if</span> (canUseHistory) &#123;</span><br><span class="line">        globalHistory.pushState(&#123; key, state &#125;, <span class="literal">null</span>, href);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = href;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当做出浏览器动作时，会触发 <code>popstate</code> 事件, 也就是说，<code>popstate</code> 本身并不是像 <code>pushState</code> 或 <code>replaceState</code> 一样是 history 的方法</p>
+</li>
+<li>不能使用 <code>history.popState</code> 这样的方式来调用</li>
+<li>而且，直接调用 <code>history.pushState</code> 或 <code>history.replaceState</code> 不会触发 popstate 事件</li>
+<li>在事件监听方法 <code>listen</code> 中涉及了 <code>popstate</code> 的使用，在源码中可以看到以下两个方法</li>
+<li><p><code>listen</code> 和 <code>checkDOMListeners</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PopStateEvent = <span class="string">"popstate"</span>;</span><br><span class="line"><span class="keyword">const</span> HashChangeEvent = <span class="string">"hashchange"</span>;</span><br><span class="line"><span class="keyword">const</span> listen = <span class="function"><span class="params">listener</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> unlisten = transitionManager.appendListener(listener);</span><br><span class="line">  checkDOMListeners(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    checkDOMListeners(<span class="number">-1</span>);</span><br><span class="line">    unlisten();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> checkDOMListeners = <span class="function"><span class="params">delta</span> =&gt;</span> &#123;</span><br><span class="line">  listenerCount += delta;</span><br><span class="line">  <span class="keyword">if</span> (listenerCount === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(PopStateEvent, handlePopState);</span><br><span class="line">    <span class="keyword">if</span> (needsHashChangeListener)</span><br><span class="line">      <span class="built_in">window</span>.addEventListener(HashChangeEvent, handleHashChange);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (listenerCount === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.removeEventListener(PopStateEvent, handlePopState);</span><br><span class="line">    <span class="keyword">if</span> (needsHashChangeListener)</span><br><span class="line">      <span class="built_in">window</span>.removeEventListener(HashChangeEvent, handleHashChange);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因此，调用 <code>listen</code> 就是给 <code>window</code> 绑定了相应方法，再次调用之前 <code>listen</code> 返回的函数则是取消</p>
+</li>
+<li><p>以上几段代码中 <code>transitionManager</code> 对象出现了多次，在 <code>popstate</code> 相关方法中，它提供了 <code>appendListener</code> 方法</p>
+</li>
+<li><p>内部其实是和 <code>listen</code> 方法相似的绑定和解绑逻辑，调用是绑定箭头事件，返回一个解绑函数，该解绑函数再次调用的话就是解绑事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> appendListener = <span class="function"><span class="params">fn</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> isActive = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">const</span> listener = <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isActive) fn(...args);</span><br><span class="line">  &#125;;</span><br><span class="line">  listeners.push(listener);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    isActive = <span class="literal">false</span>;</span><br><span class="line">    listeners = listeners.filter(<span class="function"><span class="params">item</span> =&gt;</span> item !== listener);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另一个使用的较多的方法 <code>confirmTransitionTo</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> confirmTransitionTo = (</span><br><span class="line">  location,</span><br><span class="line">  action,</span><br><span class="line">  getUserConfirmation,</span><br><span class="line">  callback</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (prompt != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> result =</span><br><span class="line">      <span class="keyword">typeof</span> prompt === <span class="string">"function"</span> ? prompt(location, action) : prompt;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> result === <span class="string">"string"</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> getUserConfirmation === <span class="string">"function"</span>) &#123;</span><br><span class="line">        getUserConfirmation(result, callback);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        callback(<span class="literal">true</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// Return false from a transition hook to cancel the transition.</span></span><br><span class="line">      <span class="comment">// 如果已经在执行，则暂时停止执行</span></span><br><span class="line">      callback(result !== <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    callback(<span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实际上执行的就是从外部传进来的 <code>callback</code> 方法，只是多了几层判断，而且传入了布尔值来控制是否需要真的执行回调函数</p>
+</li>
+</ul>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><ul>
+<li>待完善</li>
+</ul>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/React-Router/">#React-Router</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2018/06/29/learning-unit-testing/">单测入门笔记</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comentarios</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-with-react-router/';
+        this.page.identifier = '2018/07/29/understanding-history-with-react-router/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2018 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Páginas',
+                CATEGORIES: 'Categorías',
+                TAGS: 'Tags',
+                UNTITLED: '(Sin título)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>
