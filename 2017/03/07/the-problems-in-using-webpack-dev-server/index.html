@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2017-03-07T09:14:53.000Z" itemprop="datePublished">3月 7 2017</time>
+            <time datetime="2017-03-07T09:14:53.000Z" itemprop="datePublished">Mar 7 2017</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            11 分钟 de lectura (Alrededor de 1584 palabras)
+            11 分钟 read (About 1584 words)
         </span>
         
     </div>
@@ -124,7 +138,7 @@
 <li><p>首先来看看代码：</p>
 </li>
 </ul>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gulp 中一个很普通的 task, 使用 coffeescript 编写</span></span><br><span class="line">gulp.task <span class="string">'webpack-dev'</span>, <span class="function"><span class="params">(cb)</span> -&gt;</span></span><br><span class="line">  webpackServer =</span><br><span class="line">  	publicPath: <span class="string">'/'</span></span><br><span class="line">    hot: <span class="literal">true</span></span><br><span class="line">    stats:</span><br><span class="line">      colors: <span class="literal">true</span></span><br><span class="line">    proxy:</span><br><span class="line">      <span class="string">'/api/'</span>:</span><br><span class="line">      	target: <span class="string">'http://localhost:8000'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment hljs-comment"># gulp 中一个很普通的 task, 使用 coffeescript 编写</span></span><br><span class="line">gulp.task <span class="string hljs-string">'webpack-dev'</span>, <span class="function hljs-function"><span class="params hljs-params">(cb)</span> -&gt;</span></span><br><span class="line">  webpackServer =</span><br><span class="line">  	publicPath: <span class="string hljs-string">'/'</span></span><br><span class="line">    hot: <span class="literal hljs-literal">true</span></span><br><span class="line">    stats:</span><br><span class="line">      colors: <span class="literal hljs-literal">true</span></span><br><span class="line">    proxy:</span><br><span class="line">      <span class="string hljs-string">'/api/'</span>:</span><br><span class="line">      	target: <span class="string hljs-string">'http://localhost:8000'</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>这里使用了 webpack-dev-server 的 proxy 配置来代理请求，将原 <code>/api/</code>发起的请求发往 <code>localhost:8000</code>, 看起来似乎没有什么问题，实际上也并没有问题所在。</p>
 </li>
@@ -135,7 +149,7 @@
 <li><p>改动很少，大致如下:</p>
 </li>
 </ul>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.task <span class="string">'webpack-dev'</span>, <span class="function"><span class="params">(cb)</span> -&gt;</span></span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line">  proxy:</span><br><span class="line">    <span class="string">'/api/'</span>:</span><br><span class="line">      target: <span class="string">'http://chat.dev.cn'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.task <span class="string hljs-string">'webpack-dev'</span>, <span class="function hljs-function"><span class="params hljs-params">(cb)</span> -&gt;</span></span><br><span class="line">  <span class="comment hljs-comment"># ...</span></span><br><span class="line">  proxy:</span><br><span class="line">    <span class="string hljs-string">'/api/'</span>:</span><br><span class="line">      target: <span class="string hljs-string">'http://chat.dev.cn'</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>本以为不会有任何问题，小小的改动怎会引起巨变。然而，坑就这样产生了。开发环境中的 xhr 请求无法请求到原来的接口。但在浏览器中直接打开 <code>http://chatops.dev.cn/api/user</code> 却能得到应有的结果。这让人烦躁，让我心慌。</li>
 </ul>
@@ -154,7 +168,7 @@
 <li><p>我根据文档修改，于是得到如下结果：</p>
 </li>
 </ul>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gulp.task &apos;webpack-dev&apos;, (cb) -&gt;</span><br><span class="line">  # ...</span><br><span class="line">  proxy:</span><br><span class="line">    &apos;/api/&apos;:</span><br><span class="line">      target:</span><br><span class="line">        host: &apos;chat.dev.cn&apos;</span><br><span class="line">        protocol: &apos;http:&apos;</span><br><span class="line">        port: 80</span><br><span class="line">      ignorePath: true</span><br><span class="line">      changeOrigin: true</span><br><span class="line">      secure: false</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gulp.task &apos;webpack-dev&apos;, (cb) -&gt;</span><br><span class="line">  # ...</span><br><span class="line">  proxy:</span><br><span class="line">    &apos;/api/&apos;:</span><br><span class="line">      target:</span><br><span class="line">        host: &apos;chat.dev.cn&apos;</span><br><span class="line">        protocol: &apos;http:&apos;</span><br><span class="line">        port: 80</span><br><span class="line">      ignorePath: true</span><br><span class="line">      changeOrigin: true</span><br><span class="line">      secure: false</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>这时我怀着激动的心情重启服务，却得到了失望的结果——接口请求到了，返回的格式却是’text/html’. 一定是有哪里出了问题，但无从得知。心情更加烦躁。</p>
 </li>
@@ -175,7 +189,7 @@
 </ul>
 </li>
 </ul>
-  <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gulp.task &apos;webpack-dev-server&apos;, (cb) -&gt;</span><br><span class="line">  # ...</span><br><span class="line">  proxy:</span><br><span class="line">    &apos;/api/&apos;:</span><br><span class="line">      target:</span><br><span class="line">        host: &apos;chat.dev.cn&apos;</span><br><span class="line">        protocol: &apos;http:&apos;</span><br><span class="line">        port: 80</span><br><span class="line">      ingorePath: false # 默认即为 false,注释掉也可以</span><br><span class="line">      changeOrigin: true</span><br><span class="line">      secure: false</span><br></pre></td></tr></table></figure>
+  <figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gulp.task &apos;webpack-dev-server&apos;, (cb) -&gt;</span><br><span class="line">  # ...</span><br><span class="line">  proxy:</span><br><span class="line">    &apos;/api/&apos;:</span><br><span class="line">      target:</span><br><span class="line">        host: &apos;chat.dev.cn&apos;</span><br><span class="line">        protocol: &apos;http:&apos;</span><br><span class="line">        port: 80</span><br><span class="line">      ingorePath: false # 默认即为 false,注释掉也可以</span><br><span class="line">      changeOrigin: true</span><br><span class="line">      secure: false</span><br></pre></td></tr></table></figure>
 <h3 id="回顾与反思"><a href="#回顾与反思" class="headerlink" title="回顾与反思"></a>回顾与反思</h3><ul>
 <li><p>这个问题，前前后后困扰了我近一个工作日的时间，跨度有好几天。每天都花费了一定的时间在上面，直至今天，用了近半天的时间才得以解决。</p>
 </li>
@@ -238,7 +252,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -432,7 +446,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -445,10 +459,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

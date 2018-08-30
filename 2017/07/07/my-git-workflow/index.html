@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2017-07-07T10:58:44.000Z" itemprop="datePublished">7月 7 2017</time>
+            <time datetime="2017-07-07T10:58:44.000Z" itemprop="datePublished">Jul 7 2017</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            18 分钟 de lectura (Alrededor de 2719 palabras)
+            18 分钟 read (About 2719 words)
         </span>
         
     </div>
@@ -118,7 +132,7 @@
 <h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><ul>
 <li>首先是最基本的操作，从一次工作的开始到结束。这是一个比较基础的流程。</li>
 <li><p><code>Working Directory</code>(工作区) =&gt; <code>Staging Area</code>(暂存区) =&gt; <code>Git Repository</code>(git 仓库)</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-new</span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit [-m <span class="string">'commit message'</span>]</span><br><span class="line">git checkout develop|master</span><br><span class="line">git merge feature-new</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-new</span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit [-m <span class="string hljs-string">'commit message'</span>]</span><br><span class="line">git checkout develop|master</span><br><span class="line">git merge feature-new</span><br></pre></td></tr></table></figure>
 <ul>
 <li>从当前分支切出一个新分支，在该分支下进行开发。</li>
 <li>在工作区内修改文件，当任务完成时，添加所有改动文件到暂存区，然后提交，注明提交信息。</li>
@@ -344,7 +358,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -538,7 +552,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -551,10 +565,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

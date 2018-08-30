@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2016-06-23T11:13:28.000Z" itemprop="datePublished">6月 23 2016</time>
+            <time datetime="2016-06-23T11:13:28.000Z" itemprop="datePublished">Jun 23 2016</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            6 分钟 de lectura (Alrededor de 962 palabras)
+            6 分钟 read (About 962 words)
         </span>
         
     </div>
@@ -119,15 +133,15 @@
 <h3 id="1-流畅性"><a href="#1-流畅性" class="headerlink" title="1.流畅性"></a>1.流畅性</h3><ul>
 <li>简单易懂</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = _.pick(obj, [<span class="string">'name'</span>, <span class="string">'age'</span>, <span class="string">'address'</span>]);</span><br><span class="line"></span><br><span class="line">_.pick是lodash的方法，从对象obj中取出name和age，address属性。</span><br><span class="line"></span><br><span class="line">但是这个操作需要经常调用，完全可以封装起来。</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> _.pick(obj, [<span class="string">'name'</span>,<span class="string">'age'</span>,<span class="string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">这样每次调用a方法即可。明确易用。</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">var</span> a = _.pick(obj, [<span class="string hljs-string">'name'</span>, <span class="string hljs-string">'age'</span>, <span class="string hljs-string">'address'</span>]);</span><br><span class="line"></span><br><span class="line">_.pick是lodash的方法，从对象obj中取出name和age，address属性。</span><br><span class="line"></span><br><span class="line">但是这个操作需要经常调用，完全可以封装起来。</span><br><span class="line"></span><br><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">a</span>(<span class="params hljs-params">obj</span>)</span>&#123;</span><br><span class="line">	<span class="keyword hljs-keyword">return</span> _.pick(obj, [<span class="string hljs-string">'name'</span>,<span class="string hljs-string">'age'</span>,<span class="string hljs-string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">这样每次调用a方法即可。明确易用。</span><br></pre></td></tr></table></figure>
 <ul>
 <li>可读性</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">一开始接手这个web-order的时候，我是非常头疼的。到处是函数式编程，一层嵌套一层。这个时候如果没有交接，代码对新接触的人来说是非常痛苦的，所以有必要增强方法的可读性。</span><br><span class="line"></span><br><span class="line">下面是整理过后的：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateChoosenPeople</span>(<span class="params">people</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> _.pick(people, [<span class="string">'name'</span>,<span class="string">'age'</span>,<span class="string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">获取选中的人————名字即说明了该函数做的事情，可读性较好。</span><br><span class="line"></span><br><span class="line">但是，还有一点并不太令人舒服的地方，就是名字取得太长了。容易读懂，但不容易记住，也不方便使用。所以就需要下一点。</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">一开始接手这个web-order的时候，我是非常头疼的。到处是函数式编程，一层嵌套一层。这个时候如果没有交接，代码对新接触的人来说是非常痛苦的，所以有必要增强方法的可读性。</span><br><span class="line"></span><br><span class="line">下面是整理过后的：</span><br><span class="line"></span><br><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">generateChoosenPeople</span>(<span class="params hljs-params">people</span>)</span>&#123;</span><br><span class="line">	<span class="keyword hljs-keyword">return</span> _.pick(people, [<span class="string hljs-string">'name'</span>,<span class="string hljs-string">'age'</span>,<span class="string hljs-string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">获取选中的人————名字即说明了该函数做的事情，可读性较好。</span><br><span class="line"></span><br><span class="line">但是，还有一点并不太令人舒服的地方，就是名字取得太长了。容易读懂，但不容易记住，也不方便使用。所以就需要下一点。</span><br></pre></td></tr></table></figure>
 <ul>
 <li>减少记忆成本</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">将名字简化：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMan</span>(<span class="params">man</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> _.pick(man, [<span class="string">'name'</span>,<span class="string">'age'</span>,<span class="string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">这样既简明，也方便调用。</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">将名字简化：</span><br><span class="line"></span><br><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">getMan</span>(<span class="params hljs-params">man</span>)</span>&#123;</span><br><span class="line">	<span class="keyword hljs-keyword">return</span> _.pick(man, [<span class="string hljs-string">'name'</span>,<span class="string hljs-string">'age'</span>,<span class="string hljs-string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">这样既简明，也方便调用。</span><br></pre></td></tr></table></figure>
 <h4 id="2-一致性"><a href="#2-一致性" class="headerlink" title="2.一致性"></a>2.一致性</h4><ul>
 <li><p>api的一致性</p>
 <ul>
@@ -136,7 +150,7 @@
 <li><p>请看下列方法取名：</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">closeTips();</span><br><span class="line">closePrintModel();</span><br><span class="line">printChoosenOrder();</span><br><span class="line">getListByOrderPackage();</span><br><span class="line">getOrdersLength();</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">closeTips();</span><br><span class="line">closePrintModel();</span><br><span class="line">printChoosenOrder();</span><br><span class="line">getListByOrderPackage();</span><br><span class="line">getOrdersLength();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>对这些方法的第一印象是很长。但仔细看，api命名风格是统一的。各方法做什么事都在名字中已体现。一目了然，清晰明确。大大减少上手时间。</p>
 </li>
@@ -155,18 +169,18 @@
 <li><p>对方法改写如下：</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMan</span>(<span class="params">man</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(man) || <span class="keyword">typeof</span> order !== <span class="string">'object'</span> ) &#123;</span><br><span class="line">		<span class="built_in">console</span>.error(<span class="string">'param a must be type of string'</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> _.pick(man,[<span class="string">'name'</span>,<span class="string">'age'</span>,<span class="string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">当传入参数不符合条件的时候，先抛出错误。</span><br><span class="line"></span><br><span class="line">先判断是不是数组，然后再判断是不是对象，否则就抛出错误。</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">getMan</span>(<span class="params hljs-params">man</span>)</span>&#123;</span><br><span class="line">	<span class="keyword hljs-keyword">if</span> (<span class="built_in hljs-built_in">Array</span>.isArray(man) || <span class="keyword hljs-keyword">typeof</span> order !== <span class="string hljs-string">'object'</span> ) &#123;</span><br><span class="line">		<span class="built_in hljs-built_in">console</span>.error(<span class="string hljs-string">'param a must be type of string'</span>);</span><br><span class="line">		<span class="keyword hljs-keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword hljs-keyword">return</span> _.pick(man,[<span class="string hljs-string">'name'</span>,<span class="string hljs-string">'age'</span>,<span class="string hljs-string">'address'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">当传入参数不符合条件的时候，先抛出错误。</span><br><span class="line"></span><br><span class="line">先判断是不是数组，然后再判断是不是对象，否则就抛出错误。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>另一个常见的是ajax请求的错误处理，最先接触ajax的时候，从没想过请求失败的情况。经同事提醒，才了解到这样对用户很不友好。</p>
 </li>
 <li><p>上一个最早写的ajax请求,用angularjs的http：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$http.get(<span class="string">'http://123lalala.com/test'</span>)</span><br><span class="line">.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// do something...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$http.get(<span class="string hljs-string">'http://123lalala.com/test'</span>)</span><br><span class="line">.then(<span class="function hljs-function"><span class="params hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="comment hljs-comment">// do something...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这种情况只考虑了正常的情况下所做的操作，没有考虑其他情况。</p>
 </li>
 <li>其实很简单，只要再加上一段。但是之后对用户就友好许多，增加了错误提示。</li>
 </ul>
-<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$http.get(<span class="string">'http://123lalala.com/test'</span>)</span><br><span class="line">.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// do something</span></span><br><span class="line">&#125;, (err) =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.error(<span class="string">'请求失败'</span>);</span><br><span class="line">	<span class="comment">// or</span></span><br><span class="line">	<span class="built_in">window</span>.alert(<span class="string">'请求失败'</span> + err.msg);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$http.get(<span class="string hljs-string">'http://123lalala.com/test'</span>)</span><br><span class="line">.then(<span class="function hljs-function"><span class="params hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="comment hljs-comment">// do something</span></span><br><span class="line">&#125;, (err) =&gt; &#123;</span><br><span class="line">	<span class="built_in hljs-built_in">console</span>.error(<span class="string hljs-string">'请求失败'</span>);</span><br><span class="line">	<span class="comment hljs-comment">// or</span></span><br><span class="line">	<span class="built_in hljs-built_in">window</span>.alert(<span class="string hljs-string">'请求失败'</span> + err.msg);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </code></pre><h4 id="4-后续如果有补充再更新，有疑问或指正请提出。"><a href="#4-后续如果有补充再更新，有疑问或指正请提出。" class="headerlink" title="4.后续如果有补充再更新，有疑问或指正请提出。"></a>4.后续如果有补充再更新，有疑问或指正请提出。</h4>
         <!-- 引入打赏图片即显示打赏功能 -->
         
@@ -217,7 +231,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -411,7 +425,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -424,10 +438,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

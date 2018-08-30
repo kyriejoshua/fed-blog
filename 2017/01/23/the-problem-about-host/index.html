@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2017-01-23T10:45:40.000Z" itemprop="datePublished">1月 23 2017</time>
+            <time datetime="2017-01-23T10:45:40.000Z" itemprop="datePublished">Jan 23 2017</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            2 分钟 de lectura (Alrededor de 265 palabras)
+            2 分钟 read (About 265 words)
         </span>
         
     </div>
@@ -118,22 +132,22 @@
 <a id="more"></a>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
 <li><p>近期在配置新项目环境的时候遇到了如下问题：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">events.js:<span class="number">72</span></span><br><span class="line">  <span class="keyword">throw</span> err;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Error</span>: getaddrinfo ENOTFOUND talk.bb</span><br><span class="line">  at errnoException (dns.js:<span class="number">37</span>:<span class="number">11</span>)</span><br><span class="line">  at <span class="built_in">Object</span>.onanswer [<span class="keyword">as</span> oncomplete] (dns.js:<span class="number">124</span>:<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">events.js:<span class="number hljs-number">72</span></span><br><span class="line">  <span class="keyword hljs-keyword">throw</span> err;</span><br><span class="line"></span><br><span class="line"><span class="built_in hljs-built_in">Error</span>: getaddrinfo ENOTFOUND talk.bb</span><br><span class="line">  at errnoException (dns.js:<span class="number hljs-number">37</span>:<span class="number hljs-number">11</span>)</span><br><span class="line">  at <span class="built_in hljs-built_in">Object</span>.onanswer [<span class="keyword hljs-keyword">as</span> oncomplete] (dns.js:<span class="number hljs-number">124</span>:<span class="number hljs-number">16</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>经提示后发现是host配置的问题。</p>
 </li>
 <li><p>因为项目的配置 gulpfile.coffee 文件里是这样的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.listen config.webpackDevPort, <span class="string">'talk.bb'</span>, (err) -&gt;</span><br><span class="line">  <span class="keyword">if</span> err?</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> gutil.PluginError(<span class="string">'webpack-dev-server'</span>, err)</span><br><span class="line">  gutil.log <span class="string">'[webpack-dev-server] is listening'</span></span><br><span class="line">  cb()</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.listen config.webpackDevPort, <span class="string hljs-string">'talk.bb'</span>, (err) -&gt;</span><br><span class="line">  <span class="keyword hljs-keyword">if</span> err?</span><br><span class="line">    <span class="keyword hljs-keyword">throw</span> <span class="keyword hljs-keyword">new</span> gutil.PluginError(<span class="string hljs-string">'webpack-dev-server'</span>, err)</span><br><span class="line">  gutil.log <span class="string hljs-string">'[webpack-dev-server] is listening'</span></span><br><span class="line">  cb()</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这里的 talk.bb 实际上是替代了 localhost 作用，虽然目前在接手这项目的时候还不知它的作用，但就此去解决的方法就是在 host 文件下增加 talk.bb 配置。</p>
 </li>
 </ul>
 <h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
 <li><p>修改电脑的 host 配置，以管理员身份修改，运行 <code>sudo vim /etc/hosts</code>.可见文件如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>       localhost</span><br><span class="line"><span class="number">255.255</span><span class="number">.255</span><span class="number">.255</span> broadcasthost</span><br><span class="line">::<span class="number">1</span>             localhost</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number hljs-number">127.0</span><span class="number hljs-number">.0</span><span class="number hljs-number">.1</span>       localhost</span><br><span class="line"><span class="number hljs-number">255.255</span><span class="number hljs-number">.255</span><span class="number hljs-number">.255</span> broadcasthost</span><br><span class="line">::<span class="number hljs-number">1</span>             localhost</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在其中增加 talk.bb  即可，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>       talk.bb</span><br><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>       localhost</span><br><span class="line"><span class="number">255.255</span><span class="number">.255</span><span class="number">.255</span> broadcasthost</span><br><span class="line">::<span class="number">1</span>             localhost</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number hljs-number">127.0</span><span class="number hljs-number">.0</span><span class="number hljs-number">.1</span>       talk.bb</span><br><span class="line"><span class="number hljs-number">127.0</span><span class="number hljs-number">.0</span><span class="number hljs-number">.1</span>       localhost</span><br><span class="line"><span class="number hljs-number">255.255</span><span class="number hljs-number">.255</span><span class="number hljs-number">.255</span> broadcasthost</span><br><span class="line">::<span class="number hljs-number">1</span>             localhost</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><br></p>
@@ -190,7 +204,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -384,7 +398,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -397,10 +411,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

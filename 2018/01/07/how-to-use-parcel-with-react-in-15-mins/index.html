@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-01-07T05:29:00.000Z" itemprop="datePublished">1月 7 2018</time>
+            <time datetime="2018-01-07T05:29:00.000Z" itemprop="datePublished">Jan 7 2018</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            4 分钟 de lectura (Alrededor de 575 palabras)
+            4 分钟 read (About 575 words)
         </span>
         
     </div>
@@ -127,7 +141,7 @@
 <li>至于 parcel, 当然也是与时俱进用最新的了。</li>
 <li>所以最终确认下技术栈和版本。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node v8<span class="number">.0</span><span class="number">.0</span></span><br><span class="line">react v16<span class="number">.2</span><span class="number">.0</span></span><br><span class="line">yarn v1<span class="number">.3</span><span class="number">.2</span></span><br><span class="line">parcel v1<span class="number">.4</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node v8<span class="number hljs-number">.0</span><span class="number hljs-number">.0</span></span><br><span class="line">react v16<span class="number hljs-number">.2</span><span class="number hljs-number">.0</span></span><br><span class="line">yarn v1<span class="number hljs-number">.3</span><span class="number hljs-number">.2</span></span><br><span class="line">parcel v1<span class="number hljs-number">.4</span><span class="number hljs-number">.1</span></span><br></pre></td></tr></table></figure>
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><ul>
 <li><code>mkdir [your project]</code> —— 在一个合适的目录下新建个项目。</li>
 <li><code>yarn init</code> 初始化新项目，一顿回车后即完成。<ul>
@@ -164,20 +178,20 @@
 <h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><ul>
 <li>配置 .babelrc 文件来使用 babel。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"env"</span>, <span class="string">"react"</span>, <span class="string">"stage-0"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string hljs-string">"presets"</span>: [<span class="string hljs-string">"env"</span>, <span class="string hljs-string">"react"</span>, <span class="string hljs-string">"stage-0"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>配置首页入口。</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"src/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta hljs-meta">&lt;!DOCTYPE&gt;</span></span><br><span class="line"><span class="tag hljs-tag">&lt;<span class="name hljs-name">html</span>&gt;</span></span><br><span class="line">  <span class="tag hljs-tag">&lt;<span class="name hljs-name">head</span>&gt;</span><span class="tag hljs-tag">&lt;/<span class="name hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="tag hljs-tag">&lt;<span class="name hljs-name">body</span>&gt;</span></span><br><span class="line">    <span class="tag hljs-tag">&lt;<span class="name hljs-name">div</span> <span class="attr hljs-attr">id</span>=<span class="string hljs-string">"app"</span>&gt;</span><span class="tag hljs-tag">&lt;/<span class="name hljs-name">div</span>&gt;</span></span><br><span class="line">    <span class="tag hljs-tag">&lt;<span class="name hljs-name">script</span> <span class="attr hljs-attr">src</span>=<span class="string hljs-string">"src/index.js"</span>&gt;</span><span class="undefined hljs-undefined"></span><span class="tag hljs-tag">&lt;/<span class="name hljs-name">script</span>&gt;</span></span><br><span class="line">  <span class="tag hljs-tag">&lt;/<span class="name hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="tag hljs-tag">&lt;/<span class="name hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>配置 js 文件。使用 react.</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">    name: PropTypes.string</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span> hello &#123; this.props.name &#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>)</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Hello</span> <span class="attr">name</span>=<span class="string">'world'</span>/&gt;</span>, app)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">import</span> React, &#123; Component &#125; <span class="keyword hljs-keyword">from</span> <span class="string hljs-string">'react'</span></span><br><span class="line"><span class="keyword hljs-keyword">import</span> ReactDOM <span class="keyword hljs-keyword">from</span> <span class="string hljs-string">'react-dom'</span></span><br><span class="line"><span class="keyword hljs-keyword">import</span> PropTypes <span class="keyword hljs-keyword">from</span> <span class="string hljs-string">'prop-types'</span></span><br><span class="line"></span><br><span class="line"><span class="class hljs-class"><span class="keyword hljs-keyword">class</span> <span class="title hljs-title">Hello</span> <span class="keyword hljs-keyword">extends</span> <span class="title hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword hljs-keyword">static</span> propTypes = &#123;</span><br><span class="line">    name: PropTypes.string</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword hljs-keyword">return</span> <span class="xml hljs-xml"><span class="tag hljs-tag">&lt;<span class="name hljs-name">div</span>&gt;</span> hello &#123; this.props.name &#125;<span class="tag hljs-tag">&lt;/<span class="name hljs-name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword hljs-keyword">const</span> app = <span class="built_in hljs-built_in">document</span>.querySelector(<span class="string hljs-string">'#app'</span>)</span><br><span class="line">ReactDOM.render(<span class="xml hljs-xml"><span class="tag hljs-tag">&lt;<span class="name hljs-name">Hello</span> <span class="attr hljs-attr">name</span>=<span class="string hljs-string">'world'</span>/&gt;</span>, app)</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>这样就已经接近完成。</li>
 <li>剩下的，只要在 package 中加上 scripts.</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "parcel index.html"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "parcel index.html"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>最终只要在项目下运行 <code>npm start</code>，再打开 <code>open http://localhost:1234</code>. 几乎是一眨眼的功夫，就可以看到 <code>hello world</code> 了。</li>
 <li>是不是非常快捷而简单呢。</li>
@@ -232,7 +246,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -426,7 +440,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -439,10 +453,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

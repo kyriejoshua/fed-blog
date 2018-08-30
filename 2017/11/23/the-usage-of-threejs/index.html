@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2017-11-23T11:45:14.000Z" itemprop="datePublished">11月 23 2017</time>
+            <time datetime="2017-11-23T11:45:14.000Z" itemprop="datePublished">Nov 23 2017</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            12 分钟 de lectura (Alrededor de 1762 palabras)
+            12 分钟 read (About 1762 words)
         </span>
         
     </div>
@@ -189,18 +203,18 @@
 </li>
 <li>以点光源为例，我们创建一个简单的点光源。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> light = <span class="keyword">new</span> THREE.PointLight(<span class="number">0xffffff</span>, <span class="number">1</span>, <span class="number">100</span>) <span class="comment">// 光照颜色，光照强度，光照范围</span></span><br><span class="line">light.position.set(<span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>)</span><br><span class="line">scene.add(light)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">let</span> light = <span class="keyword hljs-keyword">new</span> THREE.PointLight(<span class="number hljs-number">0xffffff</span>, <span class="number hljs-number">1</span>, <span class="number hljs-number">100</span>) <span class="comment hljs-comment">// 光照颜色，光照强度，光照范围</span></span><br><span class="line">light.position.set(<span class="number hljs-number">50</span>, <span class="number hljs-number">50</span>, <span class="number hljs-number">50</span>)</span><br><span class="line">scene.add(light)</span><br></pre></td></tr></table></figure>
 <ul>
 <li><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/Light.js" target="_blank" rel="noopener">源码</a></li>
 </ul>
 <h4 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h4><ul>
 <li>最后，让这一切动起来，需要动画来运行。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animation</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.requestAnimationFrame(animation)</span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">animation</span>(<span class="params hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in hljs-built_in">window</span>.requestAnimationFrame(animation)</span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">  <span class="comment hljs-comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://codepen.io/kyriejoshua/pen/BJNoVK?editors=0110" target="_blank" rel="noopener">Demo</a></h3><ul>
 <li>在了解所有基本的要素之后，让我们来实现一个简单的动画吧——一个旋转的立方体。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> THREE <span class="keyword">from</span> <span class="string">'three.js'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">document</span>.body</span><br><span class="line"><span class="keyword">const</span> scene = <span class="keyword">new</span> THREE.Scene()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新建渲染器并设置大小</span></span><br><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer()</span><br><span class="line">renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span><br><span class="line">body.appendChild(renderer.domElement)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置相机和位置，并将视线转向场景中央</span></span><br><span class="line"><span class="keyword">const</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">75</span>, <span class="built_in">window</span>.innerHeight / <span class="built_in">window</span>.innerWidth, <span class="number">1</span>, <span class="number">1000</span>)</span><br><span class="line">camera.position.set(<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">camera.lookAt(scene.position)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新建一个立方体</span></span><br><span class="line"><span class="keyword">const</span> cubeGeometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">const</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123; <span class="attr">color</span>: <span class="number">0x123abc</span> &#125;)</span><br><span class="line"><span class="keyword">const</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span><br><span class="line">scene.add(cube)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 旋转立方体</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animation</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.requestAnimationFrame(animation)</span><br><span class="line"></span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">  cube.rotation.z += <span class="number">0.01</span></span><br><span class="line">  cube.rotation.y += <span class="number">0.01</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">animation()</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">import</span> * <span class="keyword hljs-keyword">as</span> THREE <span class="keyword hljs-keyword">from</span> <span class="string hljs-string">'three.js'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword hljs-keyword">const</span> body = <span class="built_in hljs-built_in">document</span>.body</span><br><span class="line"><span class="keyword hljs-keyword">const</span> scene = <span class="keyword hljs-keyword">new</span> THREE.Scene()</span><br><span class="line"></span><br><span class="line"><span class="comment hljs-comment">// 新建渲染器并设置大小</span></span><br><span class="line"><span class="keyword hljs-keyword">const</span> renderer = <span class="keyword hljs-keyword">new</span> THREE.WebGLRenderer()</span><br><span class="line">renderer.setSize(<span class="built_in hljs-built_in">window</span>.innerWidth, <span class="built_in hljs-built_in">window</span>.innerHeight)</span><br><span class="line">body.appendChild(renderer.domElement)</span><br><span class="line"></span><br><span class="line"><span class="comment hljs-comment">// 设置相机和位置，并将视线转向场景中央</span></span><br><span class="line"><span class="keyword hljs-keyword">const</span> camera = <span class="keyword hljs-keyword">new</span> THREE.PerspectiveCamera(<span class="number hljs-number">75</span>, <span class="built_in hljs-built_in">window</span>.innerHeight / <span class="built_in hljs-built_in">window</span>.innerWidth, <span class="number hljs-number">1</span>, <span class="number hljs-number">1000</span>)</span><br><span class="line">camera.position.set(<span class="number hljs-number">0</span>, <span class="number hljs-number">0</span>, <span class="number hljs-number">10</span>)</span><br><span class="line">camera.lookAt(scene.position)</span><br><span class="line"></span><br><span class="line"><span class="comment hljs-comment">// 新建一个立方体</span></span><br><span class="line"><span class="keyword hljs-keyword">const</span> cubeGeometry = <span class="keyword hljs-keyword">new</span> THREE.BoxGeometry(<span class="number hljs-number">1</span>, <span class="number hljs-number">1</span>, <span class="number hljs-number">1</span>)</span><br><span class="line"><span class="keyword hljs-keyword">const</span> cubeMaterial = <span class="keyword hljs-keyword">new</span> THREE.MeshBasicMaterial(&#123; <span class="attr hljs-attr">color</span>: <span class="number hljs-number">0x123abc</span> &#125;)</span><br><span class="line"><span class="keyword hljs-keyword">const</span> cube = <span class="keyword hljs-keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span><br><span class="line">scene.add(cube)</span><br><span class="line"></span><br><span class="line"><span class="comment hljs-comment">// 旋转立方体</span></span><br><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">animation</span>(<span class="params hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in hljs-built_in">window</span>.requestAnimationFrame(animation)</span><br><span class="line"></span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">  cube.rotation.z += <span class="number hljs-number">0.01</span></span><br><span class="line">  cube.rotation.y += <span class="number hljs-number">0.01</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">animation()</span><br></pre></td></tr></table></figure>
 <p><br></p>
 <blockquote><p><a href="http://techbrood.com/threejs/docs/#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF(Scene" target="_blank" rel="noopener">中文文档</a></p>
 </blockquote>
@@ -272,7 +286,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -466,7 +480,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -479,10 +493,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

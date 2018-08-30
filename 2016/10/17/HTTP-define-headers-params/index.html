@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2016-10-17T11:58:04.000Z" itemprop="datePublished">10月 17 2016</time>
+            <time datetime="2016-10-17T11:58:04.000Z" itemprop="datePublished">Oct 17 2016</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            4 分钟 de lectura (Alrededor de 556 palabras)
+            4 分钟 read (About 556 words)
         </span>
         
     </div>
@@ -160,7 +174,7 @@
 <li><p>这样当服务端传了<code>X-Resource-Count</code>时在前端就可以取到X-Rource-Count的值。</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>在angular中获取</span><br><span class="line">$http.get(<span class="string">`<span class="subst">$&#123;url&#125;</span>/getLists/`</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 可以获取到</span></span><br><span class="line">  <span class="built_in">console</span>.log(res.headers(<span class="string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>在jquery中获取</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  url: <span class="string">`<span class="subst">$&#123;url&#125;</span>/getLists`</span>,</span><br><span class="line">  type: <span class="string">'GET'</span>,</span><br><span class="line">  contentType: <span class="string">'application/json;charset/utf-8'</span>,</span><br><span class="line">&#125;)</span><br><span class="line">.done(<span class="function">(<span class="params">data, textStatus, jqXHR</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(jqXHR.getResponseHeader(<span class="string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>原生ajax</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123; <span class="comment">// Mozilla, Safari. IE7+</span></span><br><span class="line">  httpRequest = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject) &#123; <span class="comment">// IE 6 and older</span></span><br><span class="line">  httpRequest = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">&#125;</span><br><span class="line">httpRequest.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (httpRequest.readyState === XMLHttpRequest.DONE) &#123;</span><br><span class="line">    <span class="keyword">if</span> (httpRequest.statue === <span class="number">200</span>) &#123;</span><br><span class="line">	  <span class="comment">// something...</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// error</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">httpRequest.open(<span class="string">'GET'</span>, <span class="string">`<span class="subst">$&#123;url&#125;</span>/getLists`</span>);</span><br><span class="line">______________________________________________________________</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHeaderCount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.getResponseHeader(<span class="string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;</span><br><span class="line">httpRequest.onload = getHeaderCount;</span><br><span class="line">______________________________________________________________</span><br><span class="line">httpRequest.send();</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="number hljs-number">1.</span>在angular中获取</span><br><span class="line">$http.get(<span class="string hljs-string">`<span class="subst hljs-subst">$&#123;url&#125;</span>/getLists/`</span>)</span><br><span class="line">.then(<span class="function hljs-function">(<span class="params hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment hljs-comment">// 可以获取到</span></span><br><span class="line">  <span class="built_in hljs-built_in">console</span>.log(res.headers(<span class="string hljs-string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="number hljs-number">2.</span>在jquery中获取</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  url: <span class="string hljs-string">`<span class="subst hljs-subst">$&#123;url&#125;</span>/getLists`</span>,</span><br><span class="line">  type: <span class="string hljs-string">'GET'</span>,</span><br><span class="line">  contentType: <span class="string hljs-string">'application/json;charset/utf-8'</span>,</span><br><span class="line">&#125;)</span><br><span class="line">.done(<span class="function hljs-function">(<span class="params hljs-params">data, textStatus, jqXHR</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in hljs-built_in">console</span>.log(jqXHR.getResponseHeader(<span class="string hljs-string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="number hljs-number">3.</span>原生ajax</span><br><span class="line"><span class="keyword hljs-keyword">if</span> (<span class="built_in hljs-built_in">window</span>.XMLHttpRequest) &#123; <span class="comment hljs-comment">// Mozilla, Safari. IE7+</span></span><br><span class="line">  httpRequest = <span class="keyword hljs-keyword">new</span> XMLHttpRequest();</span><br><span class="line">&#125; <span class="keyword hljs-keyword">else</span> <span class="keyword hljs-keyword">if</span> (<span class="built_in hljs-built_in">window</span>.ActiveXObject) &#123; <span class="comment hljs-comment">// IE 6 and older</span></span><br><span class="line">  httpRequest = <span class="keyword hljs-keyword">new</span> ActiveXObject(<span class="string hljs-string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">&#125;</span><br><span class="line">httpRequest.onreadystatechange = <span class="function hljs-function"><span class="params hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword hljs-keyword">if</span> (httpRequest.readyState === XMLHttpRequest.DONE) &#123;</span><br><span class="line">    <span class="keyword hljs-keyword">if</span> (httpRequest.statue === <span class="number hljs-number">200</span>) &#123;</span><br><span class="line">	  <span class="comment hljs-comment">// something...</span></span><br><span class="line">    &#125; <span class="keyword hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="comment hljs-comment">// error</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">httpRequest.open(<span class="string hljs-string">'GET'</span>, <span class="string hljs-string">`<span class="subst hljs-subst">$&#123;url&#125;</span>/getLists`</span>);</span><br><span class="line">______________________________________________________________</span><br><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">getHeaderCount</span>(<span class="params hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in hljs-built_in">console</span>.log(<span class="keyword hljs-keyword">this</span>.getResponseHeader(<span class="string hljs-string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;</span><br><span class="line">httpRequest.onload = getHeaderCount;</span><br><span class="line">______________________________________________________________</span><br><span class="line">httpRequest.send();</span><br></pre></td></tr></table></figure>
 <ul>
 <li>这样就可以愉快地使用X-Resource-Count了。</li>
 </ul>
@@ -216,7 +230,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -410,7 +424,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -423,10 +437,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

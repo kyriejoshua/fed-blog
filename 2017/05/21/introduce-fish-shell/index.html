@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2017-05-21T06:01:17.000Z" itemprop="datePublished">5月 21 2017</time>
+            <time datetime="2017-05-21T06:01:17.000Z" itemprop="datePublished">May 21 2017</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            11 分钟 de lectura (Alrededor de 1664 palabras)
+            11 分钟 read (About 1664 words)
         </span>
         
     </div>
@@ -162,18 +176,18 @@
 <h3 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h3><h4 id="安装-fish"><a href="#安装-fish" class="headerlink" title="安装 fish"></a>安装 <a href="https://github.com/fish-shell/fish-shell" target="_blank" rel="noopener">fish</a></h4><ul>
 <li>在 macOS 下，安装有多种方式，这里列出采用 homebrew 安装的方式，十分简便。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> brew install fish</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta hljs-meta">$</span> brew install fish</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>安装成功后，输入 <code>fish</code> 后，就可以开启全新的奇妙历程了。</p>
 </li>
 <li><p>如果你已经迫不及待想要把他设为默认 shell 的话：</p>
 </li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/local/bin/fish</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/local/bin/fish</span><br></pre></td></tr></table></figure>
 <ul>
 <li>假如有提示说 fish 并不是标准 shell. 运行如下命令将 fish 加到系统的默认 shells 中。再运行上面的命令设置即可。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo /usr/local/bin/fish | sudo tee -a /etc/shells</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo /usr/local/bin/fish | sudo tee -a /etc/shells</span><br></pre></td></tr></table></figure>
 <ul>
 <li>设置完之后，重启你的 iterm/terminal, 就能看到全新的 fish shell 了！</li>
 </ul>
@@ -185,7 +199,7 @@
 <li><p>可以通过更改如下配置来设置 fish 的问候语，它会在每次进入时输出。</p>
 </li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set fish_greeting 'Talk is cheap. Show me the code.'</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set fish_greeting 'Talk is cheap. Show me the code.'</span><br></pre></td></tr></table></figure>
 <ul>
 <li>zsh 有许多好用的 alias, fish 同样可以。最快捷的方式也是在配置文件里直接输入，以下是我的 git alias.</li>
 </ul>
@@ -193,15 +207,15 @@
 <ul>
 <li>如果你和我一样是前端，那么很有可能也使用 nvm 来管理 node. fish 没有相关的工具，不过可以通过更改配置来使其生效。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bass source ~/.nvm/nvm.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bass source ~/.nvm/nvm.sh</span><br></pre></td></tr></table></figure>
 <ul>
 <li>也许你在 zsh 中安装了 thefuck 插件，是的，在 fish 中也可以使用。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eval(thefuck --alias | tr '\n' ';')</span><br><span class="line">alias fuck-it='export THEFUCK_REQUIRE_CONFITMATION=True; fuck; export THEFUCK_REQUIRE_CONFIRMATION=False'</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eval(thefuck --alias | tr '\n' ';')</span><br><span class="line">alias fuck-it='export THEFUCK_REQUIRE_CONFITMATION=True; fuck; export THEFUCK_REQUIRE_CONFIRMATION=False'</span><br></pre></td></tr></table></figure>
 <ul>
 <li>也许你也装了 autojump 插件，是的，同样可以在这里使用。加入以下代码：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin</span><br><span class="line">  set --local AUTOJUMP_PATH $HOME/autojump/bin/autojump.fish</span><br><span class="line">  if test -e $AUTOJUMP_PATH</span><br><span class="line">    source $AUTOJUMP_PATH</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin</span><br><span class="line">  set --local AUTOJUMP_PATH $HOME/autojump/bin/autojump.fish</span><br><span class="line">  if test -e $AUTOJUMP_PATH</span><br><span class="line">    source $AUTOJUMP_PATH</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>这里主要是核对 autojump.fish 这个文件。路径对即可生效。</p>
 </li>
@@ -211,7 +225,7 @@
 <h4 id="一些工具"><a href="#一些工具" class="headerlink" title="一些工具"></a>一些工具</h4><h5 id="oh-my-fish"><a href="#oh-my-fish" class="headerlink" title="oh my fish"></a><a href="https://github.com/oh-my-fish/oh-my-fish" target="_blank" rel="noopener">oh my fish</a></h5><ul>
 <li>和 zsh 有着 <code>oh my zsh</code> 一样，fish 也有 <code>oh my fish</code>. 可以在终端中输入如下命令安装：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.oh-my.fish | fish</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.oh-my.fish | fish</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>oh my fish</code> 通过运行 <code>omf install [&lt;name&gt;/&lt;url&gt;]</code> 来安装插件。例如运行 <code>omf install ocean</code> 安装主题。<ul>
 <li><code>omf list</code>: 列出当前安装的包。</li>
@@ -223,7 +237,7 @@
 <h5 id="fisherman"><a href="#fisherman" class="headerlink" title="fisherman"></a><a href="https://github.com/fisherman/fisherman" target="_blank" rel="noopener">fisherman</a></h5><ul>
 <li>fish 还有一个管理插件的工具 fisherman. 直接在终端中运行如下命令安装：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>fisherman</code> 通过运行 <code>fisher &lt;name&gt;</code> 安装插件。例如运行 <code>fisher z</code>.<ul>
 <li><code>fisher ls</code>: 查看当前插件。</li>
@@ -303,7 +317,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -497,7 +511,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -510,10 +524,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };

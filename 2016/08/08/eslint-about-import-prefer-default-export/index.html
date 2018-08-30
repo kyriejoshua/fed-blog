@@ -23,8 +23,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/jo.github.io/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -65,7 +79,7 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Buscar" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -92,7 +106,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2016-08-08T13:11:39.000Z" itemprop="datePublished">8月 8 2016</time>
+            <time datetime="2016-08-08T13:11:39.000Z" itemprop="datePublished">Aug 8 2016</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -104,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            1 分钟 de lectura (Alrededor de 211 palabras)
+            1 分钟 read (About 211 words)
         </span>
         
     </div>
@@ -119,13 +133,13 @@
 <h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
 <li>原来是这样</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">runBlock</span>(<span class="params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">export</span> <span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">runBlock</span>(<span class="params hljs-params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="string hljs-string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>运行eslint检查的时候一直会报错 <code>error Prefer default export     ......    import/prefer-default-export</code></li>
 <li>查询了一些资料后发现是因为,这个单一接口并不是设置为默认的。需要添加参数<code>default</code>。</li>
 <li>更改后如下</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">runBlock</span>(<span class="params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">export</span> <span class="keyword hljs-keyword">default</span> <span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">runBlock</span>(<span class="params hljs-params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="string hljs-string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>具体原因有待详细追究。目前认为是当输出只有一个变量时，需要添加<code>default</code>。</li>
 </ul>
@@ -186,7 +200,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comentarios</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
@@ -380,7 +394,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Escribe algo..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -393,10 +407,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Páginas',
-                CATEGORIES: 'Categorías',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Sin título)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/jo.github.io/content.json',
         };
