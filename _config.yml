@@ -7,7 +7,7 @@ title: Deadpool Front-end
 subtitle: 前端分享
 description: 前端痴汉
 author: '朱征原'
-language: zh-Hans
+language: zh-ch # 非要设置成这个，否则主题会显示其他语言
 timezone:
 
 # URL
