@@ -156,19 +156,35 @@ c. `react-router` 内部匹配原理
 
 * 以上几段代码中 `transitionManager` 对象出现了多次，在 `popstate` 相关方法中，它提供了 `appendListener` 方法
 * 内部其实是和 `listen` 方法相似的绑定和解绑逻辑，调用是绑定箭头事件，返回一个解绑函数，该解绑函数再次调用的话就是解绑事件
+* 其实这就是常见的订阅-发布模式，以下两个函数中，前者负责订阅事件，后者负责最终发布
 
   ```javascript
+    let listeners = [];
+    /**
+     * [description 订阅事件]
+     * @param  {Function} fn [description]
+     * @return {Function}      [description]
+     */
     const appendListener = fn => {
       let isActive = true;
+      // 订阅事件，并做了函数柯里化处理，它实际上相当于运行了 `fn.apply(this, ...args)`
       const listener = (...args) => {
         if (isActive) fn(...args);
       };
+      // 将监听函数一个个保存
       listeners.push(listener);
       return () => {
         isActive = false;
         listeners = listeners.filter(item => item !== listener);
       };
     };
+    /**
+     * [最终调用(发布)]
+     * @param  {[type]} ..args [description]
+     */
+    const notifyListeners = (..args) => {
+      listeners.forEach(listener => listener(..args))
+    }
   ```
 
 * 另一个使用的较多的方法 `confirmTransitionTo`
@@ -201,6 +217,10 @@ c. `react-router` 内部匹配原理
   
   ```
 * 实际上执行的就是从外部传进来的 `callback` 方法，只是多了几层判断，而且传入了布尔值来控制是否需要真的执行回调函数
+
+### 小结
+
+* 写这篇文章的时候，第一次有感受到技术栈拓展的无穷。从最初想分析 `react-router`，到发现它依赖的主要的库 `history`. 再进行细化，到 `history` 主要提供的对象方法。里面涉及的发布订阅设计模式 ，思路，以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日热情。
 
 ### TODO
 
