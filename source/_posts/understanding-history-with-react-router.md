@@ -52,6 +52,7 @@ c. `react-router` 内部匹配原理。
 
 ### history核心
 
+* [**history源码**](https://github.com/ReactTraining/history)
 * history v4.6+ 在内部主要导出了三个方法:
   * `createBrowserHistory`, `createHashHistory`, `createMemoryHistory`.
   * 它们分别有着自己的作用:
@@ -62,7 +63,7 @@ c. `react-router` 内部匹配原理。
 
 ### 走进createBrowserHistory
 
-* 话不多说，直接走进源码
+* 话不多说，直接走进[**createBrowserHistory源码**](https://github.com/ReactTraining/history/blob/master/modules/createBrowserHistory.js?1534690004244)
 
   ```javascsript
   /**
