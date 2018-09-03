@@ -12,10 +12,10 @@ categories: React
 <!-- 实际时间: 2018-08-29 21:47:38 -->
 
 对 `react-router` 的分析，目前准备主要集中在三点：
-a. `history` 的分析
-b. `react-router` 原理分析
-c. `react-router` 内部匹配原理
-这篇文章准备着重理解 `history`
+a. `history` 的分析。
+b. `react-router` 原理分析。
+c. `react-router` 内部匹配原理。
+这篇文章准备着重理解 `history`.
 
 <!-- more -->
 
@@ -24,11 +24,13 @@ c. `react-router` 内部匹配原理
 - [引子](#引子)
 - [history核心](#history核心)
 - [走进createBrowserHistory](#走进createBrowserHistory)
+- [小结](#小结)
 - [TODO](#TODO)
+- [参考](#参考)
 
 ### 引子
 
-* 一段显而易见出现在各大 react v16+ 项目中的代码是这样的
+* 一段显而易见出现在各大 react v16+ 项目中的代码是这样的:
 
   ```javascript
   import React, {Component} from 'react'
@@ -44,19 +46,19 @@ c. `react-router` 内部匹配原理
   render(<App/>, document.body.querySelector('#app'))
   ```
 
-* 在 `react` v16+ 版本里，通常 `react-router` 也升级到了 4 以上
-* 而 `react-router` v4+ 通常是配合 `history` 使用的
-* 下面就先从 `history` 开始，让我们一步一步走近 `react-router` 的神秘世界
+* 在 `react` v16+ 版本里，通常 `react-router` 也升级到了 4 以上。
+* 而 `react-router` v4+ 通常是配合 `history` 使用的。
+* 下面就先从 `history` 开始，让我们一步一步走近 `react-router` 的神秘世界。
 
 ### history核心
 
 * history v4.6+ 在内部主要导出了三个方法:
-  * `createBrowserHistory`,`createHashHistory`,`createMemoryHistory`
+  * `createBrowserHistory`, `createHashHistory`, `createMemoryHistory`.
   * 它们分别有着自己的作用:
-    * `createBrowserHistory` 是为现代主流浏览器提供的 api
-    * `createHashHistory` 是为不支持 `history` 功能的浏览器提供的 api
-    * `createMemoryHistory` 则是为 `node` 环境提供的 api
-  * 我们就先从最接地气的 `createBrowserHistory` 也就是我们上文中使用的方法开始看起
+    * `createBrowserHistory` 是为现代主流浏览器提供的 api.
+    * `createHashHistory` 是为不支持 `history` 功能的浏览器提供的 api.
+    * `createMemoryHistory` 则是为 `node` 环境提供的 api.
+  * 我们就先从最接地气的 `createBrowserHistory` 也就是我们上文中使用的方法开始看起。
 
 ### 走进createBrowserHistory
 
@@ -68,11 +70,12 @@ c. `react-router` 内部匹配原理
    * pushState, replaceState, and the popstate event.
    */
   ```
-* 在它自己方法开始的注释里，它说明了是基于 H5 的 `history` 创建对象，对象内包括了一些常用的方法譬如
+* 在方法开始的注释里，它说明了是基于 H5 的 `history` 创建对象，对象内包括了一些常用的方法譬如
   * `pushState`,`replaceState`,`popstate` 等
 
+#### ***`history` 对象***
 
-* 那么它具体返回了什么对象呢，下面就是它目前所有的方法和属性
+* 那么它具体返回了什么内容呢，下面就是它目前所有的方法和属性:
 
   ```javascript
     const globalHistory = window.history;
@@ -90,73 +93,25 @@ c. `react-router` 内部匹配原理
       listen
     }
   ```
-* `globalHistory.length` 显而易见是当前存的历史栈的数量
-* `createHref` 根据根路径创建新路径，在根路径上添加原地址所带的 `search`, `pathname`, `path` 参数, 推测作用是将路径简化
-* 其中，`go`,`goBack`,`goForward` 是对原生 `history.go` 的简单封装
-* `push`, `replace` 方法则是原生方法的扩展，但相对逻辑较多，两者同样是跳转逻辑，而且内部有较多逻辑相同
-* 这里以 `push` 为例, 它其实就是对原生的 `history.pushState` 做了判断和优化，具体的过渡实现则使用了 `transitionManager`(下文说明)
 
+* `globalHistory.length` 显而易见是当前存的历史栈的数量。
+* `createHref` 根据根路径创建新路径，在根路径上添加原地址所带的 `search`, `pathname`, `path` 参数, 推测作用是将路径简化。
+* 其中，`go`,`goBack`,`goForward` 是对原生 `history.go` 的简单封装。
+* 剩下的方法相对复杂些，因此在介绍 `push`, `replace` 等方法之前，先来了解下 `transitionManager`. 因为下面的很多实现，都用到了这个对象所提供的方法。
+
+#### ***`transitionManager` 方法***
+
+* 首先看下该对象返回了哪些方法：
   ```javascript
-    const push = (path, state) => {
-      const action = "PUSH";
-      const location = createLocation(path, state, createKey(), history.location);
-      // 过渡内容
-      transitionManager.confirmTransitionTo(
-        location,
-        action,
-        getUserConfirmation,
-        ok => {
-           // 布尔值，用于判断是否需要执行
-          if (!ok) return;
-          const href = createHref(location);
-          const { key, state } = location;
-          // 在支持 history 的地方则使用 history.pushState 方法实现
-          if (canUseHistory) {
-            globalHistory.pushState({ key, state }, null, href);
-          } else {
-            window.location.href = href;
-          }
-        }
-      );
-    };
+  const transitionManager = {
+    setPrompt,
+    confirmTransitionTo,
+    appendListener,
+    notifyListeners
+  }
   ```
-
-* 当做出浏览器动作时，会触发 `popstate` 事件, 也就是说，`popstate` 本身并不是像 `pushState` 或 `replaceState` 一样是 history 的方法
-* 不能使用 `history.popState` 这样的方式来调用
-* 而且，直接调用 `history.pushState` 或 `history.replaceState` 不会触发 popstate 事件
-* 在事件监听方法 `listen` 中涉及了 `popstate` 的使用，在源码中可以看到以下两个方法
-* `listen` 和 `checkDOMListeners`
-
-  ```javascript
-    const PopStateEvent = "popstate";
-    const HashChangeEvent = "hashchange";
-    const listen = listener => {
-      const unlisten = transitionManager.appendListener(listener);
-      checkDOMListeners(1);
-      return () => {
-        checkDOMListeners(-1);
-        unlisten();
-      };
-    };
-    const checkDOMListeners = delta => {
-      listenerCount += delta;
-      if (listenerCount === 1) {
-        window.addEventListener(PopStateEvent, handlePopState);
-        if (needsHashChangeListener)
-          window.addEventListener(HashChangeEvent, handleHashChange);
-      } else if (listenerCount === 0) {
-        window.removeEventListener(PopStateEvent, handlePopState);
-        if (needsHashChangeListener)
-          window.removeEventListener(HashChangeEvent, handleHashChange);
-      }
-    };
-  
-  ```
-* 因此，调用 `listen` 就是给 `window` 绑定了相应方法，再次调用之前 `listen` 返回的函数则是取消
-
-* 以上几段代码中 `transitionManager` 对象出现了多次，在 `popstate` 相关方法中，它提供了 `appendListener` 方法
-* 内部其实是和 `listen` 方法相似的绑定和解绑逻辑，调用是绑定箭头事件，返回一个解绑函数，该解绑函数再次调用的话就是解绑事件
-* 其实这就是常见的订阅-发布模式，以下两个函数中，前者负责订阅事件，后者负责最终发布
+* 在后续 `popstate` 相关方法中，它就应用了 `appendListener` 和与之有关的 `notifyListeners` 方法，我们就先从这些方法看起。
+* 它们的设计体现了常见的订阅-发布模式，前者负责实现订阅事件逻辑，后者负责最终发布逻辑。
 
   ```javascript
     let listeners = [];
@@ -167,11 +122,11 @@ c. `react-router` 内部匹配原理
      */
     const appendListener = fn => {
       let isActive = true;
-      // 订阅事件，并做了函数柯里化处理，它实际上相当于运行了 `fn.apply(this, ...args)`
+      // 订阅事件，做了函数柯里化处理，它实际上相当于运行了 `fn.apply(this, ...args)`
       const listener = (...args) => {
         if (isActive) fn(...args);
       };
-      // 将监听函数一个个保存
+      // 将监听函数一一保存
       listeners.push(listener);
       return () => {
         isActive = false;
@@ -179,7 +134,7 @@ c. `react-router` 内部匹配原理
       };
     };
     /**
-     * [最终调用(发布)]
+     * [发布逻辑]
      * @param  {[type]} ..args [description]
      */
     const notifyListeners = (..args) => {
@@ -187,7 +142,8 @@ c. `react-router` 内部匹配原理
     }
   ```
 
-* 另一个使用的较多的方法 `confirmTransitionTo`
+* 介绍了上面两个方法的定义，先别急。后续再介绍它们的具体应用。
+* 然后来看看另一个使用的较多的方法 `confirmTransitionTo`.
 
   ```javascript
     const confirmTransitionTo = (
@@ -214,9 +170,99 @@ c. `react-router` 内部匹配原理
         callback(true);
       }
     };
-  
   ```
-* 实际上执行的就是从外部传进来的 `callback` 方法，只是多了几层判断，而且传入了布尔值来控制是否需要真的执行回调函数
+
+* 实际上执行的就是从外部传进来的 `callback` 方法，只是多了几层判断，而且传入了布尔值来控制是否需要真的执行回调函数。
+
+#### ***`transitionManager` 调用***
+
+* 再然后我们来看看上述方法`appendListener`, `notifyListeners` 的具体应用。前者体现在了 `popstate` 事件的订阅中。
+* 那么就先简单谈谈 `popstate` 事件。
+  * 当做出浏览器动作时，会触发 `popstate` 事件, 也就是说，`popstate` 本身并不是像 `pushState` 或 `replaceState` 一样是 `history` 的方法。
+  * 不能使用 `history.popState` 这样的方式来调用。
+  * 而且，直接调用 `history.pushState` 或 `history.replaceState` 不会触发 popstate 事件。
+
+
+* 在事件监听方法 `listen` 中涉及了 `popstate` 的使用，在源码中可以看到以下两个方法 `listen` 和 `checkDOMListeners`.
+* 它们就是上述订阅事件的具体调用方。
+
+  ```javascript
+    // 首先自然是初始化
+    const transitionManager = createTransitionManager();
+    const PopStateEvent = "popstate";
+    const HashChangeEvent = "hashchange";
+    
+    const checkDOMListeners = delta => {
+      listenerCount += delta;
+      if (listenerCount === 1) {
+        // 其实也是最常见最简单的订阅事件
+        window.addEventListener(PopStateEvent, handlePopState);
+        if (needsHashChangeListener)
+          window.addEventListener(HashChangeEvent, handleHashChange);
+      } else if (listenerCount === 0) {
+        window.removeEventListener(PopStateEvent, handlePopState);
+        if (needsHashChangeListener)
+          window.removeEventListener(HashChangeEvent, handleHashChange);
+      }
+    };
+
+    /**
+     * [订阅事件的具体调用方]
+     * @param  {Function} listener [description]
+     * @return {Function}          [description]
+     */
+    const listen = listener => {
+      // 返回一个解绑函数
+      const unlisten = transitionManager.appendListener(listener);
+      checkDOMListeners(1);
+      // 返回的函数负责取消
+      return () => {
+        checkDOMListeners(-1);
+        unlisten();
+      };
+    };
+  ```
+* 简言之，调用 `listen` 就是给 `window` 绑定了相应方法，再次调用之前 `listen` 返回的函数则是取消。
+* 然后来看看发布事件的具体调用方。
+  
+  ```javascript
+  // 在该方法中最终发布
+  const setState = nextState => {
+    Object.assign(history, nextState);
+    history.length = globalHistory.length;
+    // 执行所有的监听函数
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+  ```
+
+* 下面的方法则应用了 `confirmTransitionTo`.
+* `push`, `replace`  是原生方法的扩展，它们都用到了上述方法，都负责实现跳转，因此内部有较多逻辑相同。
+* 这里以 `push` 为例, 它其实就是对原生的 `history.pushState` 的强化。
+
+  ```javascript
+    const push = (path, state) => {
+      const action = "PUSH";
+      const location = createLocation(path, state, createKey(), history.location);
+      // 过渡方法的应用
+      transitionManager.confirmTransitionTo(
+        location,
+        action,
+        getUserConfirmation,
+        ok => {
+           // 布尔值，用于判断是否需要执行
+          if (!ok) return;
+          const href = createHref(location);
+          const { key, state } = location;
+          // 在支持 history 的地方则使用 history.pushState 方法实现
+          if (canUseHistory) {
+            globalHistory.pushState({ key, state }, null, href);
+          } else {
+            window.location.href = href;
+          }
+        }
+      );
+    };
+  ```
 
 ### 小结
 
@@ -224,4 +270,14 @@ c. `react-router` 内部匹配原理
 
 ### TODO
 
-* 待完善
+* 下面两个方法返回的内容和 `createBrowserHistory` 基本一致，只是具体的实现有部分差别。有时间补上。
+* `createHashHistory`
+* `createMemoryHistory`
+
+### 参考
+
+{% blockquote %}
+[react-router的实现原理](http://zhenhua-lee.github.io/react/history.html)
+[react-router 源代码学习笔记
+](https://juejin.im/entry/5accc0b4f265da23a1423cba)
+{% endblockquote %}
