@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>标签: git - Deadpool Front-end</title>
+<title>标签: Git - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -99,7 +99,7 @@
     <section class="section section-heading">
     <div class="container">
         <div class="content">
-            <h5>#git</h5>
+            <h5>#Git</h5>
         </div>
     </div>
 </section>
@@ -109,12 +109,12 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/" itemprop="url">如何在git仓库中彻底清除大文件</a>
+            <a href="/jo.github.io/2017/07/07/my-git-workflow/" itemprop="url">我的 git 工作流</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2016-07-17T10:58:52.000Z" itemprop="datePublished">Jul 17 2016</time>
+            <time datetime="2017-07-07T10:58:44.000Z" itemprop="datePublished">Jul 7 2017</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -126,7 +126,7 @@
         <span class="column is-narrow">
             
             
-            11 分钟 读完 (约 1719 字)
+            18 分钟 读完 (约 2719 字)
         </span>
         
     </div>
@@ -134,75 +134,10 @@
     
         <hr>
 
-<img src="/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg" title="monica my baby">
-<blockquote><br>坑的由来<br><br>事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，这时你紧张了，慌了，明明删了视频，怎么仓库竟还变大了。<br><br>这一期，让我们走进git,细细体会git带给我们的欢乐与忧愁。<br><br></blockquote>
+<p><img src="/jo.github.io/2017/07/07/my-git-workflow/unphoto.jpg" alt=""></p>
+<p>这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。</p>
         <p class="article-more-link">
-            <a href="/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/jo.github.io/2016/03/03/my-gitbook/" itemprop="url">个人git使用手册</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2016-03-03T11:03:09.000Z" itemprop="datePublished">Mar 3 2016</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Git/">Git</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            26 分钟 读完 (约 3887 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<img src="/jo.github.io/2016/03/03/my-gitbook/unphoto.jpeg" title="jake">
-<h3 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h3><ul>
-<li>主要针对Mac环境下</li>
-<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="noopener">安装说明</a></li>
-</ul>
-        <p class="article-more-link">
-            <a href="/jo.github.io/2016/03/03/my-gitbook/#more">阅读更多</a>
+            <a href="/jo.github.io/2017/07/07/my-git-workflow/#more">阅读更多</a>
         </p>
     
     </div>
@@ -342,6 +277,95 @@
     <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>
+/div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
     $(document).ready(function () {

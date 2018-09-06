@@ -118,7 +118,7 @@
         <span class="column is-narrow">
             
             
-            11 分钟 读完 (约 1690 字)
+            15 分钟 读完 (约 2183 字)
         </span>
         
     </div>
@@ -134,6 +134,7 @@
 <li><a href="#引子">引子</a></li>
 <li><a href="#history核心">history核心</a></li>
 <li><a href="#走进createBrowserHistory">走进createBrowserHistory</a></li>
+<li><a href="#history在react-router中">history在react-router中</a></li>
 <li><a href="#小结">小结</a></li>
 <li><a href="#TODO">TODO</a></li>
 <li><a href="#参考">参考</a></li>
@@ -173,11 +174,19 @@
 </ul>
 <h4 id="history-对象"><a href="#history-对象" class="headerlink" title="history 对象"></a><strong><em><code>history</code> 对象</em></strong></h4><ul>
 <li><p>那么它具体返回了什么内容呢，下面就是它目前所有的方法和属性:</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">const</span> globalHistory = <span class="built_in hljs-built_in">window</span>.history;</span><br><span class="line"><span class="keyword hljs-keyword">const</span> history = &#123;</span><br><span class="line">  length: globalHistory.length,</span><br><span class="line">  action: <span class="string hljs-string">"POP"</span>,</span><br><span class="line">  location: initialLocation,</span><br><span class="line">  createHref,</span><br><span class="line">  push,</span><br><span class="line">  replace,</span><br><span class="line">  go,</span><br><span class="line">  goBack,</span><br><span class="line">  goForward,</span><br><span class="line">  block,</span><br><span class="line">  listen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">const</span> globalHistory = <span class="built_in hljs-built_in">window</span>.history;</span><br><span class="line"><span class="keyword hljs-keyword">const</span> history = &#123;</span><br><span class="line">  length: globalHistory.length, <span class="comment hljs-comment">// (number) The number of entries in the history stack</span></span><br><span class="line">  action: <span class="string hljs-string">"POP"</span>, <span class="comment hljs-comment">// (string) The current action (`PUSH`, `REPLACE`, or `POP`)</span></span><br><span class="line">  location: initialLocation, <span class="comment hljs-comment">// (object) The current location. May have the following properties.</span></span><br><span class="line">  createHref,</span><br><span class="line">  push, <span class="comment hljs-comment">// (function) Pushes a new entry onto the history stack</span></span><br><span class="line">  replace, <span class="comment hljs-comment">// (function) Replaces the current entry on the history stack</span></span><br><span class="line">  go, <span class="comment hljs-comment">// (function) Moves the pointer in the history stack by `n` entries</span></span><br><span class="line">  goBack, <span class="comment hljs-comment">// (function) Equivalent to `go(-1)`</span></span><br><span class="line">  goForward, <span class="comment hljs-comment">// (function) Equivalent to `go(1)`</span></span><br><span class="line">  block, <span class="comment hljs-comment">// (function) Prevents navigation</span></span><br><span class="line">  listen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>globalHistory.length</code> 显而易见是当前存的历史栈的数量。</p>
 </li>
 <li><code>createHref</code> 根据根路径创建新路径，在根路径上添加原地址所带的 <code>search</code>, <code>pathname</code>, <code>path</code> 参数, 推测作用是将路径简化。</li>
+<li><code>location</code> 当前的 <code>location</code>, 可能含有以下几个属性。<ul>
+<li><code>path</code> - (string) 当前 <code>url</code> 的路径 <code>path</code>.</li>
+<li><code>search</code> - (string) 当前 <code>url</code> 的查询参数 <code>query string</code>.</li>
+<li><code>hash</code> - (string) 当前 <code>url</code> 的哈希值 <code>hash</code>.</li>
+<li><code>state</code> - - (object) 存储栈的内容。仅存在浏览器历史和内存历史中。</li>
+</ul>
+</li>
+<li><code>block</code> 阻止浏览器的默认导航。用于在用户离开页面前弹窗提示用户相应内容。<a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">the history docs</a></li>
 <li>其中，<code>go</code>,<code>goBack</code>,<code>goForward</code> 是对原生 <code>history.go</code> 的简单封装。</li>
 <li>剩下的方法相对复杂些，因此在介绍 <code>push</code>, <code>replace</code> 等方法之前，先来了解下 <code>transitionManager</code>. 因为下面的很多实现，都用到了这个对象所提供的方法。</li>
 </ul>
@@ -224,6 +233,17 @@
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">const</span> push = <span class="function hljs-function">(<span class="params hljs-params">path, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword hljs-keyword">const</span> action = <span class="string hljs-string">"PUSH"</span>;</span><br><span class="line">  <span class="keyword hljs-keyword">const</span> location = createLocation(path, state, createKey(), history.location);</span><br><span class="line">  <span class="comment hljs-comment">// 过渡方法的应用</span></span><br><span class="line">  transitionManager.confirmTransitionTo(</span><br><span class="line">    location,</span><br><span class="line">    action,</span><br><span class="line">    getUserConfirmation,</span><br><span class="line">    ok =&gt; &#123;</span><br><span class="line">       <span class="comment hljs-comment">// 布尔值，用于判断是否需要执行</span></span><br><span class="line">      <span class="keyword hljs-keyword">if</span> (!ok) <span class="keyword hljs-keyword">return</span>;</span><br><span class="line">      <span class="keyword hljs-keyword">const</span> href = createHref(location);</span><br><span class="line">      <span class="keyword hljs-keyword">const</span> &#123; key, state &#125; = location;</span><br><span class="line">      <span class="comment hljs-comment">// 在支持 history 的地方则使用 history.pushState 方法实现</span></span><br><span class="line">      <span class="keyword hljs-keyword">if</span> (canUseHistory) &#123;</span><br><span class="line">        globalHistory.pushState(&#123; key, state &#125;, <span class="literal hljs-literal">null</span>, href);</span><br><span class="line">      &#125; <span class="keyword hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in hljs-built_in">window</span>.location.href = href;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="history在react-router中"><a href="#history在react-router中" class="headerlink" title="history在react-router中"></a>history在react-router中</h3><ul>
+<li>这篇文章快完成的时候，我才发现 <code>react-router</code> 仓库里是有 <code>history</code> 的介绍的。此时我一脸茫然，内容虽然不多，却非常值得参考。这里做部分翻译和理解，当作对上文的补充。</li>
+<li><a href="https://raw.githubusercontent.com/ReactTraining/react-router/master/packages/react-router/docs/api/history.md" target="_blank" rel="noopener">原地址</a></li>
+</ul>
+<h5 id="history-is-mutable"><a href="#history-is-mutable" class="headerlink" title="history is mutable"></a><strong><em><code>history is mutable</code></em></strong></h5><ul>
+<li><p>在原文档中，说明了 <code>history</code> 对象是可变的。因此建议在 <code>react-router</code> 中获取 <a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/location.md" target="_blank" rel="noopener"><code>location</code></a> 时可以使用 <a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md" target="_blank" rel="noopener"><code>Route</code></a> 的 <code>props</code> 的方式来替代 <code>history.location</code> 的方式。这样的方式会确保你的流程处于 React 的生命周期中。例如：</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class hljs-class"><span class="keyword hljs-keyword">class</span> <span class="title hljs-title">Comp</span> <span class="keyword hljs-keyword">extends</span> <span class="title hljs-title">React</span>.<span class="title hljs-title">Component</span> </span>&#123;</span><br><span class="line">  componentWillReceiveProps(nextProps) &#123;</span><br><span class="line">    <span class="comment hljs-comment">// 正确的打开方式</span></span><br><span class="line">    <span class="keyword hljs-keyword">const</span> locationChanged = nextProps.location !== <span class="keyword hljs-keyword">this</span>.props.location</span><br><span class="line"></span><br><span class="line">    <span class="comment hljs-comment">// 错误的打开方式，因为 history 是可变的，所以这里总是不等的 // will *always* be false because history is mutable.</span></span><br><span class="line">    <span class="keyword hljs-keyword">const</span> locationChanged = nextProps.history.location !== <span class="keyword hljs-keyword">this</span>.props.history.location</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;Route component=&#123;Comp&#125;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更多内容请查看<a href="https://github.com/ReactTraining/history#properties" target="_blank" rel="noopener">the history documentation</a>.</p>
+</li>
+</ul>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>写这篇文章的时候，第一次有感受到技术栈拓展的无穷。从最初想分析 <code>react-router</code>，到发现它依赖的主要的库 <code>history</code>. 再进行细化，到 <code>history</code> 主要提供的对象方法。里面涉及的发布订阅设计模式 ，思路，以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日热情。</li>
 </ul>
@@ -232,8 +252,8 @@
 <li><code>createHashHistory</code></li>
 <li><code>createMemoryHistory</code></li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="http://zhenhua-lee.github.io/react/history.html" target="_blank" rel="noopener">react-router的实现原理</a><br><a href="https://juejin.im/entry/5accc0b4f265da23a1423cba" target="_blank" rel="noopener">react-router 源代码学习笔记
-</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="http://zhenhua-lee.github.io/react/history.html" target="_blank" rel="noopener">react-router 的实现原理</a><br><a href="https://juejin.im/entry/5accc0b4f265da23a1423cba" target="_blank" rel="noopener">react-router 源代码学习笔记
+</a><br><a href="https://juejin.im/post/5a9108b6f265da4e7527b1a4" target="_blank" rel="noopener">Javascript设计模式之发布-订阅模式</a></p>
 </blockquote>
 
         <!-- 引入打赏图片即显示打赏功能 -->
