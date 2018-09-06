@@ -277,7 +277,7 @@ c. `react-router` 内部匹配原理。
 * 这篇文章快完成的时候，我才发现 `react-router` 仓库里是有 `history` 的介绍的。此时我一脸茫然，内容虽然不多，却非常值得参考。这里做部分翻译和理解，当作对上文的补充。
 * [原地址](https://raw.githubusercontent.com/ReactTraining/react-router/master/packages/react-router/docs/api/history.md)
 
-##### *`history is mutable`*
+##### ***`history is mutable`***
 
 * 在原文档中，说明了 `history` 对象是可变的。因此建议在 `react-router` 中获取 [`location`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/location.md) 时可以使用 [`Route`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md) 的 `props` 的方式来替代 `history.location` 的方式。这样的方式会确保你的流程处于 React 的生命周期中。例如：
 
