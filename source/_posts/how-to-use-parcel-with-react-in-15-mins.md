@@ -10,6 +10,7 @@ categories: Tools
 ![](/jo.github.io/2018/01/07/how-to-use-parcel-with-react-in-15-mins/unphoto.jpeg)
 
 最近准备新开一个 Threejs 学习的坑，因为重点在 Threejs 上，所以想构建一个简易方便的环境。于是我自然而然的想到了最近火热的 parcel 来替代以往的 webpack. 在我自己尝试了之后，这简直比我想象中的还要简单方便——当然是指搭建一个基本环境啦。
+推荐：★★☆
 
 <!-- more -->
 

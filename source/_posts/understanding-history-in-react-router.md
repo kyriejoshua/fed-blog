@@ -16,6 +16,7 @@ a. `history` 的分析。
 b. `react-router` 原理分析。
 c. `react-router` 内部匹配原理。
 这篇文章准备着重理解 `history`.
+推荐：★★★☆
 
 <!-- more -->
 
@@ -26,7 +27,7 @@ c. `react-router` 内部匹配原理。
 - [走进createBrowserHistory](#走进createBrowserHistory)
 - [history在react-router中](#history在react-router中)
 - [小结](#小结)
-- [TODO](#TODO)
+- [坑](#坑)
 - [参考](#参考)
 
 ### 引子
@@ -60,6 +61,8 @@ c. `react-router` 内部匹配原理。
     * `createBrowserHistory` 是为现代主流浏览器提供的 api.
     * `createHashHistory` 是为不支持 `history` 功能的浏览器提供的 api.
     * `createMemoryHistory` 则是为 `node` 环境提供的 api.
+
+
   * 我们就先从最接地气的 `createBrowserHistory` 也就是我们上文中使用的方法开始看起。
 
 ### 走进createBrowserHistory
@@ -188,7 +191,7 @@ c. `react-router` 内部匹配原理。
 * 那么就先简单谈谈 `popstate` 事件。
   * 当做出浏览器动作时，会触发 `popstate` 事件, 也就是说，`popstate` 本身并不是像 `pushState` 或 `replaceState` 一样是 `history` 的方法。
   * 不能使用 `history.popState` 这样的方式来调用。
-  * 而且，直接调用 `history.pushState` 或 `history.replaceState` 不会触发 popstate 事件。
+  * 而且，直接调用 `history.pushState` 或 `history.replaceState` 不会触发 `popstate` 事件。
 
 
 * 在事件监听方法 `listen` 中涉及了 `popstate` 的使用，在源码中可以看到以下两个方法 `listen` 和 `checkDOMListeners`.
@@ -279,7 +282,7 @@ c. `react-router` 内部匹配原理。
 
 ##### ***`history is mutable`***
 
-* 在原文档中，说明了 `history` 对象是可变的。因此建议在 `react-router` 中获取 [`location`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/location.md) 时可以使用 [`Route`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md) 的 `props` 的方式来替代 `history.location` 的方式。这样的方式会确保你的流程处于 React 的生命周期中。例如：
+* 在原文档中，说明了 `history` 对象是可变的。因此建议在 `react-router` 中获取 [`location`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/location.md) 时可以使用 [`Route`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md) 的 `props` 的方式来替代 `history.location` 的方式。这样的方式会确保你的流程处于 `React` 的生命周期中。例如：
 
   ```jsx
   class Comp extends React.Component {
@@ -300,8 +303,9 @@ c. `react-router` 内部匹配原理。
 ### 小结
 
 * 写这篇文章的时候，第一次有感受到技术栈拓展的无穷。从最初想分析 `react-router`，到发现它依赖的主要的库 `history`. 再进行细化，到 `history` 主要提供的对象方法。里面涉及的发布订阅设计模式 ，思路，以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日热情。
+* 下一篇文章将会继续介绍 `react-router`.
 
-### TODO
+### 坑
 
 * 下面两个方法返回的内容和 `createBrowserHistory` 基本一致，只是具体的实现有部分差别。有时间补上。
 * `createHashHistory`
@@ -315,3 +319,8 @@ c. `react-router` 内部匹配原理。
 ](https://juejin.im/entry/5accc0b4f265da23a1423cba)
 [Javascript设计模式之发布-订阅模式](https://juejin.im/post/5a9108b6f265da4e7527b1a4)
 {% endblockquote %}
+
+<hr>
+{% asset_img reward.jpeg Thanks %}
+
+<!-- 4h -->
