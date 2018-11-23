@@ -8,6 +8,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾JS——第一部分">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:35.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回顾JS——第一部分">
+<meta name="twitter:description" content="因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/unphoto.jpg">
+
 
 
 
@@ -222,11 +243,11 @@
 <li>关系运算中，所有数据默认转为数字类型比较</li>
 <li>如果无法转为数字，就会转为NaN,如果转为NaN，那不管另一半是什么，都会返回false,NaN和任何数据(包括它自己)比较</li>
 <li><p>如果是俩<strong>字符串</strong>比较，则会依次比较字符串中每个字符的unicode码，只要任意一位字符比较出结果就不再继续向后比较</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">var</span> name1 = <span class="string hljs-string">'Eric'</span>;</span><br><span class="line">    name2 = <span class="string hljs-string">'Scott'</span>;</span><br><span class="line">name1 &gt; name2; <span class="comment hljs-comment">// false 'E' -&gt; 69, 'S' -&gt; 83</span></span><br><span class="line"><span class="keyword hljs-keyword">var</span> name3 = <span class="string hljs-string">'Smith'</span>;</span><br><span class="line">name2 &gt; name3; <span class="comment hljs-comment">// false 'c' -&gt; 99, 'm' -&gt; 109</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> name1 = <span class="hljs-string">'Eric'</span>;</span><br><span class="line">    name2 = <span class="hljs-string">'Scott'</span>;</span><br><span class="line">name1 &gt; name2; <span class="hljs-comment">// false 'E' -&gt; 69, 'S' -&gt; 83</span></span><br><span class="line"><span class="hljs-keyword">var</span> name3 = <span class="hljs-string">'Smith'</span>;</span><br><span class="line">name2 &gt; name3; <span class="hljs-comment">// false 'c' -&gt; 99, 'm' -&gt; 109</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>undefined: 自动初始化变量</p>
 </li>
-<li>null: 主动清空变量<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal hljs-literal">undefined</span> == <span class="literal hljs-literal">null</span>; <span class="comment hljs-comment">// true 含隐式转换</span></span><br><span class="line"><span class="literal hljs-literal">undefined</span> === <span class="literal hljs-literal">null</span>; <span class="comment hljs-comment">// false 不含隐式转换</span></span><br><span class="line"></span><br><span class="line"><span class="keyword hljs-keyword">typeof</span> <span class="literal hljs-literal">null</span> <span class="comment hljs-comment">// object</span></span><br><span class="line"><span class="keyword hljs-keyword">typeof</span> <span class="literal hljs-literal">undefined</span> <span class="comment hljs-comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<li>null: 主动清空变量<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true 含隐式转换</span></span><br><span class="line"><span class="hljs-literal">undefined</span> === <span class="hljs-literal">null</span>; <span class="hljs-comment">// false 不含隐式转换</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span> <span class="hljs-comment">// object</span></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span> <span class="hljs-comment">// undefined</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><ul>
@@ -250,7 +271,7 @@
 <li><p>函数参数列表(params): 包围在括号<code>()</code>中并由<code>,</code>分隔。</p>
 </li>
 <li><p>函数功能(statements): 包围在花括号<code>{}</code>中，用于定义函数功能的一些 JavaScript 语句。</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment hljs-comment">/**</span></span><br><span class="line"><span class="comment hljs-comment"> * [square 输入一个数，返回该数的平方的函数]</span></span><br><span class="line"><span class="comment hljs-comment"> * @param  &#123;Number&#125; number [description]</span></span><br><span class="line"><span class="comment hljs-comment"> * @return &#123;Number&#125;        [description]</span></span><br><span class="line"><span class="comment hljs-comment"> */</span></span><br><span class="line"><span class="function hljs-function"><span class="keyword hljs-keyword">function</span> <span class="title hljs-title">square</span>(<span class="params hljs-params">number</span>) </span>&#123;</span><br><span class="line">  <span class="keyword hljs-keyword">return</span> number * number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [square 输入一个数，返回该数的平方的函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Number&#125; number [description]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;Number&#125;        [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">number</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> number * number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​</p>
 </li>
 </ul>
@@ -299,7 +320,7 @@
 </li>
 <li>循环结构<ul>
 <li>循环三要素：循环条件，循环变量，循环体</li>
-<li><code>while</code>、<code>do while</code>、’for’<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment hljs-comment">// while</span></span><br><span class="line"><span class="keyword hljs-keyword">var</span> n = <span class="number hljs-number">0</span>;</span><br><span class="line"><span class="keyword hljs-keyword">while</span>(n &lt; <span class="number hljs-number">3</span>) &#123;</span><br><span class="line">  <span class="built_in hljs-built_in">console</span>.log(<span class="string hljs-string">'n = '</span> + n);</span><br><span class="line">  n++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment hljs-comment">// n = 0; n = 1; n = 2;</span></span><br><span class="line"></span><br><span class="line"><span class="comment hljs-comment">// do while</span></span><br><span class="line"><span class="keyword hljs-keyword">var</span> n = <span class="number hljs-number">4</span>;</span><br><span class="line"><span class="keyword hljs-keyword">do</span> &#123;</span><br><span class="line">  <span class="built_in hljs-built_in">console</span>.log(<span class="string hljs-string">'n = '</span> + n);</span><br><span class="line">&#125; <span class="keyword hljs-keyword">while</span>(n &lt; <span class="number hljs-number">3</span>);</span><br><span class="line"><span class="comment hljs-comment">// n = 4;</span></span><br></pre></td></tr></table></figure>
+<li><code>while</code>、<code>do while</code>、’for’<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// while</span></span><br><span class="line"><span class="hljs-keyword">var</span> n = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">while</span>(n &lt; <span class="hljs-number">3</span>) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'n = '</span> + n);</span><br><span class="line">  n++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// n = 0; n = 1; n = 2;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// do while</span></span><br><span class="line"><span class="hljs-keyword">var</span> n = <span class="hljs-number">4</span>;</span><br><span class="line"><span class="hljs-keyword">do</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'n = '</span> + n);</span><br><span class="line">&#125; <span class="hljs-keyword">while</span>(n &lt; <span class="hljs-number">3</span>);</span><br><span class="line"><span class="hljs-comment">// n = 4;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -313,7 +334,7 @@
 <li><p>关联数组(hash数组)</p>
 <ul>
 <li><p>为每个元素自定义<em>字符串</em>下标</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">var</span> arrM = [];</span><br><span class="line">arrM[<span class="string hljs-string">'name'</span>] = <span class="string hljs-string">'Sandra'</span>;</span><br><span class="line">arrM[<span class="string hljs-string">'shx'</span>] = <span class="number hljs-number">80</span>;</span><br><span class="line">arrM[<span class="string hljs-string">'yw'</span>] = <span class="number hljs-number">65</span>;</span><br><span class="line">arrM[<span class="string hljs-string">'yy'</span>] = <span class="number hljs-number">95</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> arrM = [];</span><br><span class="line">arrM[<span class="hljs-string">'name'</span>] = <span class="hljs-string">'Sandra'</span>;</span><br><span class="line">arrM[<span class="hljs-string">'shx'</span>] = <span class="hljs-number">80</span>;</span><br><span class="line">arrM[<span class="hljs-string">'yw'</span>] = <span class="hljs-number">65</span>;</span><br><span class="line">arrM[<span class="hljs-string">'yy'</span>] = <span class="hljs-number">95</span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>关联数组的下标没规律。</p>
 </li>
@@ -322,7 +343,7 @@
 </ul>
 </li>
 <li><p>索引数组：自动从0开始，每个元素有各自编号</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">var</span> arrM = [<span class="string hljs-string">'Sandra'</span>, <span class="number hljs-number">80</span>, <span class="number hljs-number">65</span>, <span class="number hljs-number">95</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> arrM = [<span class="hljs-string">'Sandra'</span>, <span class="hljs-number">80</span>, <span class="hljs-number">65</span>, <span class="hljs-number">95</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="数组常用API"><a href="#数组常用API" class="headerlink" title="数组常用API"></a>数组常用API</h4><ul>

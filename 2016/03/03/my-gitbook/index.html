@@ -8,6 +8,36 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="git安装 主要针对Mac环境下 安装说明">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人git使用手册">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/03/03/my-gitbook/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="git安装 主要针对Mac环境下 安装说明">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/03/03/my-gitbook/unphoto.jpeg">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-1.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-3.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-4.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-5.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-1.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-2.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-3.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-4.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-5.png">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="个人git使用手册">
+<meta name="twitter:description" content="git安装 主要针对Mac环境下 安装说明">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/03/03/my-gitbook/unphoto.jpeg">
+
 
 
 
@@ -330,18 +360,18 @@
 <li>如果是在一个项目中新增子模块<code>git submodule add git@code.gomrwind:FrontEnd/ui.git</code></li>
 <li>假如成功了 运行<code>git status</code>会看到</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword hljs-keyword">new</span> file: .gitmodules</span><br><span class="line"><span class="keyword hljs-keyword">new</span> file: ui</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> file: .gitmodules</span><br><span class="line"><span class="hljs-keyword">new</span> file: ui</span><br></pre></td></tr></table></figure>
 <ul>
 <li>然后可以<code>cat .gitmodules</code>查看配置</li>
 <li>应当如下</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="string hljs-string">"src/ui"</span>]</span><br><span class="line">path = src/ui</span><br><span class="line">url = git@code.gomrwind.com:FrontEnd/ui.git</span><br><span class="line">branch = master</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="hljs-string">"src/ui"</span>]</span><br><span class="line">path = src/ui</span><br><span class="line">url = git@code.gomrwind.com:FrontEnd/ui.git</span><br><span class="line">branch = master</span><br></pre></td></tr></table></figure>
 <ul>
 <li><em>要注意的是！如果之前有下过提示出错等，要更改.git中的config配置。还有.git下的modules下的相对应文件夹需要删除<code>rm -rf files</code></em></li>
 <li><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97" target="_blank" rel="noopener">点这里学习</a></li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块的相关命令时出现以下问题：</span><br><span class="line">fatal: Needed a single revision</span><br><span class="line">Unable to find current revision <span class="keyword hljs-keyword">in</span> submodule path</span><br><span class="line">运行命令删除错误的文件，重新更新：</span><br><span class="line">	* rm -rf [模块文件名]</span><br><span class="line">	* git submodule update --init</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块相关命令时出现以下问题</span><br><span class="line">fatal: reference is not a tree: <span class="number hljs-number">16</span>effe6cfd27ff78b04ff95e9103514e6dcf5cb3</span><br><span class="line">Unable to checkout <span class="string hljs-string">'16effe6cfd27ff78b04ff95e9103514e6dcf5cb3'</span> <span class="keyword hljs-keyword">in</span> submodule path 	<span class="string hljs-string">'gezbox/lib/NotificationStyles'</span></span><br><span class="line">Failed to recurse into submodule path <span class="string hljs-string">'src/ui'</span></span><br><span class="line">切换分支到master,再拷贝一个分支作为对比，这是子模块有修改导致的。确认修改后再在那个分支上提交更新。</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块的相关命令时出现以下问题：</span><br><span class="line">fatal: Needed a single revision</span><br><span class="line">Unable to find current revision <span class="hljs-keyword">in</span> submodule path</span><br><span class="line">运行命令删除错误的文件，重新更新：</span><br><span class="line">	* rm -rf [模块文件名]</span><br><span class="line">	* git submodule update --init</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块相关命令时出现以下问题</span><br><span class="line">fatal: reference is not a tree: <span class="hljs-number">16</span>effe6cfd27ff78b04ff95e9103514e6dcf5cb3</span><br><span class="line">Unable to checkout <span class="hljs-string">'16effe6cfd27ff78b04ff95e9103514e6dcf5cb3'</span> <span class="hljs-keyword">in</span> submodule path 	<span class="hljs-string">'gezbox/lib/NotificationStyles'</span></span><br><span class="line">Failed to recurse into submodule path <span class="hljs-string">'src/ui'</span></span><br><span class="line">切换分支到master,再拷贝一个分支作为对比，这是子模块有修改导致的。确认修改后再在那个分支上提交更新。</span><br></pre></td></tr></table></figure>
 <h3 id="服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）"><a href="#服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）" class="headerlink" title="服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）"></a>服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）</h3><h5 id="本地协议"><a href="#本地协议" class="headerlink" title="本地协议"></a>本地协议</h5><ul>
 <li>最基本的协议</li>
 <li>运行<code>git clone /opt/git/project.git</code></li>

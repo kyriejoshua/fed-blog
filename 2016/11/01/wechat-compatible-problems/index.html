@@ -8,6 +8,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="本文列举了个人在微信公众号里开发时所遇到的浏览器兼容性问题。不定期更新。">
+<meta name="keywords" content="兼容性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信内置浏览器兼容性问题汇总">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/11/01/wechat-compatible-problems/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="本文列举了个人在微信公众号里开发时所遇到的浏览器兼容性问题。不定期更新。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/11/01/wechat-compatible-problems/unphoto.jpeg">
+<meta property="og:updated_time" content="2018-07-01T11:40:35.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信内置浏览器兼容性问题汇总">
+<meta name="twitter:description" content="本文列举了个人在微信公众号里开发时所遇到的浏览器兼容性问题。不定期更新。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/11/01/wechat-compatible-problems/unphoto.jpeg">
+
 
 
 
@@ -134,13 +155,13 @@
 <ul>
 <li>解决办法：添加触摸事件：</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in hljs-built_in">document</span>.body.addEventListener(<span class="string hljs-string">'touchstart'</span>,<span class="function hljs-function"><span class="keyword hljs-keyword">function</span>(<span class="params hljs-params"></span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'touchstart'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
 <p>2.百度地图api在微信内不生效，应当是微信做了屏蔽工作</p>
 <p>3.ios端微信浏览器会给input框加上自带的样式，例如圆角和内阴影。是因为-webkit-appearance这个属性的影响</p>
 <ul>
 <li><a href="http://www.w3school.com.cn/cssref/pr_appearance.asp" target="_blank" rel="noopener">appearance CSS规范</a><br>*解决办法：给input添加以下样式</li>
 </ul>
-<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag hljs-selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute hljs-attribute">appearance</span>: none;</span><br><span class="line">    <span class="attribute hljs-attribute">-webkit-appearance</span>: none; <span class="comment hljs-comment">/* safari */</span></span><br><span class="line">    <span class="attribute hljs-attribute">-moz-appearance</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">input</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">appearance</span>: none;</span><br><span class="line">    <span class="hljs-attribute">-webkit-appearance</span>: none; <span class="hljs-comment">/* safari */</span></span><br><span class="line">    <span class="hljs-attribute">-moz-appearance</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>4.ios端微信浏览器，包括ios上所有使用Safari内核的浏览器，都会有该问题——</p>
 <ul>
 <li><p>直接在window, document, body下绑定click事件，点击body不会触发</p>
@@ -152,7 +173,7 @@
 <li><p>避免bug触发：不要委托事件在body结点上。可以指定任何除了上述元素外的父元素，给该元素下的元素绑定事件。</p>
 </li>
 <li><p>已触发情况：safari对事件的解析比较特殊，事件有响应过，则会一直冒泡（捕获）到根节点，对于<strong>大规模</strong>触发的情况，只要在body元素的所有子元素绑定一个空事件，如：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string hljs-string">'body &gt; *'</span>).on(<span class="string hljs-string">'click'</span>, <span class="function hljs-function"><span class="keyword hljs-keyword">function</span>(<span class="params hljs-params"></span>) </span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="hljs-string">'body &gt; *'</span>).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -170,10 +191,10 @@
 <li><p>但是图片大小小于400px * 400px 时，或者直接将图片隐藏会导致无法显示</p>
 </li>
 <li><p>所以较好的解决方案是在标签 img 外面加父元素 div ,给 div 设置:</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag hljs-tag">&lt;<span class="name hljs-name">div</span> <span class="attr hljs-attr">style</span>=<span class="string hljs-string">"margin: 0 auto;width: 0;height: 0; overflow: hidden"</span>&gt;</span><span class="tag hljs-tag">&lt;/<span class="name hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"margin: 0 auto;width: 0;height: 0; overflow: hidden"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>而图片无需处理，最终可写成如下:</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag hljs-tag">&lt;<span class="name hljs-name">div</span> <span class="attr hljs-attr">style</span>=<span class="string hljs-string">"margin: 0 aut0; width: 0; height: 0; overflow: hidden;"</span>&gt;</span></span><br><span class="line">  <span class="tag hljs-tag">&lt;<span class="name hljs-name">img</span> <span class="attr hljs-attr">src</span>=<span class="string hljs-string">"./images/pic.png"</span>/&gt;</span></span><br><span class="line"><span class="tag hljs-tag">&lt;/<span class="name hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"margin: 0 aut0; width: 0; height: 0; overflow: hidden;"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./images/pic.png"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
         <!-- 引入打赏图片即显示打赏功能 -->

@@ -8,6 +8,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="sublime 养成记作为大多数前端攻城狮的主力编辑器，怎么能不让它美一些呢。打开偏好設置，參照以下配置，开启你神祕的sublime text 3之旅吧！">
+<meta name="keywords" content="sublime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何让你的 Sublime Text 独具一格">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/05/03/make-your-Sublime-Text-different/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="sublime 养成记作为大多数前端攻城狮的主力编辑器，怎么能不让它美一些呢。打开偏好設置，參照以下配置，开启你神祕的sublime text 3之旅吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/05/03/make-your-Sublime-Text-different/sublime.png">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.857Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何让你的 Sublime Text 独具一格">
+<meta name="twitter:description" content="sublime 养成记作为大多数前端攻城狮的主力编辑器，怎么能不让它美一些呢。打开偏好設置，參照以下配置，开启你神祕的sublime text 3之旅吧！">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/05/03/make-your-Sublime-Text-different/sublime.png">
+
 
 
 
@@ -194,7 +215,7 @@
 <li>debug: true 开启 debug 模式 paths: 根据具体环境，设置 ESLint 路径</li>
 <li>例如：</li>
 </ul>
-<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr hljs-attr">"user"</span>: &#123;</span><br><span class="line">    <span class="attr hljs-attr">"debug"</span>: <span class="literal hljs-literal">true</span>,</span><br><span class="line">    ...</span><br><span class="line">    "linters": &#123;</span><br><span class="line">        "eslint": &#123;</span><br><span class="line">            ...</span><br><span class="line">            "excludes": ["*.html"]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">    "paths": &#123;</span><br><span class="line">        ....</span><br><span class="line">        "osx": [</span><br><span class="line">            <span class="string hljs-string">"/usr/local/node/v0.12.7/bin"</span></span><br><span class="line">            // 如果用nvm装的会是这个</span><br><span class="line">            <span class="string hljs-string">"/Users/kyriejoshua/.nvm/v0.10.30/bin/"</span></span><br><span class="line">        ],</span><br><span class="line">        "windows": [</span><br><span class="line">         <span class="string hljs-string">"C:\\Users\\用户名\\AppData\\Roaming\\npm"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="hljs-attr">"user"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"debug"</span>: <span class="hljs-literal">true</span>,</span><br><span class="line">    ...</span><br><span class="line">    "linters": &#123;</span><br><span class="line">        "eslint": &#123;</span><br><span class="line">            ...</span><br><span class="line">            "excludes": ["*.html"]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">    "paths": &#123;</span><br><span class="line">        ....</span><br><span class="line">        "osx": [</span><br><span class="line">            <span class="hljs-string">"/usr/local/node/v0.12.7/bin"</span></span><br><span class="line">            // 如果用nvm装的会是这个</span><br><span class="line">            <span class="hljs-string">"/Users/kyriejoshua/.nvm/v0.10.30/bin/"</span></span><br><span class="line">        ],</span><br><span class="line">        "windows": [</span><br><span class="line">         <span class="hljs-string">"C:\\Users\\用户名\\AppData\\Roaming\\npm"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>然后在项目根目录下生成eslintrc.json文件<ul>
 <li>运行<code>eslint --init</code></li>
