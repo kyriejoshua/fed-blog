@@ -8,11 +8,18 @@ categories: Interview
 ![](/jo.github.io/2018/06/11/the-questions-in-interview-part2/unphoto.jpg)
 
 这些题目答不上的话，应该感到羞愧啊！
-推荐：★★☆
+推荐：★★★
 
 <!-- more -->
 
 ## Part 2
+
+- [JavaScript](#JavaScript)
+- [ES6](#ES6)
+- [CSS](#CSS)
+- [其他](#其他)
+
+### JavaScript
 
 #### 酷家乐面试题
 ```javascript
@@ -96,6 +103,8 @@ new Foo().getName(); // 3
 new new Foo().getName() // 3
 ```
 
+#### TODO: 函数防抖和函数节流
+
 ### ES6
 #### Promise sth
 ```Javascript
@@ -138,11 +147,17 @@ handlePromiseList(arr)
 
 * TODO: 循环的思路
 
-#### for in 和 for of 区别
+#### [`for in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 和 [`for of`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of) 区别
 
 * 两者在循环数组时，前者循环出的是 key, 后者循环出的是 value
 * 后者是用来迭代可迭代对象(`Array`, `Map`, `Set`, `String`, `TypedArray`, `arguments`)，但不包括**对象 `Object`**
 * `for in` 可以迭代出原型上的属性
+
+#### [`for in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 和 [`Object.keys`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) 的区别
+
+* `Object.keys` 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 `for in` 循环遍历该对象时返回的顺序一致。
+* 它们的区别在于 `Object.keys` 只循环对象的可枚举属性。
+* `for in` 则循环对象的可枚举属性和对象的原型链上的可枚举属性。
 
 #### 浅比较/浅拷贝的实现
 
@@ -205,9 +220,26 @@ function shallowEqual(obj1, obj2) {
 }
 ```
 
+#### 实现 [`Array.prototype.map`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 方法
+
+* 链接中的方法更完善，此为简易版。
+
+```javascript
+Array.prototype.map = function (callback) {
+  if (!Array.isArray(this)) { throw new TypeError('Param must be Array') }
+  if (typeof callback !== 'function') { throw new TypeError('callback is not a function')}
+  let res = []
+  let len = this.length
+  for (let i = 0; i <= len - 1; i++) {
+    res[i] = callback(this[i], i, this)
+  }
+  return res
+}
+```
+
 ### CSS
 
-#### border-box 和 content-box 区别
+#### `border-box` 和 `content-box` 区别
 ```css
 .parent {
   box-sizing: border-box;
@@ -229,6 +261,36 @@ function shallowEqual(obj1, obj2) {
  */
 ```
 
+#### 用 css 实现子元素宽度为父元素宽度一半的正方形 - by 头条
+
+* [在线 Demo](https://codepen.io/kyriejoshua/pen/xQaOVq)
+
+```css
+// 父元素大小未知，这里假定
+.parent {
+  width: 720px;
+  height: 420px;
+  background: red;
+}
+// 使用 padding 将其撑开
+.son {
+  width: 50%;
+  padding-top: 25%;
+  padding-bottom: 25%;
+  background: lightgreen;
+}
+```
+
 ### 浏览器
 
 * 浏览器的同源策略规定，**协议相同，域名相同，端口相同。**
+
+### 其他
+
+* 在岛上有100只老虎和1只羊，老虎可以吃草，但他们更愿意吃羊。假设： A：每次只有一只老虎可以吃羊，而且一旦他吃了羊，他自己就变成羊。 B：所有的老虎都是聪明而且完全理性的，他们的第一要务是生存。 问最后这只羊会不会被吃？- 头条的骚题。
+
+* 从一只老虎开始分析，当一只老虎一只羊时，老虎必定吃羊。
+* 当两只老虎时，老虎不敢吃羊，因为一旦吃了羊，变成了羊，就会被剩下的老虎吃了。
+* 三只老虎时，头一只老虎可以吃了羊，然后问题回到两只老虎的状态，都不敢吃羊。
+* 四只老虎时，老虎如果吃羊，就会回到三只老虎的状态，因此任一老虎都不会吃。
+* 综上所述，**老虎数量为奇数时，老虎会吃，为偶数时，不会吃。**
