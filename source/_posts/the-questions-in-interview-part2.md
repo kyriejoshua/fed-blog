@@ -159,7 +159,7 @@ let throttle = (fn, delay = 100) => {
       isRunning = false
     }, delay)
   }
-}ø
+}
 // 举例
 let throttleEvent = throttle(() => {
   console.info(new Date().getTime())

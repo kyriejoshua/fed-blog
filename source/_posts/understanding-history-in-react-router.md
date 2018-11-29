@@ -55,7 +55,7 @@ c. `react-router` 内部匹配原理。
 ### history核心
 
 * [*history源码*](https://github.com/ReactTraining/history)
-* history v4.6+ 在内部主要导出了三个方法:
+* `history` v4.6+ 在内部主要导出了三个方法:
   * `createBrowserHistory`, `createHashHistory`, `createMemoryHistory`.
   * 它们分别有着自己的作用:
     * `createBrowserHistory` 是为现代主流浏览器提供的 api.
@@ -188,7 +188,7 @@ c. `react-router` 内部匹配原理。
 #### ***`transitionManager` 调用***
 
 * 再然后我们来看看上述方法`appendListener`, `notifyListeners` 的具体应用。前者体现在了 `popstate` 事件的订阅中。
-* 那么就先简单谈谈 `popstate` 事件。
+* 那么就先简单谈谈 [**`popstate`**](https://developer.mozilla.org/zh-CN/docs/Web/Events/popstate) 事件。
   * 当做出浏览器动作时，会触发 `popstate` 事件, 也就是说，`popstate` 本身并不是像 `pushState` 或 `replaceState` 一样是 `history` 的方法。
   * 不能使用 `history.popState` 这样的方式来调用。
   * 而且，直接调用 `history.pushState` 或 `history.replaceState` 不会触发 `popstate` 事件。
@@ -202,7 +202,10 @@ c. `react-router` 内部匹配原理。
     const transitionManager = createTransitionManager();
     const PopStateEvent = "popstate";
     const HashChangeEvent = "hashchange";
-    
+
+    // 当 URL 的片段标识符更改时，将触发 hashchange 事件（跟在 # 后面的部分，包括 # 符号）
+    // https://developer.mozilla.org/zh-CN/docs/Web/Events/hashchange
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onhashchange
     const checkDOMListeners = delta => {
       listenerCount += delta;
       if (listenerCount === 1) {
@@ -235,7 +238,7 @@ c. `react-router` 内部匹配原理。
   ```
 * 简言之，调用 `listen` 就是给 `window` 绑定了相应方法，再次调用之前 `listen` 返回的函数则是取消。
 * 然后来看看发布事件的具体调用方。
-  
+
   ```javascript
   // 在该方法中最终发布
   const setState = nextState => {
@@ -248,7 +251,37 @@ c. `react-router` 内部匹配原理。
 
 * 下面的方法则应用了 `confirmTransitionTo`.
 * `push`, `replace`  是原生方法的扩展，它们都用到了上述方法，都负责实现跳转，因此内部有较多逻辑相同。
-* 这里以 `push` 为例, 它其实就是对原生的 `history.pushState` 的强化。
+* 后面会以 `push` 为例, 它其实就是对原生的 `history.pushState` 的强化。
+* 这里先从原生的 `history.pushState` 开始了解。
+* [**`history.pushState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 接收三个参数，第一个为状态对象，第二个为标题，第三个为 Url.
+  * 状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许用来标识页面的变化，以此渲染组件）
+  * 标题(目前被忽略)：给页面添加标题。目前使用空字符串作为参数是安全的，未来则是不安全的。Firefox 目前还未实现它。
+  * URL(可选)：新的历史 URL 记录。直接调用并不会加载它，但在其他情况下，重新打开浏览器或者刷新时会加载新页面。
+  * 一个正常的调用是 `history.pushState({ foo: 'bar'}, 'page1', 'bar.html')`.
+  * 调用后浏览器的 url 会立即更新，但页面并不会重新加载。例如 www.google.com 变更为 www.google.com/bar.html. 但页面不会刷新。
+  * 注意，此时并不会调用 `popstate` 事件。只有在上述操作后，访问了其他页面，然后点击返回，或者调用 `history.go(-1)/history.back()` 时，`popstate` 会被触发。
+  * 在代码中更直观的看吧。
+
+  ```javascript
+  // 定义一个 popstate 事件
+  window.onpopstate = function(event) {
+    console.info(event.state)
+  }
+  let page1 = { page: 'page1' }
+  let page2 = { page: 'page2' }
+  history.pushState(page1, 'page1', 'page1.html')
+  // 页面地址由 www.google.com => www.google.com/page1.html
+  // 但不会刷新或重新渲染
+  history.pushState(page2, 'page2', 'page2.html')
+  // 页面地址由 www.google.com/page2.html => www.google.com/page2.html
+  // 但不会刷新或重新渲染
+  // 此时执行
+  history.back() // history.go(-1)
+  // 会触发 popstate 事件, 打印出 page1 对象
+  // { page: 'page1' }
+  ```
+
+* 介绍完 `pushState` 后，看看 `history` 中是怎样实现它的。
 
   ```javascript
     const push = (path, state) => {
@@ -302,6 +335,7 @@ c. `react-router` 内部匹配原理。
 
 ### 小结
 
+* 一句话形容 `history` 这个库。它是一个对 HTML5 原生 `history` 的拓展，它对外输出三个方法，用以在支持原生 api 的环境和不兼容的环境，还有 node 环境中调用。而该方法返回的就是一个增强的 `history` api.
 * 写这篇文章的时候，第一次有感受到技术栈拓展的无穷。从最初想分析 `react-router`，到发现它依赖的主要的库 `history`. 再进行细化，到 `history` 主要提供的对象方法。里面涉及的发布订阅设计模式 ，思路，以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日热情。
 * 下一篇文章将会继续介绍 `react-router`.
 
@@ -323,4 +357,4 @@ c. `react-router` 内部匹配原理。
 <hr>
 {% asset_img reward.jpeg Thanks %}
 
-<!-- 4h -->
+<!-- 4h + 2h -->
