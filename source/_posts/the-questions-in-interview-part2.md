@@ -103,7 +103,75 @@ new Foo().getName(); // 3
 new new Foo().getName() // 3
 ```
 
-#### TODO: 函数防抖和函数节流
+#### 函数防抖和函数节流
+
+* 函数防抖：频繁调用的事件，在事件触发超出时间间隔时才执行，当一次事件执行时，后一次要等时间间隔过去才能再次执行
+  * 应用场景：输入框校验，输入完成后进行。
+
+<span></span>
+
+* 函数节流：指定时间间隔内只触发一次，在间隔内触发多次，则只有一次生效
+  * 应用场景：
+    * scroll 到底部的判断，debounce 的话只有停止滚动才判断。所以是 throttle.
+    * 拖拽，缩放事件等。`resize`, `scroll`，`mousemove` 事件等。
+    * 输入框搜索联想 `keyup` 时间等。
+
+
+* [**在线 Demo-直观清晰**](http://demo.nimius.net/debounce_throttle/)
+
+```javascript
+/**
+ * [debounce 函数防抖]
+ * @param  {Function} fn    [执行函数]
+ * @param  {Number}   delay [延时时间]
+ * @return {Function}       [返回函数]
+ */
+let debounce = (fn, delay = 100) => {
+  let timer = null
+  // 使用非箭头函数，这样可以获取 arguments 对象
+  return function () {
+    // 清除上次定时器, 定时器可以用变量保存
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
+    timer = setTimeout(() => {
+      // 这里类数组对象可以作为参数传入
+      fn.apply(this, arguments)
+    }, delay)
+  }
+}
+
+/**
+ * [throttle 函数节流]
+ * @param  {Function} fn    [执行函数]
+ * @param  {Number}   delay [延时时间]
+ * @return {Function}       [返回函数]
+ */
+let throttle = (fn, delay = 100) => {
+  let isRunning = false
+  // 使用非箭头函数，这样可以获取 arguments 对象
+  return function () {
+    if (isRunning) { return }
+    isRunning = true
+    setTimeout(() => {
+      fn.apply(this, arguments)
+      isRunning = false
+    }, delay)
+  }
+}ø
+// 举例
+let throttleEvent = throttle(() => {
+  console.info(new Date().getTime())
+}, 1000)
+let debounceEvent = debounce(() => {
+  console.info(new Date().getTime())
+}, 1000)
+
+window.addEventListener('scroll', debounceEvent) // 不恰当，只为看效果
+window.onresize = throttleEvent
+```
+
 
 ### ES6
 #### Promise sth
