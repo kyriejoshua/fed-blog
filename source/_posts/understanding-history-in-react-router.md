@@ -58,9 +58,9 @@ c. `react-router` 内部匹配原理。
 * `history` v4.6+ 在内部主要导出了三个方法:
   * `createBrowserHistory`, `createHashHistory`, `createMemoryHistory`.
   * 它们分别有着自己的作用:
-    * `createBrowserHistory` 是为现代主流浏览器提供的 api.
-    * `createHashHistory` 是为不支持 `history` 功能的浏览器提供的 api.
-    * `createMemoryHistory` 则是为 `node` 环境提供的 api.
+    * `createBrowserHistory` 是为现代主流且支持 HTML5 history 浏览器提供的 API.
+    * `createHashHistory` 是为不支持 `history` 功能的浏览器提供的 API.
+    * `createMemoryHistory` 则是为没有 DOM 环境例如 `node` 或 `React-Native` 或测试提供的 API.
 
 
   * 我们就先从最接地气的 `createBrowserHistory` 也就是我们上文中使用的方法开始看起。
@@ -260,7 +260,7 @@ c. `react-router` 内部匹配原理。
   * 一个正常的调用是 `history.pushState({ foo: 'bar'}, 'page1', 'bar.html')`.
   * 调用后浏览器的 url 会立即更新，但页面并不会重新加载。例如 www.google.com 变更为 www.google.com/bar.html. 但页面不会刷新。
   * 注意，此时并不会调用 `popstate` 事件。只有在上述操作后，访问了其他页面，然后点击返回，或者调用 `history.go(-1)/history.back()` 时，`popstate` 会被触发。
-  * 在代码中更直观的看吧。
+  * 让我们在代码中更直观的看吧。
 
   ```javascript
   // 定义一个 popstate 事件
@@ -308,9 +308,12 @@ c. `react-router` 内部匹配原理。
     };
   ```
 
+* `pushState` 和 `push` 方法讲完，`replaceState` 和 `replace` 也就很好理解了。
+* [**`replaceState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 只是把推进栈的方式改为替换栈的行为。它接收的参数与 `pushState` 完全相同。只是调用后方法不同。
+
 ### history在react-router中
 
-* 这篇文章快完成的时候，我才发现 `react-router` 仓库里是有 `history` 的介绍的。此时我一脸茫然，内容虽然不多，却非常值得参考。这里做部分翻译和理解，当作对上文的补充。
+* 这篇文章快完成的时候，我才发现 `react-router` 仓库里是有 `history` 的介绍的。此时我一脸茫然。这里面内容虽然不多，却非常值得参考。这里做部分翻译和理解，当作对上文的补充。
 * [原地址](https://raw.githubusercontent.com/ReactTraining/react-router/master/packages/react-router/docs/api/history.md)
 
 ##### ***`history is mutable`***
@@ -357,4 +360,4 @@ c. `react-router` 内部匹配原理。
 <hr>
 {% asset_img reward.jpeg Thanks %}
 
-<!-- 4h + 2h -->
+<!-- 4h + 2h + 0.5h -->
