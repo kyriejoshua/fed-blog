@@ -67,7 +67,7 @@ c. `react-router` 内部匹配原理。
 
 ### 走进createBrowserHistory
 
-* 话不多说，直接走进[*createBrowserHistory源码*](https://github.com/ReactTraining/history/blob/master/modules/createBrowserHistory.js?1534690004244)
+* 话不多说，直接走进[*createBrowserHistory源码*](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js)
 
   ```javascsript
   /**
@@ -107,10 +107,10 @@ c. `react-router` 内部匹配原理。
   * `hash` - (string) 当前 `url` 的哈希值 `hash`.
   * `state` - - (object) 存储栈的内容。仅存在浏览器历史和内存历史中。
 * `block` 阻止浏览器的默认导航。用于在用户离开页面前弹窗提示用户相应内容。[the history docs](https://github.com/ReactTraining/history#blocking-transitions)
-* 其中，`go`,`goBack`,`goForward` 是对原生 `history.go` 的简单封装。
+* 其中，`go`/`goBack`/`goForward` 是对原生 `history.go` 的简单封装。
 * 剩下的方法相对复杂些，因此在介绍 `push`, `replace` 等方法之前，先来了解下 `transitionManager`. 因为下面的很多实现，都用到了这个对象所提供的方法。
 
-#### ***`transitionManager` 方法***
+#### ***[`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法***
 
 * 首先看下该对象返回了哪些方法：
   ```javascript
@@ -183,7 +183,7 @@ c. `react-router` 内部匹配原理。
     };
   ```
 
-* 实际上执行的就是从外部传进来的 `callback` 方法，只是多了几层判断，而且传入了布尔值来控制是否需要真的执行回调函数。
+* 实际上执行的就是从外部传进来的 `callback` 方法，只是多了几层判断来做校验，而且传入了布尔值来控制是否需要真的执行回调函数。
 
 #### ***`transitionManager` 调用***
 
@@ -254,7 +254,7 @@ c. `react-router` 内部匹配原理。
 * 后面会以 `push` 为例, 它其实就是对原生的 `history.pushState` 的强化。
 * 这里先从原生的 `history.pushState` 开始了解。
 * [**`history.pushState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 接收三个参数，第一个为状态对象，第二个为标题，第三个为 Url.
-  * 状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许用来标识页面的变化，以此渲染组件）
+  * 状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许 `react-router` 用来标识页面的变化，以此渲染组件）
   * 标题(目前被忽略)：给页面添加标题。目前使用空字符串作为参数是安全的，未来则是不安全的。Firefox 目前还未实现它。
   * URL(可选)：新的历史 URL 记录。直接调用并不会加载它，但在其他情况下，重新打开浏览器或者刷新时会加载新页面。
   * 一个正常的调用是 `history.pushState({ foo: 'bar'}, 'page1', 'bar.html')`.
@@ -309,7 +309,7 @@ c. `react-router` 内部匹配原理。
   ```
 
 * `pushState` 和 `push` 方法讲完，`replaceState` 和 `replace` 也就很好理解了。
-* [**`replaceState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 只是把推进栈的方式改为替换栈的行为。它接收的参数与 `pushState` 完全相同。只是调用后方法不同。
+* [**`replaceState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 只是把推进栈的方式改为替换栈的行为。它接收的参数与 `pushState` 完全相同。只是调用后方法执行的效果不同。
 
 ### history在react-router中
 
