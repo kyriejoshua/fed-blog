@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2018-11-30T09:40:00.151Z">
+<meta property="og:updated_time" content="2018-12-02T13:26:59.617Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 react-router 中的 history">
 <meta name="twitter:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
@@ -140,7 +140,7 @@
         <span class="column is-narrow">
             
             
-            19 分钟 读完 (约 2922 字)
+            20 分钟 读完 (约 2943 字)
         </span>
         
     </div>
@@ -187,7 +187,7 @@
 <li>我们就先从最接地气的 <code>createBrowserHistory</code> 也就是我们上文中使用的方法开始看起。</li>
 </ul>
 <h3 id="走进createBrowserHistory"><a href="#走进createBrowserHistory" class="headerlink" title="走进createBrowserHistory"></a>走进createBrowserHistory</h3><ul>
-<li><p>话不多说，直接走进<a href="https://github.com/ReactTraining/history/blob/master/modules/createBrowserHistory.js?1534690004244" target="_blank" rel="noopener"><em>createBrowserHistory源码</em></a></p>
+<li><p>话不多说，直接走进<a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js" target="_blank" rel="noopener"><em>createBrowserHistory源码</em></a></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Creates a history object that uses the HTML5 history API including</span><br><span class="line"> * pushState, replaceState, and the popstate event.</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在方法开始的注释里，它说明了是基于 H5 的 <code>history</code> 创建对象，对象内包括了一些常用的方法譬如</p>
@@ -211,10 +211,10 @@
 </ul>
 </li>
 <li><code>block</code> 阻止浏览器的默认导航。用于在用户离开页面前弹窗提示用户相应内容。<a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">the history docs</a></li>
-<li>其中，<code>go</code>,<code>goBack</code>,<code>goForward</code> 是对原生 <code>history.go</code> 的简单封装。</li>
+<li>其中，<code>go</code>/<code>goBack</code>/<code>goForward</code> 是对原生 <code>history.go</code> 的简单封装。</li>
 <li>剩下的方法相对复杂些，因此在介绍 <code>push</code>, <code>replace</code> 等方法之前，先来了解下 <code>transitionManager</code>. 因为下面的很多实现，都用到了这个对象所提供的方法。</li>
 </ul>
-<h4 id="transitionManager-方法"><a href="#transitionManager-方法" class="headerlink" title="transitionManager 方法"></a><strong><em><code>transitionManager</code> 方法</em></strong></h4><ul>
+<h4 id="transitionManager-方法"><a href="#transitionManager-方法" class="headerlink" title="transitionManager 方法"></a><strong><em><a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194" target="_blank" rel="noopener"><code>transitionManager</code></a> 方法</em></strong></h4><ul>
 <li><p>首先看下该对象返回了哪些方法：</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> transitionManager = &#123;</span><br><span class="line">  setPrompt,</span><br><span class="line">  confirmTransitionTo,</span><br><span class="line">  appendListener,</span><br><span class="line">  notifyListeners</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -228,7 +228,7 @@
 <li><p>然后来看看另一个使用的较多的方法 <code>confirmTransitionTo</code>.</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> confirmTransitionTo = (</span><br><span class="line">  location,</span><br><span class="line">  action,</span><br><span class="line">  getUserConfirmation,</span><br><span class="line">  callback</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (prompt != <span class="hljs-literal">null</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> result =</span><br><span class="line">      <span class="hljs-keyword">typeof</span> prompt === <span class="hljs-string">"function"</span> ? prompt(location, action) : prompt;</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> result === <span class="hljs-string">"string"</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> getUserConfirmation === <span class="hljs-string">"function"</span>) &#123;</span><br><span class="line">        getUserConfirmation(result, callback);</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        callback(<span class="hljs-literal">true</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-comment">// Return false from a transition hook to cancel the transition.</span></span><br><span class="line">      <span class="hljs-comment">// 如果已经在执行，则暂时停止执行</span></span><br><span class="line">      callback(result !== <span class="hljs-literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    callback(<span class="hljs-literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>实际上执行的就是从外部传进来的 <code>callback</code> 方法，只是多了几层判断，而且传入了布尔值来控制是否需要真的执行回调函数。</p>
+<li><p>实际上执行的就是从外部传进来的 <code>callback</code> 方法，只是多了几层判断来做校验，而且传入了布尔值来控制是否需要真的执行回调函数。</p>
 </li>
 </ul>
 <h4 id="transitionManager-调用"><a href="#transitionManager-调用" class="headerlink" title="transitionManager 调用"></a><strong><em><code>transitionManager</code> 调用</em></strong></h4><ul>
@@ -257,7 +257,7 @@
 <li>这里先从原生的 <code>history.pushState</code> 开始了解。</li>
 <li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>history.pushState</code></strong></a> 接收三个参数，第一个为状态对象，第二个为标题，第三个为 Url.</p>
 <ul>
-<li>状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许用来标识页面的变化，以此渲染组件）</li>
+<li>状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许 <code>react-router</code> 用来标识页面的变化，以此渲染组件）</li>
 <li>标题(目前被忽略)：给页面添加标题。目前使用空字符串作为参数是安全的，未来则是不安全的。Firefox 目前还未实现它。</li>
 <li>URL(可选)：新的历史 URL 记录。直接调用并不会加载它，但在其他情况下，重新打开浏览器或者刷新时会加载新页面。</li>
 <li>一个正常的调用是 <code>history.pushState({ foo: &#39;bar&#39;}, &#39;page1&#39;, &#39;bar.html&#39;)</code>.</li>
@@ -272,7 +272,7 @@
 </li>
 <li><p><code>pushState</code> 和 <code>push</code> 方法讲完，<code>replaceState</code> 和 <code>replace</code> 也就很好理解了。</p>
 </li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>replaceState</code></strong></a> 只是把推进栈的方式改为替换栈的行为。它接收的参数与 <code>pushState</code> 完全相同。只是调用后方法不同。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>replaceState</code></strong></a> 只是把推进栈的方式改为替换栈的行为。它接收的参数与 <code>pushState</code> 完全相同。只是调用后方法执行的效果不同。</li>
 </ul>
 <h3 id="history在react-router中"><a href="#history在react-router中" class="headerlink" title="history在react-router中"></a>history在react-router中</h3><ul>
 <li>这篇文章快完成的时候，我才发现 <code>react-router</code> 仓库里是有 <code>history</code> 的介绍的。此时我一脸茫然。这里面内容虽然不多，却非常值得参考。这里做部分翻译和理解，当作对上文的补充。</li>
