@@ -97,10 +97,10 @@ function getName() {
 Foo.getName(); // 2
 getName(); // 4 函数直接量的定义会声明提前从而被 var 声明的所取代
 Foo().getName(); // 1 window.Foo().getName() this 指向 window
-getName(); // 1
-new Foo.getName(); // 2
-new Foo().getName(); // 3
-new new Foo().getName() // 3
+getName(); // 1 由于调用了 Foo().getName()，而该方法内没用 var/let 声明的变量，都是 window 的，因此 window 上的 getName 被改写
+new Foo.getName(); // 2 函数的属性方法调用
+new Foo().getName(); // 3 函数的原型链上的方法随着继承而调用
+new new Foo().getName() // 3 函数的原型连上的方法随着继承而调用
 ```
 
 #### 函数防抖和函数节流
