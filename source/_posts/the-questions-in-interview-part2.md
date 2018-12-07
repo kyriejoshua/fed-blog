@@ -305,6 +305,38 @@ Array.prototype.map = function (callback) {
 }
 ```
 
+#### 函数柯里化
+
+* 蚂蚁的题。
+
+```javascript
+function sum(a, b, c) {
+  return a + b + c
+}
+
+var currySum = curry(sum)
+// currySum(1)(2)(3) = sum(1, 2, 3) // 实现这样的效果
+
+// 兼容参数个数的实现
+function curry(fn, args) {
+  let arr = args || [] // 入参，在第二次调用时会有初始值
+  let len = fn.length // 函数参数的数量
+  return function () {
+    res = arr.concat(Array.prototype.slice.call(arguments)) // 传入的参数与原来的参数整合
+    // 参数长度不足时，仍然传入原函数
+    if (res.length < len) {
+      return curry.call(null, fn, res) // 调用柯里化函数，并传入原函数和参数
+    // 参数长度足够时，输出结果
+    } else {
+      return fn(...res) // 等同于 fn.apply(null, res)
+    }
+  }
+}
+currySum(1)(2)(3) === sum(1, 2, 3) // 6
+```
+
+#### TODO import 和 require 的区别
+
 ### CSS
 
 #### `border-box` 和 `content-box` 区别
@@ -348,6 +380,11 @@ Array.prototype.map = function (callback) {
   background: lightgreen;
 }
 ```
+
+#### 行内元素
+
+* 行内元素例如 `<span>` 是可以设置宽高的，但是设置无效，**除非将 `display` 的值修改为 `inline-block` 或 `block`。**
+* [在线 demo](https://codepen.io/kyriejoshua/pen/pQMXMb)
 
 ### 浏览器
 
