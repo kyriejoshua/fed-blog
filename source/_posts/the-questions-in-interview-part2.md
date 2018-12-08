@@ -350,7 +350,7 @@ function handleCallback(res) {
 
 function handleJsonp() {
   let script = document.createElement('script')
-  script.src = `http://justexample.com?callback=${handleCallback}`
+  script.src = `http://justexample.com?callback=handleCallback`
   script.type = 'text/javascript'
   document.body.appendChild(script)
 }
