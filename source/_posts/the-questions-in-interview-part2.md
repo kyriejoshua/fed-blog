@@ -1,5 +1,5 @@
 ---
-title: 面试题整理2
+title: 面试题整理-2018
 date: 2018-06-11 19:46:55
 tags: interview
 categories: Interview
@@ -12,7 +12,7 @@ categories: Interview
 
 <!-- more -->
 
-## Part 2
+## Part 2 2018版
 
 - [JavaScript](#JavaScript)
 - [ES6](#ES6)
@@ -172,7 +172,6 @@ window.addEventListener('scroll', debounceEvent) // 不恰当，只为看效果
 window.onresize = throttleEvent
 ```
 
-
 ### ES6
 #### Promise sth
 ```Javascript
@@ -325,7 +324,8 @@ function curry(fn, args) {
     res = arr.concat(Array.prototype.slice.call(arguments)) // 传入的参数与原来的参数整合
     // 参数长度不足时，仍然传入原函数
     if (res.length < len) {
-      return curry.call(null, fn, res) // 调用柯里化函数，并传入原函数和参数
+      // 调用柯里化函数，并传入原函数和参数
+      return curry(fn, res) // 等同于 curry.call(null, fn, res)
     // 参数长度足够时，输出结果
     } else {
       return fn(...res) // 等同于 fn.apply(null, res)
@@ -333,6 +333,34 @@ function curry(fn, args) {
   }
 }
 currySum(1)(2)(3) === sum(1, 2, 3) // 6
+```
+
+#### jsonp 实现原理及具体实现
+
+* 蚂蚁面试时被问到了 jsonp 的实现原理，虽然答出了原理，但具体的实现逻辑有所遗忘，这里做一个简易版但是是完整的实现。
+* 利用 script 标签可以跨域请求资源的原理。
+
+```javascript
+/*
+ * 回调函数，服务端响应数据后执行
+ */
+function handleCallback(res) {
+  console.info(res.data)
+}
+
+function handleJsonp() {
+  let script = document.createElement('script')
+  script.src = `http://justexample.com?callback=${handleCallback}`
+  script.type = 'text/javascript'
+  document.body.appendChild(script)
+}
+
+handleJsonp()
+
+// 服务端的返回应当是这样，这里是 nodejs 的写法
+// `${callback}(${callbackData})`
+// handleCallback({ data: 'bad view' })
+// 然后客户端执行 handleCallback 函数，打印出结果
 ```
 
 #### TODO import 和 require 的区别
