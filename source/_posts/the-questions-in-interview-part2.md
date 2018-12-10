@@ -7,8 +7,8 @@ categories: Interview
 
 ![](/jo.github.io/2018/06/11/the-questions-in-interview-part2/unphoto.jpg)
 
-这些题目答不上的话，应该感到羞愧啊！
-推荐：★★★
+P6 的标准。
+推荐：★★★☆
 
 <!-- more -->
 
@@ -369,12 +369,16 @@ handleJsonp()
   * ***import:*** ES6 的语法规范——模块化方案。仅在现代浏览器上支持，在其他浏览器上需转成 ES5 运行，也就是说其实仍然是转成 require 的方式运行。
   * ***require:*** nodejs 提供的社区方案，遵循 CommonJS/AMD 规范。
 
+<span></span>
+
 * **调用时间：**
   * ***import:*** 编译时执行。因此必须放在文件开头。
   * ***require:*** 运行时加载。当**首次**调用时，会执行请求的文件的脚本代码，执行后生成一个对象在内存中。之后再引用时，并不会重新执行代码，而是从缓存中读取对象。
     * 循环取值的情况。
     * [官方文档](https://nodejs.org/api/modules.html#modules_cycles)
     * [阮一峰解读](http://www.ruanyifeng.com/blog/2015/11/circular-dependency.html)
+
+<span></span>
 
 * **本质：**
   * ***import:*** 值引用，所取的值仅仅是可读的。见下文。数据无法重新赋值，原始数据无法更改，对象无法赋值，但可以定义属性。[在React中查看](https://github.com/kyriejoshua/react-tutorial/blob/ba578f52ebc38fd719b008cfc3762b577f0c44f6/react-deep/scripts/_pureComponent.js#L9)
