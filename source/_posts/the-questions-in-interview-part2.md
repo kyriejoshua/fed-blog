@@ -363,7 +363,54 @@ handleJsonp()
 // 然后客户端执行 handleCallback 函数，打印出结果
 ```
 
-#### TODO import 和 require 的区别
+#### import 和 require 的区别
+
+* **规范:**
+  * ***import:*** ES6 的语法规范——模块化方案。仅在现代浏览器上支持，在其他浏览器上需转成 ES5 运行，也就是说其实仍然是转成 require 的方式运行。
+  * ***require:*** nodejs 提供的社区方案，遵循 CommonJS/AMD 规范。
+
+* **调用时间：**
+  * ***import:*** 编译时执行。因此必须放在文件开头。
+  * ***require:*** 运行时加载。当**首次**调用时，会执行请求的文件的脚本代码，执行后生成一个对象在内存中。之后再引用时，并不会重新执行代码，而是从缓存中读取对象。
+    * 循环取值的情况。
+    * [官方文档](https://nodejs.org/api/modules.html#modules_cycles)
+    * [阮一峰解读](http://www.ruanyifeng.com/blog/2015/11/circular-dependency.html)
+
+* **本质：**
+  * ***import:*** 值引用，所取的值仅仅是可读的。见下文。数据无法重新赋值，原始数据无法更改，对象无法赋值，但可以定义属性。[在React中查看](https://github.com/kyriejoshua/react-tutorial/blob/ba578f52ebc38fd719b008cfc3762b577f0c44f6/react-deep/scripts/_pureComponent.js#L9)
+  * ***require:*** 值拷贝，浅拷贝。相当于获取了值，并赋值给当前的值。
+  ```javascript
+  // a.js
+  module.exports = 0
+  // b.js
+  export const b = 0
+  // main.js
+  let a = require('a.js')
+  import b from 'b.js'
+  ++a // 1
+  ++b // 报错，因为这个值是 read-only 的
+  ```
+
+* **写法：**
+```javascript
+// import 的方式较多
+import React from 'react'
+import * as React from 'react'
+import { default as React } from 'react'
+import React, { Component } from 'react'
+import { Component } from 'react'
+import { PureComponent as PC } from 'react'
+// export
+export default fs
+export const fs
+export * from 'fs'
+export { readFile, writeFile }
+export function readFile
+// require 方式很少
+const fs = require('fs')
+module.exports = () => { console.info('A') }
+exports.fs = {}
+```
 
 ### CSS
 
