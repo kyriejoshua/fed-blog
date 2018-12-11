@@ -363,7 +363,7 @@ handleJsonp()
 // 然后客户端执行 handleCallback 函数，打印出结果
 ```
 
-#### import 和 require 的区别
+#### **import** 和 **require** 的区别
 
 * **规范:**
   * ***import:*** ES6 的语法规范——模块化方案。仅在现代浏览器上支持，在其他浏览器上需转成 ES5 运行，也就是说其实仍然是转成 require 的方式运行。
@@ -381,8 +381,8 @@ handleJsonp()
 <span></span>
 
 * **本质：**
-  * ***import:*** 值引用，所取的值仅仅是可读的。见下文。数据无法重新赋值，原始数据无法更改，对象无法赋值，但可以定义属性。[在React中查看](https://github.com/kyriejoshua/react-tutorial/blob/ba578f52ebc38fd719b008cfc3762b577f0c44f6/react-deep/scripts/_pureComponent.js#L9)
-  * ***require:*** 值拷贝，浅拷贝。相当于获取了值，并赋值给当前的值。
+  * ***import:*** 值引用，所取的值仅仅是可读的。见下文。数据无法重新赋值，基础数据类型无法更改，对象类型无法赋值，但可以定义属性。[在React中查看](https://github.com/kyriejoshua/react-tutorial/blob/ba578f52ebc38fd719b008cfc3762b577f0c44f6/react-deep/scripts/_pureComponent.js#L9)
+  * ***require:*** 值拷贝，浅拷贝。基础类型相当于直接赋值。对象类型，相当于获取了值，并浅拷贝给当前的值。
   ```javascript
   // a.js
   module.exports = 0
@@ -419,6 +419,8 @@ exports.fs = {}
 ### CSS
 
 #### `border-box` 和 `content-box` 区别
+
+* [**box-sizing**](https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing)
 ```css
 .parent {
   box-sizing: border-box;
