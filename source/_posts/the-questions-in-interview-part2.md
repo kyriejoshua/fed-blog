@@ -416,6 +416,36 @@ module.exports = () => { console.info('A') }
 exports.fs = {}
 ```
 
+#### window.open 的使用 - by 丁香园
+
+* [**window.open**](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/open)
+* 该方法接受三个参数：
+  * strUrl: url 地址。设置的值没有 http 时，打开的新窗口是当前 url 的相对地址。
+  * strWindowName: 窗口名称，不是窗口标题，并不会显示。如果已存在同名的 strWindowName 的窗口，就不再打开新窗口，而是在那个窗口中加载。除非将它设置为 '_blank'.
+  * strWindowFeature: 窗口的属性，字符串形式，以逗号分隔。
+  * `window.open('http://www.google.com', 'newWindow', 'resizable,scrollbars')`
+
+#### this 指向 window - by 丁香园
+
+```javascript
+const obj = {
+  name: 'james',
+  show: function(name) {
+    console.info(name)
+  }
+}
+obj.show(this.name) // 空，因为当前的 this 指向 window
+
+// TODO
+const result = (function (){
+  return '1';
+}, function() {
+  console.info(2)
+  return 2;
+})()
+typeof result // "number" result 是 2
+```
+
 ### CSS
 
 #### `border-box` 和 `content-box` 区别
