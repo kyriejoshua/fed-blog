@@ -524,8 +524,8 @@ typeof result // "number" result 是 2
 ### 前端安全
 
 * TODO：
-* XSS
-* CSRF
+* **XSS**
+* **CSRF**
 
 ### 其他
 
@@ -542,3 +542,5 @@ typeof result // "number" result 是 2
 * TODO
 * **单向数据流：** 简单的理解，可认为水（数据）往低处流。高处是用户，低处是视图。用户的交互行为使得动作发生变更，派发后触发回调函数，进而引起视图的监听事件的调用，最终导致视图的更新。换句话说，视图的变更不会引起数据的变化，否则这就是双向数据绑定了。当然，目前谈论到的数据变化，是以 UI 控件为前提。
 * user interaction => dispatch(action) => callback => store(update) => change events => view(react component)
+
+* **双向数据流：**
