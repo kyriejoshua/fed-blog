@@ -7,7 +7,7 @@ categories: Interview
 
 ![](/jo.github.io/2018/06/11/the-questions-in-interview-part2/unphoto.jpg)
 
-P6 的标准。
+P6 的标准。这里所有的题都应该十分熟悉。
 推荐：★★★☆
 
 <!-- more -->
@@ -17,6 +17,8 @@ P6 的标准。
 - [JavaScript](#JavaScript)
 - [ES6](#ES6)
 - [CSS](#CSS)
+- [浏览器](#浏览器)
+- [前端安全](#前端安全)
 - [其他](#其他)
 
 ### JavaScript
@@ -74,7 +76,7 @@ function f(n, v) {
 f(10, 1)
 ```
 
-#### var 变量声明
+#### var 变量声明及原型
 
 ```javascript
 function Foo() {
@@ -101,6 +103,14 @@ getName(); // 1 由于调用了 Foo().getName()，而该方法内没用 var/let
 new Foo.getName(); // 2 函数的属性方法调用
 new Foo().getName(); // 3 函数的原型链上的方法随着继承而调用
 new new Foo().getName() // 3 函数的原型连上的方法随着继承而调用
+
+// 原型
+var obj = {}
+obj.__proto__ // Object.prototype
+Object.__proto__ // function() {}
+Object.prototype.__proto__ // null
+Function.__proto__ // function() {}
+Function.prototype.__proto__ // Object.prototype
 ```
 
 #### 函数防抖和函数节流
@@ -287,6 +297,8 @@ function shallowEqual(obj1, obj2) {
 }
 ```
 
+#### TODO 深拷贝的实现
+
 #### 实现 [`Array.prototype.map`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 方法
 
 * 链接中的方法更完善，此为简易版。
@@ -335,7 +347,7 @@ function curry(fn, args) {
 currySum(1)(2)(3) === sum(1, 2, 3) // 6
 ```
 
-#### jsonp 实现原理及具体实现
+#### jsonp实现原理及具体实现
 
 * 蚂蚁面试时被问到了 jsonp 的实现原理，虽然答出了原理，但具体的实现逻辑有所遗忘，这里做一个简易版但是是完整的实现。
 * 利用 script 标签可以跨域请求资源的原理。
@@ -499,7 +511,21 @@ typeof result // "number" result 是 2
 
 ### 浏览器
 
+#### 同源策略
+
 * 浏览器的同源策略规定，**协议相同，域名相同，端口相同。**
+
+#### TODO: 跨域方案
+
+* [**JSONP**](#jsonp实现原理及具体实现)
+* **CORS**
+* nginx ???
+
+### 前端安全
+
+* TODO：
+* XSS
+* CSRF
 
 ### 其他
 
@@ -510,3 +536,9 @@ typeof result // "number" result 是 2
 * 三只老虎时，头一只老虎可以吃了羊，然后问题回到两只老虎的状态，都不敢吃羊。
 * 四只老虎时，老虎如果吃羊，就会回到三只老虎的状态，因此任一老虎都不会吃。
 * 综上所述，**老虎数量为奇数时，老虎会吃，为偶数时，不会吃。**
+
+#### 单双向数据流的理解
+
+* TODO
+* **单向数据流：** 简单的理解，可认为水（数据）往低处流。高处是用户，低处是视图。用户的交互行为使得动作发生变更，派发后触发回调函数，进而引起视图的监听事件的调用，最终导致视图的更新。换句话说，视图的变更不会引起数据的变化，否则这就是双向数据绑定了。当然，目前谈论到的数据变化，是以 UI 控件为前提。
+* user interaction => dispatch(action) => callback => store(update) => change events => view(react component)
