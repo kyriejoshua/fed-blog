@@ -15,9 +15,17 @@ P6 的标准。这里所有的题都应该十分熟悉。
 ## Part 2 2018版
 
 - [JavaScript](#JavaScript)
+  - [函数防抖和函数节流](#函数防抖和函数节流)
+  - [浅比较和浅拷贝的实现](#浅比较和浅拷贝的实现)
+  - [函数柯里化](#函数柯里化)
 - [ES6](#ES6)
+  - [Promise](#Promise)
 - [CSS](#CSS)
+  -  [BFC](#BFC)
+  -  [行内元素](#行内元素)
 - [浏览器](#浏览器)
+  - [同源策略](#同源策略)
+  - [跨域方案](#跨域方案)
 - [前端安全](#前端安全)
 - [其他](#其他)
 
@@ -183,7 +191,7 @@ window.onresize = throttleEvent
 ```
 
 ### ES6
-#### Promise sth
+#### Promise
 ```Javascript
   const wait = ms => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -236,7 +244,7 @@ handlePromiseList(arr)
 * 它们的区别在于 `Object.keys` 只循环对象的可枚举属性。
 * `for in` 则循环对象的可枚举属性和对象的原型链上的可枚举属性。
 
-#### 浅比较/浅拷贝的实现
+#### 浅比较和浅拷贝的实现
 
 ``` javascript
 // 这里的 shallowEqual 就是浅比较，这个方法经过小部分的扩展，也可以实现 Object.assign 方法，后续补充上
@@ -448,7 +456,7 @@ const obj = {
 }
 obj.show(this.name) // 空，因为当前的 this 指向 window
 
-// TODO
+// TODO 不知道这题的意义
 const result = (function (){
   return '1';
 }, function() {
@@ -456,9 +464,48 @@ const result = (function (){
   return 2;
 })()
 typeof result // "number" result 是 2
+
+document.body.addEventListener('click', function(e) {
+  console.info(e.target, this) // this 指向 body, 绑定对象时指定了 this
+}, false)
+
+document.body.addEventListener('click', (e) => {
+  console.info(e.target, this) // this 指向 window
+}, false)
 ```
 
 ### CSS
+
+#### [BFC](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
+
+* 块级格式化上下文: 布局过程中生成的块级盒子区域。规定了内部块级元素的布局规则，默认情况下只有 body 一个 BFC 块级上下文.
+* 规则：
+  * 盒子块会在垂直方向上放置。
+  * 相邻的盒子块在垂直方向上的 margin 会合并。
+  * 每个元素的 margin box 左边，与包含 border box 的左边相接触（对于从左往右的格式化，否则相反）。即使存在浮动也是如此。（这部分不太理解）[Demo](https://codepen.io/kyriejoshua/pen/ZVBrgN)
+  * BFC 区域不会与 float box 重叠。[Demo](https://codepen.io/kyriejoshua/pen/MZbryb)
+  * BFC 是页面上隔离的独立的容器，容器内部的子元素不会受外部影响，也不会影响外部元素。
+  * 计算 BFC 的高度时，浮动元素也参与计算。
+
+<span></span>
+
+* 触发条件：
+  * 根元素或包含根元素的元素。
+  * 行内块元素：`display` 为 `inline-block`.
+  * 浮动元素：`float` 有值(不为 none).
+  * `overflow` 不为 `visible` 的块元素.
+  * 绝对定位元素：`position` 为 `fixed` 或 `absolute`.
+  * 弹性元素：`display` 为 `flex` 或 `inline-flex` 元素的直接子元素。
+  * 网格元素：`display` 为 `grid` 或 `inline-grid` 元素的直接子元素。
+  * 等等。
+
+<span></span>
+
+* 实际应用：很多 CSS 的布局方案都是通过创建 BFC 来解决的。
+  * 不使用 BFC 实现文字环绕效果。使用 BFC 实现排列效果。[**在线 Demo**](https://codepen.io/kyriejoshua/pen/MZbryb)
+  * 例如解决 margin 合并的问题，方案就是创建两个 BFC。使元素处在不同的 BFC 中。[**在线 Demo**](https://codepen.io/kyriejoshua/pen/BvQZqb)
+  * 例如清除浮动，父元素添加了 `overflow: hidden` 属性后，生成了一个 BFC，而 BFC 的高度计算是包括浮动元素在内的，因此计算后的父元素高度包括了浮动元素，当前的原本脱离了文档流的浮动元素又被包括在父级 BFC 内。[**在线 Demo**](https://codepen.io/kyriejoshua/pen/roWzqd)
+    * `display: inline-block;float: left;position: absolute;` 等等能创建 BFC 的方式都可以清除浮动，但还是要看具体的应用场景。
 
 #### `border-box` 和 `content-box` 区别
 
@@ -515,16 +562,18 @@ typeof result // "number" result 是 2
 
 * 浏览器的同源策略规定，**协议相同，域名相同，端口相同。**
 
-#### TODO: 跨域方案
+#### 跨域方案
 
+* TODO
 * [**JSONP**](#jsonp实现原理及具体实现)
 * **CORS**
 * nginx ???
 
 ### 前端安全
 
-* TODO：
-* **XSS**
+* TODO：https://github.com/riotkkwok/blog/issues/8,https://zhuanlan.zhihu.com/p/31553667
+https://tech.meituan.com/fe_security.html
+* **XSS**:
 * **CSRF**
 
 ### 其他
