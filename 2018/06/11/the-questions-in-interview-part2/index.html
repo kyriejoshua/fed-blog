@@ -23,7 +23,7 @@
 <meta property="og:description" content="P6 的标准。这里所有的题都应该十分熟悉。推荐：★★★☆">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/06/11/the-questions-in-interview-part2/unphoto.jpg">
-<meta property="og:updated_time" content="2018-12-19T11:34:49.882Z">
+<meta property="og:updated_time" content="2018-12-20T13:33:59.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题整理-2018">
 <meta name="twitter:description" content="P6 的标准。这里所有的题都应该十分熟悉。推荐：★★★☆">
@@ -139,7 +139,7 @@
         <span class="column is-narrow">
             
             
-            28 分钟 读完 (约 4165 字)
+            30 分钟 读完 (约 4540 字)
         </span>
         
     </div>
@@ -159,6 +159,7 @@
 <li><a href="#Promise">Promise</a></li>
 </ul>
 </li>
+<li><a href="#React">React</a></li>
 <li><a href="#CSS">CSS</a><ul>
 <li><a href="#BFC">BFC</a></li>
 <li><a href="#行内元素">行内元素</a></li>
@@ -272,6 +273,12 @@
 </li>
 </ul>
 <h4 id="this-指向-window-by-丁香园"><a href="#this-指向-window-by-丁香园" class="headerlink" title="this 指向 window - by 丁香园"></a>this 指向 window - by 丁香园</h4><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> obj = &#123;</span><br><span class="line">  name: <span class="hljs-string">'james'</span>,</span><br><span class="line">  show: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.info(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.show(<span class="hljs-keyword">this</span>.name) <span class="hljs-comment">// 空，因为当前的 this 指向 window</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// TODO 不知道这题的意义</span></span><br><span class="line"><span class="hljs-keyword">const</span> result = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-string">'1'</span>;</span><br><span class="line">&#125;, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(<span class="hljs-number">2</span>)</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="hljs-keyword">typeof</span> result <span class="hljs-comment">// "number" result 是 2</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(e.target, <span class="hljs-keyword">this</span>) <span class="hljs-comment">// this 指向 body, 绑定对象时指定了 this</span></span><br><span class="line">&#125;, <span class="hljs-literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(e.target, <span class="hljs-keyword">this</span>) <span class="hljs-comment">// this 指向 window</span></span><br><span class="line">&#125;, <span class="hljs-literal">false</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount"></a>componentWillMount</h4><ul>
+<li>TODO: 为什么不推荐该生命周期，以及为什么不推荐在这里使用 ajax.</li>
+<li><code>componentWillMount</code> 内的报错会阻塞后续生命周期的执行，即 DOM 的挂载等等。</li>
+<li>如果异步请求后续有涉及 DOM 的操作，可能会因为 DOM 还未生成而找不到 DOM 而报错。</li>
+<li>存疑：v16+ 的版本里，<code>componentWillMount</code> 会触发多次，导致发送多次 ajax？</li>
+</ul>
 <h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><h4 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="noopener">BFC</a></h4><ul>
 <li>块级格式化上下文: 布局过程中生成的块级盒子区域。规定了内部块级元素的布局规则，默认情况下只有 body 一个 BFC 块级上下文.</li>
 <li>规则：<ul>
@@ -322,14 +329,46 @@
 <li>行内元素例如 <code>&lt;span&gt;</code> 是可以设置宽高的，但是设置无效，<strong>除非将 <code>display</code> 的值修改为 <code>inline-block</code> 或 <code>block</code>。</strong></li>
 <li><a href="https://codepen.io/kyriejoshua/pen/pQMXMb" target="_blank" rel="noopener">在线 demo</a></li>
 </ul>
-<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><h4 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h4><ul>
-<li>浏览器的同源策略规定，<strong>协议相同，域名相同，端口相同。</strong></li>
+<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><h4 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">同源策略</a></h4><ul>
+<li>浏览器的同源策略规定，<strong>协议相同，域名相同，端口相同(该条 IE 除外)。</strong></li>
+<li>影响：<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies" target="_blank" rel="noopener"><code>Cookie</code></a>, <code>LocalStorage</code>, <code>IndexDB</code> 无法读取。</li>
+<li>无法使用 AJAX.</li>
+<li>无法获取 DOM.</li>
+</ul>
+</li>
 </ul>
 <h4 id="跨域方案"><a href="#跨域方案" class="headerlink" title="跨域方案"></a>跨域方案</h4><ul>
-<li>TODO</li>
 <li><a href="#jsonp实现原理及具体实现"><strong>JSONP</strong></a></li>
-<li><strong>CORS</strong></li>
-<li>nginx ???</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener"><strong>CORS</strong></a>：比较常规的解决方案。<ul>
+<li><code>access-control-allow-origin</code> 这个参数添加域名或设置为 <code>*</code>.</li>
+<li>简单请求浏览器直接发送。</li>
+<li>非简单请求，浏览器自动先发送预检请求 <code>options</code>, 然后再发送非简单请求。</li>
+</ul>
+</li>
+</ul>
+<p><span></span></p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage" target="_blank" rel="noopener"><strong>window.postMessage</strong></a>：个人理解比较适用于 iframe 间的通信。<ul>
+<li><code>window.postMessage(message, targetOrigin, [transfer])</code> 接收三个参数。</li>
+<li><code>message</code>: 消息内容，会被自动序列化，无需手动序列化。</li>
+<li><code>targetOrigin</code>: 要发送的域名。</li>
+<li><code>transfer</code>: TODO</li>
+<li>手动接收事件</li>
+<li><code>window.addEventListener(&#39;message&#39;, receiveMessage, false)</code></li>
+<li><code>message</code>: 包括 <code>data</code>, <code>origin</code>, <code>source</code><ul>
+<li><code>data</code>: 传过来的数据对象。</li>
+<li><code>origin</code>: 发送方的源地址。</li>
+<li><code>source</code>: 发送方窗口的引用。</li>
+</ul>
+</li>
+<li><code>receiveMessage</code>: 回调函数。</li>
+</ul>
+</li>
+</ul>
+<p><span></span></p>
+<ul>
+<li>TODO: nginx 反向代理 / websocket ???</li>
 </ul>
 <h3 id="前端安全"><a href="#前端安全" class="headerlink" title="前端安全"></a>前端安全</h3><ul>
 <li>TODO：<a href="https://github.com/riotkkwok/blog/issues/8,https://zhuanlan.zhihu.com/p/31553667" target="_blank" rel="noopener">https://github.com/riotkkwok/blog/issues/8,https://zhuanlan.zhihu.com/p/31553667</a><br><a href="https://tech.meituan.com/fe_security.html" target="_blank" rel="noopener">https://tech.meituan.com/fe_security.html</a></li>
