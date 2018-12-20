@@ -20,6 +20,7 @@ P6 的标准。这里所有的题都应该十分熟悉。
   - [函数柯里化](#函数柯里化)
 - [ES6](#ES6)
   - [Promise](#Promise)
+- [React](#React)
 - [CSS](#CSS)
   -  [BFC](#BFC)
   -  [行内元素](#行内元素)
@@ -474,6 +475,15 @@ document.body.addEventListener('click', (e) => {
 }, false)
 ```
 
+### React
+
+#### componentWillMount
+
+* TODO: 为什么不推荐该生命周期，以及为什么不推荐在这里使用 ajax.
+* `componentWillMount` 内的报错会阻塞后续生命周期的执行，即 DOM 的挂载等等。
+* 如果异步请求后续有涉及 DOM 的操作，可能会因为 DOM 还未生成而找不到 DOM 而报错。
+* 存疑：v16+ 的版本里，`componentWillMount` 会触发多次，导致发送多次 ajax？
+
 ### CSS
 
 #### [BFC](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
@@ -558,16 +568,40 @@ document.body.addEventListener('click', (e) => {
 
 ### 浏览器
 
-#### 同源策略
+#### [同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
 
-* 浏览器的同源策略规定，**协议相同，域名相同，端口相同。**
+* 浏览器的同源策略规定，**协议相同，域名相同，端口相同(该条 IE 除外)。**
+* 影响：
+  * [`Cookie`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies), `LocalStorage`, `IndexDB` 无法读取。
+  * 无法使用 AJAX.
+  * 无法获取 DOM.
 
 #### 跨域方案
 
-* TODO
 * [**JSONP**](#jsonp实现原理及具体实现)
-* **CORS**
-* nginx ???
+* [**CORS**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)：比较常规的解决方案。
+  * `access-control-allow-origin` 这个参数添加域名或设置为 `*`.
+  * 简单请求浏览器直接发送。
+  * 非简单请求，浏览器自动先发送预检请求 `options`, 然后再发送非简单请求。
+
+<span></span>
+
+* [**window.postMessage**](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)：个人理解比较适用于 iframe 间的通信。
+  * `window.postMessage(message, targetOrigin, [transfer])` 接收三个参数。
+  * `message`: 消息内容，会被自动序列化，无需手动序列化。
+  * `targetOrigin`: 要发送的域名。
+  * `transfer`: TODO
+  * 手动接收事件
+  * `window.addEventListener('message', receiveMessage, false)`
+  * `message`: 包括 `data`, `origin`, `source`
+    * `data`: 传过来的数据对象。
+    * `origin`: 发送方的源地址。
+    * `source`: 发送方窗口的引用。
+  * `receiveMessage`: 回调函数。
+
+<span></span>
+
+* TODO: nginx 反向代理 / websocket ???
 
 ### 前端安全
 
