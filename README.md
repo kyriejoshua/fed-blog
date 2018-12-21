@@ -22,6 +22,7 @@
 * 一键部署：`npm run build` 或 `npm run publish`.
   * `npm run build` 串行运行了相关的部署脚本。
   * `npm run publish` 执行时理论上应当按顺序执行 `prepublish`、`prepare`、`prepublishOnly`、`publish`. 但中间两个没有执行，不知是否是 npm 版本的问题。
+  * 部署电影和书时可能会耗时较长-3mins 左右。电影页面已生成，但不提供入口。入口自寻。
 
 #### Others
 
