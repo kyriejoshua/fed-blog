@@ -122,6 +122,35 @@ Function.__proto__ // function() {}
 Function.prototype.__proto__ // Object.prototype
 ```
 
+#### 类型判断
+
+* [**typeof**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof)
+* [**instanceof**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)： 测试构造函数的 prototype 是否出现在对象的原型链之中。由于 prototype 是可更改的，所以同样的表达式不一定会返回一样的结果。
+  * `object instanceof constructor`
+
+```javascript
+typeof [] === typeof {} // 'object'
+typeof Object === typeof Array // 'function' 构造函数
+typeof null // 'object'
+typeof undefined // 'undefined'
+typeof NaN // 'number'
+
+111 instanceof Number // false
+'111' instanceof String // false
+// 因为它们都不是用构造函数实例化的对象，所以不是
+// 下面则是
+var num = new Number(111)
+num instanceof Number // true
+var str = new String('curry')
+str instanceof String // true
+{} instanceof Object // 报错
+[] instanceof Array // true
+[] instanceof Object // true
+
+// 通常的判断
+Object.prototype.toString.call(obj)
+```
+
 #### 函数防抖和函数节流
 
 * 函数防抖：频繁调用的事件，在事件触发超出时间间隔时才执行，当一次事件执行时，后一次要等时间间隔过去才能再次执行
@@ -325,6 +354,18 @@ Array.prototype.map = function (callback) {
 }
 ```
 
+```javascript
+const a =  [1, 2, 3, 4, 5]
+a.multiply() // [1, 4, 9, 16, 25]
+
+function multiply() {
+  if (!Array.isArray(this)) { throw new Error() }
+  return this.map((item) => {
+    return item * item
+  })
+}
+Object.assign(a.__proto__, { multiply })
+```
 #### 函数柯里化
 
 * 蚂蚁的题。
@@ -354,6 +395,14 @@ function curry(fn, args) {
   }
 }
 currySum(1)(2)(3) === sum(1, 2, 3) // 6
+
+// 30 秒代码上的实现，更加简约
+// https://30secondsofcode.org/function#curry
+// args 这里不是很理解
+const curry = (fn, len = fn.length, ...args) => {
+  return len <= args.length ? fn(...args) : curry.bind(null, fn, len, ...args)
+}
+
 ```
 
 #### jsonp实现原理及具体实现
@@ -482,7 +531,8 @@ document.body.addEventListener('click', (e) => {
 * TODO: 为什么不推荐该生命周期，以及为什么不推荐在这里使用 ajax.
 * `componentWillMount` 内的报错会阻塞后续生命周期的执行，即 DOM 的挂载等等。
 * 如果异步请求后续有涉及 DOM 的操作，可能会因为 DOM 还未生成而找不到 DOM 而报错。
-* 存疑：v16+ 的版本里，`componentWillMount` 会触发多次，导致发送多次 ajax？
+* 存疑：v16+ 的版本里，在 fiber 的机制下，开启 async rendering, render 之前的生命周期函数可能会执行多次，导致发送多次 ajax。
+* 服务端渲染 SSR，`componentWillMount` 也会触发？
 
 ### CSS
 
