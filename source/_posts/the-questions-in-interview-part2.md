@@ -15,6 +15,7 @@ P6 的标准。这里所有的题都应该十分熟悉。
 ## Part 2 2018版
 
 - [JavaScript](#JavaScript)
+  - [类型判断](#类型判断)
   - [函数防抖和函数节流](#函数防抖和函数节流)
   - [浅比较和浅拷贝的实现](#浅比较和浅拷贝的实现)
   - [函数柯里化](#函数柯里化)
@@ -220,7 +221,46 @@ window.addEventListener('scroll', debounceEvent) // 不恰当，只为看效果
 window.onresize = throttleEvent
 ```
 
+#### 函数柯里化
+
+* 蚂蚁的题。
+
+```javascript
+function sum(a, b, c) {
+  return a + b + c
+}
+
+var currySum = curry(sum)
+// currySum(1)(2)(3) = sum(1, 2, 3) // 实现这样的效果
+
+// 兼容参数个数的实现
+function curry(fn, args) {
+  let arr = args || [] // 入参，在第二次调用时会有初始值
+  let len = fn.length // 函数参数的数量
+  return function () {
+    res = arr.concat(Array.prototype.slice.call(arguments)) // 传入的参数与原来的参数整合
+    // 参数长度不足时，仍然传入原函数
+    if (res.length < len) {
+      // 调用柯里化函数，并传入原函数和参数
+      return curry(fn, res) // 等同于 curry.call(null, fn, res)
+    // 参数长度足够时，输出结果
+    } else {
+      return fn(...res) // 等同于 fn.apply(null, res)
+    }
+  }
+}
+currySum(1)(2)(3) === sum(1, 2, 3) // 6
+
+// 30 秒代码上的实现，更加简约
+// https://30secondsofcode.org/function#curry
+// args 这里不是很理解
+const curry = (fn, len = fn.length, ...args) => {
+  return len <= args.length ? fn(...args) : curry.bind(null, fn, len, ...args)
+}
+```
+
 ### ES6
+
 #### Promise
 ```Javascript
   const wait = ms => new Promise((resolve) => setTimeout(resolve, ms))
@@ -365,44 +405,6 @@ function multiply() {
   })
 }
 Object.assign(a.__proto__, { multiply })
-```
-#### 函数柯里化
-
-* 蚂蚁的题。
-
-```javascript
-function sum(a, b, c) {
-  return a + b + c
-}
-
-var currySum = curry(sum)
-// currySum(1)(2)(3) = sum(1, 2, 3) // 实现这样的效果
-
-// 兼容参数个数的实现
-function curry(fn, args) {
-  let arr = args || [] // 入参，在第二次调用时会有初始值
-  let len = fn.length // 函数参数的数量
-  return function () {
-    res = arr.concat(Array.prototype.slice.call(arguments)) // 传入的参数与原来的参数整合
-    // 参数长度不足时，仍然传入原函数
-    if (res.length < len) {
-      // 调用柯里化函数，并传入原函数和参数
-      return curry(fn, res) // 等同于 curry.call(null, fn, res)
-    // 参数长度足够时，输出结果
-    } else {
-      return fn(...res) // 等同于 fn.apply(null, res)
-    }
-  }
-}
-currySum(1)(2)(3) === sum(1, 2, 3) // 6
-
-// 30 秒代码上的实现，更加简约
-// https://30secondsofcode.org/function#curry
-// args 这里不是很理解
-const curry = (fn, len = fn.length, ...args) => {
-  return len <= args.length ? fn(...args) : curry.bind(null, fn, len, ...args)
-}
-
 ```
 
 #### jsonp实现原理及具体实现
