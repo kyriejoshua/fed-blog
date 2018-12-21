@@ -9,9 +9,13 @@
     "start": "hexo s",
     "clean": "hexo clean",
     "douban": "hexo douban -b",
-    "generate": "hexo g",
+    "ge": "hexo g",
     "deploy": "hexo deploy",
-    "build": "hexo clean & hexo douban -b & hexo g & hexo deploy"
+    "prepublish": "npm run clean",
+    "prepare": "npm run douban",
+    "prepublishOnly": "npm run ge",
+    "publish": "npm run deploy",
+    "build": "hexo clean && hexo douban -b && hexo g && hexo deploy"
   },
   "dependencies": {
     "hexo": "^3.2.0",

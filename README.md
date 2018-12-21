@@ -15,11 +15,13 @@
 ### Usage
 
 * `hexo s` 或 `npm start` 启动服务
-* `hexo clean`或 `npm run clean` 清除 `public` 目录
+* `hexo clean` 或 `npm run clean` 清除 `public` 目录
 * `hexo douban -b` 或 `npm run douban` 生成豆瓣阅读页面
 * `hexo g` 或 `npm run generate` 生成 public 目录
 * `hexo d` 或 `npm run deploy` 部署
-* 一键部署：`npm run build`
+* 一键部署：`npm run build` 或 `npm run publish`.
+  * `npm run build` 串行运行了相关的部署脚本。
+  * `npm run publish` 执行时理论上应当按顺序执行 `prepublish`、`prepare`、`prepublishOnly`、`publish`. 但中间两个没有执行，不知是否是 npm 版本的问题。
 
 #### Others
 
