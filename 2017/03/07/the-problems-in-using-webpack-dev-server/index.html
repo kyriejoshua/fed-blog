@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>webpack-dev-server 中代理(proxy)相关问题的解决及反思 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="记一次工作中踩的坑。坑不大，但耗时非常长。">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack-dev-server 中代理(proxy)相关问题的解决及反思">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/03/07/the-problems-in-using-webpack-dev-server/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="记一次工作中踩的坑。坑不大，但耗时非常长。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/03/07/the-problems-in-using-webpack-dev-server/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:35.075Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack-dev-server 中代理(proxy)相关问题的解决及反思">
+<meta name="twitter:description" content="记一次工作中踩的坑。坑不大，但耗时非常长。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2017/03/07/the-problems-in-using-webpack-dev-server/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            webpack-dev-server 中代理(proxy)相关问题的解决及反思
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-03-07T09:14:53.000Z" itemprop="datePublished">Mar 7 2017</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/Tools/">Tools</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 分钟 读完 (约 1584 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2017/03/07/the-problems-in-using-webpack-dev-server/unphoto.jpg" title="webpack-dev-server">
+<blockquote><p>记一次工作中踩的坑。坑不大，但耗时非常长。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li><p>近期刚加入新公司，配置环境方面踩了非常多的坑。有的最后发现其实是非常简单的原因导致，有的到最后也没有找到原因。这里记录一个最近发生的，让自己头疼了很久的问题，最后的解决方式并不难，但解决的过程值得记录和反思。</p>
+</li>
+<li><p>新项目中使用了 gulp 来配置 webpack, 其中也包括了 webpack-dev-server. 问题便来自于这里。</p>
+</li>
+<li><p>首先来看看代码：</p>
+</li>
+</ul>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># gulp 中一个很普通的 task, 使用 coffeescript 编写</span></span><br><span class="line">gulp.task <span class="hljs-string">'webpack-dev'</span>, <span class="hljs-function"><span class="hljs-params">(cb)</span> -&gt;</span></span><br><span class="line">  webpackServer =</span><br><span class="line">  	publicPath: <span class="hljs-string">'/'</span></span><br><span class="line">    hot: <span class="hljs-literal">true</span></span><br><span class="line">    stats:</span><br><span class="line">      colors: <span class="hljs-literal">true</span></span><br><span class="line">    proxy:</span><br><span class="line">      <span class="hljs-string">'/api/'</span>:</span><br><span class="line">      	target: <span class="hljs-string">'http://localhost:8000'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>这里使用了 webpack-dev-server 的 proxy 配置来代理请求，将原 <code>/api/</code>发起的请求发往 <code>localhost:8000</code>, 看起来似乎没有什么问题，实际上也并没有问题所在。</p>
+</li>
+<li><p>然而，因为某些未知 bug, 我不得不更改 proxy 的 target 对象。实际上，个人认为，前端在调试时，使用本地的后端服务并不恰当，最好是在 dev 环境上进行接口调试。dev 环境提供的服务至少稳定。</p>
+</li>
+<li><p>因为那该死的 bug, 和刚才说明的考虑，我将这个 target 指向了公司的 dev 站点。</p>
+</li>
+<li><p>改动很少，大致如下:</p>
+</li>
+</ul>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.task <span class="hljs-string">'webpack-dev'</span>, <span class="hljs-function"><span class="hljs-params">(cb)</span> -&gt;</span></span><br><span class="line">  <span class="hljs-comment"># ...</span></span><br><span class="line">  proxy:</span><br><span class="line">    <span class="hljs-string">'/api/'</span>:</span><br><span class="line">      target: <span class="hljs-string">'http://chat.dev.cn'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>本以为不会有任何问题，小小的改动怎会引起巨变。然而，坑就这样产生了。开发环境中的 xhr 请求无法请求到原来的接口。但在浏览器中直接打开 <code>http://chatops.dev.cn/api/user</code> 却能得到应有的结果。这让人烦躁，让我心慌。</li>
+</ul>
+<h3 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h3><ul>
+<li><p>最初碰到这问题的时候，我一脸懵逼，第一反应是这属于 nodejs 相关的问题，但我对 nodejs 接触不多，想到要从一无所知的事物下手，心情更加烦躁。</p>
+</li>
+<li><p>待冷静下来后，首先想到的是跨域问题。既然 chrome log 里涉及到了 xhr, 那么从跨域的角度或许能找到线索。</p>
+</li>
+<li><p>不幸的是，我发现，这个代理请求是 nodejs  发出的，并不是浏览器发出，既然不是浏览器发起，那也没有跨域这一说。</p>
+</li>
+<li><p>随即我反应过来，既然是 webpack-dev-server 的问题，那么从官方文档查看或许会有进展。果然，文档中有如下说明并列举了使用方式。</p>
+<blockquote>
+<h3 id="Proxying-local-virtual-hosts"><a href="#Proxying-local-virtual-hosts" class="headerlink" title="Proxying local virtual hosts"></a>Proxying local virtual hosts</h3><p>It seems that <code>http-proxy-middleware</code> pre-resolves the local hostnames into <code>localhost</code>, you will need the following config to fix the proxy request:</p>
+</blockquote>
+</li>
+<li><p>我根据文档修改，于是得到如下结果：</p>
+</li>
+</ul>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gulp.task &apos;webpack-dev&apos;, (cb) -&gt;</span><br><span class="line">  # ...</span><br><span class="line">  proxy:</span><br><span class="line">    &apos;/api/&apos;:</span><br><span class="line">      target:</span><br><span class="line">        host: &apos;chat.dev.cn&apos;</span><br><span class="line">        protocol: &apos;http:&apos;</span><br><span class="line">        port: 80</span><br><span class="line">      ignorePath: true</span><br><span class="line">      changeOrigin: true</span><br><span class="line">      secure: false</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>这时我怀着激动的心情重启服务，却得到了失望的结果——接口请求到了，返回的格式却是’text/html’. 一定是有哪里出了问题，但无从得知。心情更加烦躁。</p>
+</li>
+<li><p>从刚才 webpack-dev-server 的说明中，我又查阅了 http-proxy-middleware 的相关文档，里面有它自己相关的说明，但和 webpack 相关的仍然一无所获。</p>
+</li>
+<li><p>无奈之下，第一反应是回到万能的 google, 提取关键字 webpack-dev-server 和 proxy，几乎漫无目的搜索后，并没有发现有用的解决办法。</p>
+</li>
+<li><p>于是我又想到 github issues, 在 webpack-dev-server 开源项目中查找相关 issues, 的确有部分 proxy 的疑问在，但仍然没有可提取的信息。</p>
+</li>
+<li><p>stackoverflow 上也是同样的结果。这几乎是我最绝望的时刻。</p>
+</li>
+<li><p>冷静下来，我开始反思，是不是一开始就走错了路。于是我回到了官方文档上，逐一试探。</p>
+<ul>
+<li>在尝试了 quiet 选项之后无效。</li>
+<li>将端口改为本地一样的 8000 也无效。</li>
+<li>我想，虽然不是跨域，但 origin 应当是更改的，changeOrigin 应保留。而 secure 在基础配置里也有，应当也不是。于是我再尝试修改 ignorePath 的值，重启之后，发现竟然成功了。</li>
+<li>最后的代码如下：</li>
+</ul>
+</li>
+</ul>
+  <figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gulp.task &apos;webpack-dev-server&apos;, (cb) -&gt;</span><br><span class="line">  # ...</span><br><span class="line">  proxy:</span><br><span class="line">    &apos;/api/&apos;:</span><br><span class="line">      target:</span><br><span class="line">        host: &apos;chat.dev.cn&apos;</span><br><span class="line">        protocol: &apos;http:&apos;</span><br><span class="line">        port: 80</span><br><span class="line">      ingorePath: false # 默认即为 false,注释掉也可以</span><br><span class="line">      changeOrigin: true</span><br><span class="line">      secure: false</span><br></pre></td></tr></table></figure>
+<h3 id="回顾与反思"><a href="#回顾与反思" class="headerlink" title="回顾与反思"></a>回顾与反思</h3><ul>
+<li><p>这个问题，前前后后困扰了我近一个工作日的时间，跨度有好几天。每天都花费了一定的时间在上面，直至今天，用了近半天的时间才得以解决。</p>
+</li>
+<li><p>事实上，这个问题的本质我还是没有发现，我只是简单地让他生效，并不知其中的原因。等到发现根本原因，理解透彻之后，再回来更新这里。</p>
+</li>
+<li><p>在解决这个问题的过程中，我先后想到 nodejs, 跨域，官方文档，google, github issues, stackoverflow 到最后回到文档。仔细想想，其中有部分是可以避免的，比如在漫无目的的使用 google  时，搜索的效果其实并不好，提取关键字也不够到位。</p>
+</li>
+<li><p>而且在每个过程之间，都有一定的时间跨度，这是不足之处。因为在前一种方式尝试过后难以平复失败时的焦躁心情，不能冷静的思考其他可能，才浪费了许多时间。</p>
+</li>
+<li><p>另外，要拥有一种任何问题都可以搞定的心态，没有搞不定的问题，只有没有信心的人。问题总是可以解决的，只不过有的解决方式并不那么完美，但也许睡过一觉再醒来，再想想，就会发现新的角度。如果一个问题暂时无法解决，那就好好睡一觉，第二天继续干。</p>
+</li>
+</ul>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/webpack/">#webpack</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2017/04/01/zhihulive-vczero/">前端 vczero 三年从前端小工到架构分享</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2017/02/12/review-dom/">DOM 重要知识点回顾</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/03/07/the-problems-in-using-webpack-dev-server/';
+        this.page.identifier = '2017/03/07/the-problems-in-using-webpack-dev-server/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>
