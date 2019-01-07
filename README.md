@@ -2,7 +2,8 @@
 
 ### Requirements
 
-* node -v 6.6.0
+* hexo v3.7.1
+* node v8.9.4
 * 旧版本 0.10.30 (与Hexo版本同步，现已更新)
 
 ### Table of Contents

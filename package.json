@@ -18,7 +18,7 @@
     "build": "hexo clean && hexo douban && hexo g && hexo deploy"
   },
   "dependencies": {
-    "hexo": "^3.2.0",
+    "hexo": "^3.7.1",
     "hexo-cli": "^1.1.0",
     "hexo-deployer-git": "^0.2.0",
     "hexo-douban": "^1.0.5",
