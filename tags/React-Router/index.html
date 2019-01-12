@@ -126,6 +126,68 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/jo.github.io/2019/01/03/understanding-react-router/" itemprop="url">深入浅出 react-router 原理</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-01-03T13:59:22.000Z" itemprop="datePublished">Jan 3 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            24 分钟 读完 (约 3639 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/jo.github.io/2019/01/03/understanding-react-router/unphoto.jpg" alt=""></p>
+<p>从<a href="/jo.github.io/2018/07/29/understanding-history-in-react-router">上篇文章</a>可以知道，<code>react-router</code> 本质上，利用了 <code>history api</code> 的 <code>pushState</code>, <code>replaceState</code> 方法来控制路由地址，然后使用 <code>popstate</code>, <code>hashchange</code> 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。<br>推荐：★★★★</p>
+        <p class="article-more-link">
+            <a href="/jo.github.io/2019/01/03/understanding-react-router/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/jo.github.io/2018/07/29/understanding-history-in-react-router/" itemprop="url">理解 react-router 中的 history</a>
         
     </h1>
