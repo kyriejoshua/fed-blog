@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>深入浅出 react-router 原理 - Deadpool Front-end</title>
+<title>浅谈 react-router 实现原理 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -17,7 +17,7 @@
     <meta name="description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
 <meta name="keywords" content="React-Router">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出 react-router 原理">
+<meta property="og:title" content="浅谈 react-router 实现原理">
 <meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
@@ -27,9 +27,9 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/react-router-road.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-01-12T12:55:20.639Z">
+<meta property="og:updated_time" content="2019-01-19T10:23:32.385Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出 react-router 原理">
+<meta name="twitter:title" content="浅谈 react-router 实现原理">
 <meta name="twitter:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/unphoto.jpg">
 
@@ -126,7 +126,7 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            深入浅出 react-router 原理
+            浅谈 react-router 实现原理
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -143,7 +143,7 @@
         <span class="column is-narrow">
             
             
-            24 分钟 读完 (约 3639 字)
+            25 分钟 读完 (约 3765 字)
         </span>
         
     </div>
@@ -166,21 +166,21 @@
 </ul>
 </li>
 <li><a href="#react-router与react-router-dom">react-router与react-router-dom</a></li>
-<li><a href="#遗留的坑">遗留的坑</a></li>
 <li><a href="#小结">小结</a></li>
+<li><a href="#遗留的坑">遗留的坑</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
 <li>如上所说，其实在 <code>history</code> 与 <code>react-router</code> 之间，核心就差了视图如何变化的逻辑部分。</li>
-<li>在了解到内部原理之前，这张图是这样的。</li>
+<li>在了解到内部原理之前，我理解的流程图是这样的。</li>
 </ul>
 <img src="/jo.github.io/2019/01/03/understanding-react-router/react-router.png">
 <ul>
-<li>接下来我们来慢慢找出这剩余的部分。</li>
+<li>接下来我们来慢慢找出这剩余的部分。然后来看看和最初的印象有什么不同。</li>
 <li>注意：这里的所有代码均基于 <a href="https://github.com/ReactTraining/react-router/tree/v4.2.2" target="_blank" rel="noopener"><code>react-router</code></a> 的 v4+ 版本。</li>
 </ul>
 <h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
-<li>最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 <code>replaceState</code> 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面。</li>
+<li>我最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 <code>replaceState</code> 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面，不会让页面重新加载。</li>
 <li>因此，让我们还是从组件入手。</li>
 </ul>
 <h4 id="Link"><a href="#Link" class="headerlink" title="Link"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/Link.js" target="_blank" rel="noopener">Link</a></h4><ul>
@@ -256,7 +256,7 @@
 </ul>
 <p><span></span></p>
 <ul>
-<li><p><strong><code>children</code></strong>: 一个函数，和 <code>render</code> 类似。但它在任何情况下，只要传入值就会渲染。它接收的 <code>props</code> 和其他方式相同，除了在不匹配的情况下，<code>match</code> 的值为 <code>null</code> 这点不同。可用于一些固定显示在页面的组件，然后通过 <code>match</code> 的值来控制样式。</p>
+<li><p><strong><code>children</code></strong>: 一个函数，和 <code>render</code> 类似。但它在任何情况下，只要传入值就会渲染。它接收的 <code>props</code> 和其他方式相同，除了在不匹配的情况下，<code>match</code> 的值为 <code>null</code> 这点不同。它的业务场景，可能是用于一些固定显示在页面的组件，然后通过 <code>match</code> 的值来控制样式。</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> matchPath <span class="hljs-keyword">from</span> <span class="hljs-string">'./matchPath'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * The public API for matching a single path and rendering.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Route</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">static</span> contextTypes = &#123;</span><br><span class="line">    router: PropTypes.shape(&#123;</span><br><span class="line">      history: PropTypes.object.isRequired,</span><br><span class="line">      route: PropTypes.object.isRequired,</span><br><span class="line">      staticContext: PropTypes.object</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getChildContext() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      router: &#123;</span><br><span class="line">        ...this.context.router,</span><br><span class="line">        route: &#123;</span><br><span class="line">          location: <span class="hljs-keyword">this</span>.props.location || <span class="hljs-keyword">this</span>.context.router.route.location,</span><br><span class="line">          match: <span class="hljs-keyword">this</span>.state.match</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  state = &#123;</span><br><span class="line">    match: <span class="hljs-keyword">this</span>.computeMatch(<span class="hljs-keyword">this</span>.props, <span class="hljs-keyword">this</span>.context.router)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  computeMatch(&#123; computedMatch, location, path, strict, exact, sensitive &#125;, router) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (computedMatch)</span><br><span class="line">      <span class="hljs-keyword">return</span> computedMatch <span class="hljs-comment">// &lt;Switch&gt; already computed the match for us</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> &#123; route &#125; = router</span><br><span class="line">    <span class="hljs-keyword">const</span> pathname = (location || route.location).pathname</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> path ? matchPath(pathname, &#123; path, strict, exact, sensitive &#125;) : route.match</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillReceiveProps(nextProps, nextContext) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      match: <span class="hljs-keyword">this</span>.computeMatch(nextProps, nextContext.router)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> &#123; match &#125; = <span class="hljs-keyword">this</span>.state</span><br><span class="line">    <span class="hljs-keyword">const</span> &#123; children, component, render &#125; = <span class="hljs-keyword">this</span>.props</span><br><span class="line">    <span class="hljs-keyword">const</span> &#123; history, route, staticContext &#125; = <span class="hljs-keyword">this</span>.context.router</span><br><span class="line">    <span class="hljs-keyword">const</span> location = <span class="hljs-keyword">this</span>.props.location || route.location</span><br><span class="line">    <span class="hljs-keyword">const</span> props = &#123; match, location, history, staticContext &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      component ? ( <span class="hljs-comment">// component prop gets first priority, only called if there's a match</span></span><br><span class="line">        match ? React.createElement(component, props) : <span class="hljs-literal">null</span></span><br><span class="line">      ) : render ? ( <span class="hljs-comment">// render prop is next, only called if there's a match</span></span><br><span class="line">        match ? render(props) : <span class="hljs-literal">null</span></span><br><span class="line">      ) : children ? ( <span class="hljs-comment">// children come last, always called</span></span><br><span class="line">        <span class="hljs-keyword">typeof</span> children === <span class="hljs-string">'function'</span> ? (</span><br><span class="line">          children(props)</span><br><span class="line">        ) : !isEmptyChildren(children) ? (</span><br><span class="line">          React.Children.only(children)</span><br><span class="line">        ) : (</span><br><span class="line">          <span class="hljs-literal">null</span></span><br><span class="line">        )</span><br><span class="line">      ) : (</span><br><span class="line">        <span class="hljs-literal">null</span></span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Route</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在 <code>Route</code> 组件里，首先我们看到 <code>render</code> 里，由组件的内容类型来决定渲染是 <code>component</code> 或 <code>render</code> 或 <code>children</code>. 然后由 <code>this.state.match</code> 这个字段决定了当前的元素是否渲染。</p>
@@ -277,7 +277,7 @@
 <li><p><code>matchPath</code> 通过返回一个对象，来确定路由是否匹配。(官方文档有关于这个对象的介绍<a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/match.md" target="_blank" rel="noopener"><strong>match</strong></a>)如果匹配，则返回一个包含 <code>path</code>, <code>url</code>, <code>isExact</code>, <code>params</code> 等属性的对象。否则，则返回 <code>null</code>.</p>
 </li>
 <li>判断的主要逻辑是通过正则。</li>
-<li>引入了外部的独立的库 <code>path-to-regexp</code> 来将地址转化成正则。<ul>
+<li>引入了外部的独立的库 <a href="https://github.com/pillarjs/path-to-regexp" target="_blank" rel="noopener"><strong><code>path-to-regexp</code></strong></a> 来将地址转化成正则。<ul>
 <li><code>compilePath</code> 方法里： <code>const re = pathToRegexp(pattern, keys, options)</code></li>
 <li><code>const { re, keys } = compilePath(path, { end: exact, strict, sensitive })</code></li>
 <li><code>const match = re.exec(pathname)</code></li>
@@ -303,16 +303,11 @@
 </li>
 <li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/withRouter.md?1546862742594" target="_blank" rel="noopener"><strong>这里是文档</strong></a></li>
 </ul>
-<h4 id="react-router与react-router-dom"><a href="#react-router与react-router-dom" class="headerlink" title="react-router与react-router-dom"></a>react-router与react-router-dom</h4><ul>
+<h4 id="react-router与react-router-dom"><a href="#react-router与react-router-dom" class="headerlink" title="react-router与react-router-dom"></a><code>react-router</code>与<code>react-router-dom</code></h4><ul>
 <li>好了，现在来补充这两个库的不同。</li>
 <li><code>react-router</code> 是一个底层的库，任何其他的基于 <code>React</code> 的路由库都基于它。但是在实际应用中，我们可能要对不同的场景做一些细分，以便更好地使用它们。</li>
 <li>于是，就有了为现代浏览器提供的 <code>react-router-dom</code>. 观察代码可以发现，它的核心组件，例如 <code>Route</code>、<code>Switch</code>、<code>withRouter</code> 都是从 <code>react-router</code> 直接引入的。</li>
 <li>除此之外，自然还有在 <code>React-Native</code> 中使用的 <code>react-router-native</code>, 以及结合 <code>redux</code> 使用的 <code>react-router-redux</code> 等等。</li>
-</ul>
-<h3 id="遗漏的坑"><a href="#遗漏的坑" class="headerlink" title="遗漏的坑"></a>遗漏的坑</h3><ul>
-<li>遗留两个 TODO 待完成。</li>
-<li><code>react-router</code> 在 <code>node</code> 中的应用。</li>
-<li><code>path-to-regexp</code> 的原理及为何使用缓存。</li>
 </ul>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>在了解完这么多组件的内容和原理后，相信我们对于 <code>react-router</code> 的实现，有了一定的清晰的思路了。我们会发现，和最初理解的不一样。其实就是自己的理解在一开始是不完善的，甚至有些误解。这个时候，让我们再把流程图再重新梳理，画一遍。下面是简略的更新逻辑过程。</li>
@@ -322,6 +317,13 @@
 <li>下面是一张调用栈的图，或许可以更直观地展示调用了哪些方法调用以及他们的执行顺序。</li>
 </ul>
 <img src="/jo.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
+<h3 id="遗漏的坑"><a href="#遗漏的坑" class="headerlink" title="遗漏的坑"></a>遗漏的坑</h3><ul>
+<li>到此，相关的主要的逻辑就解释完毕了。</li>
+<li>以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。</li>
+<li><code>react-router</code> 或 <code>history</code> 在 <code>node</code> 中的应用。</li>
+<li><a href="https://github.com/pillarjs/path-to-regexp" target="_blank" rel="noopener"><strong><code>path-to-regexp</code></strong></a> 的原理及为何使用缓存。</li>
+<li><code>popstate</code> 和 <code>hashchange</code> 最后到底在哪些地方进行了调用和应用。</li>
+</ul>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="https://juejin.im/post/5a7e9ee7f265da4e7832949c" target="_blank" rel="noopener">[译]简明React Router v4教程</a><br><a href="https://github.com/fi3ework/blog/issues/21" target="_blank" rel="noopener">前端路由实现及 react-router v4 源码分析</a></p>
 </blockquote>
 <p><hr><br><img src="/jo.github.io/2019/01/03/understanding-react-router/reward.jpeg" title="Thanks"></p>
