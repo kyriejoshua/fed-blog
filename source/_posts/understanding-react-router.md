@@ -1,5 +1,5 @@
 ---
-title: 深入浅出 react-router 原理
+title: 浅谈 react-router 实现原理
 date: 2019-01-03 21:59:22
 tags: React-Router
 categories: React
@@ -25,23 +25,23 @@ categories: React
   - [Switch](#Switch)
   - [withRouter](#withRouter)
 - [react-router与react-router-dom](#react-router与react-router-dom)
-- [遗留的坑](#遗留的坑)
 - [小结](#小结)
+- [遗留的坑](#遗留的坑)
 - [参考](#参考)
 
 ### 引子
 
 * 如上所说，其实在 `history` 与 `react-router` 之间，核心就差了视图如何变化的逻辑部分。
-* 在了解到内部原理之前，这张图是这样的。
+* 在了解到内部原理之前，我理解的流程图是这样的。
 
 {% asset_img react-router.png %}
 
-* 接下来我们来慢慢找出这剩余的部分。
+* 接下来我们来慢慢找出这剩余的部分。然后来看看和最初的印象有什么不同。
 * 注意：这里的所有代码均基于 [`react-router`](https://github.com/ReactTraining/react-router/tree/v4.2.2) 的 v4+ 版本。
 
 ### 组件
 
-* 最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 `replaceState` 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面。
+* 我最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 `replaceState` 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面，不会让页面重新加载。
 * 因此，让我们还是从组件入手。
 
 #### [Link](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/Link.js)
@@ -131,7 +131,7 @@ categories: React
   * [`<StaticRouter>`](./StaticRouter.md)
   * `BrowserRouter` 是在现代浏览器里使用较多的组件，它在支持 `HTML5` 的 `history API` 的地方可以使用。通过独立的包 `react-router-dom` 提供。做的事情类似，只是使用方式略有不同，这里不再赘述。
   * [**这里是具体的文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Router.md)
-  <span></span>
+<span></span>
 
 * 通常情况下，`Router` 作为父组件，包裹着 `Route` 和 `Switch` 等组件。
 * 观察它的源码。它本质上也是 `React` 组件。在渲染的时候，注册监听了事件。下文细说。
@@ -233,7 +233,7 @@ categories: React
 
 <span></span>
 
-* **`children`**: 一个函数，和 `render` 类似。但它在任何情况下，只要传入值就会渲染。它接收的 `props` 和其他方式相同，除了在不匹配的情况下，`match` 的值为 `null` 这点不同。可用于一些固定显示在页面的组件，然后通过 `match` 的值来控制样式。
+* **`children`**: 一个函数，和 `render` 类似。但它在任何情况下，只要传入值就会渲染。它接收的 `props` 和其他方式相同，除了在不匹配的情况下，`match` 的值为 `null` 这点不同。它的业务场景，可能是用于一些固定显示在页面的组件，然后通过 `match` 的值来控制样式。
 
   ```javascript
   import matchPath from './matchPath'
@@ -388,7 +388,7 @@ categories: React
 
 * `matchPath` 通过返回一个对象，来确定路由是否匹配。(官方文档有关于这个对象的介绍[**match**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/match.md))如果匹配，则返回一个包含 `path`, `url`, `isExact`, `params` 等属性的对象。否则，则返回 `null`.
 * 判断的主要逻辑是通过正则。
-* 引入了外部的独立的库 `path-to-regexp` 来将地址转化成正则。
+* 引入了外部的独立的库 [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 来将地址转化成正则。
   * `compilePath` 方法里： `const re = pathToRegexp(pattern, keys, options)`
   * `const { re, keys } = compilePath(path, { end: exact, strict, sensitive })`
   * `const match = re.exec(pathname)`
@@ -475,18 +475,12 @@ categories: React
 * 目前在项目中我还没有用到它，等用到的时候，再来补充下具体的使用场景。
 * [**这里是文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/withRouter.md?1546862742594)
 
-#### react-router与react-router-dom
+#### `react-router`与`react-router-dom`
 
 * 好了，现在来补充这两个库的不同。
 * `react-router` 是一个底层的库，任何其他的基于 `React` 的路由库都基于它。但是在实际应用中，我们可能要对不同的场景做一些细分，以便更好地使用它们。
 * 于是，就有了为现代浏览器提供的 `react-router-dom`. 观察代码可以发现，它的核心组件，例如 `Route`、`Switch`、`withRouter` 都是从 `react-router` 直接引入的。
 * 除此之外，自然还有在 `React-Native` 中使用的 `react-router-native`, 以及结合 `redux` 使用的 `react-router-redux` 等等。
-
-### 遗漏的坑
-
-* 遗留两个 TODO 待完成。
-* `react-router` 在 `node` 中的应用。
-* `path-to-regexp` 的原理及为何使用缓存。
 
 ### 小结
 
@@ -497,6 +491,14 @@ categories: React
 * 下面是一张调用栈的图，或许可以更直观地展示调用了哪些方法调用以及他们的执行顺序。
 
 {% asset_img react-router-stack.png %}
+
+### 遗漏的坑
+
+* 到此，相关的主要的逻辑就解释完毕了。
+* 以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。
+* `react-router` 或 `history` 在 `node` 中的应用。
+* [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 的原理及为何使用缓存。
+* `popstate` 和 `hashchange` 最后到底在哪些地方进行了调用和应用。
 
 ### 参考
 
