@@ -628,6 +628,13 @@ document.body.addEventListener('click', (e) => {
   * 无法使用 AJAX.
   * 无法获取 DOM.
 
+<span></span>
+
+* 但是有几个标签的请求是绕过同源策略的。
+  * `<img src='' />`
+  * `<link href='' />`
+  * `<script src='' />`
+
 #### 跨域方案
 
 * [**JSONP**](#jsonp实现原理及具体实现)
@@ -653,7 +660,30 @@ document.body.addEventListener('click', (e) => {
 
 <span></span>
 
-* TODO: nginx 反向代理 / websocket ???
+* node 中间件代理
+  * 思路是 node 服务端获取到客户端请求，再从 node 服务器发出，请求后数据再返回给客户端。
+  * 这样从服务端发起请求，没有同源策略影响。
+
+<span></span>
+
+* TODO: nginx 反向代理
+  * 类似 node 中间件代理，搭建一层服务器作为中转。
+  * ssh 登录上服务器，修改 nginx 的配置文件。然后重启 nginx. `nginx -s reload`
+  * 在 `nginx.conf` 文件里修改
+  ```shell
+  server {
+    listen  80;
+    server_name www.domain1.com;
+    location / {
+      proxy_pass www.domain2.com:8080; #反向代理
+      index index.html;
+    }
+  }
+  ```
+
+<span></span>
+
+* TODO: websocket
 
 ### 前端安全
 

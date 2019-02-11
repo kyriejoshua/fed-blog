@@ -510,5 +510,5 @@ categories: React
 <hr>
 {% asset_img reward.jpeg Thanks %}
 
-<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h -->
-<!-- 6.2h -->
+<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h-->
+<!-- 6.4h -->
