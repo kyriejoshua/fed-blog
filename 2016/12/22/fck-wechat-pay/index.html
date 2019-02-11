@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>微信支付开发日志 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="曾经有一项需求，是从移动端的H5页面请求微信支付功能。微信的文档写地较为混乱，在这里写个防坑指南。">
+<meta name="keywords" content="wepay">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信支付开发日志">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/12/22/fck-wechat-pay/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="曾经有一项需求，是从移动端的H5页面请求微信支付功能。微信的文档写地较为混乱，在这里写个防坑指南。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/22/fck-wechat-pay/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信支付开发日志">
+<meta name="twitter:description" content="曾经有一项需求，是从移动端的H5页面请求微信支付功能。微信的文档写地较为混乱，在这里写个防坑指南。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/22/fck-wechat-pay/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            微信支付开发日志
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-12-22T03:55:48.000Z" itemprop="datePublished">12月 22 2016</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/Wechat/">Wechat</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 分钟 读完 (约 1506 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2016/12/22/fck-wechat-pay/unphoto.jpg" title="wx pay">
+<blockquote><br>曾经有一项需求，是从移动端的H5页面请求微信支付功能。微信的文档写地较为混乱，在这里写个防坑指南。<br><br></blockquote>
+
+<a id="more"></a>
+<h3 id="支付的坑"><a href="#支付的坑" class="headerlink" title="支付的坑"></a>支付的坑</h3><p>1.微信支付的文档不止一个。</p>
+<ul>
+<li><p>在<a href="http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html" target="_blank" rel="noopener">官方的文档</a>里，有一段简单的关于微信支付的说明。调用<code>wx.chooseWXPay</code>方法启用。但是在这个文档之下，有另一个开发文档<a href="https://pay.weixin.qq.com/wiki/doc/api/index.html" target="_blank" rel="noopener">微信支付开发文档</a></p>
+</li>
+<li><p>这个文档里也有一个支付调用的方法<code>weixinJSBridge</code>，但是只能在微信浏览器里使用，非常不方便。本人测试从未成功过，所以建议放弃。</p>
+</li>
+</ul>
+<p>2.<code>wx.chooseWXPay</code>方法的传入参数和签名</p>
+<ul>
+<li><p>该方法发起请求时是没有<code>appId</code>参数的，但是在生成<code>paySign</code>签名的时候，需要有<code>appId</code>和它的值。这里的I是大写的i。</p>
+</li>
+<li><p>生成<code>paySign</code>的时候的<code>timeStamp</code>是大写的，和传入的参数不一样，传入的是小写。</p>
+</li>
+</ul>
+<p>3.服务端的工作？！</p>
+<ul>
+<li><p>由于微信文档里没有说明哪些是前端工作哪些是后端，所以在一开始开发时我做了很多服务端做的事。比如生成<code>signature</code>, <code>paySign</code>.两者不一样。</p>
+</li>
+<li><p>生成签名的工作前端也是可以做的，但是要发起很多异步请求，处理非常多的回调，简直是回调地狱，而且不安全。最后服务端的伙伴处理了第一个签名。</p>
+</li>
+<li><p>注意两个<code>access_token</code>的不同。</p>
+</li>
+</ul>
+<h3 id="微信公众号的准备工作"><a href="#微信公众号的准备工作" class="headerlink" title="微信公众号的准备工作"></a>微信公众号的准备工作</h3><p>1.微信公众号开通微信支付功能。</p>
+<ul>
+<li><p><a href="mp.weixin.qq.com">微信公众平台</a> 微信支付-开发配置里配置支付授权目录。</p>
+<ul>
+<li>正式授权目录可以添加多个，测试时只能添加一个。</li>
+<li>不允许添加端口。只支持默认80端口。</li>
+<li>目录即为调用微信支付空间的页面所在的目录。</li>
+<li>将个人的微信号加到支付的白名单里，只有白名单里的用户才可以支付，但没想到付的是真钱。</li>
+</ul>
+</li>
+<li><p>同一个页面里，选择开发者配置，找到接口权限表。</p>
+<ul>
+<li>网页授权用户基本信息。</li>
+<li>这个<code>url</code>是用户回调的<code>url</code>,即开启微信支付控件页面的<code>url</code>,这个值即是<code>redirect_url</code>的值。</li>
+<li>要记得<code>encodeUrl</code>转码。</li>
+</ul>
+</li>
+<li><p>进入公众号设置，功能设置</p>
+<ul>
+<li>对<code>js</code>安全域名做设置。</li>
+<li>这个值只能设置一个且似乎改动次数有限制。所以要小心改动。</li>
+<li>上线前记得切换。</li>
+</ul>
+</li>
+<li><p>开发者中心里的配置项。</p>
+<ul>
+<li>获取<code>appId</code>, <code>secret</code>等相关信息。</li>
+<li>还有<code>mch_id</code>和<code>key</code>。</li>
+<li>这些数据都不推荐写在前端页面里。</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li><p>打开微信页面，从服务端的回调<code>url</code>里获取<code>access_token</code>, <code>openId</code>. 须服务端通过<code>code</code>验证等，然后返回。</p>
+</li>
+<li><p>获取<code>wx.config</code>配置需要的<code>signature</code>, 传递随机数<code>nonceStr</code>，时间戳<code>timestamp</code>等参数给服务端生成签名。</p>
+</li>
+<li><p><code>wx.config</code>接口注入权限验证配置——通过<code>signature</code>等验证后。</p>
+</li>
+<li><p>通过<code>openId</code>获取<code>prepay_id</code>。</p>
+</li>
+<li><p>前端生成另一个签名<code>paySign</code>, 然后调用<code>wx.ready</code>里<code>wx.chooseWXPay</code>的方法调起支付。</p>
+</li>
+</ol>
+<h3 id="Show-Your-the-Code"><a href="#Show-Your-the-Code" class="headerlink" title="Show Your the Code"></a>Show Your the Code</h3><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// ES6、jquery结合的写法.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WxpayCtrl</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.access_token = <span class="hljs-keyword">this</span>.getUrlParams().access_token;</span><br><span class="line">    <span class="hljs-keyword">this</span>.openId = <span class="hljs-keyword">this</span>.getUrlParams().openId;</span><br><span class="line">    <span class="hljs-keyword">this</span>.appId = <span class="hljs-string">'skidfoislkdrehjkgrg'</span>;</span><br><span class="line">    <span class="hljs-keyword">this</span>.key = <span class="hljs-string">'sdkjgfgkgkhjishiduh'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [getUrlParams 获取url的参数 querystring]</span></span><br><span class="line"><span class="hljs-comment">   * @return &#123;Object&#125; [一个url参数键值配对的对象]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  getUrlParams() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> url = <span class="hljs-built_in">window</span>.location.search;</span><br><span class="line">    <span class="hljs-keyword">const</span> queryString = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</span><br><span class="line">    <span class="hljs-keyword">if</span> (url.indexOf(<span class="hljs-string">'?'</span>) !== <span class="hljs-number">-1</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">let</span> str = url.substr(<span class="hljs-number">1</span>);</span><br><span class="line">      <span class="hljs-keyword">let</span> strs = str.split(<span class="hljs-string">'&amp;'</span>);</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">        queryString[strs[i].split(<span class="hljs-string">'='</span>)[<span class="hljs-number">0</span>]] = <span class="hljs-built_in">decodeURI</span>(strs[i].split(<span class="hljs-string">'='</span>)[<span class="hljs-number">1</span>]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> queryString;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [createTimestamp 时间戳]</span></span><br><span class="line"><span class="hljs-comment">   * @return &#123;String&#125; [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  createTimestamp () &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseInt</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime() / <span class="hljs-number">1000</span>) + <span class="hljs-string">''</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [createNonceStr 随机字符串]</span></span><br><span class="line"><span class="hljs-comment">   * @return &#123;String&#125; [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  createNonceStr() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.random().toString(<span class="hljs-number">36</span>).substr(<span class="hljs-number">2</span>, <span class="hljs-number">15</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [getSignature 获取授权签名]</span></span><br><span class="line"><span class="hljs-comment">   * @return &#123;String&#125; [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  getSignature() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">const</span> data = &#123;</span><br><span class="line">        nonceStr: <span class="hljs-keyword">this</span>.createNonceStr(),</span><br><span class="line">        timestamp: <span class="hljs-keyword">this</span>.createTimestamp(),</span><br><span class="line">        url: <span class="hljs-built_in">window</span>.location.href.split(<span class="hljs-string">'#'</span>)[<span class="hljs-number">0</span>],</span><br><span class="line">        access_token: <span class="hljs-keyword">this</span>.accessToken</span><br><span class="line">      &#125;;</span><br><span class="line">      $.ajax(&#123;</span><br><span class="line">        url: <span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>/wechat/getSignature`</span>,</span><br><span class="line">        type: <span class="hljs-string">'POST'</span>,</span><br><span class="line">        data: <span class="hljs-built_in">JSON</span>.stringify(data)</span><br><span class="line">      &#125;)</span><br><span class="line">      .done(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        resolve(res);</span><br><span class="line">      &#125;)</span><br><span class="line">      .fail(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;</span><br><span class="line">        reject(err.message);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="hljs-keyword">return</span> promise;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [getPrepayId 用openId获取prepay_id， 和服务端协调后决定queryString]</span></span><br><span class="line"><span class="hljs-comment">   * @param  &#123;Number&#125; cash [消费金额]</span></span><br><span class="line"><span class="hljs-comment">   * @return &#123;String&#125;      [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  getPrepayId (cash=<span class="hljs-number">100</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">const</span> data = &#123;</span><br><span class="line">        amount: cash,</span><br><span class="line">        openId: <span class="hljs-keyword">this</span>.openId,</span><br><span class="line">        type: <span class="hljs-string">'JSAPI'</span>,</span><br><span class="line">        nonceStr: <span class="hljs-keyword">this</span>.createNonceStr()</span><br><span class="line">      &#125;;</span><br><span class="line">      $.ajax(&#123;</span><br><span class="line">        url: <span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>/wechat/getPrepayId`</span>,</span><br><span class="line">        type: <span class="hljs-string">'POST'</span>,</span><br><span class="line">        data: <span class="hljs-built_in">JSON</span>.stringify(data)</span><br><span class="line">      &#125;)</span><br><span class="line">      .done(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        resolve(res.content);</span><br><span class="line">      &#125;)</span><br><span class="line">      .fail(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;</span><br><span class="line">        reject(err.message);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="hljs-keyword">return</span> promise;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [weiPay 微信支付，验证加最终支付]</span></span><br><span class="line"><span class="hljs-comment">   * @param  &#123;String&#125; prepay_id [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  weiPay(prepay_id) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 随机生成随机数，在不同地方调用的时候是不一样的，尤其注意！！！</span></span><br><span class="line">    <span class="hljs-keyword">const</span> nonceStr = <span class="hljs-keyword">this</span>.createNonceStr();</span><br><span class="line">    <span class="hljs-keyword">const</span> stringA = <span class="hljs-string">`appId=<span class="hljs-subst">$&#123;<span class="hljs-keyword">this</span>.appId&#125;</span>&amp;nonceStr=<span class="hljs-subst">$&#123;nonceStr&#125;</span>&amp;package=prepay_id=<span class="hljs-subst">$&#123;prepay_id&#125;</span>&amp;signType=MD5&amp;timeStamp=<span class="hljs-subst">$&#123;<span class="hljs-keyword">this</span>.createTimestamp()&#125;</span>`</span>;</span><br><span class="line">    <span class="hljs-keyword">const</span> stringSignTemp = <span class="hljs-string">`<span class="hljs-subst">$&#123;stringA&#125;</span>&amp;key=<span class="hljs-subst">$&#123;<span class="hljs-keyword">this</span>.key&#125;</span>`</span>;</span><br><span class="line">    <span class="hljs-keyword">const</span> sign = md5(stringSignTemp).toUpperCase();</span><br><span class="line">    wx.chooseWXPay(&#123;</span><br><span class="line">      timestamp: <span class="hljs-keyword">this</span>.createTimestamp(),</span><br><span class="line">      nonceStr:  nonceStr,</span><br><span class="line">      package: <span class="hljs-string">`prepay_id=<span class="hljs-subst">$&#123;prepay_id&#125;</span>`</span>,</span><br><span class="line">      paySign: sign,</span><br><span class="line">      signType: <span class="hljs-string">'MD5'</span>,</span><br><span class="line">      success: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (res.errMsg === <span class="hljs-string">'chooseWXPay:ok'</span>)&#123;</span><br><span class="line">          <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">'success.html'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      fail: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">window</span>.alert(<span class="hljs-string">'支付失败！'</span>);</span><br><span class="line">        <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">'fail.html'</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      cancel: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">'cancel.html'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [weixinPay 调起微信支付]</span></span><br><span class="line"><span class="hljs-comment">   * @return &#123;[type]&#125; [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  weixinPay(cash) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.getSignature()</span><br><span class="line">    .then(<span class="hljs-function">(<span class="hljs-params">signature</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">       * [appId 微信支付的相关配置,通过config接口注入权限验证配置]</span></span><br><span class="line"><span class="hljs-comment">       */</span></span><br><span class="line">      wx.config(&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// debug: true, // 该选项仅用于调试</span></span><br><span class="line">        appId: <span class="hljs-keyword">this</span>.appId,</span><br><span class="line">        timestamp: <span class="hljs-keyword">this</span>.createTimestamp(),</span><br><span class="line">        nonceStr: <span class="hljs-keyword">this</span>.createNonceStr(),</span><br><span class="line">        signature: signature,</span><br><span class="line">        jsApiList: [<span class="hljs-string">'chooseWXPay'</span>]</span><br><span class="line">      &#125;);</span><br><span class="line">      wx.ready(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.getPrepayId(cash)</span><br><span class="line">        .then(<span class="hljs-function">(<span class="hljs-params">prepay_id</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="hljs-keyword">this</span>.weiPay(prepay_id);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="hljs-built_in">window</span>.alert(err);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-built_in">window</span>.alert(err);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>虽然这里有很多回调，代码也略凌乱，但它work了！</li>
+<li>当然有更好的方案，但紧急需求要求下这是较快的实现方式了。再次对接可让生成签名的工作移交服务端！</li>
+<li>PS：经过这次对接微信支付文档后，对微信的开发失去了信心。然后对微信推出的小程序也坚持保守态度。</li>
+</ul>
+<blockquote><br>参考：<br>*  <a href="http://www.cnblogs.com/sunshq/p/5035163.html" target="_blank" rel="noopener">接入微信支付流程清晰版</a><br><br></blockquote>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/wepay/">#wepay</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2016/12/26/my-2016-with-front-end/">前端入坑周年记——野蛮生长</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2016/12/19/transform-cookies-into-es6/">ES6改写cookies.js及分析</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/12/22/fck-wechat-pay/';
+        this.page.identifier = '2016/12/22/fck-wechat-pay/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

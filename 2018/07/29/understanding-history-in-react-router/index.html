@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>理解 react-router 中的 history - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
+<meta name="keywords" content="React-Router">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 react-router 中的 history">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg">
+<meta property="og:updated_time" content="2019-01-07T07:47:24.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 react-router 中的 history">
+<meta name="twitter:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            理解 react-router 中的 history
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-07-29T13:47:38.000Z" itemprop="datePublished">7月 29 2018</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            21 分钟 读完 (约 3182 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg" alt=""></p>
+<!-- 实际时间: 2018-08-29 21:47:38 -->
+<p>对 <code>react-router</code> 的分析，目前准备主要集中在三点：<br>a. <code>history</code> 的分析。<br>b. <code>react-router</code> 原理分析。<br>c. <code>react-router</code> 内部匹配原理。<br>这篇文章准备着重理解 <code>history</code>.<br>推荐：★★★☆</p>
+<a id="more"></a>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#引子">引子</a></li>
+<li><a href="#history核心">history核心</a></li>
+<li><a href="#走进createBrowserHistory">走进createBrowserHistory</a></li>
+<li><a href="#history在react-router中">history在react-router中</a></li>
+<li><a href="#小结">小结</a></li>
+<li><a href="#坑">坑</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+<h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
+<li><p>一段显而易见出现在各大 react v16+ 项目中的代码是这样的:</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123;Component&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; render &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span></span><br><span class="line"><span class="hljs-keyword">import</span> AppRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'./routes/'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; createBrowserHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'history'</span></span><br><span class="line"><span class="hljs-keyword">const</span> history = createBrowserHistory()</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;AppRouter history=&#123;history&#125; /&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">render(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, <span class="hljs-built_in">document</span>.body.querySelector(<span class="hljs-string">'#app'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>react</code> v16+ 版本里，通常 <code>react-router</code> 也升级到了 4 以上。</p>
+</li>
+<li>而 <code>react-router</code> v4+ 通常是配合 <code>history</code> 使用的。</li>
+<li>下面就先从 <code>history</code> 开始，让我们一步一步走近 <code>react-router</code> 的神秘世界。</li>
+</ul>
+<h3 id="history核心"><a href="#history核心" class="headerlink" title="history核心"></a>history核心</h3><ul>
+<li><a href="https://github.com/ReactTraining/history" target="_blank" rel="noopener"><em>history源码</em></a></li>
+<li><code>history</code> v4.6+ 在内部主要导出了三个方法:<ul>
+<li><code>createBrowserHistory</code>, <code>createHashHistory</code>, <code>createMemoryHistory</code>.</li>
+<li>它们分别有着自己的作用:<ul>
+<li><code>createBrowserHistory</code> 是为现代主流且支持 HTML5 history 浏览器提供的 API.</li>
+<li><code>createHashHistory</code> 是为不支持 <code>history</code> 功能的浏览器提供的 API.</li>
+<li><code>createMemoryHistory</code> 则是为没有 DOM 环境例如 <code>node</code> 或 <code>React-Native</code> 或测试提供的 API.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>我们就先从最接地气的 <code>createBrowserHistory</code> 也就是我们上文中使用的方法开始看起。</li>
+</ul>
+<h3 id="走进createBrowserHistory"><a href="#走进createBrowserHistory" class="headerlink" title="走进createBrowserHistory"></a>走进createBrowserHistory</h3><ul>
+<li><p>话不多说，直接走进<a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js" target="_blank" rel="noopener"><em>createBrowserHistory源码</em></a></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Creates a history object that uses the HTML5 history API including</span><br><span class="line"> * pushState, replaceState, and the popstate event.</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在方法开始的注释里，它说明了是基于 H5 的 <code>history</code> 创建对象，对象内包括了一些常用的方法譬如</p>
+<ul>
+<li><code>pushState</code>,<code>replaceState</code>,<code>popstate</code> 等</li>
+</ul>
+</li>
+</ul>
+<h4 id="history-对象"><a href="#history-对象" class="headerlink" title="history 对象"></a><strong><em><code>history</code> 对象</em></strong></h4><ul>
+<li><p>那么它具体返回了什么内容呢，下面就是它目前所有的方法和属性:</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> globalHistory = <span class="hljs-built_in">window</span>.history;</span><br><span class="line"><span class="hljs-keyword">const</span> history = &#123;</span><br><span class="line">  length: globalHistory.length, <span class="hljs-comment">// (number) The number of entries in the history stack</span></span><br><span class="line">  action: <span class="hljs-string">"POP"</span>, <span class="hljs-comment">// (string) The current action (`PUSH`, `REPLACE`, or `POP`)</span></span><br><span class="line">  location: initialLocation, <span class="hljs-comment">// (object) The current location. May have the following properties.</span></span><br><span class="line">  createHref,</span><br><span class="line">  push, <span class="hljs-comment">// (function) Pushes a new entry onto the history stack</span></span><br><span class="line">  replace, <span class="hljs-comment">// (function) Replaces the current entry on the history stack</span></span><br><span class="line">  go, <span class="hljs-comment">// (function) Moves the pointer in the history stack by `n` entries</span></span><br><span class="line">  goBack, <span class="hljs-comment">// (function) Equivalent to `go(-1)`</span></span><br><span class="line">  goForward, <span class="hljs-comment">// (function) Equivalent to `go(1)`</span></span><br><span class="line">  block, <span class="hljs-comment">// (function) Prevents navigation</span></span><br><span class="line">  listen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>globalHistory.length</code> 显而易见是当前存的历史栈的数量。</p>
+</li>
+<li><code>createHref</code> 根据根路径创建新路径，在根路径上添加原地址所带的 <code>search</code>, <code>pathname</code>, <code>path</code> 参数, 推测作用是将路径简化。</li>
+<li><code>location</code> 当前的 <code>location</code>, 可能含有以下几个属性。<ul>
+<li><code>path</code> - (string) 当前 <code>url</code> 的路径 <code>path</code>.</li>
+<li><code>search</code> - (string) 当前 <code>url</code> 的查询参数 <code>query string</code>.</li>
+<li><code>hash</code> - (string) 当前 <code>url</code> 的哈希值 <code>hash</code>.</li>
+<li><code>state</code> - - (object) 存储栈的内容。仅存在浏览器历史和内存历史中。</li>
+</ul>
+</li>
+<li><code>block</code> 阻止浏览器的默认导航。用于在用户离开页面前弹窗提示用户相应内容。<a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">the history docs</a></li>
+<li>其中，<code>go</code>/<code>goBack</code>/<code>goForward</code> 是对原生 <code>history.go</code> 的简单封装。</li>
+<li>剩下的方法相对复杂些，因此在介绍 <code>push</code>, <code>replace</code> 等方法之前，先来了解下 <code>transitionManager</code>. 因为下面的很多实现，都用到了这个对象所提供的方法。</li>
+</ul>
+<h4 id="transitionManager-方法"><a href="#transitionManager-方法" class="headerlink" title="transitionManager 方法"></a><strong><em><a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194" target="_blank" rel="noopener"><code>transitionManager</code></a> 方法</em></strong></h4><ul>
+<li><p>首先看下该对象返回了哪些方法：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> transitionManager = &#123;</span><br><span class="line">  setPrompt,</span><br><span class="line">  confirmTransitionTo,</span><br><span class="line">  appendListener,</span><br><span class="line">  notifyListeners</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在后续 <code>popstate</code> 相关方法中，它就应用了 <code>appendListener</code> 和与之有关的 <code>notifyListeners</code> 方法，我们就先从这些方法看起。</p>
+</li>
+<li><p>它们的设计体现了常见的订阅-发布模式，前者负责实现订阅事件逻辑，后者负责最终发布逻辑。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> listeners = [];</span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [description 订阅事件]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Function&#125; fn [description]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;Function&#125;      [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">const</span> appendListener = <span class="hljs-function"><span class="hljs-params">fn</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> isActive = <span class="hljs-literal">true</span>;</span><br><span class="line">  <span class="hljs-comment">// 订阅事件，做了函数柯里化处理，它实际上相当于运行了 `fn.apply(this, ...args)`</span></span><br><span class="line">  <span class="hljs-keyword">const</span> listener = <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (isActive) fn(...args);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="hljs-comment">// 将监听函数一一保存</span></span><br><span class="line">  listeners.push(listener);</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">    isActive = <span class="hljs-literal">false</span>;</span><br><span class="line">    listeners = listeners.filter(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item !== listener);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [发布逻辑]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;[type]&#125; ..args [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">const</span> notifyListeners = <span class="hljs-function">(<span class="hljs-params">..args</span>) =&gt;</span> &#123;</span><br><span class="line">  listeners.forEach(<span class="hljs-function"><span class="hljs-params">listener</span> =&gt;</span> listener(..args))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>介绍了上面两个方法的定义，先别急。后续再介绍它们的具体应用。</p>
+</li>
+<li><p>然后来看看另一个使用的较多的方法 <code>confirmTransitionTo</code>.</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> confirmTransitionTo = (</span><br><span class="line">  location,</span><br><span class="line">  action,</span><br><span class="line">  getUserConfirmation,</span><br><span class="line">  callback</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (prompt != <span class="hljs-literal">null</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> result =</span><br><span class="line">      <span class="hljs-keyword">typeof</span> prompt === <span class="hljs-string">"function"</span> ? prompt(location, action) : prompt;</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> result === <span class="hljs-string">"string"</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> getUserConfirmation === <span class="hljs-string">"function"</span>) &#123;</span><br><span class="line">        getUserConfirmation(result, callback);</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        callback(<span class="hljs-literal">true</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-comment">// Return false from a transition hook to cancel the transition.</span></span><br><span class="line">      <span class="hljs-comment">// 如果已经在执行，则暂时停止执行</span></span><br><span class="line">      callback(result !== <span class="hljs-literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    callback(<span class="hljs-literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实际上执行的就是从外部传进来的 <code>callback</code> 方法，只是多了几层判断来做校验，而且传入了布尔值来控制是否需要真的执行回调函数。</p>
+</li>
+</ul>
+<h4 id="transitionManager-调用"><a href="#transitionManager-调用" class="headerlink" title="transitionManager 调用"></a><strong><em><code>transitionManager</code> 调用</em></strong></h4><ul>
+<li>再然后我们来看看上述方法<code>appendListener</code>, <code>notifyListeners</code> 的具体应用。前者体现在了 <code>popstate</code> 事件的订阅中。</li>
+<li>那么就先简单谈谈 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/popstate" target="_blank" rel="noopener"><strong><code>popstate</code></strong></a> 事件。<ul>
+<li>当做出浏览器动作时，会触发 <code>popstate</code> 事件, 也就是说，<code>popstate</code> 本身并不是像 <code>pushState</code> 或 <code>replaceState</code> 一样是 <code>history</code> 的方法。</li>
+<li>不能使用 <code>history.popState</code> 这样的方式来调用。</li>
+<li>而且，直接调用 <code>history.pushState</code> 或 <code>history.replaceState</code> 不会触发 <code>popstate</code> 事件。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>在事件监听方法 <code>listen</code> 中涉及了 <code>popstate</code> 的使用，在源码中可以看到以下两个方法 <code>listen</code> 和 <code>checkDOMListeners</code>.</li>
+<li><p>它们就是上述订阅事件的具体调用方。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 首先自然是初始化</span></span><br><span class="line"><span class="hljs-keyword">const</span> transitionManager = createTransitionManager();</span><br><span class="line"><span class="hljs-keyword">const</span> PopStateEvent = <span class="hljs-string">"popstate"</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> HashChangeEvent = <span class="hljs-string">"hashchange"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 当 URL 的片段标识符更改时，将触发 hashchange 事件（跟在 # 后面的部分，包括 # 符号）</span></span><br><span class="line"><span class="hljs-comment">// https://developer.mozilla.org/zh-CN/docs/Web/Events/hashchange</span></span><br><span class="line"><span class="hljs-comment">// https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onhashchange</span></span><br><span class="line"><span class="hljs-keyword">const</span> checkDOMListeners = <span class="hljs-function"><span class="hljs-params">delta</span> =&gt;</span> &#123;</span><br><span class="line">  listenerCount += delta;</span><br><span class="line">  <span class="hljs-keyword">if</span> (listenerCount === <span class="hljs-number">1</span>) &#123;</span><br><span class="line">    <span class="hljs-comment">// 其实也是最常见最简单的订阅事件</span></span><br><span class="line">    <span class="hljs-built_in">window</span>.addEventListener(PopStateEvent, handlePopState);</span><br><span class="line">    <span class="hljs-keyword">if</span> (needsHashChangeListener)</span><br><span class="line">      <span class="hljs-built_in">window</span>.addEventListener(HashChangeEvent, handleHashChange);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (listenerCount === <span class="hljs-number">0</span>) &#123;</span><br><span class="line">    <span class="hljs-built_in">window</span>.removeEventListener(PopStateEvent, handlePopState);</span><br><span class="line">    <span class="hljs-keyword">if</span> (needsHashChangeListener)</span><br><span class="line">      <span class="hljs-built_in">window</span>.removeEventListener(HashChangeEvent, handleHashChange);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [订阅事件的具体调用方]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Function&#125; listener [description]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;Function&#125;          [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">const</span> listen = <span class="hljs-function"><span class="hljs-params">listener</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-comment">// 返回一个解绑函数</span></span><br><span class="line">  <span class="hljs-keyword">const</span> unlisten = transitionManager.appendListener(listener);</span><br><span class="line">  checkDOMListeners(<span class="hljs-number">1</span>);</span><br><span class="line">  <span class="hljs-comment">// 返回的函数负责取消</span></span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">    checkDOMListeners(<span class="hljs-number">-1</span>);</span><br><span class="line">    unlisten();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简言之，调用 <code>listen</code> 就是给 <code>window</code> 绑定了相应方法，再次调用之前 <code>listen</code> 返回的函数则是取消。</p>
+</li>
+<li><p>然后来看看发布事件的具体调用方。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 在该方法中最终发布</span></span><br><span class="line"><span class="hljs-keyword">const</span> setState = <span class="hljs-function"><span class="hljs-params">nextState</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">Object</span>.assign(history, nextState);</span><br><span class="line">  history.length = globalHistory.length;</span><br><span class="line">  <span class="hljs-comment">// 执行所有的监听函数</span></span><br><span class="line">  transitionManager.notifyListeners(history.location, history.action);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下面的方法则应用了 <code>confirmTransitionTo</code>.</p>
+</li>
+<li><code>push</code>, <code>replace</code>  是原生方法的扩展，它们都用到了上述方法，都负责实现跳转，因此内部有较多逻辑相同。</li>
+<li>后面会以 <code>push</code> 为例, 它其实就是对原生的 <code>history.pushState</code> 的强化。</li>
+<li>这里先从原生的 <code>history.pushState</code> 开始了解。</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>history.pushState</code></strong></a> 接收三个参数，第一个为状态对象，第二个为标题，第三个为 Url.</p>
+<ul>
+<li>状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许 <code>react-router</code> 用来标识页面的变化，以此渲染组件）</li>
+<li>标题(目前被忽略)：给页面添加标题。目前使用空字符串作为参数是安全的，未来则是不安全的。Firefox 目前还未实现它。</li>
+<li>URL(可选)：新的历史 URL 记录。直接调用并不会加载它，但在其他情况下，重新打开浏览器或者刷新时会加载新页面。</li>
+<li>一个正常的调用是 <code>history.pushState({ foo: &#39;bar&#39;}, &#39;page1&#39;, &#39;bar.html&#39;)</code>.</li>
+<li>调用后浏览器的 url 会立即更新，但页面并不会重新加载。例如 <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> 变更为 <a href="http://www.google.com/bar.html" target="_blank" rel="noopener">www.google.com/bar.html</a>. 但页面不会刷新。</li>
+<li>注意，此时并不会调用 <code>popstate</code> 事件。只有在上述操作后，访问了其他页面，然后点击返回，或者调用 <code>history.go(-1)/history.back()</code> 时，<code>popstate</code> 会被触发。</li>
+<li>让我们在代码中更直观的看吧。</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 定义一个 popstate 事件</span></span><br><span class="line"><span class="hljs-built_in">window</span>.onpopstate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(event.state)</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">let</span> page1 = &#123; <span class="hljs-attr">page</span>: <span class="hljs-string">'page1'</span> &#125;</span><br><span class="line"><span class="hljs-keyword">let</span> page2 = &#123; <span class="hljs-attr">page</span>: <span class="hljs-string">'page2'</span> &#125;</span><br><span class="line">history.pushState(page1, <span class="hljs-string">'page1'</span>, <span class="hljs-string">'page1.html'</span>)</span><br><span class="line"><span class="hljs-comment">// 页面地址由 www.google.com =&gt; www.google.com/page1.html</span></span><br><span class="line"><span class="hljs-comment">// 但不会刷新或重新渲染</span></span><br><span class="line">history.pushState(page2, <span class="hljs-string">'page2'</span>, <span class="hljs-string">'page2.html'</span>)</span><br><span class="line"><span class="hljs-comment">// 页面地址由 www.google.com/page2.html =&gt; www.google.com/page2.html</span></span><br><span class="line"><span class="hljs-comment">// 但不会刷新或重新渲染</span></span><br><span class="line"><span class="hljs-comment">// 此时执行</span></span><br><span class="line">history.back() <span class="hljs-comment">// history.go(-1)</span></span><br><span class="line"><span class="hljs-comment">// 会触发 popstate 事件, 打印出 page1 对象</span></span><br><span class="line"><span class="hljs-comment">// &#123; page: 'page1' &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>介绍完 <code>pushState</code> 后，看看 <code>history</code> 中是怎样实现它的。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> push = <span class="hljs-function">(<span class="hljs-params">path, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> action = <span class="hljs-string">"PUSH"</span>;</span><br><span class="line">  <span class="hljs-keyword">const</span> location = createLocation(path, state, createKey(), history.location);</span><br><span class="line">  <span class="hljs-comment">// 过渡方法的应用</span></span><br><span class="line">  transitionManager.confirmTransitionTo(</span><br><span class="line">    location,</span><br><span class="line">    action,</span><br><span class="line">    getUserConfirmation,</span><br><span class="line">    ok =&gt; &#123;</span><br><span class="line">       <span class="hljs-comment">// 布尔值，用于判断是否需要执行</span></span><br><span class="line">      <span class="hljs-keyword">if</span> (!ok) <span class="hljs-keyword">return</span>;</span><br><span class="line">      <span class="hljs-keyword">const</span> href = createHref(location);</span><br><span class="line">      <span class="hljs-keyword">const</span> &#123; key, state &#125; = location;</span><br><span class="line">      <span class="hljs-comment">// 在支持 history 的地方则使用 history.pushState 方法实现</span></span><br><span class="line">      <span class="hljs-keyword">if</span> (canUseHistory) &#123;</span><br><span class="line">        globalHistory.pushState(&#123; key, state &#125;, <span class="hljs-literal">null</span>, href);</span><br><span class="line">        <span class="hljs-keyword">if</span> (forceRefresh) &#123;</span><br><span class="line">          <span class="hljs-built_in">window</span>.location.href = href</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">          <span class="hljs-comment">// 如果是非强制刷新时，会更新状态，后续在 react-router 中起到重要作用</span></span><br><span class="line">          setState(&#123; action, location &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">window</span>.location.href = href;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>pushState</code> 和 <code>push</code> 方法讲完，<code>replaceState</code> 和 <code>replace</code> 也就很好理解了。</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>replaceState</code></strong></a> 只是把推进栈的方式改为替换栈的行为。它接收的参数与 <code>pushState</code> 完全相同。只是调用后方法执行的效果不同。</p>
+</li>
+<li><p>补：本来如果仅仅是介绍当前的 <code>history</code>. 我之前以为找到 <code>pushState</code> 这个核心就已经足够了。但当我继续深入，探究 <code>react-router</code> 原理的时候，才发现这里遗漏了重要的一点。那就是 <code>setState</code> 方法。</p>
+</li>
+<li>那么这个方法具体做了什么呢。在上文中已经做了简单介绍，这里再重申一遍：<strong>就是将当前 <code>state</code> 存入 <code>history</code>, 同时发布事件，也就是调用之前订阅时的保存的所有方法。参数则是 <code>history.location</code>, <code>history.action</code>. 或许现在，可能我们对它的重要性没有那么深的理解，当你再结合后一篇分析 <code>react-router</code> 的文章。就知道它起的作用了。</strong></li>
+</ul>
+<h3 id="history在react-router中"><a href="#history在react-router中" class="headerlink" title="history在react-router中"></a>history在react-router中</h3><ul>
+<li>这篇文章快完成的时候，我才发现 <code>react-router</code> 仓库里是有 <code>history</code> 的介绍的。此时我一脸茫然。这里面内容虽然不多，却非常值得参考。这里做部分翻译和理解，当作对上文的补充。</li>
+<li><a href="https://raw.githubusercontent.com/ReactTraining/react-router/master/packages/react-router/docs/api/history.md" target="_blank" rel="noopener">原地址</a></li>
+</ul>
+<h5 id="history-is-mutable"><a href="#history-is-mutable" class="headerlink" title="history is mutable"></a><strong><em><code>history is mutable</code></em></strong></h5><ul>
+<li><p>在原文档中，说明了 <code>history</code> 对象是可变的。因此建议在 <code>react-router</code> 中获取 <a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/location.md" target="_blank" rel="noopener"><code>location</code></a> 时可以使用 <a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md" target="_blank" rel="noopener"><code>Route</code></a> 的 <code>props</code> 的方式来替代 <code>history.location</code> 的方式。这样的方式会确保你的流程处于 <code>React</code> 的生命周期中。例如：</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Comp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  componentWillReceiveProps(nextProps) &#123;</span><br><span class="line">    <span class="hljs-comment">// 正确的打开方式</span></span><br><span class="line">    <span class="hljs-keyword">const</span> locationChanged = nextProps.location !== <span class="hljs-keyword">this</span>.props.location</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 错误的打开方式，因为 history 是可变的，所以这里总是不等的 // will *always* be false because history is mutable.</span></span><br><span class="line">    <span class="hljs-keyword">const</span> locationChanged = nextProps.history.location !== <span class="hljs-keyword">this</span>.props.history.location</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;Route component=&#123;Comp&#125;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更多内容请查看<a href="https://github.com/ReactTraining/history#properties" target="_blank" rel="noopener">the history documentation</a>.</p>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>一句话形容 <code>history</code> 这个库。它是一个对 HTML5 原生 <code>history</code> 的拓展，它对外输出三个方法，用以在支持原生 api 的环境和不兼容的环境，还有 node 环境中调用。而该方法返回的就是一个增强的 <code>history</code> api.</li>
+<li>写这篇文章的时候，第一次有感受到技术栈拓展的无穷。从最初想分析 <code>react-router</code>，到发现它依赖的主要的库 <code>history</code>. 再进行细化，到 <code>history</code> 主要提供的对象方法。里面涉及的发布订阅设计模式 ，思路，以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日热情。</li>
+<li>下一篇文章将会继续介绍 <code>react-router</code>.</li>
+</ul>
+<h3 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h3><ul>
+<li>下面两个方法返回的内容和 <code>createBrowserHistory</code> 基本一致，只是具体的实现有部分差别。有时间补上。</li>
+<li><code>createHashHistory</code></li>
+<li><code>createMemoryHistory</code></li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="http://zhenhua-lee.github.io/react/history.html" target="_blank" rel="noopener">react-router 的实现原理</a><br><a href="https://juejin.im/entry/5accc0b4f265da23a1423cba" target="_blank" rel="noopener">react-router 源代码学习笔记
+</a><br><a href="https://juejin.im/post/5a9108b6f265da4e7527b1a4" target="_blank" rel="noopener">Javascript设计模式之发布-订阅模式</a></p>
+</blockquote>
+<p><hr><br><img src="/jo.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg" title="Thanks"></p>
+<!-- 4h + 2h + 0.5h -->
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/React-Router/">#React-Router</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2018/11/23/the-compatibility-issues-in-macos-mojave/">升级 MacOs Mojave 后的兼容问题解决</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2018/06/29/learning-unit-testing/">单测入门笔记</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/';
+        this.page.identifier = '2018/07/29/understanding-history-in-react-router/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

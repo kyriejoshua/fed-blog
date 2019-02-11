@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>DOM 重要知识点回顾 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="回顾部分重要的 DOM 知识点。">
+<meta name="keywords" content="DOM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM 重要知识点回顾">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/02/12/review-dom/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="回顾部分重要的 DOM 知识点。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/02/12/review-dom/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:35.009Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DOM 重要知识点回顾">
+<meta name="twitter:description" content="回顾部分重要的 DOM 知识点。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2017/02/12/review-dom/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            DOM 重要知识点回顾
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-02-12T10:16:27.000Z" itemprop="datePublished">2月 12 2017</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/DOM/">DOM</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            20 分钟 读完 (约 3063 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2017/02/12/review-dom/unphoto.jpg" title="DOM">
+<blockquote><br>  回顾部分重要的 DOM 知识点。<br><br></blockquote>
+
+<a id="more"></a>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><ul>
+<li>元素的增删改查。</li>
+<li>获取或设置元素的属性。</li>
+</ul>
+<h3 id="DHTML"><a href="#DHTML" class="headerlink" title="DHTML"></a>DHTML</h3><ul>
+<li>动态HTML。</li>
+<li>一系列实现网页动态效果的技术统称。</li>
+<li>区别:<ul>
+<li>HTML：超文本标记语言，标签名固定。</li>
+<li>XHTML：更严格的HTML语言标准。</li>
+<li>XML: 可扩展的标记语言，标签名可自定义，语法和HTML完全相同。</li>
+</ul>
+</li>
+</ul>
+<h3 id="JS-ECMAScript、DOM、BOM"><a href="#JS-ECMAScript、DOM、BOM" class="headerlink" title="JS(ECMAScript、DOM、BOM)"></a>JS(ECMAScript、DOM、BOM)</h3><ul>
+<li>ECMAScript(核心语法)。</li>
+<li>文档对象模型。</li>
+<li>浏览器对象模型。</li>
+</ul>
+<h3 id="DHTML-7大内置对象"><a href="#DHTML-7大内置对象" class="headerlink" title="DHTML: 7大内置对象"></a>DHTML: 7大内置对象</h3><ol>
+<li>window: 指代当前浏览器打开窗口。</li>
+<li>document: 指代当前页面的HTML文档。</li>
+<li>navigator: 封装了浏览器软件的版本信息和部分设置。</li>
+<li>history: 封装当前窗口成功浏览过的网址的历史记录栈。</li>
+<li>location: 指代当前窗口中地址栏。</li>
+<li>screen: 指代当前显示器。</li>
+<li>event: 指代事件对象。</li>
+</ol>
+<h3 id="DOM-1"><a href="#DOM-1" class="headerlink" title="DOM"></a>DOM</h3><ul>
+<li>网页中一切内容都是节点(Node)对象。</li>
+<li>所有节点对象以树形结构组织在一起(Dom Tree)。</li>
+<li>增删查改。</li>
+</ul>
+<h4 id="DOM-TREE"><a href="#DOM-TREE" class="headerlink" title="DOM TREE"></a>DOM TREE</h4><ul>
+<li>网页加载时生成的文档模型。</li>
+<li>Document: Dom Tree根节点, 网页加载完成自动生成。</li>
+<li>继承自 HTML Document 的原型，Document 的原型中提供了 document 对象可用的 API.</li>
+</ul>
+<h4 id="节点对象"><a href="#节点对象" class="headerlink" title="节点对象"></a>节点对象</h4><ul>
+<li>元素节点对象：指代 HTML 文档中每个元素。</li>
+<li>文本节点对象：指代 HTML 文档中的文本内容。</li>
+</ul>
+<h4 id="节点对象：所有节点对象都继承自一个父对象：Node-prototype"><a href="#节点对象：所有节点对象都继承自一个父对象：Node-prototype" class="headerlink" title="节点对象：所有节点对象都继承自一个父对象：Node.prototype."></a>节点对象：所有节点对象都继承自一个父对象：Node.prototype.</h4><ul>
+<li>Body 对象：<code>body -&gt; HTMLBodyElement.prototype -&gt; HTMLElement.prototype -&gt; Element.prototype -&gt; Node.prototype -&gt; 所有结节点共有属性</code>.</li>
+<li>document 对象：<code>document -&gt; HTMLDocument.prototype -&gt; Document.prototype -&gt; Node.prototype</code>.</li>
+<li>nodeType:<ul>
+<li>元素节点(1)。</li>
+<li>文本节点(3)。</li>
+</ul>
+</li>
+<li>nodeName(返回全大写形式的标签名):<ul>
+<li>元素节点(标签名)。</li>
+<li>文本节点(#text)。</li>
+</ul>
+</li>
+<li>nodeValue:<ul>
+<li>文本节点(文本内容)。</li>
+<li>元素节点(null)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="节点关系"><a href="#节点关系" class="headerlink" title="节点关系"></a>节点关系</h4><ul>
+<li><p>父子关系:</p>
+<ul>
+<li>node.parentNode: 获得 node 对象的父节点对象。</li>
+<li>node.childNode: 获得 node 对象的所有子节点对象。</li>
+<li>node.firstChild: 获得 node 对象下第一个子节点对象。</li>
+<li>node.lastChild: 获得 node 对象下最后一个子节点对象。</li>
+<li>返回 NodeList 类型的对象。</li>
+<li>NodeList 中的节点对象都是基于 Dom 树<strong>动态</strong>查询。</li>
+<li>Dom 树的变化随时反映在 NodeList 中。</li>
+<li>遍历所有子节点：<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; node.childNodes.length; i++) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(node.childNodes[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 每遍历一个元素，for 循环就会重新查找 childNodes 结果</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 优化如下</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = node.childNodes.length; i &lt; len; i++) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(node.childNodes[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-string">`</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><br></p>
+</li>
+<li>兄弟关系<ul>
+<li>node.previousSibling: 获得平级对象的前一个节点对象。</li>
+<li>node.nextSibling: 获得平级对象的后一个节点对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><ul>
+<li>id: <code>var elem = document.getElementById(&#39;id&#39;)</code>.</li>
+<li>TagName:<ul>
+<li><code>var elems = element.getElementsByTagName(&#39;tagname&#39;)</code>.</li>
+<li><code>elems</code>是一个动态集合——HTMLCollection类型的对象。</li>
+<li>随着页面 Dom 的改变实时改变。</li>
+</ul>
+</li>
+<li>name:<ul>
+<li><code>var elem = document.getElementsByName(&#39;&#39;)</code>.</li>
+<li>直接获得表单元素: <code>var form = document.form[&#39;id&#39;]</code>.(存疑)</li>
+<li><code>elems = form[&#39;name&#39;]</code>.</li>
+<li>返回<strong>对象</strong>或者 <strong>HTMLCollection</strong>.</li>
+</ul>
+</li>
+<li>class(HTML5):<ul>
+<li><code>var elems = node.getElementsByClassName(&#39;class&#39;)</code>.</li>
+</ul>
+</li>
+<li>选择器查找: Selector API<ul>
+<li>没有兼容性问题。</li>
+<li>原生API，执行效率高。</li>
+<li>返回值：包含全功能，全属性的元素对象集合。</li>
+<li><code>var elem = element.querySelector(&#39;selector&#39;)</code>.</li>
+<li><code>var elems = element.querySelectorAll(&#39;selectors&#39;)</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="读写元素对象内容属性"><a href="#读写元素对象内容属性" class="headerlink" title="读写元素对象内容属性"></a>读写元素对象内容属性</h4><ul>
+<li><p>操作元素的内容：开始标签和结束标签之间的内容。</p>
+<ul>
+<li><code>elem.innerHTML</code>: 开始标签和结束标签的 HTML 原文。</li>
+<li>批量替换或删除一个元素下所有子节点的最快速高效的办法。</li>
+<li><p>注意点：</p>
+<ul>
+<li>替换内容不要包含事件处理程序。</li>
+<li>不是所有元素都支持:<ul>
+<li>table 极其子元素，除了 td 外都不支持。</li>
+<li>html/head/style.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>elem.textContent</code>: DOM 标准。</p>
+</li>
+<li>存在兼容性问题：<ul>
+<li>IE8: elem.innerText. firefox 不支持。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>性能问题：<ul>
+<li>每次设置 innterHTML 时，会临时创建解释器对象。频繁设置会导致内存浪费，效率差。<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">  ul.innerHTML += <span class="hljs-string">'&lt;li&gt;'</span> + values[i] + <span class="hljs-string">'&lt;/li&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 会创建多个解释器对象</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> lis = [];</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">  lis.push(<span class="hljs-string">'&lt;li&gt;'</span> + values[i] + <span class="hljs-string">'&lt;/li&gt;'</span>);</span><br><span class="line">&#125;</span><br><span class="line">ul.innerHTML = <span class="hljs-string">'&lt;li&gt;'</span> + lis.join(<span class="hljs-string">'&lt;/li&gt;&lt;li&gt;'</span>) + <span class="hljs-string">'&lt;/li&gt;'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="读写元素属性"><a href="#读写元素属性" class="headerlink" title="读写元素属性"></a>读写元素属性</h4><ol>
+<li>通过 HTMLElement 类型提供的标准属性: HTML DOM.<ul>
+<li><code>elem.[attr]</code><br><br></li>
+</ul>
+</li>
+<li>通过 get/setAttribute 函数——核心DOM.<ul>
+<li><code>elem.getAttribute(&#39;attr&#39;)</code>.</li>
+<li><code>elem.setAttribute(&#39;attr&#39;)</code>.</li>
+<li>获取或设置所有属性类型都是字符串。</li>
+<li>可读写 HTML 元素中自定义属性。</li>
+<li>attribute: 指 HTML 标签中属性或自定义属性。</li>
+<li>property: 指内存中对象的属性。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>前两种方法不可通用。</li>
+</ul>
+<h4 id="读写内联样式"><a href="#读写内联样式" class="headerlink" title="读写内联样式"></a>读写内联样式</h4><ul>
+<li>返回一个 CSSStyleDeclaration.</li>
+<li>CSS 中的属性都是 style 对象的子属性。</li>
+<li>所有 CSS 紫属性都返回带单位的字符串。</li>
+<li>例如：<code>console.log(elem.style.width); // &#39;100px&#39;</code></li>
+<li>子属性的命名规则，去横线，改驼峰。</li>
+<li>修改属性：<ul>
+<li><code>elem.setAttribute(&#39;style&#39;, &#39;style string&#39;)</code>.</li>
+<li><code>elem.style.cssText = &#39;style string&#39;</code>.</li>
+</ul>
+</li>
+<li>移除属性：<ul>
+<li><code>elem.style.removeProperty(&#39;attr&#39;)</code>.</li>
+</ul>
+</li>
+<li>大量修改样式建议如下：<ol>
+<li>CSS 中为元素的不同状态定义样式类</li>
+<li>JS 中控制对应的样式类改变</li>
+</ol>
+</li>
+</ul>
+<h3 id="遍历-DOM-TREE"><a href="#遍历-DOM-TREE" class="headerlink" title="遍历 DOM TREE"></a>遍历 DOM TREE</h3><ul>
+<li>遍历：以任意元素对象开始，以深度优先的原则，获取所有子对象。</li>
+<li>递归：函数内调用自己<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> blank = [];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getChildren</span>(<span class="hljs-params">parent</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(blank.join(<span class="hljs-string">''</span>) + <span class="hljs-string">'|-'</span> + (parent.nodeType != <span class="hljs-number">3</span> ? parent.nodeName : parent.nodeValue));</span><br><span class="line">  <span class="hljs-keyword">if</span> (parent.childNodes) &#123;</span><br><span class="line">    blank.push(<span class="hljs-string">'\t'</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = parent.childNodes.length; i &lt; len; i++) &#123;</span><br><span class="line">      getChildren(parent.childNodes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    blank.pop();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">getChildren(<span class="hljs-built_in">document</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a>递归遍历</h4><ul>
+<li>手写遍历元素树：仅包含元素节点的树结构</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>tree</th>
+<th>节点数</th>
+<th>元素树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>父子节点</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>父节点</td>
+<td>parentNode</td>
+<td>parentElementNode</td>
+</tr>
+<tr>
+<td>子节点</td>
+<td>childNode</td>
+<td>childElementNode(IE8支持)</td>
+</tr>
+<tr>
+<td>首末节点</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>首个子节点</td>
+<td>firstChild</td>
+<td>firstElementNode</td>
+</tr>
+<tr>
+<td>最后子节点</td>
+<td>lastChild</td>
+<td>lastElementNode</td>
+</tr>
+<tr>
+<td>兄弟节点</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>前一个</td>
+<td>previousSibling</td>
+<td>previousElementSibling</td>
+</tr>
+<tr>
+<td>后一个</td>
+<td>nextSibling</td>
+<td>nextElementSibling</td>
+</tr>
+</tbody>
+</table>
+<h4 id="DOM-2级遍历API"><a href="#DOM-2级遍历API" class="headerlink" title="DOM 2级遍历API"></a>DOM 2级遍历API</h4><ol>
+<li><p>NodeIterator 迭代器：</p>
+<ul>
+<li>一个集合中每次金宝村一个对象的游标</li>
+<li>游标通过前后移动在集合中遍历每个元素</li>
+<li>迭代器<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [iterator 迭代器]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Object&#125; parentNode [开始遍历的父节点对象]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;String?&#125; nodeType [选择节点的类别(NodeFilter.SHOW_ALL|NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT)]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Function&#125; filterFun [筛选器函数对象]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Boolean&#125; boolean []</span></span><br><span class="line"><span class="hljs-comment"> * @type &#123;[type]&#125;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">var</span> iterator = <span class="hljs-built_in">document</span>.createNodeIterator(parentNode, nodeType, filerFun, boolean);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 调用 nextNode 方法</span></span><br><span class="line">iterator.nextNode();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 待完善</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><br></p>
+</li>
+<li>TreeWalker: 用法和迭代器完全一样<ul>
+<li>新增了部分API，所有如下：<code>firstChild</code>、<code>lastChild</code>、<code>previousNode</code>、<code>nextNode</code>、<code>previousSibling</code>、<code>nextSibling</code>、<code>parentNode</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="操作节点"><a href="#操作节点" class="headerlink" title="操作节点"></a>操作节点</h3><h4 id="创建、删除节点对象"><a href="#创建、删除节点对象" class="headerlink" title="创建、删除节点对象"></a>创建、删除节点对象</h4><ul>
+<li>核心 DOM.</li>
+<li><p>创建：<code>var newElem = document.createElement(&#39;tagName&#39;);</code></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newElem = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'tagName'</span>);</span><br><span class="line"><span class="hljs-comment">// var a = document.createElement('a');</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 DOM 树中添加：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parent.appendChild(newTag);</span><br><span class="line">parent.insertBefore(newTag);</span><br><span class="line">parent.replaceChild(newTag);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTML DOM: 部分常用元素对象可以直接生成。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建新对象的同事插入 tr 到 table, i 为新行位置的索引</span></span><br><span class="line"><span class="hljs-comment">// HTMLTableElement:</span></span><br><span class="line"><span class="hljs-keyword">var</span> newTr = table.insertRow([i]);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// HTMLTableRowElement:</span></span><br><span class="line"><span class="hljs-keyword">var</span> newTd = tr.insertCell(i);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// HTMLSelectElement: onchange(),sel.selectedIndex</span></span><br><span class="line"><span class="hljs-keyword">var</span> sel = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'#select'</span>); <span class="hljs-comment">// ? 这步存疑</span></span><br><span class="line"><span class="hljs-keyword">var</span> opt = sel.add(<span class="hljs-keyword">new</span> Option(<span class="hljs-string">'innterHTML'</span>, <span class="hljs-string">'value'</span>));</span><br><span class="line"><span class="hljs-comment">// 创建一个新的空对象。</span></span><br><span class="line"><span class="hljs-comment">// 将第一个参数设置为 opt.innerHTML 属性</span></span><br><span class="line"><span class="hljs-comment">// 将第二个参数设置为 opt.value</span></span><br><span class="line"><span class="hljs-comment">// 将 opt 对象添加到 sel 中</span></span><br><span class="line">sel.remove(); <span class="hljs-comment">// 移除</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>性能：频繁添加节点会反复解析 DOM 树，导致效率低下。</p>
+</li>
+<li><p>文档片段：内存中临时保存多个 DOM 节点对象的空间。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 向文档片段中临时存入节点对象</span></span><br><span class="line"><span class="hljs-keyword">var</span> tempFrag = <span class="hljs-built_in">document</span>.createDocumentFragment();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文档片段接入 DOM 树中时，不会在页面显示。</p>
+</li>
+</ul>
+<h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h3 id="WINDOW"><a href="#WINDOW" class="headerlink" title="WINDOW"></a>WINDOW</h3><ul>
+<li>在浏览器中代替 global 对象的全局对象。</li>
+<li>全局作用域。</li>
+<li>修改或设置浏览器窗口的相关属性。</li>
+</ul>
+<h4 id="打开新链接的方式"><a href="#打开新链接的方式" class="headerlink" title="打开新链接的方式"></a>打开新链接的方式</h4><ol>
+<li><p>在当前窗口内替换当前页：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">'url'</span>, <span class="hljs-string">'self'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开新窗口，可重复打开:</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">'url'</span>[, <span class="hljs-string">'blank'</span>] ); <span class="hljs-comment">// 默认是 blank</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开新窗口，不可重复打开</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">'url'</span>[, <span class="hljs-string">'blank'</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="窗口定位、移动"><a href="#窗口定位、移动" class="headerlink" title="窗口定位、移动"></a>窗口定位、移动</h4><ul>
+<li>window.innerHeight/width: 浏览器窗口可见区域的大小。</li>
+<li>window.outerHeight/width: 浏览器窗口完整大小。</li>
+<li>window.moveTo(浏览器窗口左上角 x 坐标，浏览器 左上角 y 坐标).</li>
+<li>window.moveBy(x 坐标的变化量，y 坐标的变化量).</li>
+<li>在打开窗口时制定窗口大小和位置：<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [open]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; strUrl    [链接]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; strName   [名字]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; config ['attr=value, attr=value' 键值对的方式保存]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line">open(<span class="hljs-string">'url'</span>, <span class="hljs-string">'name'</span>[, <span class="hljs-string">'config'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 例如：</span></span><br><span class="line"><span class="hljs-built_in">window</span>.open(<span class="hljs-string">'www.google.com'</span>, <span class="hljs-string">'google'</span>, <span class="hljs-string">'resizable=no, scrollbars=yes,status=no'</span>);</span><br><span class="line"><span class="hljs-comment">// config 可以写：</span></span><br><span class="line"><span class="hljs-comment">// height/width: 窗口文档显示区大小</span></span><br><span class="line"><span class="hljs-comment">// top/left: 窗口左上角 x 坐标，y 坐标</span></span><br><span class="line"><span class="hljs-comment">// resizable: 是否允许调整窗口大小</span></span><br><span class="line"><span class="hljs-comment">// location: 是否允许修改地址栏</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h4><ul>
+<li><code>alert(&#39;warning&#39;);</code></li>
+<li><code>var input = prompt(&#39;tips&#39;);</code></li>
+<li><code>var bool = confirm(&#39;tips&#39;); // 含两个按钮</code></li>
+</ul>
+<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><ul>
+<li><p>周期性定时器：反复执行。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 定义任务函数。</span></span><br><span class="line"><span class="hljs-comment">// 全局变量保存定时器的 id.</span></span><br><span class="line"><span class="hljs-comment">// 启动定时器。</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [setInterval 周期性定时器]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Function&#125; function [须调用的函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Number&#125; time     [间隔时间]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">var</span> timer = setInterval(fun, time);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 例如：</span></span><br><span class="line"><span class="hljs-comment">// 定义它：</span></span><br><span class="line"><span class="hljs-keyword">var</span> timer = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line"> <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());</span><br><span class="line">&#125;, <span class="hljs-number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 清空它：</span></span><br><span class="line">clearInterval(timer);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一次性定时器：执行一次任务后便自动退出。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 定义任务函数。</span></span><br><span class="line"><span class="hljs-comment">// 定义全局变量，保存定时器 id.</span></span><br><span class="line"><span class="hljs-comment">// 启动定时器。</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [setTimeout 一次性定时器]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Function&#125; function [任务函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Number&#125; time     [延迟时长]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"> <span class="hljs-keyword">var</span> timer = setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">   <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());</span><br><span class="line"> &#125;, <span class="hljs-number">3000</span>);</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 清空它：</span></span><br><span class="line"> cleatTimeout(timer);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="NAVIGATOR-封装浏览器软件版本信息的对象"><a href="#NAVIGATOR-封装浏览器软件版本信息的对象" class="headerlink" title="NAVIGATOR: 封装浏览器软件版本信息的对象"></a>NAVIGATOR: 封装浏览器软件版本信息的对象</h4><ul>
+<li>navigator: 检测插件。</li>
+<li>navigator: 检测 cookie 是否启用。<ul>
+<li>chrome -&gt; 设置 -&gt; 显示高级设置 -&gt; 隐私 -&gt; 内容设置 -&gt; 禁用</li>
+</ul>
+</li>
+<li>navigator.userAgent: 包含了浏览器名称和版本号。</li>
+</ul>
+<h4 id="LOCATION-封装当前窗口打开的-url-信息的对象"><a href="#LOCATION-封装当前窗口打开的-url-信息的对象" class="headerlink" title="LOCATION: 封装当前窗口打开的 url 信息的对象"></a>LOCATION: 封装当前窗口打开的 url 信息的对象</h4><ul>
+<li><code>window.location === document.location; // true</code></li>
+<li>location.search: 获取 url 中查询字符串参数</li>
+<li><p>在当前窗口内打开新 url:</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="hljs-string">'url'</span>;</span><br><span class="line"><span class="hljs-built_in">window</span>.location = <span class="hljs-string">'url'</span>;</span><br><span class="line">location.assign(url);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>location.replace(&#39;url&#39;)</code>: 禁止后退：</p>
+</li>
+</ul>
+<h4 id="HISTORY-当前窗口打开后的历史记录栈"><a href="#HISTORY-当前窗口打开后的历史记录栈" class="headerlink" title="HISTORY: 当前窗口打开后的历史记录栈"></a>HISTORY: 当前窗口打开后的<em>历史记录栈</em></h4><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 前进</span></span><br><span class="line">history.go(<span class="hljs-number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 刷新</span></span><br><span class="line">history.go(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 后退</span></span><br><span class="line">history.go(<span class="hljs-number">-1</span>);</span><br><span class="line">history.go(<span class="hljs-number">-2</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="SCREEN"><a href="#SCREEN" class="headerlink" title="SCREEN"></a>SCREEN</h4><ul>
+<li>screen.width/height: 完整分辨率。</li>
+<li>screen.availWidth/availHeight: 除去任务栏后的剩余分辨率。</li>
+<li>window.innerWidth/innerHeight: 浏览器可视区域的大小，出去控制台等。</li>
+<li>window.outerWidth/outerHeight: 浏览器整体大小</li>
+</ul>
+<h3 id="事件：网页中，人为触发或自动触发的状态改变"><a href="#事件：网页中，人为触发或自动触发的状态改变" class="headerlink" title="事件：网页中，人为触发或自动触发的状态改变"></a>事件：网页中，人为触发或自动触发的状态改变</h3><ul>
+<li>事件处理程序：一个对象的特殊属性。</li>
+<li>属性一般引用一个函数对象或 JS 程序块。</li>
+<li>当事件发生时，自动执行绑定在属性上的程序。</li>
+<li>例如：<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line">btn.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line">txt.onfocus = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line">select.onchange = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 其他</span></span><br><span class="line">div.onmouseover <span class="hljs-comment">// 鼠标跨入边界执行</span></span><br><span class="line">div.onmousemove <span class="hljs-comment">// 鼠标在范围内移动则执行</span></span><br><span class="line">div.onmouseout <span class="hljs-comment">// 鼠标跨出边界执行</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="事件流：当事件出发时，内外层元素间的时间出发顺序"><a href="#事件流：当事件出发时，内外层元素间的时间出发顺序" class="headerlink" title="事件流：当事件出发时，内外层元素间的时间出发顺序"></a>事件流：当事件出发时，内外层元素间的时间出发顺序</h3><ul>
+<li>DOM 标准事件流：由外向内捕获 -&gt; 目标触发 -&gt; 由内向外冒泡触发。</li>
+<li>IE8 事件流： 目标触发 -&gt; 由内向外冒泡触发。没有捕获阶段。</li>
+</ul>
+<h4 id="绑定事件处理程序"><a href="#绑定事件处理程序" class="headerlink" title="绑定事件处理程序"></a>绑定事件处理程序</h4><ol>
+<li>HTML 中设置事件属性:<ul>
+<li><code>&lt;div onclick=&quot;javascript&quot;&gt;&lt;/div&gt; // this 必须从页面中传入</code></li>
+</ul>
+</li>
+<li>DOM0 级 API: JS 中设置对象的时间属性<ul>
+<li><code>obj.onclick = function() {}; // this 指代正在调用时间处理程序的元素对象</code></li>
+<li>存在以下两个问题：<ul>
+<li>无法改变事件流中事件触发的顺序。</li>
+<li>同一对象的统一吹函数，同时绑定多个函数对象。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DOM2 级标准 API:<ul>
+<li><code>obj.addEventListener(&#39;click&#39;,function(){}[, boolean]); // 依次传入事件名，函数对象，是否在捕获阶段触发</code></li>
+<li>IE8 的处理：<code>obj.attchEvent(&#39;click&#39;, &#39;function() {}&#39;); // 依次传入事件名，函数对象</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="EVENT-事件触发时自动创建，自动传入事件处理函数内-默认为第一个参数"><a href="#EVENT-事件触发时自动创建，自动传入事件处理函数内-默认为第一个参数" class="headerlink" title="EVENT: 事件触发时自动创建，自动传入事件处理函数内(默认为第一个参数)"></a>EVENT: 事件触发时自动创建，自动传入事件处理函数内(默认为第一个参数)</h4><ul>
+<li>获取：<code>var event = window.event || arguments[0]; // 在函数内使用</code></li>
+<li>获得事件源(目标对象)：<code>var src = event.target || event.srcElement; // this 随着事件冒泡而变化</code></li>
+<li>取消冒泡：<ul>
+<li><code>event.cancelBubble = true; // IE</code></li>
+<li><code>event.stopPropagation(); // DOM</code></li>
+<li>兼容写法：<code>if (e.stopPropagation) { e.stopPropagation(); } else {e.cancelBubble = true;}</code></li>
+</ul>
+</li>
+<li>取消事件：取消事件的默认行为，停止继续执行<ul>
+<li><code>if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; }</code></li>
+</ul>
+</li>
+</ul>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/DOM/">#DOM</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2017/03/07/the-problems-in-using-webpack-dev-server/">webpack-dev-server 中代理(proxy)相关问题的解决及反思</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2017/02/05/zhihulive-xiaojue/">小爝前端自我提升知乎 Live 笔记</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/02/12/review-dom/';
+        this.page.identifier = '2017/02/12/review-dom/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>
