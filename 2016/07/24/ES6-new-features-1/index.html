@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>ES6 简单特性尝鲜-1 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Java">
+<meta name="keywords" content="ES2015">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 简单特性尝鲜-1">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/07/24/ES6-new-features-1/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Java">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/07/24/ES6-new-features-1/unphoto.jpeg">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 简单特性尝鲜-1">
+<meta name="twitter:description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Java">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/07/24/ES6-new-features-1/unphoto.jpeg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            ES6 简单特性尝鲜-1
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-07-24T09:40:54.000Z" itemprop="datePublished">7月 24 2016</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 分钟 读完 (约 1239 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2016/07/24/ES6-new-features-1/unphoto.jpeg" title="Hey ES2015">
+<blockquote><br>ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。<br><br>尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Javascript超集不谈，回归到js本身来。<br><br></blockquote>
+
+<a id="more"></a>
+<p><strong>1.Block-Scoped Constructs Let and Const (构造let和const及块作用域)</strong></p>
+<ul>
+<li>在我刚开始学习js的时候，我的老师教导在js中声明变量，一定要用var声明。否则这些可能原本应当属于你的孩子，最终都会被window抢走。</li>
+<li><p>后来在工作中，更规范的写法是将所有的变量声明在js顶部，以防止声明提前带来的糟糕影响。</p>
+</li>
+<li><p><strong>而ES6中的let，则让你更容易地避免以上两种易犯的错误。</strong></p>
+</li>
+<li><p><code>let</code>是一种新的变量声明的方式，它允许你把变量作用域控制在块级里面。</p>
+<p>*你可能不信，让我们先苦后甜——以一个糟糕的例子开头</p>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkYourMoney</span>(<span class="hljs-params">you</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">var</span> money = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (you) &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> money = <span class="hljs-number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> money = <span class="hljs-number">100</span>;	<span class="hljs-comment">//	混淆你的视线</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="hljs-keyword">var</span> money = <span class="hljs-number">1000</span>;	<span class="hljs-comment">//	再次混淆</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> money;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(checkYourMoney(<span class="hljs-literal">true</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>不管你信不信，控制台里输出的都是冷冰冰的1000。尽管现实中你可能希望钱确实能无故多出来，但在代码这儿可不行。</p>
+<p>*反面教材结束，正面登场</p>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkYourMoney</span>(<span class="hljs-params">you</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> money = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (you) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> money = <span class="hljs-number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> money = <span class="hljs-number">100</span>;</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="hljs-keyword">let</span> money = <span class="hljs-number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> money;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(checkYourMoney(<span class="hljs-literal">true</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>这回变了，输出为0。<br>*let的好处是让你在任何块内定义都不会互相影响，尽管在别的块内你定义了money不同的值，但对于return而言，只获取邻近的变量。</p>
+<p>*相对而言，<code>const</code>的使用较少一些。它的作用是声明常量。虽然这么说，不过它的作用更类似于一个指针指向某个引用，这么听起来好像有些git的感觉。尽管它用于定义常量，但这常量并非一成不变。</p>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> GIRL = [<span class="hljs-string">'lovely'</span>];	<span class="hljs-comment">// 定义一只可爱的妹子</span></span><br><span class="line">GIRL.push(<span class="hljs-string">'beautiful'</span>);  <span class="hljs-comment">// 再漂亮点儿</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(GIRL);	<span class="hljs-comment">//	['lovely', 'beautiful']</span></span><br><span class="line">GIRL = <span class="hljs-string">'lovely and beautiful'</span>;  <span class="hljs-comment">// TypeError: Identifier 'GIRL' has already been declared(…)	//	您的妹子已被认领</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>let</code>和<code>const</code>的基本用法就是这样，还有几点需要注意的是<ul>
+<li>let声明的变量不具备声明提前的属性，意味着可以就近使用。<ul>
+<li>let和const只在最靠近的块(作用域/花括号)中有效。</li>
+</ul>
+</li>
+<li>使用const声明时采用大写方式。</li>
+<li>const在声明时必须赋值。</li>
+<li>let为编写者带来了很多便利，相应地维护成本也增加了，因为你需要非常了解每个声明的变量所处的块作用域。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.Template Literals (模板对象)</strong></p>
+<ul>
+<li>我在工作中有写coffeescript，里面的<code>#{}</code>用法很方便，让你即使在字符串中也可以很自如地穿插变量，现在，ES6推出了类似的写法。</li>
+<li>即<code>${}</code>——注意这里的分隔符是反引号<strong>`</strong>不是<strong>‘</strong>。</li>
+<li>小试一把</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> code = <span class="hljs-string">'cold'</span>;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">`My code is <span class="hljs-subst">$&#123;code&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//	在我的日常中更广泛的用法是——譬如angular中</span></span><br><span class="line">$http.get(<span class="hljs-string">`<span class="hljs-subst">$&#123;config().lala_url&#125;</span>/abc/book?page<span class="hljs-subst">$&#123;page&#125;</span>=&amp;count=<span class="hljs-subst">$&#123;count&#125;</span>`</span>)</span><br><span class="line"><span class="hljs-comment">//	do something...</span></span><br></pre></td></tr></table></figure>
+<p><strong>3.Muti-line Strings (多行字符串)</strong></p>
+<ul>
+<li>相信不少人在使用jquery的时候都拼接过字符串，而如果一旦内容较多，画面一定很香艳。</li>
+<li>true story——请感受一下冰山一角</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> order = <span class="hljs-string">'&lt;div class="order"&gt;'</span></span><br><span class="line"> + <span class="hljs-string">'&lt;div class="orderTitle"&gt;'</span></span><br><span class="line">   + <span class="hljs-string">'&lt;div class="fl"&gt;'</span></span><br><span class="line">     + <span class="hljs-string">'&lt;div class="orderNum ml10"&gt;'</span></span><br><span class="line">     + order.number</span><br><span class="line">     + <span class="hljs-string">'&lt;/div&gt;'</span></span><br><span class="line">   + <span class="hljs-string">'&lt;/div&gt;'</span></span><br><span class="line"> + <span class="hljs-string">'&lt;/div&gt;'</span></span><br><span class="line">+ <span class="hljs-string">'&lt;/div&gt;'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>而有了ES6的反引号<strong><code></code></strong>，妈妈再也不用担心我的拼接了！</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> order = <span class="hljs-string">`&lt;div class="order"&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;div class="orderTitle"&gt;</span></span><br><span class="line"><span class="hljs-string">    &lt;div class="fl"&gt;</span></span><br><span class="line"><span class="hljs-string">      &lt;div class="orderNum ml10"&gt;</span></span><br><span class="line"><span class="hljs-string">      order.number</span></span><br><span class="line"><span class="hljs-string">      &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string">    &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string"> &lt;/div&gt;`</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>请忽略这是段糟糕代码的事实——看！是不是清爽多了。</li>
+</ul>
+<p><br></p>
+<h4 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a><em>未完待续……</em></h4><blockquote>
+<p>   参考：</p>
+<blockquote>
+<p>   1.<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651551064&amp;idx=1&amp;sn=341d021ae1bd0f3cd28d7868271711af&amp;scene=1&amp;srcid=0724xCQ1rJWgMrU50XdGz0PZ&amp;key=77421cf58af4a653461fba296e96872e2715a294ed34c7fb49ddd6407cf6da67909214d917189477fd576b9232f7700c&amp;ascene=0&amp;uin=MTMxNzIxNjQwMA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.5+build(15F34" target="_blank" rel="noopener">前端开发者不得不知的ES6十大特性</a>&amp;version=11020201&amp;pass_ticket=c7Yh9%2F%2BIn%2FGijh%2B4%2BO4woXjDX0Z7CZPLJ3RU4OSXBwKIZsuXR7JF%2F6eQuiz9CwSj)<br>   2.<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651551048&amp;idx=2&amp;sn=5f774837f3d15598bf214093a8260d22&amp;scene=0&amp;key=77421cf58af4a653545020c9c6e435766cc9f001dad993790afb7d37f64f860e986557f6f2e891fd4ffb0bbd17678ae0&amp;ascene=0&amp;uin=MTMxNzIxNjQwMA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.5+build(15F34" target="_blank" rel="noopener">ECMAScript 6 扫盲</a>&amp;version=11020201&amp;pass_ticket=Et6ONVlb%2FAvtJ1F2RhJ0%2B9Fgp347EX4ziPKzR5tTKUrSqpaxXrVZABtlsquUNvfc)</p>
+</blockquote>
+</blockquote>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/ES2015/">#ES2015</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2016/08/02/nginx-gzip-on/">前端性能加快之nginx开启gzip压缩</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/">如何在git仓库中彻底清除大文件</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/07/24/ES6-new-features-1/';
+        this.page.identifier = '2016/07/24/ES6-new-features-1/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

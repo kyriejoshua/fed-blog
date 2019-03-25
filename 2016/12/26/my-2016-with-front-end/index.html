@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>前端入坑周年记——野蛮生长 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="不久前，正好是我以前端身份工作的一周年。很难相信，毕业前迷茫得找不到北的我，会在没多久后找到一个与自己兴趣相投的职位并且决定长期发展。人总是是要向前看的，但有些时候也需要回顾，我想就这篇文章，来记录这一年里踩过的大大小小的坑，和经历前端风云变化的一些事。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端入坑周年记——野蛮生长">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/12/26/my-2016-with-front-end/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="不久前，正好是我以前端身份工作的一周年。很难相信，毕业前迷茫得找不到北的我，会在没多久后找到一个与自己兴趣相投的职位并且决定长期发展。人总是是要向前看的，但有些时候也需要回顾，我想就这篇文章，来记录这一年里踩过的大大小小的坑，和经历前端风云变化的一些事。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/26/my-2016-with-front-end/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.881Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端入坑周年记——野蛮生长">
+<meta name="twitter:description" content="不久前，正好是我以前端身份工作的一周年。很难相信，毕业前迷茫得找不到北的我，会在没多久后找到一个与自己兴趣相投的职位并且决定长期发展。人总是是要向前看的，但有些时候也需要回顾，我想就这篇文章，来记录这一年里踩过的大大小小的坑，和经历前端风云变化的一些事。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/26/my-2016-with-front-end/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            前端入坑周年记——野蛮生长
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-12-26T11:46:58.000Z" itemprop="datePublished">12月 26 2016</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 分钟 读完 (约 1622 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2016/12/26/my-2016-with-front-end/unphoto.jpg" title="Front-end">
+<blockquote><br>不久前，正好是我以前端身份工作的一周年。很难相信，毕业前迷茫得找不到北的我，会在没多久后找到一个与自己兴趣相投的职位并且决定长期发展。人总是是要向前看的，但有些时候也需要回顾，我想就这篇文章，来记录这一年里踩过的大大小小的坑，和经历前端风云变化的一些事。<br><br></blockquote>
+
+<a id="more"></a>
+<h3 id="不断踩坑"><a href="#不断踩坑" class="headerlink" title="不断踩坑"></a>不断踩坑</h3><p>我清楚记得刚开始工作时的状态——那会儿只学习了些基础知识的我，在第一次面对实际的业务代码的时候一脸懵逼。就像新手从新手村刚出来，就开始不得不面对boss。但其实远没有那么夸张，当你只见过html, javascript, css这些素颜天真的妹子，然后再第一次遇见化妆后的美女们，自然会不知所措。js化妆成了简洁的coffeescript(cs), html化妆成了简洁的jade, css穿上了高跟鞋变成scss.还有强大无比的版本控制工具git, 再加上本来习惯用的windows平台，换成了mac, 就像习惯穿的T恤牛仔，换成了西装衬衫。在把妹(coding)时也越来越不自信了。</p>
+<p>但在一开始接触这些，其实并不是坏事。她们让我明白了前端的多样性，多元化，也让我做了今年最棒的事之一——由于工作需要，买了属于自己的Macbook Pro——尽管前不久我才刚刚把分期还完。使用MBP的效率实在是高的惊人，就前端而言，她是如此地方便和快捷。github上有一堆awesome-mac系列app等待你去挖掘。</p>
+<p>搭配cs使用的是angular 1.3, 在这一年里慢慢发现，这个曾经流行的MVC框架王者，在框架领域开始慢慢被react和vue瓜分。而1.3更可算是古老的版本了，她和cs正在随着历史潮流退去。这是我后来才意识到的事。在我还没意识到这些的时候，我又接触了typescript + angular 1.4搭建的项目，ts和ES6相似，有许多ES6的新特性，而整体上有一点像java, 静态类型，类，继承，私有状态等等。</p>
+<p>前半年大概就在大量接触新内容的状态中度过了。说来惭愧，至少过了个把月，我才渐渐适应这些琳琅满目的框架和预编译语言等等。在这里要感谢两位前辈聪哥和望哥，和他们接触的时间并不久，但给我留下很多可学习的地方。让我在编程初期意识到良好的代码规范在团队中的重要性，要养成好的代码习惯等等。</p>
+<h3 id="野蛮生长"><a href="#野蛮生长" class="headerlink" title="野蛮生长"></a>野蛮生长</h3><p>后来在望哥帮助下，我构建了一个小项目——主要使用了webpack+ES6, 是一个多页面应用，截至目前只引入了jquery，除此之外包括eslint规范审查，引入babel编译ES6等等。后来应用到了公司的生产环境中，在微信公众号里。建立这个项目初期是期望开发者能简单上手，但随着业务需求的增加，它开始变得捉襟见肘。首先缺乏bootstrap这样类似的样式框架，未定义公共样式，使得后来所有单个页面的样式都需要重写。后来我尝试添加路由，尝试引入express框架却发现每个模块都需要更改，实际条件不允许，更别谈引入react和vue之类的框架了。</p>
+<p>接下来的过半年时间我在写以ts和ES6为主的业务代码。在没有框架可用情况下使用纯ES6边学习边写，没有任何模板，也没有时间写模板，不管是样式还是逻辑。即便ES6新提供的语法糖非常可爱实用，但过程却让我非常痛苦，也不得不去github看一些优秀项目的源码寻找更好更优化的方案。这段时间，写几乎纯原生的代码让我开始意识到代码的抽象性。写代码的能力和抽象的能力是正比的。</p>
+<p>回顾下来，我渴望进步，所以在工作之余试图让自己处在学习的状态。但或许有些过犹不及——那些技术热文我看了许多，其中却也匆匆扫过许多，留下印象的却寥寥无几。有段时间我啃起了权威指南，有段时间又尝试理解Understore.js源码。阅读内容，方向太杂太乱导致我有时停滞不前。所以最近，我又让自己回归基础，啃起了js权威指南。我始终觉得基础的是最重要的。</p>
+<h3 id="划重点"><a href="#划重点" class="headerlink" title="划重点"></a>划重点</h3><p><strong>这一年，我的重心从angular+cs转到angular+ts, 再到后几个月的ES6+jquery+webpack，经历了较大的转变。而这年也几乎是我在前端摸爬滚打的一年, google, github issues, stackoverflow, segmengfault等等我用尽各种手段去寻找坑的答案。前两个月有前辈指导，后来就开始横冲直撞。库克说过——总之是一个名人说过——只要是方向对了，不管是跑是走是爬，都是进步，都是好的。但我不想爬了，不想横冲直撞，想走路，想走快点，再快点，我还有饱满的热情不想浪费呢。</strong></p>
+<p><strong>最后，留一点私心。最近离职了，正在寻找下一份工作。我的一切几乎都在上面了，剩下的也在博客里，有talk有code。希望也有机会可以和各路前辈大神交流，十分想加入一个优秀的团队，和各位优秀的伙伴共事、成长。</strong></p>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/JavaScript/">#JavaScript</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2017/01/05/questions-in-interview/">面试题整理-2017</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2016/12/22/fck-wechat-pay/">微信支付开发日志</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/12/26/my-2016-with-front-end/';
+        this.page.identifier = '2016/12/26/my-2016-with-front-end/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

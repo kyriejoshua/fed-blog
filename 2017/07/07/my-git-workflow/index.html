@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>我的 git 工作流 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的 git 工作流">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitStatus.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitStatus2.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitDiff.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitDiffFile.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitStash.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitStash2.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitStashApply.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitCommitMessage.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitCommit.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitCommitMessageLog.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitCommitMessageLog2.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitCommitAmend.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitRebase.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitRebase2.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitRebase3.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitRebase4.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitRebase5.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitRebase6.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitLogPFile.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitLogStat.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitShortlog.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/gitPullRebase.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/reward.jpeg">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的 git 工作流">
+<meta name="twitter:description" content="这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            我的 git 工作流
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-07-07T10:58:44.000Z" itemprop="datePublished">7月 7 2017</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/Git/">Git</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            18 分钟 读完 (约 2719 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/jo.github.io/2017/07/07/my-git-workflow/unphoto.jpg" alt></p>
+<p>这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。</p>
+<a id="more"></a>
+<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><ul>
+<li>首先是最基本的操作，从一次工作的开始到结束。这是一个比较基础的流程。</li>
+<li><p><code>Working Directory</code>(工作区) =&gt; <code>Staging Area</code>(暂存区) =&gt; <code>Git Repository</code>(git 仓库)</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-new</span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit [-m <span class="hljs-string">'commit message'</span>]</span><br><span class="line">git checkout develop|master</span><br><span class="line">git merge feature-new</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从当前分支切出一个新分支，在该分支下进行开发。</li>
+<li>在工作区内修改文件，当任务完成时，添加所有改动文件到暂存区，然后提交，注明提交信息。</li>
+<li>提交完成后，切回到原始分支，然后 merge 刚刚完成的功能分支。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>而在这过程中，有许多地方可以改善，或者根据实际应用场景，有很多部分可以扩展。</li>
+<li>这里以三种状态为界限展开。</li>
+</ul>
+<h3 id="Working-Directory-and-Staging-Area"><a href="#Working-Directory-and-Staging-Area" class="headerlink" title="Working Directory and Staging Area"></a>Working Directory and Staging Area</h3><ul>
+<li>工作区是自己开发时的部分。通常当一个新需求降临时，我们从 develop|master 切出分支，即自动停留在这阶段。</li>
+<li>当需求开始开发，改动了部分代码而没有完成任务，这时我使用 <code>git add .</code> 来将代码保存到暂存区。</li>
+<li><code>git add .</code>的适用场景还包括但不限于以下：<ul>
+<li>睡午觉。</li>
+<li>泡咖啡。</li>
+<li>吃晚饭。</li>
+</ul>
+</li>
+<li>简言之，是工作因故暂时停止而任务又没有完成时，适合使用该命令。</li>
+</ul>
+<h3 id="Git-Repository"><a href="#Git-Repository" class="headerlink" title="Git Repository"></a>Git Repository</h3><ul>
+<li>当一个需求或任务完成时，我们需要将改动提交上去。</li>
+<li>最常见的是，当一项任务完成时，我们先把所有改动放到暂存区，然后运行 <code>git commit -m &#39;feat: 完成xx功能&#39;</code> 来将这次改动提交到仓库。必要时再将分支 push 到远程。</li>
+</ul>
+<hr>
+
+<ul>
+<li>以上是对基础使用的扩展总结。但，如果只谈这些这篇文章就毫无价值了。以下是一些进阶使用方式——毕竟任何事都不会只有基础那么简单。这些使用对我工作的效率是有极大帮助的。</li>
+</ul>
+<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><h3 id="Working-Directory-and-Staging-Area-1"><a href="#Working-Directory-and-Staging-Area-1" class="headerlink" title="Working Directory and Staging Area"></a>Working Directory and Staging Area</h3><h4 id="git-status优化"><a href="#git-status优化" class="headerlink" title="git status优化"></a><code>git status</code>优化</h4><ul>
+<li>个人而言，在未开发完需求时，最常见的使用 git 时机是查看当前的改动状态，有多少文件修改，有多少文件已经放在暂存区。</li>
+<li><p>这时通过<code>git status</code>来查看文件状态。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitStatus.png" title="git status">
+</li>
+<li><p>不过，正因为频繁使用。完全可以简化查看内容。</p>
+</li>
+<li><p><code>git status -sb(git status -short -branch)</code>查看分支情况并简化信息。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitStatus2.png" title="git status short">
+</li>
+<li><p>简便多了。</p>
+</li>
+</ul>
+<h4 id="git-diff优化"><a href="#git-diff优化" class="headerlink" title="git diff优化"></a><code>git diff</code>优化</h4><ul>
+<li>一个常见的场景是需要查看当前代码的改动部分——我想大部分人都不会刻意去记住自己究竟改了哪些代码。</li>
+<li><p>运行<code>git diff</code>查看当前改动的文件:</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitDiff.png" title="git status short">
+</li>
+<li><p>这里我用<a href="https://github.com/so-fancy/diff-so-fancy" target="_blank" rel="noopener">diff-so-fancy</a>优化排版了diff 的查看。</p>
+</li>
+<li>简单直接对吧。</li>
+<li><p>如果文件多也不怕，可直接查看单个文件。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitDiffFile.png" title="git diff file">
+</li>
+</ul>
+<h4 id="git-stash和git-stash-apply"><a href="#git-stash和git-stash-apply" class="headerlink" title="git stash和git stash apply"></a><code>git stash</code>和<code>git stash apply</code></h4><ul>
+<li>这是个可能有些人不熟悉的命令，但实际上很有用。</li>
+<li>想象一下这个场景，你在自己分支上改了部分代码，突然某个环境有个严重问题要你切换到 master 或某个分支马上查看，这时工作没完成并不适合提交，放在暂存区的话不方便切换分支。<code>git stash</code>在这里就很有必要了。</li>
+<li><code>git stash</code>保存当前工作进度，代码改动。然后你可以尽情地切换分支，在别的分支上修复完问题后再回来，使用<code>git stash apply</code>恢复即可。</li>
+<li><p>改动了部分代码：</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitStash.png" title="git status -sb">
+</li>
+<li><p>保存代码改动：</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitStash2.png" title="git stash">
+</li>
+<li><p>当在其他分支完成后再回到当前分支恢复：</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitStashApply.png" title="git stash apply">
+</li>
+</ul>
+<h4 id="git-checkout-撤销修改"><a href="#git-checkout-撤销修改" class="headerlink" title="git checkout .撤销修改"></a><code>git checkout .</code>撤销修改</h4><ul>
+<li>有时候会遇到这样一个情况，午睡时或喝咖啡或其他小伙伴过来故意动手动脚开玩笑的时候，不小心按到键盘上的某些键，而且该死，正好打在了编辑器上。我们当然不会傻到一个个去找出来然后动手删掉。</li>
+<li>这时只要用<code>git checkout .</code>来取消所有修改。</li>
+<li><code>git checkout file</code>——或者发现只有一个文件改动时。</li>
+</ul>
+<h3 id="Git-Repository-1"><a href="#Git-Repository-1" class="headerlink" title="Git Repository"></a>Git Repository</h3><h4 id="git-commit优化-使用-commit-message-规范提交"><a href="#git-commit优化-使用-commit-message-规范提交" class="headerlink" title="git commit优化: 使用 commit message 规范提交"></a><code>git commit</code>优化: 使用 commit message 规范提交</h4><ul>
+<li>如果你临时起意想要创建一个项目用来随意把玩，那自然随意提交即可。但只要项目是多人维护，多人开发的，或者有回顾自己以往的改动记录的需求的，commit message 就显得很有必要了。</li>
+<li><p>我参考阮一峰老师的如下规范来编写 commit message.</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitCommitMessage.png" title="git commit message">
+</li>
+<li><p>例如刚才的改动，使用<code>git commit -m &#39;feat: 完成 demo4&#39;</code>来提交。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitCommit.png" title="git commit -m feat: demo4">
+</li>
+<li><p>这里我写错了，少写了<em>完成</em>两字，不过没关系，下一节有说明。</p>
+</li>
+<li><p>如果严格遵守规范，那么回顾过往的提交记录时，结果将是一目了然的。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitCommitMessageLog.png" title="git log --oneline">
+</li>
+<li><p>而即便没有以上较麻烦的规则，严格遵守自己的规则也是必要的，这使得你能够清楚直接的了解自己过去、或者别人过去在这个项目里面做了什么。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitCommitMessageLog2.png" title="git log --oneline">
+</li>
+</ul>
+<h4 id="git-commit补充"><a href="#git-commit补充" class="headerlink" title="git commit补充"></a><code>git commit</code>补充</h4><ul>
+<li>正常的提交像上面按规则使用<code>git commit</code>即可。但如果突然发现自己的提交信息有误，或者遗漏了重要的信息。没关系，仍然可以修改刚才的提交——<strong>只要你还未 push 到远程</strong>！</li>
+<li><code>git commit --amend</code>命令可以将当前的改动补充到前一次提交中。</li>
+<li><p>刚才我提交过快，把<code>feat: 完成 demo4</code>写成了<code>feat: demo4</code>, 现在我改回来。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitCommitAmend.png" title="git commit --amend">
+</li>
+<li><p>这点在补充完善 commit message 时非常方便。<strong><em>但也需要非常注意，这只适用于还未 push 时，否则会引起一些小麻烦。</em></strong></p>
+</li>
+</ul>
+<h4 id="git-rebase合并提交"><a href="#git-rebase合并提交" class="headerlink" title="git rebase合并提交"></a><code>git rebase</code>合并提交</h4><ul>
+<li>很多时候，一个需求的完成需要数天时间，迫于各种原因，期间会提交数次。但总的来说，我们只是完成了某个需求。所以并不需要中间的或者前几次提交，这时候合并提交就显得有必要了。</li>
+<li><code>git rebase -i HEAD~n</code>可以合并前几次提交。</li>
+<li><p>合并前：</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitRebase.png" title="git log --pretty=oneline">
+</li>
+<li><p>现在我们将最近两次提交合并<code>git rebase -i HEAD~2</code>:</p>
+</li>
+<li><p>这里清楚显示了各命令用法，我们使用<code>squash</code>来合并，把第二个 pick 改为 squash.</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitRebase2.png" title="git rebase -i HEAD~2">
+</li>
+<li><p>可以再次编辑 commit message, 我们精简一下，写在一起。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitRebase3.png" title="git rebase -i HEAD~2">
+</li>
+<li><p>完成后可见提示。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitRebase4.png" title="git rebase -i HEAD~2">
+</li>
+<li><p>这时再查看记录：</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitRebase5.png" title="git log --oneline">
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitRebase6.png" title="git log">
+</li>
+<li><p>两条 commit 已经合为一条。</p>
+</li>
+<li><strong><em>和<code>git commit --amend</code>类似，因为涉及到修改 commit 历史，所以千万不要在<code>git push</code>后尝试哦！</em></strong></li>
+</ul>
+<h4 id="git-log优化"><a href="#git-log优化" class="headerlink" title="git log优化"></a><code>git log</code>优化</h4><ul>
+<li><code>git log --oneline</code>以一行的形式快速查看提交记录，这个可见刚才的提交记录。</li>
+<li><code>git log -p</code>查看提交记录同时也查看具体改动的代码部分——这在 code review 时非常方便。</li>
+<li><p><code>git log -p file</code>查看单个文件提交记录同时也查看具体改动的代码部分——这在找错时非常方便，再也不用到处找人询问是哪个家伙改了 XX 文件的代码了。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitLogPFile.png" title="git log -p">
+</li>
+<li><p><code>git log --stat</code>查看提交记录的时候显示文件改动信息——也很适合 review 或排查错误.</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitLogStat.png" title="git log -stat">
+</li>
+<li><p><code>git log --auther=zhengyuan zhu</code>查看某个家伙的提交记录——我没改这部分代码啊，看看那个家伙做了什么(这家伙究竟有没有好好工作)。</p>
+</li>
+<li><code>git shortlog</code>简化版提交记录。</li>
+<li><p><code>git shortlog -s -n</code>查看所有人提交次数并排序——或许这样看更加简洁方便。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitShortlog.png" title="git shortlog -s -n">
+</li>
+<li><p>很高兴看到在这个项目里我贡献的部分较多。</p>
+</li>
+</ul>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
+<li><code>git pull --rebase</code>可以简洁 pull 过程——适合洁癖者——我是很反感在查看 log 时看到一堆 merge 记录和情况。即有时如果远程仓库和本地仓库代码不一致时，<code>git pull</code> 会自动进行一次合并，这条记录突兀地存在于 commit history 里，我觉得毫无必要。</li>
+<li><code>git pull --rebase</code>过程中可能会遇到冲突，解决后用<code>git rebase --continue</code>来继续。或者觉得这次不稳，可以用<code>git rebase --abort</code>来取消。</li>
+<li><p>如图所示的<code>f6c5d08</code>和<code>6cbd73f</code>提交就可以通过<code>git pull --rebase</code>避免。</p>
+<img src="/jo.github.io/2017/07/07/my-git-workflow/gitPullRebase.png" title="git pull --rebase">
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><p>这里罗列了我常用的 git, 还有部分因篇幅原因不能再一一列举。可能更适合再写一篇来总结。相比之下，我觉得 GUI 很难做到像这样随心随欲地做到自己想用 git 所做的事。而这些完全可以使用一行命令搞定的事，我也不高兴去将手从键盘区移开然后去挪动笨重的鼠标去一个个点击。</p>
+</li>
+<li><p>希望大家都可以学好 git, 善待 git, 然后在 CLI 里尽情使用 git 吧.</p>
+</li>
+</ul>
+<p><hr><br><img src="/jo.github.io/2017/07/07/my-git-workflow/reward.jpeg" title="Thanks"></p>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/Git/">#Git</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2017/08/30/react-component-lifecycle/">理解 React 组件的生命周期</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2017/05/21/introduce-fish-shell/">从 zsh 到 fish, 让你的 shell 更可爱更友好</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/07/07/my-git-workflow/';
+        this.page.identifier = '2017/07/07/my-git-workflow/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

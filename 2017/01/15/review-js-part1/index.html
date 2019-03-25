@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>回顾JS——第一部分 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾JS——第一部分">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:35.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回顾JS——第一部分">
+<meta name="twitter:description" content="因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            回顾JS——第一部分
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-01-15T07:14:56.000Z" itemprop="datePublished">1月 15 2017</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            14 分钟 读完 (约 2043 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2017/01/15/review-js-part1/unphoto.jpg" title="review javascript">
+<blockquote><br>因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。<br><br></blockquote>
+
+<a id="more"></a>
+<h2 id="回顾JavaScript知识点-ES3-ES5为主，部分ES6"><a href="#回顾JavaScript知识点-ES3-ES5为主，部分ES6" class="headerlink" title="回顾JavaScript知识点(ES3,ES5为主，部分ES6)"></a>回顾JavaScript知识点(ES3,ES5为主，部分ES6)</h2><h3 id="什么是JavaScript"><a href="#什么是JavaScript" class="headerlink" title="什么是JavaScript"></a>什么是JavaScript</h3><ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/About_JavaScript" target="_blank" rel="noopener">JavaScript</a>: JS是一种轻量的，解释性的，面向对象的头等函数语言。其最广为人知的应用是作为网页的脚本语言，但同时它也在很多非浏览器环境下使用。JS是一种动态的基于原型和多范式的脚本语言，支持面向对象，命令式和函数式的编程风格。</p>
+</li>
+<li><p>JavaScript的标准就是ECMAScript.截至2012年为止，所有的主流浏览器都完整的支持ECMAScript 5.1, 旧式的浏览器至少支持ECMAScript 3标准。2015年6月17日，ECMAScript的第六个版本正式发布，该版本正式命名为ECMAScript 2015, 但通常被称为ECMAScript或ES6。</p>
+</li>
+</ul>
+<h3 id="网页中编写JS"><a href="#网页中编写JS" class="headerlink" title="网页中编写JS"></a>网页中编写JS</h3><ol>
+<li>使用<code>script</code>标签</li>
+</ol>
+<ul>
+<li>可以写在页面的任何位置，随网页解释执行</li>
+</ul>
+<ol start="2">
+<li>元素的事件属性</li>
+</ol>
+<ul>
+<li>事件触发后，才会执行事件处理程序</li>
+<li><code>&lt;div onclick=&quot;window.alert(&#39;Send me a job! Please!&#39;)&quot;&gt;&lt;/div&gt;</code></li>
+</ul>
+<ol start="3">
+<li>单独的JS文件</li>
+</ol>
+<ul>
+<li><code>&lt;script src=&quot;index.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
+<li>内存中一个数据的空间</li>
+<li>JS中变量不能以数字开头，不能使用保留字，如果有多个单词，一般采用驼峰命名</li>
+<li>可以使用_或$开头，这是唯二的例外，目前所知。</li>
+<li>规范：<ul>
+<li>变量一定要声明，ES5前使用<code>var</code>，ES6后使用<code>let</code>或<code>const</code>.</li>
+<li>变量的声明通常在文件顶部(ES5前)，避免因<strong>声明提前</strong>造成的问题。</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">数据类型</a></h3><ul>
+<li>原始类型<ul>
+<li><strong>Undefined</strong>: 一个没有被赋值的变量会有默认值undefined.</li>
+<li><strong>Null</strong>: null,常用于清空变量。</li>
+<li><strong>String</strong>: JS的字符串类型用于表示文本数据。它是一组16位的无符号“整数值”的元素。一旦创建便无法更改。</li>
+<li><strong>Number</strong>: ECMAScript中只有一种数字类型：基于IEEE 754 标准的双精度64位二进制格式的值(-(2^53 - 1) 到 2^53-1)，没有像Java里的那种浮点数整数之分。</li>
+<li><strong>Boolean</strong>: 布尔表示一个逻辑实体(true/false).</li>
+<li><strong>Symbol</strong> (ES6新增): 符号类型是唯一的并且是不可修改的，而且可以用来作为Object的key的值。</li>
+</ul>
+</li>
+<li>引用类型(Object): 对象是指内存中的可以被标识符引用的一块区域。</li>
+<li><strong>使用<code>typeof</code>操作符判断对象类型。</strong></li>
+</ul>
+<h4 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h4><ul>
+<li><p>JS是弱类型编程语言</p>
+<ul>
+<li>声明变量时，无需提前规定变量的数据类型。</li>
+<li>赋值时，根据存入数据，动态决定数据类型</li>
+<li>运算时，JS会根据需要动态转换数据类型(隐式转换)</li>
+</ul>
+</li>
+<li><p>隐式转换和强制转换</p>
+<ul>
+<li>强制转换<ul>
+<li><code>x.toString()</code>、<code>String(x)</code></li>
+<li><code>parseInt(x)</code>、<code>parseFloat(x)</code></li>
+<li><code>Boolean(x)</code></li>
+<li><code>typeof x</code> 查看x的数据类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Strict_mode" target="_blank" rel="noopener">严格模式</a></h3><ul>
+<li>ES5中的严格模式是JS中的一种限制性更强的变种方式。</li>
+<li>严格模式会将JS陷阱直接变成明显的错误。</li>
+<li>严格模式修正了一些引擎难以优化的错误，同样的代码有些时候严格模式会比非严格模式下更快。</li>
+<li>严格模式下禁用了一些有可能在未来版本中定义的语法。</li>
+</ul>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><ul>
+<li><code>n++</code>: 将变量本身的值+1，并返回<strong>新值</strong></li>
+<li><code>++n</code>: 将变量本身的值+1，并返回<strong>旧值</strong><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var n = 12;</span><br><span class="line">var n1 = n++; // n1 = 13;</span><br><span class="line">m = 12;</span><br><span class="line">m = ++m; // m1 = 12;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="比较操作符"><a href="#比较操作符" class="headerlink" title="比较操作符"></a>比较操作符</h4><ul>
+<li>严格比较操作符 <code>===</code></li>
+<li>非严格比较操作符 <code>==</code></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank" rel="noopener">Object.is()(ES6新增)</a><ul>
+<li><code>Object.is(value1, value2)</code></li>
+<li>和严格比较操作符类似，但更规范</li>
+</ul>
+</li>
+</ul>
+<h4 id="关系运算"><a href="#关系运算" class="headerlink" title="关系运算"></a>关系运算</h4><ul>
+<li>关系运算中，所有数据默认转为数字类型比较</li>
+<li>如果无法转为数字，就会转为NaN,如果转为NaN，那不管另一半是什么，都会返回false,NaN和任何数据(包括它自己)比较</li>
+<li><p>如果是俩<strong>字符串</strong>比较，则会依次比较字符串中每个字符的unicode码，只要任意一位字符比较出结果就不再继续向后比较</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> name1 = <span class="hljs-string">'Eric'</span>;</span><br><span class="line">    name2 = <span class="hljs-string">'Scott'</span>;</span><br><span class="line">name1 &gt; name2; <span class="hljs-comment">// false 'E' -&gt; 69, 'S' -&gt; 83</span></span><br><span class="line"><span class="hljs-keyword">var</span> name3 = <span class="hljs-string">'Smith'</span>;</span><br><span class="line">name2 &gt; name3; <span class="hljs-comment">// false 'c' -&gt; 99, 'm' -&gt; 109</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>undefined: 自动初始化变量</p>
+</li>
+<li>null: 主动清空变量<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true 含隐式转换</span></span><br><span class="line"><span class="hljs-literal">undefined</span> === <span class="hljs-literal">null</span>; <span class="hljs-comment">// false 不含隐式转换</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span> <span class="hljs-comment">// object</span></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span> <span class="hljs-comment">// undefined</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><ul>
+<li><code>&amp;&amp;</code></li>
+<li><code>||</code></li>
+</ul>
+<h4 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h4><h4 id="赋值运算"><a href="#赋值运算" class="headerlink" title="赋值运算"></a>赋值运算</h4><ul>
+<li>如果是原始类型赋值，则原变量不会随着新变量的改变而改变。</li>
+<li>如果是引用类型的赋值，新变量的改动会随之影响原变量，使其一起改变。因为本质上，它们指向同一对象。</li>
+</ul>
+<h4 id="三目运算"><a href="#三目运算" class="headerlink" title="三目运算"></a><strong>三目运算</strong></h4><ul>
+<li><code>condition ? expr1 : expr2</code></li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li><p>在JS中，函数是一等公民，它不仅像对象一样拥有属性和方法，还可以被调用。</p>
+</li>
+<li><p>一个函数定义(函数声明，函数语句)由以下三部分组成:</p>
+<ul>
+<li><p>函数名(name).</p>
+</li>
+<li><p>函数参数列表(params): 包围在括号<code>()</code>中并由<code>,</code>分隔。</p>
+</li>
+<li><p>函数功能(statements): 包围在花括号<code>{}</code>中，用于定义函数功能的一些 JavaScript 语句。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [square 输入一个数，返回该数的平方的函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Number&#125; number [description]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;Number&#125;        [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">number</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> number * number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+</li>
+<li><p>变量作用域</p>
+<ol>
+<li>全局作用域</li>
+</ol>
+<ul>
+<li>保存在全局window对象下，任何位置都可以访问</li>
+<li>意味着也随时可以修改</li>
+</ul>
+<ol start="2">
+<li>函数作用域</li>
+</ol>
+<ul>
+<li>保存在函数内：随每次函数调用时，临时创建。函数调用完即释放内存空间。再次调用再次创建。</li>
+</ul>
+</li>
+<li><p>声明提前：JS程序正式执行前，引擎会预读<code>var</code>和<code>function</code>到当前作用域的顶部，而赋值留在原地。</p>
+</li>
+<li><p>按值传递：在向函数传入参数时，外部变量仅将值复制一个副本给函数的参数变量。</p>
+<ul>
+<li>函数内修改参数变量，不影响函数外原变量(原始类型)的值。理论同赋值运算。</li>
+</ul>
+</li>
+<li><p>全局函数，可以在全局进行调用的函数。</p>
+<ul>
+<li><code>parseInt/parseFloat</code></li>
+<li><code>isNaN</code></li>
+<li><code>isFinite</code></li>
+<li><code>eval</code></li>
+<li><code>encodeURI/decodeURI</code></li>
+<li><code>encodeURLComponent/decodeURIComponent</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h4><ul>
+<li>顺序结构</li>
+<li>分支结构<ul>
+<li><code>if else</code></li>
+<li><code>switch case</code>: 当一个case触发时，之后的所有的case都自动触发。</li>
+<li>使用break来退出当前结构。</li>
+<li>相邻俩case需要连续时，可省略前一个case中的break。</li>
+</ul>
+</li>
+<li>循环结构<ul>
+<li>循环三要素：循环条件，循环变量，循环体</li>
+<li><code>while</code>、<code>do while</code>、’for’<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// while</span></span><br><span class="line"><span class="hljs-keyword">var</span> n = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">while</span>(n &lt; <span class="hljs-number">3</span>) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'n = '</span> + n);</span><br><span class="line">  n++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// n = 0; n = 1; n = 2;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// do while</span></span><br><span class="line"><span class="hljs-keyword">var</span> n = <span class="hljs-number">4</span>;</span><br><span class="line"><span class="hljs-keyword">do</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'n = '</span> + n);</span><br><span class="line">&#125; <span class="hljs-keyword">while</span>(n &lt; <span class="hljs-number">3</span>);</span><br><span class="line"><span class="hljs-comment">// n = 4;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="程序-数据结构-算法"><a href="#程序-数据结构-算法" class="headerlink" title="程序 = 数据结构 + 算法"></a>程序 = 数据结构 + 算法</h4><ul>
+<li>数据结构：程序中数据如何存储的机构</li>
+<li>算法：程序的执行步骤：顺序、分支、循环</li>
+</ul>
+<h4 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h4><ul>
+<li><strong>数组不限制元素个数，数组中的元素可以为任意类型</strong></li>
+<li><p>关联数组(hash数组)</p>
+<ul>
+<li><p>为每个元素自定义<em>字符串</em>下标</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> arrM = [];</span><br><span class="line">arrM[<span class="hljs-string">'name'</span>] = <span class="hljs-string">'Sandra'</span>;</span><br><span class="line">arrM[<span class="hljs-string">'shx'</span>] = <span class="hljs-number">80</span>;</span><br><span class="line">arrM[<span class="hljs-string">'yw'</span>] = <span class="hljs-number">65</span>;</span><br><span class="line">arrM[<span class="hljs-string">'yy'</span>] = <span class="hljs-number">95</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关联数组的下标没规律。</p>
+</li>
+<li>关联数组的length属性无效。</li>
+<li>使用<code>for in</code>循环遍历</li>
+</ul>
+</li>
+<li><p>索引数组：自动从0开始，每个元素有各自编号</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> arrM = [<span class="hljs-string">'Sandra'</span>, <span class="hljs-number">80</span>, <span class="hljs-number">65</span>, <span class="hljs-number">95</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="数组常用API"><a href="#数组常用API" class="headerlink" title="数组常用API"></a>数组常用API</h4><ul>
+<li><code>toString</code>、 <code>join</code>、 <code>sort</code> 、 <code>concat</code>、 <code>slice</code>、 <code>splice</code>、 <code>reverse</code>、 <code>reduce</code>、 <code>reduceRight</code>、 <code>map</code>、 <code>filter</code>…</li>
+<li>控制台里看一下</li>
+</ul>
+<h4 id="栈和队列-数据结构"><a href="#栈和队列-数据结构" class="headerlink" title="栈和队列(数据结构)"></a>栈和队列(数据结构)</h4><ul>
+<li>栈和队列：JS中没有专门的栈和队列的类型，是用数组模拟的</li>
+<li>栈：一端封闭，只能从另一端进出（仅适用于JS）</li>
+<li>FILO：first in last out</li>
+<li>队列：只能从末尾进入，从头出的数组</li>
+<li>LIFO： last in first out</li>
+</ul>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/JavaScript/">#JavaScript</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2017/01/17/the-summary-of-interview/">跳槽面试小结——那些在我下次面试前我想知道的事</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2017/01/05/questions-in-interview/">面试题整理-2017</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/01/15/review-js-part1/';
+        this.page.identifier = '2017/01/15/review-js-part1/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>

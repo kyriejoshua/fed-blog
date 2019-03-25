@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>HTTP协议之自定义headers参数 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端痴汉">
+
+
+
+
+
+    <meta name="description" content="近期和我司服务端对接时发现藏在headers里的参数，并不是HTTP的response里的常规参数。几经折腾后发现是自定义的参数。供前端ajax调用时提取使用。">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议之自定义headers参数">
+<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/10/17/HTTP-define-headers-params/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="近期和我司服务端对接时发现藏在headers里的参数，并不是HTTP的response里的常规参数。几经折腾后发现是自定义的参数。供前端ajax调用时提取使用。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/17/HTTP-define-headers-params/unphoto.jpg">
+<meta property="og:updated_time" content="2018-07-01T11:40:34.533Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP协议之自定义headers参数">
+<meta name="twitter:description" content="近期和我司服务端对接时发现藏在headers里的参数，并不是HTTP的response里的常规参数。几经折腾后发现是自定义的参数。供前端ajax调用时提取使用。">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/17/HTTP-define-headers-params/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/jo.github.io/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+                
+                <img src="/jo.github.io/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            
+            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            
+            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            
+            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            
+            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            HTTP协议之自定义headers参数
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-10-17T11:58:04.000Z" itemprop="datePublished">10月 17 2016</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/jo.github.io/categories/HTTP/">HTTP</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 分钟 读完 (约 556 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<img src="/jo.github.io/2016/10/17/HTTP-define-headers-params/unphoto.jpg" title="HTTP">
+<blockquote><br>近期和我司服务端对接时发现藏在headers里的参数，并不是HTTP的response里的常规参数。几经折腾后发现是自定义的参数。供前端ajax调用时提取使用。<br><br></blockquote>
+
+<a id="more"></a>
+<h3 id="Before"><a href="#Before" class="headerlink" title="Before"></a>Before</h3><ul>
+<li>在工作时常常有获取列表的接口，就必然会涉及获取到的数组的长度，即页数。</li>
+</ul>
+<ul>
+<li>讲道理，将返回的数组内容和总数量一起返回并不太合理，就像一本书不会在每一页上都标明总页数，而是在书的最开始或者末尾有说明。所以秉着内容和页数不应存放在一起的原则，服务端同事将列表的总页数放在了response的headers里。</li>
+</ul>
+<ul>
+<li>所以问题是如何从response headers获取相应参数。</li>
+</ul>
+<h3 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h3><ul>
+<li>查找了部分文档后找到了Access-Control-Expose-Headers这个参数。</li>
+</ul>
+<ul>
+<li><em>The <strong>Access-Control-Expose-Headers</strong> response header indicates which headers can be exposed as part of the response by listing their names.</em></li>
+</ul>
+<ul>
+<li>它表明了哪些参数是可以用名字展示在response的header里的——这里的展示应当理解为前端可以获取，而不是单纯的显示。</li>
+</ul>
+<ul>
+<li><p>默认是展示6个参数：</p>
+<ul>
+<li><strong>Cache-Control</strong></li>
+<li><strong>Content-Language</strong></li>
+<li><strong>Content-Type</strong></li>
+<li><strong>Expires</strong></li>
+<li><strong>Last-Modified</strong></li>
+<li><strong>Pragma</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>也可以展示其他参数。通过以下方式设置：</p>
+<ul>
+<li><code>Access-Control-Expose-Headers: Content-Length</code></li>
+</ul>
+</li>
+<li><p>甚至自定义参数：</p>
+<ul>
+<li><code>Access-Control-Expose-Headers: X-Resource-Count, Content-Length</code></li>
+</ul>
+</li>
+<li><p>这样当服务端传了<code>X-Resource-Count</code>时在前端就可以取到X-Rource-Count的值。</p>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">1.</span>在angular中获取</span><br><span class="line">$http.get(<span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>/getLists/`</span>)</span><br><span class="line">.then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-comment">// 可以获取到</span></span><br><span class="line">  <span class="hljs-built_in">console</span>.log(res.headers(<span class="hljs-string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">2.</span>在jquery中获取</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  url: <span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>/getLists`</span>,</span><br><span class="line">  type: <span class="hljs-string">'GET'</span>,</span><br><span class="line">  contentType: <span class="hljs-string">'application/json;charset/utf-8'</span>,</span><br><span class="line">&#125;)</span><br><span class="line">.done(<span class="hljs-function">(<span class="hljs-params">data, textStatus, jqXHR</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(jqXHR.getResponseHeader(<span class="hljs-string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">3.</span>原生ajax</span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.XMLHttpRequest) &#123; <span class="hljs-comment">// Mozilla, Safari. IE7+</span></span><br><span class="line">  httpRequest = <span class="hljs-keyword">new</span> XMLHttpRequest();</span><br><span class="line">&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.ActiveXObject) &#123; <span class="hljs-comment">// IE 6 and older</span></span><br><span class="line">  httpRequest = <span class="hljs-keyword">new</span> ActiveXObject(<span class="hljs-string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">&#125;</span><br><span class="line">httpRequest.onreadystatechange = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (httpRequest.readyState === XMLHttpRequest.DONE) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (httpRequest.statue === <span class="hljs-number">200</span>) &#123;</span><br><span class="line">	  <span class="hljs-comment">// something...</span></span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-comment">// error</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">httpRequest.open(<span class="hljs-string">'GET'</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>/getLists`</span>);</span><br><span class="line">______________________________________________________________</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeaderCount</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.getResponseHeader(<span class="hljs-string">'X-Resource-Count'</span>));</span><br><span class="line">&#125;</span><br><span class="line">httpRequest.onload = getHeaderCount;</span><br><span class="line">______________________________________________________________</span><br><span class="line">httpRequest.send();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样就可以愉快地使用X-Resource-Count了。</li>
+</ul>
+<blockquote><br>参考：<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers" target="_blank" rel="noopener">Access-Control-Expose-Headers</a><br><br><a href="https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started" target="_blank" rel="noopener">Ajax</a><br><br></blockquote>
+
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/HTTP/">#HTTP</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/jo.github.io/2016/11/01/wechat-compatible-problems/">微信内置浏览器兼容性问题汇总</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/jo.github.io/2016/10/01/how-to-clear-input-style/">如何清除input元素自定义样式</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/10/17/HTTP-define-headers-params/';
+        this.page.identifier = '2016/10/17/HTTP-define-headers-params/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/jo.github.io/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/jo.github.io/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/jo.github.io/js/insight.js"></script>
+    
+</body>
+</html>
