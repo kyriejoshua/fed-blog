@@ -7,7 +7,7 @@ categories: Tools
 
 <hr>
 
-![](/jo.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/unphoto.jpg)
+![](/2017/10/07/the-introduction-of-sublime-text-plugins/unphoto.jpg)
 
 不久前，sublime text 官方推出了一次大更新。这次更新几乎时隔一年，而且有重大改动，虽然我早用 dev 版提前体验了新版本，但也借此机会再鼓捣了下自己的工具。
 

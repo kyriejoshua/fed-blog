@@ -7,9 +7,9 @@ categories: React
 
 <hr>
 
-![](/jo.github.io/2019/01/03/understanding-react-router/unphoto.jpg)
+![](/2019/01/03/understanding-react-router/unphoto.jpg)
 
-从[上篇文章](/jo.github.io/2018/07/29/understanding-history-in-react-router)可以知道，`react-router` 本质上，利用了 `history api` 的 `pushState`, `replaceState` 方法来控制路由地址，然后使用 `popstate`, `hashchange` 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。
+从[上篇文章](/2018/07/29/understanding-history-in-react-router)可以知道，`react-router` 本质上，利用了 `history api` 的 `pushState`, `replaceState` 方法来控制路由地址，然后使用 `popstate`, `hashchange` 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。
 推荐：★★★★
 
 <!-- more -->

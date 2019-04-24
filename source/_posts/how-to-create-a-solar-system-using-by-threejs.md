@@ -7,7 +7,7 @@ categories: threejs
 
 <hr/>
 
-![](/jo.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/unphoto.png)
+![](/2017/12/19/how-to-create-a-solar-system-using-by-threejs/unphoto.png)
 
 在上一篇文章中，我整理了 Threejs 中的一些基本概念。现在这一篇，就使用上次所整理的内容加上一些不复杂的算法，来实现一个运转着的太阳系模型。这里的所有行星大小及公转时间，尽量贴合实际。
 

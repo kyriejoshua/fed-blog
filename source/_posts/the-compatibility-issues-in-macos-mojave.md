@@ -7,7 +7,7 @@ categories: macos
 
 <hr>
 
-![](/jo.github.io/2018/11/23/the-compatibility-issues-in-macos-mojave/unphoto.jpg)
+![](/2018/11/23/the-compatibility-issues-in-macos-mojave/unphoto.jpg)
 
 升级 MacOs Mojave 后不免会遇到兼容性问题，这里列举几个自己遇到的，后面列出了解决方案。
 推荐：★★☆

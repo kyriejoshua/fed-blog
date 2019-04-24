@@ -7,7 +7,7 @@ categories: Unit-Testing
 
 <hr>
 
-![](/jo.github.io/2018/06/29/learning-unit-testing/unphoto.jpeg)
+![](/2018/06/29/learning-unit-testing/unphoto.jpeg)
 
 以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。
 推荐：★★★

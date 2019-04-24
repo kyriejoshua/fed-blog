@@ -5,7 +5,7 @@ tags: interview
 categories: Interview
 ---
 
-![](/jo.github.io/2018/06/11/the-questions-in-interview-part2/unphoto.jpg)
+![](/2018/06/11/the-questions-in-interview-part2/unphoto.jpg)
 
 P6 的标准。这里所有的题都应该十分熟悉。
 推荐：★★★☆
