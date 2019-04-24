@@ -20,15 +20,15 @@
 <meta name="keywords" content="React-Router">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈 react-router 实现原理">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/unphoto.jpg">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/react-router.png">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/react-router-road.png">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/reward.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-road.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/reward.jpeg">
 <meta property="og:updated_time" content="2019-01-19T11:41:38.443Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈 react-router 实现原理">
@@ -52,7 +52,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -73,9 +73,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -87,15 +87,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -133,7 +133,7 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
+            <a class="article-category-link" href="/categories/React/">React</a>
         </span>
         
         
@@ -171,7 +171,7 @@
 <li>如上所说，其实在 <code>history</code> 与 <code>react-router</code> 之间，核心就差了视图如何变化的逻辑部分。</li>
 <li>在了解到内部原理之前，我理解的流程图是这样的。</li>
 </ul>
-<img src="/jo.github.io/2019/01/03/understanding-react-router/react-router.png">
+<img src="/2019/01/03/understanding-react-router/react-router.png">
 <ul>
 <li>接下来我们来慢慢找出这剩余的部分。然后来看看和最初的印象有什么不同。</li>
 <li>注意：这里的所有代码均基于 <a href="https://github.com/ReactTraining/react-router/tree/v4.2.2" target="_blank" rel="noopener"><code>react-router</code></a> 的 v4+ 版本。</li>
@@ -309,11 +309,11 @@
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>在了解完这么多组件的内容和原理后，相信我们对于 <code>react-router</code> 的实现，有了一定的清晰的思路了。我们会发现，和最初理解的不一样。其实就是自己的理解在一开始是不完善的，甚至有些误解。这个时候，让我们再把流程图再重新梳理，画一遍。下面是简略的更新逻辑过程。</li>
 </ul>
-<img src="/jo.github.io/2019/01/03/understanding-react-router/react-router-road.png">
+<img src="/2019/01/03/understanding-react-router/react-router-road.png">
 <ul>
 <li>下面是一张调用栈的图，或许可以更直观地展示调用了哪些方法调用以及他们的执行顺序。</li>
 </ul>
-<img src="/jo.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
+<img src="/2019/01/03/understanding-react-router/react-router-stack.png">
 <h3 id="遗漏的坑"><a href="#遗漏的坑" class="headerlink" title="遗漏的坑"></a>遗漏的坑</h3><ul>
 <li>到此，相关的主要的逻辑就解释完毕了。</li>
 <li>以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。</li>
@@ -323,7 +323,7 @@
 </ul>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="https://juejin.im/post/5a7e9ee7f265da4e7832949c" target="_blank" rel="noopener">[译]简明React Router v4教程</a><br><a href="https://github.com/fi3ework/blog/issues/21" target="_blank" rel="noopener">前端路由实现及 react-router v4 源码分析</a></p>
 </blockquote>
-<p><hr><br><img src="/jo.github.io/2019/01/03/understanding-react-router/reward.jpeg" title="Thanks"></p>
+<p><hr><br><img src="/2019/01/03/understanding-react-router/reward.jpeg" title="Thanks"></p>
 <!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h-->
 <!-- 6.4h -->
 
@@ -351,7 +351,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/React-Router/">#React-Router</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/React-Router/">#React-Router</a></span>
     
     </div>
     
@@ -362,7 +362,7 @@
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2018/11/23/the-compatibility-issues-in-macos-mojave/">升级 MacOs Mojave 后的兼容问题解决</a>
+            <a href="/2018/11/23/the-compatibility-issues-in-macos-mojave/">升级 MacOs Mojave 后的兼容问题解决</a>
             
         </span>
     </div>
@@ -395,7 +395,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2019/01/03/understanding-react-router/';
+        this.page.url = 'http://kyriejoshua.github.io/2019/01/03/understanding-react-router/';
         this.page.identifier = '2019/01/03/understanding-react-router/';
         
         this.language = 'zh';
@@ -577,7 +577,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -602,12 +602,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>

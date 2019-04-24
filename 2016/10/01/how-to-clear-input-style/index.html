@@ -20,19 +20,19 @@
 <meta name="keywords" content="css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何清除input元素自定义样式">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="有注意到input在不同状态下，或者不同浏览器下都会有显示的问题。例如ios下的浏览器里input有边框显示问题，设置input属性appearance为none即可解决。但input仍然留下许多样式坑。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/unphoto.jpg">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/input-number.png">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/input-ugly.png">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/input-perfect.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/input-number.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/input-ugly.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/input-perfect.png">
 <meta property="og:updated_time" content="2018-07-01T11:40:34.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何清除input元素自定义样式">
 <meta name="twitter:description" content="有注意到input在不同状态下，或者不同浏览器下都会有显示的问题。例如ios下的浏览器里input有边框显示问题，设置input属性appearance为none即可解决。但input仍然留下许多样式坑。">
-<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/unphoto.jpg">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/unphoto.jpg">
 
 
 
@@ -51,7 +51,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -72,9 +72,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -86,15 +86,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -132,7 +132,7 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/CSS/">CSS</a>
+            <a class="article-category-link" href="/categories/CSS/">CSS</a>
         </span>
         
         
@@ -147,13 +147,13 @@
     
         <hr>
 
-<img src="/jo.github.io/2016/10/01/how-to-clear-input-style/unphoto.jpg" title="Input...">
+<img src="/2016/10/01/how-to-clear-input-style/unphoto.jpg" title="Input...">
 <blockquote><br>有注意到input在不同状态下，或者不同浏览器下都会有显示的问题。例如ios下的浏览器里input有边框显示问题，设置input属性appearance为none即可解决。但input仍然留下许多样式坑。<br><br></blockquote>
 
 <a id="more"></a>
 <h3 id="input-type-number-样式问题"><a href="#input-type-number-样式问题" class="headerlink" title="input(type=number)样式问题"></a>input(type=number)样式问题</h3><ul>
 <li><p>当type的值设置为number时，聚焦状态下会出现一个小边框，如下图：</p>
-<img src="/jo.github.io/2016/10/01/how-to-clear-input-style/input-number.png" title="input-number">
+<img src="/2016/10/01/how-to-clear-input-style/input-number.png" title="input-number">
 </li>
 <li><p>因强迫症和需求以及正常的审美观要求，一致确定去掉这个丑陋的多余项。</p>
 </li>
@@ -167,7 +167,7 @@
 <h3 id="input作为表单自动提交时"><a href="#input作为表单自动提交时" class="headerlink" title="input作为表单自动提交时"></a>input作为表单自动提交时</h3><ul>
 <li>当input作为表单时，会自动记录之前的填写项，并自动补充，如果选择自动补充的选项，而且本身给input设置了样式时。画面就会非常唯美（丑陋）。</li>
 </ul>
-<img src="/jo.github.io/2016/10/01/how-to-clear-input-style/input-ugly.png" title="ugly">
+<img src="/2016/10/01/how-to-clear-input-style/input-ugly.png" title="ugly">
 <ul>
 <li><p>这里有两种解决方案：</p>
 </li>
@@ -177,7 +177,7 @@
 <li><p>原理是通过打补丁来解决自定义样式——是不是优雅了很多~</p>
 </li>
 </ul>
-<img src="/jo.github.io/2016/10/01/how-to-clear-input-style/input-perfect.png" title="perfect">
+<img src="/2016/10/01/how-to-clear-input-style/input-perfect.png" title="perfect">
 <ul>
 <li>2.通过关闭表单的自动填充功能来彻底根除该问题：</li>
 </ul>
@@ -193,7 +193,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/css/">#css</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/css/">#css</a></span>
     
     </div>
     
@@ -201,12 +201,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/jo.github.io/2016/10/17/HTTP-define-headers-params/">HTTP协议之自定义headers参数</a>
+            <a href="/2016/10/17/HTTP-define-headers-params/">HTTP协议之自定义headers参数</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2016/09/23/webpack-plugin-webpack-dashboard/">webpack实用插件安利之webpack-dashboard</a>
+            <a href="/2016/09/23/webpack-plugin-webpack-dashboard/">webpack实用插件安利之webpack-dashboard</a>
             
         </span>
     </div>
@@ -239,7 +239,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/10/01/how-to-clear-input-style/';
+        this.page.url = 'http://kyriejoshua.github.io/2016/10/01/how-to-clear-input-style/';
         this.page.identifier = '2016/10/01/how-to-clear-input-style/';
         
         this.language = 'zh';
@@ -421,7 +421,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -446,12 +446,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>

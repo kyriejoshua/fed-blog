@@ -20,17 +20,17 @@
 <meta name="keywords" content="React-Router">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解 react-router 中的 history">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-01-07T07:47:24.013Z">
+<meta property="og:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg">
+<meta property="og:updated_time" content="2019-04-24T11:36:04.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 react-router 中的 history">
 <meta name="twitter:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
-<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
 
 
 
@@ -49,7 +49,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -84,15 +84,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -130,14 +130,14 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
+            <a class="article-category-link" href="/categories/React/">React</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            21 分钟 读完 (约 3182 字)
+            21 分钟 读完 (约 3179 字)
         </span>
         
     </div>
@@ -145,7 +145,7 @@
     
         <hr>
 
-<p><img src="/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg" alt></p>
+<p><img src="/2018/07/29/understanding-history-in-react-router/unphoto.jpg" alt></p>
 <!-- 实际时间: 2018-08-29 21:47:38 -->
 <p>对 <code>react-router</code> 的分析，目前准备主要集中在三点：<br>a. <code>history</code> 的分析。<br>b. <code>react-router</code> 原理分析。<br>c. <code>react-router</code> 内部匹配原理。<br>这篇文章准备着重理解 <code>history</code>.<br>推荐：★★★☆</p>
 <a id="more"></a>
@@ -299,7 +299,7 @@
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="http://zhenhua-lee.github.io/react/history.html" target="_blank" rel="noopener">react-router 的实现原理</a><br><a href="https://juejin.im/entry/5accc0b4f265da23a1423cba" target="_blank" rel="noopener">react-router 源代码学习笔记
 </a><br><a href="https://juejin.im/post/5a9108b6f265da4e7527b1a4" target="_blank" rel="noopener">Javascript设计模式之发布-订阅模式</a></p>
 </blockquote>
-<p><hr><br><img src="/jo.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg" title="Thanks"></p>
+<p><hr><br><img src="/2018/07/29/understanding-history-in-react-router/reward.jpeg" title="Thanks"></p>
 <!-- 4h + 2h + 0.5h -->
 
         <!-- 引入打赏图片即显示打赏功能 -->
@@ -326,7 +326,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/React-Router/">#React-Router</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/React-Router/">#React-Router</a></span>
     
     </div>
     
@@ -334,12 +334,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/jo.github.io/2018/11/23/the-compatibility-issues-in-macos-mojave/">升级 MacOs Mojave 后的兼容问题解决</a>
+            <a href="/2018/11/23/the-compatibility-issues-in-macos-mojave/">升级 MacOs Mojave 后的兼容问题解决</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2018/06/29/learning-unit-testing/">单测入门笔记</a>
+            <a href="/2018/06/29/learning-unit-testing/">单测入门笔记</a>
             
         </span>
     </div>
@@ -372,7 +372,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2018/07/29/understanding-history-in-react-router/';
+        this.page.url = 'http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/';
         this.page.identifier = '2018/07/29/understanding-history-in-react-router/';
         
         this.language = 'zh';
@@ -554,7 +554,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -579,12 +579,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>

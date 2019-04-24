@@ -20,16 +20,16 @@
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在git仓库中彻底清除大文件">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="坑的由来事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:34.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在git仓库中彻底清除大文件">
 <meta name="twitter:description" content="坑的由来事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，">
-<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
 
 
 
@@ -48,7 +48,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -69,9 +69,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -83,15 +83,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -129,7 +129,7 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/Git/">Git</a>
+            <a class="article-category-link" href="/categories/Git/">Git</a>
         </span>
         
         
@@ -144,7 +144,7 @@
     
         <hr>
 
-<img src="/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg" title="monica my baby">
+<img src="/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg" title="monica my baby">
 <blockquote><br>坑的由来<br><br>事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，这时你紧张了，慌了，明明删了视频，怎么仓库竟还变大了。<br><br>这一期，让我们走进git,细细体会git带给我们的欢乐与忧愁。<br><br></blockquote>
 
 <a id="more"></a>
@@ -225,7 +225,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/git/">#git</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/git/">#git</a></span>
     
     </div>
     
@@ -233,12 +233,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/jo.github.io/2016/07/24/ES6-new-features-1/">ES6 简单特性尝鲜-1</a>
+            <a href="/2016/07/24/ES6-new-features-1/">ES6 简单特性尝鲜-1</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2016/07/03/webpack-trytry/">webpack小试牛刀</a>
+            <a href="/2016/07/03/webpack-trytry/">webpack小试牛刀</a>
             
         </span>
     </div>
@@ -271,7 +271,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/07/17/how-to-clear-huge-files-in-git/';
+        this.page.url = 'http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/';
         this.page.identifier = '2016/07/17/how-to-clear-huge-files-in-git/';
         
         this.language = 'zh';
@@ -453,7 +453,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -478,12 +478,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>

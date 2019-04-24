@@ -20,17 +20,17 @@
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="回顾JS-第二部分">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/01/25/review-js-part2/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2017/01/25/review-js-part2/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="第二部分。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/25/review-js-part2/unphoto.jpg">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/25/review-js-part2/reward.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/01/25/review-js-part2/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/01/25/review-js-part2/reward.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:35.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回顾JS-第二部分">
 <meta name="twitter:description" content="第二部分。">
-<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2017/01/25/review-js-part2/unphoto.jpg">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2017/01/25/review-js-part2/unphoto.jpg">
 
 
 
@@ -49,7 +49,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -84,15 +84,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -130,7 +130,7 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
         </span>
         
         
@@ -145,7 +145,7 @@
     
         <hr>
 
-<img src="/jo.github.io/2017/01/25/review-js-part2/unphoto.jpg" title="review javascript">
+<img src="/2017/01/25/review-js-part2/unphoto.jpg" title="review javascript">
 <blockquote><br>第二部分。<br><br></blockquote>
 
 <a id="more"></a>
@@ -432,7 +432,7 @@
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 给Array添加类似String的indexOf方法</span></span><br><span class="line"><span class="hljs-comment">// 首先检查原来的原型链中是否有该方法</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">indexOf</span>(<span class="hljs-params">value</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.indexOf &amp;&amp; !<span class="hljs-built_in">Array</span>.prototype.indexOf) &#123; <span class="hljs-comment">// 疑问: 为什么这里this.indexOf in Array.prototype 会返回false</span></span><br><span class="line">    <span class="hljs-comment">// 使用this来指代当前的调用对象(数组)</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.length; i++) &#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>[i] === value) &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> i;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 可以简写成以下这样</span></span><br><span class="line"><span class="hljs-built_in">Array</span>.prototype.indexOf = <span class="hljs-built_in">Array</span>.prototype.indexOf || indexOf;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><hr><br><img src="/jo.github.io/2017/01/25/review-js-part2/reward.jpeg" title="Thanks"></p>
+<p><hr><br><img src="/2017/01/25/review-js-part2/reward.jpeg" title="Thanks"></p>
 
         <!-- 引入打赏图片即显示打赏功能 -->
         
@@ -458,7 +458,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/JavaScript/">#JavaScript</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/JavaScript/">#JavaScript</a></span>
     
     </div>
     
@@ -466,12 +466,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/jo.github.io/2017/02/05/zhihulive-Jasin-Yip/">Jasin Yip 计蒜客前端知乎 Live 笔记</a>
+            <a href="/2017/02/05/zhihulive-Jasin-Yip/">Jasin Yip 计蒜客前端知乎 Live 笔记</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2017/01/23/the-problem-about-host/">有关 getaddrinfo 报错的解决</a>
+            <a href="/2017/01/23/the-problem-about-host/">有关 getaddrinfo 报错的解决</a>
             
         </span>
     </div>
@@ -504,7 +504,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/01/25/review-js-part2/';
+        this.page.url = 'http://kyriejoshua.github.io/2017/01/25/review-js-part2/';
         this.page.identifier = '2017/01/25/review-js-part2/';
         
         this.language = 'zh';
@@ -686,7 +686,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -711,12 +711,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>

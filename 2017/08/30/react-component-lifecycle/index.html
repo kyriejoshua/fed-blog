@@ -20,12 +20,12 @@
 <meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解 React 组件的生命周期">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2017/08/30/react-component-lifecycle/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/08/30/react-component-lifecycle/unphoto.jpg">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:34.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 React 组件的生命周期">
@@ -49,7 +49,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -84,15 +84,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -130,7 +130,7 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/React/">React</a>
+            <a class="article-category-link" href="/categories/React/">React</a>
         </span>
         
         
@@ -247,7 +247,7 @@
 <li><code>React</code> 组件都必须是纯函数，并禁止修改其自身 props.</li>
 </ul>
 <h3 id="这里以图片形式更直观地来理解这整个生命周期流程"><a href="#这里以图片形式更直观地来理解这整个生命周期流程" class="headerlink" title="这里以图片形式更直观地来理解这整个生命周期流程"></a>这里以图片形式更直观地来理解这整个生命周期流程</h3><ul>
-<li>组件的生命周期流程图<img src="/jo.github.io/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg" title="React LifeCycle">
+<li>组件的生命周期流程图<img src="/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg" title="React LifeCycle">
 </li>
 </ul>
 <h5 id="PS-截止-9-月份，React-宣布将会随着-16-版本更新，修改原有的-license，-将原专利许可和-BSD-协议改为-MIT-协议。算是给这场风波一个较为圆满的结果。"><a href="#PS-截止-9-月份，React-宣布将会随着-16-版本更新，修改原有的-license，-将原专利许可和-BSD-协议改为-MIT-协议。算是给这场风波一个较为圆满的结果。" class="headerlink" title="PS: 截止 9 月份，React 宣布将会随着 16 版本更新，修改原有的 license， 将原专利许可和 BSD 协议改为 MIT 协议。算是给这场风波一个较为圆满的结果。"></a><em>PS: 截止 9 月份，<code>React</code> 宣布将会随着 16 版本更新，修改原有的 <code>license</code>， 将原专利许可和 BSD 协议改为 MIT 协议。算是给这场风波一个较为圆满的结果。</em></h5><blockquote><p>参考：<br>  1.<a href="https://devhints.io/react" target="_blank" rel="noopener">react</a><br>  2.<a href="https://reactcheatsheet.com/" target="_blank" rel="noopener">reactchectsheet</a><br>  3.<a href="https://reactjs.org/docs/react-component.html" target="_blank" rel="noopener">reactjs</a></p>
@@ -260,7 +260,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/React/">#React</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/React/">#React</a></span>
     
     </div>
     
@@ -268,12 +268,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/jo.github.io/2017/09/23/css3d-study/">CSS3 实现🎲旋转教程</a>
+            <a href="/2017/09/23/css3d-study/">CSS3 实现🎲旋转教程</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2017/07/07/my-git-workflow/">我的 git 工作流</a>
+            <a href="/2017/07/07/my-git-workflow/">我的 git 工作流</a>
             
         </span>
     </div>
@@ -306,7 +306,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2017/08/30/react-component-lifecycle/';
+        this.page.url = 'http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/';
         this.page.identifier = '2017/08/30/react-component-lifecycle/';
         
         this.language = 'zh';
@@ -488,7 +488,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -513,12 +513,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>

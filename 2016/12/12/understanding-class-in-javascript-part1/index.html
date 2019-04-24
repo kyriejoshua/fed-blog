@@ -20,17 +20,17 @@
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解JavaScript中的类">
-<meta property="og:url" content="http://kyriejoshua.github.io/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/index.html">
+<meta property="og:url" content="http://kyriejoshua.github.io/2016/12/12/understanding-class-in-javascript-part1/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。基于ES3, ES5.">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg">
-<meta property="og:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/understand-prototype.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/12/12/understanding-class-in-javascript-part1/understand-prototype.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:35.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解JavaScript中的类">
 <meta name="twitter:description" content="整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。基于ES3, ES5.">
-<meta name="twitter:image" content="http://kyriejoshua.github.io/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg">
 
 
 
@@ -49,7 +49,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
 
-<link rel="stylesheet" href="/jo.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/jo.github.io/">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/jo.github.io/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -84,15 +84,15 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/jo.github.io/archives">Archives</a>
+            <a class="navbar-item " href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/jo.github.io/categories">Categories</a>
+            <a class="navbar-item " href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/jo.github.io/tags">Tags</a>
+            <a class="navbar-item " href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/jo.github.io/books">Books</a>
+            <a class="navbar-item " href="/books">Books</a>
             
-            <a class="navbar-item " href="/jo.github.io/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
@@ -130,7 +130,7 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/jo.github.io/categories/JavaScript/">JavaScript</a>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
         </span>
         
         
@@ -145,7 +145,7 @@
     
         <hr>
 
-<img src="/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg" title="Class">
+<img src="/2016/12/12/understanding-class-in-javascript-part1/unphoto.jpg" title="Class">
 <blockquote><br>整理了部分类的知识点。类的定义，如何实现一个类，类有哪些特点，等等。基于ES3, ES5.<br><br></blockquote>
 
 <a id="more"></a>
@@ -201,7 +201,7 @@
 <ul>
 <li>毕竟不是灵魂画手，大概便是这样……</li>
 </ul>
-<img src="/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/understand-prototype.jpeg" title="understanding prototype">
+<img src="/2016/12/12/understanding-class-in-javascript-part1/understand-prototype.jpeg" title="understanding prototype">
 <p>​</p>
 
         <!-- 引入打赏图片即显示打赏功能 -->
@@ -211,7 +211,7 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/jo.github.io/tags/JavaScript/">#JavaScript</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/JavaScript/">#JavaScript</a></span>
     
     </div>
     
@@ -219,12 +219,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/jo.github.io/2016/12/19/transform-cookies-into-es6/">ES6改写cookies.js及分析</a>
+            <a href="/2016/12/19/transform-cookies-into-es6/">ES6改写cookies.js及分析</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/jo.github.io/2016/12/05/duplicate-removal-algorithm-about-array/">JavaScript数组去重</a>
+            <a href="/2016/12/05/duplicate-removal-algorithm-about-array/">JavaScript数组去重</a>
             
         </span>
     </div>
@@ -257,7 +257,7 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://kyriejoshua.github.io/jo.github.io/2016/12/12/understanding-class-in-javascript-part1/';
+        this.page.url = 'http://kyriejoshua.github.io/2016/12/12/understanding-class-in-javascript-part1/';
         this.page.identifier = '2016/12/12/understanding-class-in-javascript-part1/';
         
         this.language = 'zh';
@@ -439,7 +439,7 @@
     
 
 
-<script src="/jo.github.io/js/script.js"></script>
+<script src="/js/script.js"></script>
 
     
     <div class="searchbox ins-search">
@@ -464,12 +464,12 @@
                 TAGS: '标签',
                 UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/jo.github.io/content.json',
+            CONTENT_URL: '/content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script src="/jo.github.io/js/insight.js"></script>
+<script src="/js/insight.js"></script>
     
 </body>
 </html>
