@@ -7,7 +7,7 @@ categories: React
 
 <hr>
 
-![](/jo.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg)
+![](/2018/07/29/understanding-history-in-react-router/unphoto.jpg)
 
 <!-- 实际时间: 2018-08-29 21:47:38 -->
 
