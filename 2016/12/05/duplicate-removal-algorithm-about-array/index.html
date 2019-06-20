@@ -71,7 +71,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="/images/logo.png" alt height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -116,7 +116,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             JavaScript数组去重
@@ -186,7 +186,7 @@
 <li>它类似于数组，但每个属性(值)都是唯一的。可使用构造函数Set生成。</li>
 <li>Set有内置属性size，可以查看数组的长度。</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 数组作为参数传入</span></span><br><span class="line"><span class="hljs-keyword">const</span> set = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>]);</span><br><span class="line">set.size; <span class="hljs-comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 类数组对象传入</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDivs</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> [...document.querySelectorAll(<span class="hljs-string">'div'</span>)];</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> set2= <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(getDivs());</span><br><span class="line">set2.size; <span class="hljs-comment">// 192</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 数组作为参数传入</span></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">set</span> = new Set([1, 2, 3, 4, 5, 5]);</span><br><span class="line"><span class="hljs-keyword">set</span>.size; // 5</span><br><span class="line"></span><br><span class="line">// 类数组对象传入</span><br><span class="line">function getDivs() &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> [...document.querySelectorAll(<span class="hljs-string">'div'</span>)];</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> set2= <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(getDivs());</span><br><span class="line">set2.size; <span class="hljs-comment">// 192</span></span><br></pre></td></tr></table></figure>
 <p>​</p>
 </li>
 <li><p>ES6中，数组扩展了很多方法。这里用到了Array.from方法。它用于将两类对象转为真正的数组:</p>
