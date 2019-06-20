@@ -27,7 +27,7 @@ c. `react-router` 内部匹配原理。
 - [走进createBrowserHistory](#走进createBrowserHistory)
 - [history在react-router中](#history在react-router中)
 - [小结](#小结)
-- [坑](#坑)
+- [占位坑](#占位坑)
 - [参考](#参考)
 
 ### 引子
@@ -67,7 +67,7 @@ c. `react-router` 内部匹配原理。
 
 ### 走进createBrowserHistory
 
-* 话不多说，直接走进[*createBrowserHistory源码*](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js)
+* 话不多说，直接走进 [*createBrowserHistory源码*](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js)
 
   ```javascsript
   /**
@@ -75,7 +75,7 @@ c. `react-router` 内部匹配原理。
    * pushState, replaceState, and the popstate event.
    */
   ```
-* 在方法开始的注释里，它说明了是基于 H5 的 `history` 创建对象，对象内包括了一些常用的方法譬如
+* 在该方法开始的注释里，它说明了是基于 H5 的 `history` 创建对象，对象内包括了一些常用的方法譬如
   * `pushState`,`replaceState`,`popstate` 等
 
 #### ***`history` 对象***
@@ -110,7 +110,7 @@ c. `react-router` 内部匹配原理。
 * 其中，`go`/`goBack`/`goForward` 是对原生 `history.go` 的简单封装。
 * 剩下的方法相对复杂些，因此在介绍 `push`, `replace` 等方法之前，先来了解下 `transitionManager`. 因为下面的很多实现，都用到了这个对象所提供的方法。
 
-#### ***[`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法***
+#### ***[`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法介绍***
 
 * 首先看下该对象返回了哪些方法：
   ```javascript
@@ -249,7 +249,8 @@ c. `react-router` 内部匹配原理。
   };
   ```
 
-* 下面的方法则应用了 `confirmTransitionTo`.
+##### 下面的方法则应用了 `confirmTransitionTo`.
+
 * `push`, `replace`  是原生方法的扩展，它们都用到了上述方法，都负责实现跳转，因此内部有较多逻辑相同。
 * 后面会以 `push` 为例, 它其实就是对原生的 `history.pushState` 的强化。
 * 这里先从原生的 `history.pushState` 开始了解。
@@ -304,6 +305,7 @@ c. `react-router` 内部匹配原理。
               window.location.href = href
             } else {
               // 如果是非强制刷新时，会更新状态，后续在 react-router 中起到重要作用
+              // 上文提到过的发布事件调用处
               setState({ action, location })
             }
           } else {
@@ -318,7 +320,7 @@ c. `react-router` 内部匹配原理。
 * [**`replaceState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 只是把推进栈的方式改为替换栈的行为。它接收的参数与 `pushState` 完全相同。只是调用后方法执行的效果不同。
 
 * 补：本来如果仅仅是介绍当前的 `history`. 我之前以为找到 `pushState` 这个核心就已经足够了。但当我继续深入，探究 `react-router` 原理的时候，才发现这里遗漏了重要的一点。那就是 `setState` 方法。
-* 那么这个方法具体做了什么呢。在上文中已经做了简单介绍，这里再重申一遍：**就是将当前 `state` 存入 `history`, 同时发布事件，也就是调用之前订阅时的保存的所有方法。参数则是 `history.location`, `history.action`. 或许现在，可能我们对它的重要性没有那么深的理解，当你再结合后一篇分析 `react-router` 的文章。就知道它起的作用了。**
+* 那么这个方法具体做了什么呢。在上文中已经做了简单介绍，这里再重申一遍：**就是将当前 `state` 存入 `history`, 同时发布事件，也就是调用之前订阅时的保存的所有方法。参数则是 `[history.location, history.action]`. 或许现在，我们可能对该方法的重要性没有那么深的理解，当你再结合后一篇分析 `react-router` 的文章，就知道它起的作用了。**
 
 ### history在react-router中
 
@@ -348,10 +350,10 @@ c. `react-router` 内部匹配原理。
 ### 小结
 
 * 一句话形容 `history` 这个库。它是一个对 HTML5 原生 `history` 的拓展，它对外输出三个方法，用以在支持原生 api 的环境和不兼容的环境，还有 node 环境中调用。而该方法返回的就是一个增强的 `history` api.
-* 写这篇文章的时候，第一次有感受到技术栈拓展的无穷。从最初想分析 `react-router`，到发现它依赖的主要的库 `history`. 再进行细化，到 `history` 主要提供的对象方法。里面涉及的发布订阅设计模式 ，思路，以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日热情。
+* 写这篇文章的时候，第一次有感受到技术栈拓展的无穷魅力。从最初试图分析 `react-router`，到发现它依赖的主要的库 `history`. 再进行细化，到 `history` 主要提供的对象方法。里面涉及的发布订阅设计模式、思路、以及具体的实现使用了柯里化方式。一步一步探究下去可以发现很多有趣的地方。似乎又唤起往日的技术热情。
 * 下一篇文章将会继续介绍 `react-router`.
 
-### 坑
+### 占位坑
 
 * 下面两个方法返回的内容和 `createBrowserHistory` 基本一致，只是具体的实现有部分差别。有时间补上。
 * `createHashHistory`
