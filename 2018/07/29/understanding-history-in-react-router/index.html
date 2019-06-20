@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
 <title>理解 react-router 中的 history - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-06-20T07:40:35.250Z">
+<meta property="og:updated_time" content="2019-06-20T08:47:57.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 react-router 中的 history">
 <meta name="twitter:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. react-router 原理分析。c. react-router 内部匹配原理。这篇文章准备着重理解 history.推荐：★★★☆">
@@ -72,7 +72,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -117,7 +117,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             理解 react-router 中的 history
@@ -145,7 +145,7 @@
     
         <hr>
 
-<p><img src="/2018/07/29/understanding-history-in-react-router/unphoto.jpg" alt></p>
+<p><img src="/2018/07/29/understanding-history-in-react-router/unphoto.jpg" alt=""></p>
 <!-- 实际时间: 2018-08-29 21:47:38 -->
 <p>对 <code>react-router</code> 的分析，目前准备主要集中在三点：<br>a. <code>history</code> 的分析。<br>b. <code>react-router</code> 原理分析。<br>c. <code>react-router</code> 内部匹配原理。<br>这篇文章准备着重理解 <code>history</code>.<br>推荐：★★★☆</p>
 <a id="more"></a>
@@ -269,7 +269,7 @@
 </li>
 <li><p><code>pushState</code> 和 <code>push</code> 方法讲完，<code>replaceState</code> 和 <code>replace</code> 也就很好理解了。</p>
 </li>
-<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>replaceState</code></strong></a> 只是把推进栈的方式改为替换栈的行为。它接收的参数与 <code>pushState</code> 完全相同。只是调用后方法执行的效果不同。</p>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener"><strong><code>replaceState</code></strong></a> 只是把<strong>推进栈</strong>的方式改为<strong>替换栈</strong>的行为。它接收的参数与 <code>pushState</code> 完全相同。只是调用后方法执行的效果不同。</p>
 </li>
 <li><p>补：本来如果仅仅是介绍当前的 <code>history</code>. 我之前以为找到 <code>pushState</code> 这个核心就已经足够了。但当我继续深入，探究 <code>react-router</code> 原理的时候，才发现这里遗漏了重要的一点。那就是 <code>setState</code> 方法。</p>
 </li>
