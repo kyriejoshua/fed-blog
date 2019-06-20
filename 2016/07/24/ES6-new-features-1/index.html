@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Java">
+    <meta name="description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。  尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的">
 <meta name="keywords" content="ES2015">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6 简单特性尝鲜-1">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/07/24/ES6-new-features-1/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Java">
+<meta property="og:description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。  尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/07/24/ES6-new-features-1/unphoto.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:34.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 简单特性尝鲜-1">
-<meta name="twitter:description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Java">
+<meta name="twitter:description" content="ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。  尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/07/24/ES6-new-features-1/unphoto.jpeg">
 
 
@@ -145,12 +145,19 @@
         <hr>
 
 <img src="/2016/07/24/ES6-new-features-1/unphoto.jpeg" title="Hey ES2015">
-<blockquote><br>ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。<br><br>尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Javascript超集不谈，回归到js本身来。<br><br></blockquote>
+
+<blockquote>
+ES6的出现，无疑是对现有的ES5的一次巨大冲击。某种程度上，部分人觉得这是给开发人员带来的巨大惊喜。它保证现有的基础之外，增加了很多好用的语法糖，使得对后端转入的javascript更为友好。尽管有些人在ES5上还未站稳脚跟——譬如我，但已经迫不及待地想去尝试ES6。
+
+<p>尽管在我的工作曾写过coffeescript,typescipt，但我始终觉得基础的才是实用的。让我们抛开那些多样的Javascript超集不谈，回归到js本身来。</p>
+</blockquote>
 
 <a id="more"></a>
+
 <p><strong>1.Block-Scoped Constructs Let and Const (构造let和const及块作用域)</strong></p>
 <ul>
-<li>在我刚开始学习js的时候，我的老师教导在js中声明变量，一定要用var声明。否则这些可能原本应当属于你的孩子，最终都会被window抢走。</li>
+<li><p>在我刚开始学习js的时候，我的老师教导在js中声明变量，一定要用var声明。否则这些可能原本应当属于你的孩子，最终都会被window抢走。</p>
+</li>
 <li><p>后来在工作中，更规范的写法是将所有的变量声明在js顶部，以防止声明提前带来的糟糕影响。</p>
 </li>
 <li><p><strong>而ES6中的let，则让你更容易地避免以上两种易犯的错误。</strong></p>
@@ -160,18 +167,21 @@
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkYourMoney</span>(<span class="hljs-params">you</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">var</span> money = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (you) &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> money = <span class="hljs-number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> money = <span class="hljs-number">100</span>;	<span class="hljs-comment">//	混淆你的视线</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="hljs-keyword">var</span> money = <span class="hljs-number">1000</span>;	<span class="hljs-comment">//	再次混淆</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> money;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(checkYourMoney(<span class="hljs-literal">true</span>));</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>不管你信不信，控制台里输出的都是冷冰冰的1000。尽管现实中你可能希望钱确实能无故多出来，但在代码这儿可不行。</p>
 <p>*反面教材结束，正面登场</p>
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkYourMoney</span>(<span class="hljs-params">you</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> money = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (you) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> money = <span class="hljs-number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> money = <span class="hljs-number">100</span>;</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="hljs-keyword">let</span> money = <span class="hljs-number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> money;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(checkYourMoney(<span class="hljs-literal">true</span>));</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>这回变了，输出为0。<br>*let的好处是让你在任何块内定义都不会互相影响，尽管在别的块内你定义了money不同的值，但对于return而言，只获取邻近的变量。</p>
 <p>*相对而言，<code>const</code>的使用较少一些。它的作用是声明常量。虽然这么说，不过它的作用更类似于一个指针指向某个引用，这么听起来好像有些git的感觉。尽管它用于定义常量，但这常量并非一成不变。</p>
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> GIRL = [<span class="hljs-string">'lovely'</span>];	<span class="hljs-comment">// 定义一只可爱的妹子</span></span><br><span class="line">GIRL.push(<span class="hljs-string">'beautiful'</span>);  <span class="hljs-comment">// 再漂亮点儿</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(GIRL);	<span class="hljs-comment">//	['lovely', 'beautiful']</span></span><br><span class="line">GIRL = <span class="hljs-string">'lovely and beautiful'</span>;  <span class="hljs-comment">// TypeError: Identifier 'GIRL' has already been declared(…)	//	您的妹子已被认领</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><code>let</code>和<code>const</code>的基本用法就是这样，还有几点需要注意的是<ul>
 <li>let声明的变量不具备声明提前的属性，意味着可以就近使用。<ul>
@@ -191,25 +201,30 @@
 <li>小试一把</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> code = <span class="hljs-string">'cold'</span>;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">`My code is <span class="hljs-subst">$&#123;code&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//	在我的日常中更广泛的用法是——譬如angular中</span></span><br><span class="line">$http.get(<span class="hljs-string">`<span class="hljs-subst">$&#123;config().lala_url&#125;</span>/abc/book?page<span class="hljs-subst">$&#123;page&#125;</span>=&amp;count=<span class="hljs-subst">$&#123;count&#125;</span>`</span>)</span><br><span class="line"><span class="hljs-comment">//	do something...</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>3.Muti-line Strings (多行字符串)</strong></p>
 <ul>
 <li>相信不少人在使用jquery的时候都拼接过字符串，而如果一旦内容较多，画面一定很香艳。</li>
 <li>true story——请感受一下冰山一角</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> order = <span class="hljs-string">'&lt;div class="order"&gt;'</span></span><br><span class="line"> + <span class="hljs-string">'&lt;div class="orderTitle"&gt;'</span></span><br><span class="line">   + <span class="hljs-string">'&lt;div class="fl"&gt;'</span></span><br><span class="line">     + <span class="hljs-string">'&lt;div class="orderNum ml10"&gt;'</span></span><br><span class="line">     + order.number</span><br><span class="line">     + <span class="hljs-string">'&lt;/div&gt;'</span></span><br><span class="line">   + <span class="hljs-string">'&lt;/div&gt;'</span></span><br><span class="line"> + <span class="hljs-string">'&lt;/div&gt;'</span></span><br><span class="line">+ <span class="hljs-string">'&lt;/div&gt;'</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>而有了ES6的反引号<strong><code></code></strong>，妈妈再也不用担心我的拼接了！</li>
+<li>而有了ES6的反引号<strong>``</strong>，妈妈再也不用担心我的拼接了！</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> order = <span class="hljs-string">`&lt;div class="order"&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;div class="orderTitle"&gt;</span></span><br><span class="line"><span class="hljs-string">    &lt;div class="fl"&gt;</span></span><br><span class="line"><span class="hljs-string">      &lt;div class="orderNum ml10"&gt;</span></span><br><span class="line"><span class="hljs-string">      order.number</span></span><br><span class="line"><span class="hljs-string">      &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string">    &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string"> &lt;/div&gt;`</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>请忽略这是段糟糕代码的事实——看！是不是清爽多了。</li>
 </ul>
-<p><br></p>
+<br>
+
 <h4 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a><em>未完待续……</em></h4><blockquote>
 <p>   参考：</p>
 <blockquote>
-<p>   1.<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651551064&amp;idx=1&amp;sn=341d021ae1bd0f3cd28d7868271711af&amp;scene=1&amp;srcid=0724xCQ1rJWgMrU50XdGz0PZ&amp;key=77421cf58af4a653461fba296e96872e2715a294ed34c7fb49ddd6407cf6da67909214d917189477fd576b9232f7700c&amp;ascene=0&amp;uin=MTMxNzIxNjQwMA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.5+build(15F34" target="_blank" rel="noopener">前端开发者不得不知的ES6十大特性</a>&amp;version=11020201&amp;pass_ticket=c7Yh9%2F%2BIn%2FGijh%2B4%2BO4woXjDX0Z7CZPLJ3RU4OSXBwKIZsuXR7JF%2F6eQuiz9CwSj)<br>   2.<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651551048&amp;idx=2&amp;sn=5f774837f3d15598bf214093a8260d22&amp;scene=0&amp;key=77421cf58af4a653545020c9c6e435766cc9f001dad993790afb7d37f64f860e986557f6f2e891fd4ffb0bbd17678ae0&amp;ascene=0&amp;uin=MTMxNzIxNjQwMA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.5+build(15F34" target="_blank" rel="noopener">ECMAScript 6 扫盲</a>&amp;version=11020201&amp;pass_ticket=Et6ONVlb%2FAvtJ1F2RhJ0%2B9Fgp347EX4ziPKzR5tTKUrSqpaxXrVZABtlsquUNvfc)</p>
+<p>   1.<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651551064&idx=1&sn=341d021ae1bd0f3cd28d7868271711af&scene=1&srcid=0724xCQ1rJWgMrU50XdGz0PZ&key=77421cf58af4a653461fba296e96872e2715a294ed34c7fb49ddd6407cf6da67909214d917189477fd576b9232f7700c&ascene=0&uin=MTMxNzIxNjQwMA%3D%3D&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.5+build(15F34)&version=11020201&pass_ticket=c7Yh9%2F%2BIn%2FGijh%2B4%2BO4woXjDX0Z7CZPLJ3RU4OSXBwKIZsuXR7JF%2F6eQuiz9CwSj" target="_blank" rel="noopener">前端开发者不得不知的ES6十大特性</a><br>   2.<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651551048&idx=2&sn=5f774837f3d15598bf214093a8260d22&scene=0&key=77421cf58af4a653545020c9c6e435766cc9f001dad993790afb7d37f64f860e986557f6f2e891fd4ffb0bbd17678ae0&ascene=0&uin=MTMxNzIxNjQwMA%3D%3D&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.5+build(15F34)&version=11020201&pass_ticket=Et6ONVlb%2FAvtJ1F2RhJ0%2B9Fgp347EX4ziPKzR5tTKUrSqpaxXrVZABtlsquUNvfc" target="_blank" rel="noopener">ECMAScript 6 扫盲</a></p>
 </blockquote>
 </blockquote>
 

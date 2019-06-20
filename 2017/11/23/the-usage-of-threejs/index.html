@@ -148,8 +148,9 @@
 <p><img src="/2017/11/23/the-usage-of-threejs/unphoto.jpg" alt></p>
 <p>近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获。</p>
 <a id="more"></a>
+
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
-<li><a href="#Three.js 是什么">简单介绍</a></li>
+<li>[简单介绍](#Three.js 是什么)</li>
 <li><a href="#基础概念">基础概念</a><ul>
 <li><a href="#Scene">Scene(场景)</a></li>
 <li><a href="#Renderer">Renderer(渲染器)</a></li>
@@ -223,6 +224,7 @@
 <li>以点光源为例，我们创建一个简单的点光源。</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> light = <span class="hljs-keyword">new</span> THREE.PointLight(<span class="hljs-number">0xffffff</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>) <span class="hljs-comment">// 光照颜色，光照强度，光照范围</span></span><br><span class="line">light.position.set(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>)</span><br><span class="line">scene.add(light)</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/Light.js" target="_blank" rel="noopener">源码</a></li>
 </ul>
@@ -230,14 +232,19 @@
 <li>最后，让这一切动起来，需要动画来运行。</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">animation</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">window</span>.requestAnimationFrame(animation)</span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">  <span class="hljs-comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://codepen.io/kyriejoshua/pen/BJNoVK?editors=0110" target="_blank" rel="noopener">Demo</a></h3><ul>
 <li>在了解所有基本的要素之后，让我们来实现一个简单的动画吧——一个旋转的立方体。</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> THREE <span class="hljs-keyword">from</span> <span class="hljs-string">'three.js'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> body = <span class="hljs-built_in">document</span>.body</span><br><span class="line"><span class="hljs-keyword">const</span> scene = <span class="hljs-keyword">new</span> THREE.Scene()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 新建渲染器并设置大小</span></span><br><span class="line"><span class="hljs-keyword">const</span> renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer()</span><br><span class="line">renderer.setSize(<span class="hljs-built_in">window</span>.innerWidth, <span class="hljs-built_in">window</span>.innerHeight)</span><br><span class="line">body.appendChild(renderer.domElement)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 设置相机和位置，并将视线转向场景中央</span></span><br><span class="line"><span class="hljs-keyword">const</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera(<span class="hljs-number">75</span>, <span class="hljs-built_in">window</span>.innerHeight / <span class="hljs-built_in">window</span>.innerWidth, <span class="hljs-number">1</span>, <span class="hljs-number">1000</span>)</span><br><span class="line">camera.position.set(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>)</span><br><span class="line">camera.lookAt(scene.position)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 新建一个立方体</span></span><br><span class="line"><span class="hljs-keyword">const</span> cubeGeometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)</span><br><span class="line"><span class="hljs-keyword">const</span> cubeMaterial = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial(&#123; <span class="hljs-attr">color</span>: <span class="hljs-number">0x123abc</span> &#125;)</span><br><span class="line"><span class="hljs-keyword">const</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span><br><span class="line">scene.add(cube)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 旋转立方体</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">animation</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">window</span>.requestAnimationFrame(animation)</span><br><span class="line"></span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">  cube.rotation.z += <span class="hljs-number">0.01</span></span><br><span class="line">  cube.rotation.y += <span class="hljs-number">0.01</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">animation()</span><br></pre></td></tr></table></figure>
-<p><br></p>
+
+<br>
+
 <blockquote><p><a href="http://techbrood.com/threejs/docs/#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF(Scene" target="_blank" rel="noopener">中文文档</a></p>
 </blockquote>
-<p><hr><br><img src="/2017/11/23/the-usage-of-threejs/reward.jpeg" title="Thanks"></p>
+
+<hr>
+<img src="/2017/11/23/the-usage-of-threejs/reward.jpeg" title="Thanks">
 
         <!-- 引入打赏图片即显示打赏功能 -->
         

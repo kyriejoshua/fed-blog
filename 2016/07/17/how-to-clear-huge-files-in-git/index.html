@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="坑的由来事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，">
+    <meta name="description" content="坑的由来  事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在git仓库中彻底清除大文件">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="坑的由来事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，">
+<meta property="og:description" content="坑的由来  事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:34.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在git仓库中彻底清除大文件">
-<meta name="twitter:description" content="坑的由来事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，">
+<meta name="twitter:description" content="坑的由来  事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
 
 
@@ -145,9 +145,16 @@
         <hr>
 
 <img src="/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg" title="monica my baby">
-<blockquote><br>坑的由来<br><br>事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，这时你紧张了，慌了，明明删了视频，怎么仓库竟还变大了。<br><br>这一期，让我们走进git,细细体会git带给我们的欢乐与忧愁。<br><br></blockquote>
+
+<blockquote>
+坑的由来
+
+<p>事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，这时你紧张了，慌了，明明删了视频，怎么仓库竟还变大了。</p>
+<p>这一期，让我们走进git,细细体会git带给我们的欢乐与忧愁。</p>
+</blockquote>
 
 <a id="more"></a>
+
 <h3 id="关于git"><a href="#关于git" class="headerlink" title="关于git"></a>关于git</h3><ul>
 <li>每个人都会有过去，git也不例外。<br><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E7%AE%80%E5%8F%B2" target="_blank" rel="noopener">git是个什么东西</a></li>
 </ul>
@@ -161,7 +168,8 @@
 </li>
 <li><p><code>size-pack</code>以千字节为单位表示，那么这里就有1.5G大小，这对代码仓库来说可是个恐怖的数字了。</p>
 </li>
-<li>那么让我们来找出罪魁祸首——到底是哪些大文件在混淆视听。</li>
+<li><p>那么让我们来找出罪魁祸首——到底是哪些大文件在混淆视听。</p>
+</li>
 <li><p>将所有含这些大文件的历史提交记录，一个不漏的找出来。</p>
 <ul>
 <li><code>git verify-pack</code>可以识别出大对象，使用<code>sort</code>参数对输出的5列信息排序，再进行定向</li>
@@ -173,13 +181,15 @@
 </li>
 <li><p><strong>unbelievable!</strong>都是huge的文件!最底下的那家伙，到底是什么啊！</p>
 </li>
-<li>让我们用rev-list命令来查看commit 的 SHA值和文件路径：</li>
+<li><p>让我们用rev-list命令来查看commit 的 SHA值和文件路径：</p>
+</li>
 <li><p><code>git rev-list --objects --all | grep 98c5dc9779</code></p>
  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">98</span>c5dc977918aaf3b45a999ae92e031b4b15191b public/video/feng-mv.mp4</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这次倒很快，答案揭晓——是公司宣传视频。我们明明有七牛。这玩意儿就不该出现在这里。</p>
 </li>
-<li>再来看看所有包含这家伙的提交历史:</li>
+<li><p>再来看看所有包含这家伙的提交历史:</p>
+</li>
 <li><p><code>git log --pretty=oneline --branches -- public/video/feng.mp4</code></p>
  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">9364</span>a4f65f03d3a6d0873106ba21bd3172418176 chore: 删除视频文件</span><br><span class="line">da24a01e46876a495518f9617501b4b360177f2b improve(官网首页)</span><br></pre></td></tr></table></figure>
 </li>
@@ -208,9 +218,12 @@
 </li>
 <li><p>尽管表面上看去没有什么软用，但是当我运行<code>du -sh .git</code>查看大小时，发现.  git文件夹确实缩小了。</p>
 </li>
-<li>现在这个视频文件存在于松散对象(size)中。虽然它没有彻底消失，但已经不再出现于推送或克隆中。</li>
-<li>如果需要彻底移除，运行<code>git prune --expire now</code>。</li>
-<li>再次查看    <code>git count-objects -v</code>。</li>
+<li><p>现在这个视频文件存在于松散对象(size)中。虽然它没有彻底消失，但已经不再出现于推送或克隆中。</p>
+</li>
+<li><p>如果需要彻底移除，运行<code>git prune --expire now</code>。</p>
+</li>
+<li><p>再次查看    <code>git count-objects -v</code>。</p>
+</li>
 </ul>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>讲道理走到这一步应当是成功了，只是刚才运行<code>git count-objects -v</code>的结果并不那么尽如人意，它并没有缩减的很明显。</li>

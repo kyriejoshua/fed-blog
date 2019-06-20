@@ -148,9 +148,13 @@
         <hr>
 
 <img src="/2016/10/01/how-to-clear-input-style/unphoto.jpg" title="Input...">
-<blockquote><br>有注意到input在不同状态下，或者不同浏览器下都会有显示的问题。例如ios下的浏览器里input有边框显示问题，设置input属性appearance为none即可解决。但input仍然留下许多样式坑。<br><br></blockquote>
+
+<blockquote><br>有注意到input在不同状态下，或者不同浏览器下都会有显示的问题。例如ios下的浏览器里input有边框显示问题，设置input属性appearance为none即可解决。但input仍然留下许多样式坑。
+
+</blockquote>
 
 <a id="more"></a>
+
 <h3 id="input-type-number-样式问题"><a href="#input-type-number-样式问题" class="headerlink" title="input(type=number)样式问题"></a>input(type=number)样式问题</h3><ul>
 <li><p>当type的值设置为number时，聚焦状态下会出现一个小边框，如下图：</p>
 <img src="/2016/10/01/how-to-clear-input-style/input-number.png" title="input-number">
@@ -161,6 +165,7 @@
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input[type=number]::-webkit-inner-spin-button,</span><br><span class="line">input[type=number]::-webkit-outer-spin-button &#123;</span><br><span class="line">  -webkit-appearance: none;</span><br><span class="line">  -moz-appearance: none;</span><br><span class="line">  appearance: none;</span><br><span class="line">  margin: <span class="hljs-number">0</span>; <span class="hljs-comment">// Apparently some margin are still there even though it's hidden -清除margin。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong><em>原理就是关闭input自带的number按钮选项。</em></strong></li>
 </ul>
@@ -168,6 +173,7 @@
 <li>当input作为表单时，会自动记录之前的填写项，并自动补充，如果选择自动补充的选项，而且本身给input设置了样式时。画面就会非常唯美（丑陋）。</li>
 </ul>
 <img src="/2016/10/01/how-to-clear-input-style/input-ugly.png" title="ugly">
+
 <ul>
 <li><p>这里有两种解决方案：</p>
 </li>
@@ -178,14 +184,18 @@
 </li>
 </ul>
 <img src="/2016/10/01/how-to-clear-input-style/input-perfect.png" title="perfect">
+
 <ul>
 <li>2.通过关闭表单的自动填充功能来彻底根除该问题：</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="hljs-string">"number"</span> autocomplete=<span class="hljs-string">"off"</span>/&gt;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>这样就连提示也没有了~也是种解决办法。</li>
 </ul>
-<blockquote><br>参考：<a href="https://css-tricks.com/snippets/css/turn-off-number-input-spinners/" target="_blank" rel="noopener">Turn Off Number Input Spinners</a><br><br></blockquote>
+<blockquote><br>参考：[Turn Off Number Input Spinners](https://css-tricks.com/snippets/css/turn-off-number-input-spinners/)
+
+</blockquote>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     

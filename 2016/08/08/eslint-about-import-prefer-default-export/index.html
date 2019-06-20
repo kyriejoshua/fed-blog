@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错    error Prefer default export    ......     import/prefer-default-export        查了半天资料终于发现如何解决。">
+    <meta name="description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错     *`error Prefer default export    ......     import/prefer-default-export`*         查了半天资料终于发现如何解决。">
 <meta name="keywords" content="eslint">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eslint有关import&#x2F;prefer-default-export报错的解决">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/08/08/eslint-about-import-prefer-default-export/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错    error Prefer default export    ......     import/prefer-default-export        查了半天资料终于发现如何解决。">
+<meta property="og:description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错     *`error Prefer default export    ......     import/prefer-default-export`*         查了半天资料终于发现如何解决。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:34.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eslint有关import&#x2F;prefer-default-export报错的解决">
-<meta name="twitter:description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错    error Prefer default export    ......     import/prefer-default-export        查了半天资料终于发现如何解决。">
+<meta name="twitter:description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错     *`error Prefer default export    ......     import/prefer-default-export`*         查了半天资料终于发现如何解决。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg">
 
 
@@ -145,19 +145,28 @@
         <hr>
 
 <img src="/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg" title="miss hot">
-<blockquote><br>    今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错<br>    <em><code>error Prefer default export    ......     import/prefer-default-export</code></em><br>        查了半天资料终于发现如何解决。<br><br></blockquote>
+
+<blockquote>
+    今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错
+    *`error Prefer default export    ......     import/prefer-default-export`*
+        查了半天资料终于发现如何解决。
+
+</blockquote>
 
 <a id="more"></a>
+
 <h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
 <li>原来是这样</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="hljs-string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>运行eslint检查的时候一直会报错 <code>error Prefer default export     ......    import/prefer-default-export</code></li>
 <li>查询了一些资料后发现是因为,这个单一接口并不是设置为默认的。需要添加参数<code>default</code>。</li>
 <li>更改后如下</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="hljs-string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>具体原因有待详细追究。目前认为是当输出只有一个变量时，需要添加<code>default</code>。</li>
 </ul>

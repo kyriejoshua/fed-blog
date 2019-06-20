@@ -145,9 +145,14 @@
         <hr>
 
 <img src="/2017/01/23/the-problem-about-host/unphoto.jpg" title="localhost">
-<blockquote><br>  有关 getaddrinfo 报错的解决方式。<br><br></blockquote>
+
+<blockquote>
+  有关 getaddrinfo 报错的解决方式。
+
+</blockquote>
 
 <a id="more"></a>
+
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
 <li><p>近期在配置新项目环境的时候遇到了如下问题：</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">events.js:<span class="hljs-number">72</span></span><br><span class="line">  <span class="hljs-keyword">throw</span> err;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Error</span>: getaddrinfo ENOTFOUND talk.bb</span><br><span class="line">  at errnoException (dns.js:<span class="hljs-number">37</span>:<span class="hljs-number">11</span>)</span><br><span class="line">  at <span class="hljs-built_in">Object</span>.onanswer [<span class="hljs-keyword">as</span> oncomplete] (dns.js:<span class="hljs-number">124</span>:<span class="hljs-number">16</span>)</span><br></pre></td></tr></table></figure>
@@ -166,13 +171,11 @@
 </li>
 <li><p>在其中增加 talk.bb  即可，如下：</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>       talk.bb</span><br><span class="line"><span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>       localhost</span><br><span class="line"><span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.255</span> broadcasthost</span><br><span class="line">::<span class="hljs-number">1</span>             localhost</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<p><br></p>
-<ul>
-<li><em>不知这类的问题算不算是计算机基础问题，依然还有很长的路要走……</em></li>
-</ul>
-
+<br>
+* *不知这类的问题算不算是计算机基础问题，依然还有很长的路要走……*
         <!-- 引入打赏图片即显示打赏功能 -->
         
     

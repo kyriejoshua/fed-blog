@@ -154,11 +154,13 @@
         <hr>
 
 <img src="/2016/03/03/my-gitbook/unphoto.jpeg" title="jake">
+
 <h3 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h3><ul>
 <li>主要针对Mac环境下</li>
 <li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="noopener">安装说明</a></li>
 </ul>
 <a id="more"></a>
+
 <h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><ul>
 <li>以下通常在测试时需要，因为需要连上主机 命令行里的输入方法（如果能在页面上做最好还是在网页上）</li>
 <li>命令行里输入 <code>cat ~/.ssh/id_rsa.pub</code> 查看密钥、公钥方法</li>
@@ -179,25 +181,25 @@
 <ul>
 <li><p>权限问题，或者修改Host</p>
 <p>###查看历史提交记录</p>
-<p><em>格式为作者，修改距离现在多久/提交时间：提交说名 -简短的哈希字串 展示分支合并、历史
-</em><code>git log --pretty=format:&quot;%an, %ar/%cd : %s -%h&quot; --graph</code><br>*格式基本同上</p>
+<p>*格式为作者，修改距离现在多久/提交时间：提交说名 -简短的哈希字串 展示分支合并、历史<br>*<code>git log --pretty=format:&quot;%an, %ar/%cd : %s -%h&quot; --graph</code><br>*格式基本同上</p>
 <ul>
 <li><code>git log --pretty=format:&quot;%h - %an, %ar/%cd : %s&quot;</code></li>
 </ul>
 </li>
 </ul>
 <h3 id="撤销操作"><a href="#撤销操作" class="headerlink" title="撤销操作"></a>撤销操作</h3><h5 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h5><ul>
-<li>取消文件的暂存<br>*<code>git reset HEAD &lt;file&gt;</code>来取消暂存</li>
-<li>撤销对文件的修改 <strong>！不推荐使用，不能还原</strong></li>
+<li><p>取消文件的暂存<br>*<code>git reset HEAD &lt;file&gt;</code>来取消暂存</p>
+</li>
+<li><p>撤销对文件的修改 <strong>！不推荐使用，不能还原</strong></p>
+</li>
 <li><p><code>git checkout --&lt;file&gt;</code></p>
-<p> #####补充提交<br> <em>补充提交，会覆盖上次的提交，并不会产生一次新的提交
- </em>提交前用<code>git add &lt;file&gt;</code>加上补充的文件<br> *<code>git commit --amend</code></p>
+<p> #####补充提交<br> *补充提交，会覆盖上次的提交，并不会产生一次新的提交<br> *提交前用<code>git add &lt;file&gt;</code>加上补充的文件<br> *<code>git commit --amend</code></p>
 </li>
 </ul>
 <h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><ul>
-<li>查看远程仓库<br><em><code>git remote -v</code> 显示读写远程仓库使用的git保存的简写与其对应的URL
-</em><code>git remote show origin</code> &gt;查看远程仓库的更多信息<br>*添加远程仓库<ul>
-<li><code>git remote add &lt;shortname&gt;&lt;url&gt;</code>例如：<code>git remote add pb http://www.google.com</code><br>*可以用pb来代替整个url 例如：<code>git fetch pb</code> 拉取远程仓库</li>
+<li>查看远程仓库<br>*<code>git remote -v</code> 显示读写远程仓库使用的git保存的简写与其对应的URL<br>*<code>git remote show origin</code> &gt;查看远程仓库的更多信息<br>*添加远程仓库<ul>
+<li><code>git remote add &lt;shortname&gt;&lt;url&gt;</code>例如：<code>git remote add pb http://www.google.com</code></li>
+<li>可以用pb来代替整个url 例如：<code>git fetch pb</code> 拉取远程仓库</li>
 </ul>
 </li>
 </ul>
@@ -219,14 +221,15 @@
 <p> ###git别名</p>
 <p> *用于修改git操作的别名，使操作更方便</p>
 </li>
-<li>运行<code>git config --global alias.logpregra &#39;log --pretty=format:&quot;%an, %ar/%cd : %s -%h&quot; --graph&#39;</code><ul>
+<li><p>运行<code>git config --global alias.logpregra &#39;log --pretty=format:&quot;%an, %ar/%cd : %s -%h&quot; --graph&#39;</code></p>
+<ul>
 <li><code>git logpregra</code>就等价于 <code>git log --pretty=format:&quot;%an, %ar/%cd : %s -%h&quot; --graph</code><br>*常用的还有 <code>git config --glabal alias.ci commit</code>、<code>git config --global alias.co checkout</code></li>
 </ul>
 </li>
 </ul>
 <h5 id="定义外部命令"><a href="#定义外部命令" class="headerlink" title="定义外部命令"></a>定义外部命令</h5><ul>
-<li><p>替换外部命令而不是子命令时，在命令前面加一个<strong>‘！’</strong>号<br><em><code>git config --global alias.visual &#39;!gitk&#39;</code>
-</em>定义<code>git visual</code>为gitk的别名</p>
+<li><p>替换外部命令而不是子命令时，在命令前面加一个<strong>‘！’</strong>号
+*<code>git config --global alias.visual &#39;!gitk&#39;</code><br>*定义<code>git visual</code>为gitk的别名</p>
 <p>###分支简介</p>
 </li>
 </ul>
@@ -243,26 +246,30 @@
 <li>当有冲突存在时<br>*其中之一方法利用图形化工具来解决冲突，运行<code>git mergetool</code> &gt;git中默认的合并工具是opendiff</li>
 </ul>
 <h5 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h5><ul>
-<li><code>git branch --merged</code> 查看哪些分支已经合并到当前分支<br><em>查看所有包含未合并工作的分支，
-</em><code>git branch --no-merged</code><br><em>使用<code>git branch -d</code>命令来删除未合并的工作时会失败，因为它还未合并
-</em>但如果确实想丢掉那些工作，可以用<code>-D</code>选项强制删除</li>
+<li><code>git branch --merged</code> 查看哪些分支已经合并到当前分支<br>*查看所有包含未合并工作的分支，<br>*<code>git branch --no-merged</code><br>*使用<code>git branch -d</code>命令来删除未合并的工作时会失败，因为它还未合并<br>*但如果确实想丢掉那些工作，可以用<code>-D</code>选项强制删除</li>
 </ul>
 <h3 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h3><ul>
-<li>远程分支以 (remote)/(branch)形式命名</li>
-<li>运行<code>git ls-remote (remote)</code> 来显式地获得远程引用的完整列表 &gt;就是远程的所有分支,或者使用<code>git branch -a</code>来查看远程分支，似乎这个比前者更有效</li>
-<li>更换远程分支的名字 <code>git clone -o booyah</code> 那么远程分支的名字就会是 booya/master</li>
+<li><p>远程分支以 (remote)/(branch)形式命名</p>
+</li>
+<li><p>运行<code>git ls-remote (remote)</code> 来显式地获得远程引用的完整列表 &gt;就是远程的所有分支,或者使用<code>git branch -a</code>来查看远程分支，似乎这个比前者更有效</p>
+</li>
+<li><p>更换远程分支的名字 <code>git clone -o booyah</code> 那么远程分支的名字就会是 booya/master</p>
+</li>
 <li><p>更新远程仓库到本地的命令 <code>git fetch teamone</code> 抓取远程仓库teamone有而本地没有的数据</p>
 </li>
 <li><p><em>假如刚刚克隆了一个仓库，想要获取一个远程分支，先在当前分支下pull，保证是最新的，然后运行<code>git checkout -b index-pro origin/index-pro</code></em></p>
 </li>
-<li><em>这样你就有一个同名分支index-pro和远程的分支index-pro同步了</em></li>
+<li><p><em>这样你就有一个同名分支index-pro和远程的分支index-pro同步了</em></p>
+</li>
 </ul>
 <h5 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h5><ul>
 <li><p>推送本地的分支到服务器上 <code>git push origin servefix</code>等同于 <code>git push origin servefix:servefix</code> 如果不想让远程的分支重名  可以这样<code>git push origin servefix:awesomebranch</code></p>
 <p>####如何避免每次输入密码</p>
 </li>
-<li>如果你正在使用 HTTPS URL 来推送，Git 服务器会询问用户名与密码。 默认情况下它会在终端中提示服务器是否允许你进行推送。</li>
-<li>如果不想在每一次推送时都输入用户名与密码，你可以设置一个 “credential cache”。 最简单的方式就是将其保存在内存中几分钟，可以简单地运行 <code>git config --global credential.helper cache</code> 来设置它。</li>
+<li><p>如果你正在使用 HTTPS URL 来推送，Git 服务器会询问用户名与密码。 默认情况下它会在终端中提示服务器是否允许你进行推送。</p>
+</li>
+<li><p>如果不想在每一次推送时都输入用户名与密码，你可以设置一个 “credential cache”。 最简单的方式就是将其保存在内存中几分钟，可以简单地运行 <code>git config --global credential.helper cache</code> 来设置它。</p>
+</li>
 </ul>
 <hr>
 <h5 id="跟踪分支（上游分支）：与远程分支有直接关系的本地分支"><a href="#跟踪分支（上游分支）：与远程分支有直接关系的本地分支" class="headerlink" title="跟踪分支（上游分支）：与远程分支有直接关系的本地分支"></a>跟踪分支（上游分支）：与远程分支有直接关系的本地分支</h5><ul>
@@ -286,9 +293,11 @@
 </ul>
 <h3 id="git分支-变基"><a href="#git分支-变基" class="headerlink" title="git分支-变基"></a>git分支-变基</h3><ul>
 <li>git中整合来自不同分支的修改主要有两种方法：<code>merge</code>和<code>rebase</code><br>*<strong>变基即在新分支上引入补丁和修改，然后在原分支上再应用一次</strong><ul>
-<li>运行<code>git checkout [branch-name]</code><br><em><code>git rebase master</code>
-</em>然后合并 <code>git checkout master</code><br><em><code>git merge [branch-name]</code>
-</em>变基使得提交历史更整洁</li>
+<li>运行<code>git checkout [branch-name]</code></li>
+<li><code>git rebase master</code></li>
+<li>然后合并 <code>git checkout master</code></li>
+<li><code>git merge [branch-name]</code></li>
+<li>变基使得提交历史更整洁</li>
 </ul>
 </li>
 </ul>
@@ -296,10 +305,7 @@
 <hr>
 <p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-1.png" alt="变基例子"></p>
 <ul>
-<li>将client的修改合并到主分支并发布，但暂时不合并server的修改<br><em>这时可以使用 <code>git rebase</code>命令的<code>--onto</code>选项，选中在client分支里但不在server分支里的修改，在master分支上重演
-</em><code>git rebase --onto master server client</code><br><em>取出client分支，找出处于client分支和server分支的共同祖先之后的修改，然后把它们在master分支上重演一遍。
-</em>然后可以快进合并master分支了<br><em><code>git checkout master</code>
-</em><code>git merge client</code></li>
+<li>将client的修改合并到主分支并发布，但暂时不合并server的修改<br>*这时可以使用 <code>git rebase</code>命令的<code>--onto</code>选项，选中在client分支里但不在server分支里的修改，在master分支上重演<br>*<code>git rebase --onto master server client</code><br>*取出client分支，找出处于client分支和server分支的共同祖先之后的修改，然后把它们在master分支上重演一遍。<br>*然后可以快进合并master分支了<br>*<code>git checkout master</code><br>*<code>git merge client</code></li>
 </ul>
 <p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-3.png" alt="变基后合并"></p>
 <ul>
@@ -307,8 +313,7 @@
 </ul>
 <p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-4.png" alt="合并另一分支"></p>
 <ul>
-<li>然后再合并主分支master<br><em><code>git checkout master</code>
-</em><code>git merge server</code></li>
+<li>然后再合并主分支master<br>*<code>git checkout master</code><br>*<code>git merge server</code></li>
 </ul>
 <p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-5.png" alt="效果图"></p>
 <h5 id="变基的风险-不太理解"><a href="#变基的风险-不太理解" class="headerlink" title="变基的风险(不太理解)"></a>变基的风险(不太理解)</h5><ul>
@@ -339,13 +344,13 @@
 <h5 id="用变基解决变基"><a href="#用变基解决变基" class="headerlink" title="用变基解决变基"></a>用变基解决变基</h5><ul>
 <li><p>如果你拉取被覆盖过的更新并将你手头的工作基于此进行变基的话，一般情况下git都能成功分辨出哪些是你的修改，并把它们应用到新分支上。<br>*如果遇到图3-38的情境，如果没有执行合并，而是执行<code>git rebase teamone/master</code>,git 会:</p>
 <ul>
-<li><em>检查哪些提交是我们的分支上独有的（C2，C3，C4，C6，C7）</em><br><strong>检查其中哪些提交不是合并操作的结果（C2，C3，C4）*
-</strong>检查哪些提交在对方覆盖更新时并没有被纳入目标分支（只有 C2 和 C3，因为 C4 其实就是 C4’）<em><br>**把查到的这些提交应用在 teamone/master 上面</em><br><em>会得到下图的结果
-</em><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-5.png" alt="3-40.在一个被变基然后强制推送的分支上再次执行变基"></li>
+<li><em>检查哪些提交是我们的分支上独有的（C2，C3，C4，C6，C7）</em><br><em>*检查其中哪些提交不是合并操作的结果（C2，C3，C4）</em><br><em>*检查哪些提交在对方覆盖更新时并没有被纳入目标分支（只有 C2 和 C3，因为 C4 其实就是 C4’）</em><br><em>*把查到的这些提交应用在 teamone/master 上面</em><br>*会得到下图的结果<br>*<img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-5.png" alt="3-40.在一个被变基然后强制推送的分支上再次执行变基"></li>
 </ul>
-<p><em>要使得方案有效，需要对方变基时确保C4`和C4几乎是一样的。否则变基操作将无法识别，并新建另一个类似 C4 的补丁（而这个补丁很可能无法整洁的整合入历史，因为补丁中的修改已经存在于某个地方了）。
-</em>在本例中另一种简单的方法是使用 <code>git pull --rebase</code> 命令而不是直接 <code>git pull</code>。 又或者你可以自己手动完成这个过程，先 <code>git fetch</code>，再 <code>git rebase teamone/master</code>。<br><em>如果你习惯使用 <code>git pull</code> ，同时又希望默认使用选项 <code>--rebase</code>，你可以执行这条语句 <code>git config --global pull.rebase true</code> 来更改 <code>pull.rebase</code> 的默认配置。
-</em><strong>只要你把变基命令当作是在推送前清理提交使之整洁的工具，并且只在从未推送至共用仓库的提交上执行变基命令，你就不会有事。</strong><br>*如果某些情形下决议要这么做，一定要通知每个人执行<code>git pull --rebase</code>命令，这样虽然不能避免伤痛，但能有所缓解。</p>
+<p>*要使得方案有效，需要对方变基时确保C4<code>和C4几乎是一样的。否则变基操作将无法识别，并新建另一个类似 C4 的补丁（而这个补丁很可能无法整洁的整合入历史，因为补丁中的修改已经存在于某个地方了）。
+*在本例中另一种简单的方法是使用</code>git pull –rebase<code>命令而不是直接</code>git pull<code>。 又或者你可以自己手动完成这个过程，先</code>git fetch<code>，再</code>git rebase teamone/master<code>。
+*如果你习惯使用</code>git pull<code>，同时又希望默认使用选项</code>–rebase<code>，你可以执行这条语句</code>git config –global pull.rebase true<code>来更改</code>pull.rebase<code>的默认配置。
+*__只要你把变基命令当作是在推送前清理提交使之整洁的工具，并且只在从未推送至共用仓库的提交上执行变基命令，你就不会有事。__
+*如果某些情形下决议要这么做，一定要通知每个人执行</code>git pull –rebase`命令，这样虽然不能避免伤痛，但能有所缓解。</p>
 <ul>
 <li><em><strong>总的原则是：只对还没有推送或分享给别人的本地修改执行变基操作清理历史，从不对已推送至别处的提交执行变基操作，这样才能享受到两种方式带来的便利。</strong></em></li>
 </ul>
@@ -358,17 +363,21 @@
 <li>假如成功了 运行<code>git status</code>会看到</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> file: .gitmodules</span><br><span class="line"><span class="hljs-keyword">new</span> file: ui</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>然后可以<code>cat .gitmodules</code>查看配置</li>
 <li>应当如下</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="hljs-string">"src/ui"</span>]</span><br><span class="line">path = src/ui</span><br><span class="line">url = git@code.gomrwind.com:FrontEnd/ui.git</span><br><span class="line">branch = master</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><em>要注意的是！如果之前有下过提示出错等，要更改.git中的config配置。还有.git下的modules下的相对应文件夹需要删除<code>rm -rf files</code></em></li>
 <li><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97" target="_blank" rel="noopener">点这里学习</a></li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块的相关命令时出现以下问题：</span><br><span class="line">fatal: Needed a single revision</span><br><span class="line">Unable to find current revision <span class="hljs-keyword">in</span> submodule path</span><br><span class="line">运行命令删除错误的文件，重新更新：</span><br><span class="line">	* rm -rf [模块文件名]</span><br><span class="line">	* git submodule update --init</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块相关命令时出现以下问题</span><br><span class="line">fatal: reference is not a tree: <span class="hljs-number">16</span>effe6cfd27ff78b04ff95e9103514e6dcf5cb3</span><br><span class="line">Unable to checkout <span class="hljs-string">'16effe6cfd27ff78b04ff95e9103514e6dcf5cb3'</span> <span class="hljs-keyword">in</span> submodule path 	<span class="hljs-string">'gezbox/lib/NotificationStyles'</span></span><br><span class="line">Failed to recurse into submodule path <span class="hljs-string">'src/ui'</span></span><br><span class="line">切换分支到master,再拷贝一个分支作为对比，这是子模块有修改导致的。确认修改后再在那个分支上提交更新。</span><br></pre></td></tr></table></figure>
+
 <h3 id="服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）"><a href="#服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）" class="headerlink" title="服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）"></a>服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）</h3><h5 id="本地协议"><a href="#本地协议" class="headerlink" title="本地协议"></a>本地协议</h5><ul>
 <li>最基本的协议</li>
 <li>运行<code>git clone /opt/git/project.git</code></li>

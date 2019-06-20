@@ -145,9 +145,14 @@
         <hr>
 
 <img src="/2017/01/15/review-js-part1/unphoto.jpg" title="review javascript">
-<blockquote><br>因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。<br><br></blockquote>
+
+<blockquote>
+因面试时裸面的惨痛教训，特此回顾从前所学的JS。这个办法也许很蠢，但她肯定有效。
+
+</blockquote>
 
 <a id="more"></a>
+
 <h2 id="回顾JavaScript知识点-ES3-ES5为主，部分ES6"><a href="#回顾JavaScript知识点-ES3-ES5为主，部分ES6" class="headerlink" title="回顾JavaScript知识点(ES3,ES5为主，部分ES6)"></a>回顾JavaScript知识点(ES3,ES5为主，部分ES6)</h2><h3 id="什么是JavaScript"><a href="#什么是JavaScript" class="headerlink" title="什么是JavaScript"></a>什么是JavaScript</h3><ul>
 <li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/About_JavaScript" target="_blank" rel="noopener">JavaScript</a>: JS是一种轻量的，解释性的，面向对象的头等函数语言。其最广为人知的应用是作为网页的脚本语言，但同时它也在很多非浏览器环境下使用。JS是一种动态的基于原型和多范式的脚本语言，支持面向对象，命令式和函数式的编程风格。</p>
 </li>
@@ -225,6 +230,7 @@
 <h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><ul>
 <li><code>n++</code>: 将变量本身的值+1，并返回<strong>新值</strong></li>
 <li><code>++n</code>: 将变量本身的值+1，并返回<strong>旧值</strong><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var n = 12;</span><br><span class="line">var n1 = n++; // n1 = 13;</span><br><span class="line">m = 12;</span><br><span class="line">m = ++m; // m1 = 12;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h4 id="比较操作符"><a href="#比较操作符" class="headerlink" title="比较操作符"></a>比较操作符</h4><ul>
@@ -237,14 +243,18 @@
 </li>
 </ul>
 <h4 id="关系运算"><a href="#关系运算" class="headerlink" title="关系运算"></a>关系运算</h4><ul>
-<li>关系运算中，所有数据默认转为数字类型比较</li>
-<li>如果无法转为数字，就会转为NaN,如果转为NaN，那不管另一半是什么，都会返回false,NaN和任何数据(包括它自己)比较</li>
+<li><p>关系运算中，所有数据默认转为数字类型比较</p>
+</li>
+<li><p>如果无法转为数字，就会转为NaN,如果转为NaN，那不管另一半是什么，都会返回false,NaN和任何数据(包括它自己)比较</p>
+</li>
 <li><p>如果是俩<strong>字符串</strong>比较，则会依次比较字符串中每个字符的unicode码，只要任意一位字符比较出结果就不再继续向后比较</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> name1 = <span class="hljs-string">'Eric'</span>;</span><br><span class="line">    name2 = <span class="hljs-string">'Scott'</span>;</span><br><span class="line">name1 &gt; name2; <span class="hljs-comment">// false 'E' -&gt; 69, 'S' -&gt; 83</span></span><br><span class="line"><span class="hljs-keyword">var</span> name3 = <span class="hljs-string">'Smith'</span>;</span><br><span class="line">name2 &gt; name3; <span class="hljs-comment">// false 'c' -&gt; 99, 'm' -&gt; 109</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>undefined: 自动初始化变量</p>
 </li>
-<li>null: 主动清空变量<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true 含隐式转换</span></span><br><span class="line"><span class="hljs-literal">undefined</span> === <span class="hljs-literal">null</span>; <span class="hljs-comment">// false 不含隐式转换</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span> <span class="hljs-comment">// object</span></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span> <span class="hljs-comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<li><p>null: 主动清空变量</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true 含隐式转换</span></span><br><span class="line"><span class="hljs-literal">undefined</span> === <span class="hljs-literal">null</span>; <span class="hljs-comment">// false 不含隐式转换</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span> <span class="hljs-comment">// object</span></span><br><span class="line"><span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span> <span class="hljs-comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><ul>
@@ -269,6 +279,7 @@
 </li>
 <li><p>函数功能(statements): 包围在花括号<code>{}</code>中，用于定义函数功能的一些 JavaScript 语句。</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [square 输入一个数，返回该数的平方的函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Number&#125; number [description]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;Number&#125;        [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">number</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> number * number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>​</p>
 </li>
 </ul>
@@ -318,6 +329,7 @@
 <li>循环结构<ul>
 <li>循环三要素：循环条件，循环变量，循环体</li>
 <li><code>while</code>、<code>do while</code>、’for’<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// while</span></span><br><span class="line"><span class="hljs-keyword">var</span> n = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">while</span>(n &lt; <span class="hljs-number">3</span>) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'n = '</span> + n);</span><br><span class="line">  n++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// n = 0; n = 1; n = 2;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// do while</span></span><br><span class="line"><span class="hljs-keyword">var</span> n = <span class="hljs-number">4</span>;</span><br><span class="line"><span class="hljs-keyword">do</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'n = '</span> + n);</span><br><span class="line">&#125; <span class="hljs-keyword">while</span>(n &lt; <span class="hljs-number">3</span>);</span><br><span class="line"><span class="hljs-comment">// n = 4;</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 </li>
@@ -327,7 +339,8 @@
 <li>算法：程序的执行步骤：顺序、分支、循环</li>
 </ul>
 <h4 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h4><ul>
-<li><strong>数组不限制元素个数，数组中的元素可以为任意类型</strong></li>
+<li><p><strong>数组不限制元素个数，数组中的元素可以为任意类型</strong></p>
+</li>
 <li><p>关联数组(hash数组)</p>
 <ul>
 <li><p>为每个元素自定义<em>字符串</em>下标</p>
@@ -335,12 +348,15 @@
 </li>
 <li><p>关联数组的下标没规律。</p>
 </li>
-<li>关联数组的length属性无效。</li>
-<li>使用<code>for in</code>循环遍历</li>
+<li><p>关联数组的length属性无效。</p>
+</li>
+<li><p>使用<code>for in</code>循环遍历</p>
+</li>
 </ul>
 </li>
 <li><p>索引数组：自动从0开始，每个元素有各自编号</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> arrM = [<span class="hljs-string">'Sandra'</span>, <span class="hljs-number">80</span>, <span class="hljs-number">65</span>, <span class="hljs-number">95</span>];</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h4 id="数组常用API"><a href="#数组常用API" class="headerlink" title="数组常用API"></a>数组常用API</h4><ul>

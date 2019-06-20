@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
+    <meta name="description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。  经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
 <meta name="keywords" content="webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack小试牛刀">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/07/03/webpack-trytry/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
+<meta property="og:description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。  经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/07/03/webpack-trytry/unphoto.jpeg">
 <meta property="og:updated_time" content="2018-07-01T11:40:35.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack小试牛刀">
-<meta name="twitter:description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
+<meta name="twitter:description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。  经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/07/03/webpack-trytry/unphoto.jpeg">
 
 
@@ -145,9 +145,15 @@
         <hr>
 
 <img src="/2016/07/03/webpack-trytry/unphoto.jpeg" title="monica my baby">
-<blockquote><br>近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。<br><br>经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。<br><br></blockquote>
+
+<blockquote>
+近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。
+
+<p>经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。</p>
+</blockquote>
 
 <a id="more"></a>
+
 <ul>
 <li><p>webpack是近期比较火的一款模块加载器兼打包工具，能把各种资源，包括图片，js，样式等都作为模块来处理。<a href="http://webpack.github.io/" target="_blank" rel="noopener">官网点这里</a></p>
 </li>
@@ -210,6 +216,7 @@
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">output:&#123;</span><br><span class="line">    path: path.resolve(__dirname + <span class="hljs-string">'/build'</span>),</span><br><span class="line">    filename: <span class="hljs-string">'[name].js'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p><strong>loaders</strong>: 这是webpack比较重要的一部分，模块加载器，因为是小项目，在这里我使用的插件并不多，css文件用style-loader和css-loader来处理，less用less-loader来处理，图片用url-loader来处理，目前还支持es6，有babel-loader支持。其中<code>-loader</code>可以省略</p>
 </li>
@@ -221,6 +228,7 @@
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">module</span>: &#123;</span><br><span class="line">    loaders: [</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> &#125;, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader')&#125;,</span></span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css!less'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> &#125;, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')&#125;,</span></span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'url?limit=8192'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> &#125;,</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'babel'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> &#125;,</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.json$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'json-loader'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p><strong>resolve</strong>则看注释即可</p>
 </li>
@@ -248,6 +256,7 @@
 </li>
 <li><p>然后在webpack.config.js里设置</p>
   <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">externals: &#123;</span><br><span class="line">	<span class="hljs-string">'jquery'</span>: <span class="hljs-string">'jQuery'</span>	<span class="hljs-comment">// 将jQuery赋值为jquery</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h3 id="运行-webpack"><a href="#运行-webpack" class="headerlink" title="运行 webpack"></a>运行 webpack</h3><ul>
@@ -260,7 +269,8 @@
 <li>直接在html里加入 <code>&lt;script type=&#39;text/javascript&#39; src=&#39;index.js&#39;&gt;</code>即可</li>
 </ul>
 <h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><ul>
-<li>HTML中不引入样式，是因为在这里就引入了。在页面顶部加上<code>require(&#39;../[name].less&#39;)</code></li>
+<li><p>HTML中不引入样式，是因为在这里就引入了。在页面顶部加上<code>require(&#39;../[name].less&#39;)</code></p>
+</li>
 <li><p><code>[name]</code>指代当前less的文件名，我的做法是在每个less里引入一个公用的all.less,然后不同页面的js里引入各自的less，webpack会自动编译less并放在页面的style里</p>
 <ul>
 <li>其实还尝试过使用<code>ExtractTextPlugin.extract(&#39;style-loader&#39;, &#39;css-loader&#39;)}</code> 插件，将页面顶部的样式改为外部文件引入，但因为开始时设计的偏差，改动起来比较麻烦，最后作罢</li>
@@ -268,16 +278,22 @@
 </li>
 <li><p>这是个小项目，只引入了jquery和自己的公用的一个库 <code>reqiure(&#39;feed&#39;)</code></p>
 </li>
-<li>通过process.env.NODE_ENV的值判断开发环境的接口，是引用测试的接口还是线上的接口，它的值不同时会引用不同的js文件</li>
+<li><p>通过process.env.NODE_ENV的值判断开发环境的接口，是引用测试的接口还是线上的接口，它的值不同时会引用不同的js文件</p>
+</li>
 <li><p>所以最终每个index.js的顶部会有这么几行</p>
   <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">require</span>(<span class="hljs-string">'./style.less'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> feed = <span class="hljs-built_in">require</span>(<span class="hljs-string">'feed'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> url = <span class="hljs-built_in">require</span>(<span class="hljs-string">'config/env/'</span> + process.env.NODE_ENV);</span><br><span class="line"><span class="hljs-comment">// 执行该页面的逻辑代码</span></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h4 id="如何自动刷新-使用webpack-dev-server"><a href="#如何自动刷新-使用webpack-dev-server" class="headerlink" title="如何自动刷新 使用webpack-dev-server"></a>如何自动刷新 使用webpack-dev-server</h4><ul>
-<li>webpack-dev-server是一个静态轻量的express资源服务器，只用于开发环境</li>
-<li>它的作用就是把编译后的静态文件全部保存在内存里，而不会写到文件目录内</li>
-<li>安装:<code>npm install webpack-dev-server --save-dev</code></li>
-<li>这里采用了双服务器模式，一个后端服务器和一个资源服务器</li>
+<li><p>webpack-dev-server是一个静态轻量的express资源服务器，只用于开发环境</p>
+</li>
+<li><p>它的作用就是把编译后的静态文件全部保存在内存里，而不会写到文件目录内</p>
+</li>
+<li><p>安装:<code>npm install webpack-dev-server --save-dev</code></p>
+</li>
+<li><p>这里采用了双服务器模式，一个后端服务器和一个资源服务器</p>
+</li>
 <li><p>运行 <code>NODE_ENV=local webpack-dev-server --inline --hot --devtool --content-base build/</code> 得到的entry应当是这样的</p>
   <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">entry:</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="hljs-string">'page/index'</span>: [</span><br><span class="line">	<span class="hljs-string">'webpack-dev-server/client?http://localhost:8080'</span>,</span><br><span class="line">	<span class="hljs-string">'webpack/hot/dev-server'</span>,</span><br><span class="line">	<span class="hljs-string">'./src/page/index.js'</span></span><br><span class="line">	]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -288,11 +304,15 @@
 </li>
 <li><p>采用 –inline 模式，它的工作其实就是把<code>webpack-dev-server/client?http://localhost:8080</code>加到entry中</p>
 </li>
-<li>–content-base 把build/下的内容作为静态资源服务</li>
-<li>–devtool eval 配置devtool的值为eval，用于查看编译后的源代码，eval 不支持生产环境查看源代码，但编译速度快，另一个常用的值是source-map，支持生产环境，但相对慢</li>
-<li>打开 <code>localhost:8080/webpack-dev-server/page/index.html</code>查看</li>
+<li><p>–content-base 把build/下的内容作为静态资源服务</p>
+</li>
+<li><p>–devtool eval 配置devtool的值为eval，用于查看编译后的源代码，eval 不支持生产环境查看源代码，但编译速度快，另一个常用的值是source-map，支持生产环境，但相对慢</p>
+</li>
+<li><p>打开 <code>localhost:8080/webpack-dev-server/page/index.html</code>查看</p>
+</li>
 </ul>
 <h4 id="package-json-配置"><a href="#package-json-配置" class="headerlink" title="package.json 配置"></a>package.json 配置</h4><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">script: &#123;</span><br><span class="line">  <span class="hljs-string">"dev"</span>: <span class="hljs-string">"rm -rf build &amp;&amp; NODE_ENV=local webpack-dev-server --inline --hot --devtool eval --progress --colors --content-base build/"</span>,</span><br><span class="line">  <span class="hljs-string">"web"</span>: <span class="hljs-string">"NODE_ENV=development webpack --progress --colors --display-error-details"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>运行<code>npm run dev</code> 开发环境下</li>
 <li><code>npm run web</code> 测试环境下</li>

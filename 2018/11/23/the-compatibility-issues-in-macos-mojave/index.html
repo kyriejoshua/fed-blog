@@ -147,6 +147,7 @@
 <p><img src="/2018/11/23/the-compatibility-issues-in-macos-mojave/unphoto.jpg" alt></p>
 <p>升级 MacOs Mojave 后不免会遇到兼容性问题，这里列举几个自己遇到的，后面列出了解决方案。<br>推荐：★★☆</p>
 <a id="more"></a>
+
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
 <li><a href="#问题概览">问题概览</a></li>
 <li><a href="#小结">小结</a></li>
@@ -174,6 +175,7 @@
 <li>在运行 <code>git commit --amend</code> 等不直接使用 vim 的命令时，报错。</li>
 </ul>
 <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vim: Caught deadly signal SEGV</span><br><span class="line">Error detected while processing function 70_PollServerReady[7]..70_Pyeval:Vim: Finished.</span><br><span class="line"></span><br><span class="line">line 4:</span><br><span class="line">Exception MemoryError: MemoryError() in &lt;module 'threading' from '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/threading.pyc'&gt; ignored</span><br></pre></td></tr></table></figure>
+
 <h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><h5 id="vim-直接报错"><a href="#vim-直接报错" class="headerlink" title="vim 直接报错"></a>vim 直接报错</h5><ul>
 <li>重新下载 vim.<ul>
 <li>运行 <code>brew install vim --with-lua --with-override-system-vi</code></li>
@@ -213,6 +215,8 @@
 </ul>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="https://github.com/powerline/powerline/issues/1947" target="_blank" rel="noopener">Update MacOS to Mojave, then vim get error with powerline</a><br><a href="https://ltaoo.github.io/2018/10/22/%E6%9B%B4%E6%96%B0%20macOS%20Mojave%20%E5%90%8E%20vim%20%E6%89%93%E4%B8%8D%E5%BC%80/" target="_blank" rel="noopener">更新 macOS Mojave 后 vim 打不开</a></p>
 </blockquote>
+
+
 <!-- 1.5h -->
 
         <!-- 引入打赏图片即显示打赏功能 -->

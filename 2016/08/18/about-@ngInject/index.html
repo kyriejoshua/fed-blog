@@ -145,11 +145,16 @@
         <hr>
 
 <img src="/2016/08/18/about-@ngInject/unphoto.jpeg" title="Angular">
-<blockquote><br>    angular的依赖注入是一个非常好的特性。但如果注入的很多也会比较麻烦。发现了一个可以自动创建注射器对象的方法。<br><br></blockquote>
+
+<blockquote>
+    angular的依赖注入是一个非常好的特性。但如果注入的很多也会比较麻烦。发现了一个可以自动创建注射器对象的方法。
+
+</blockquote>
 
 <a id="more"></a>
+
 <h2 id="ngInject"><a href="#ngInject" class="headerlink" title="/* @ngInject */"></a>/* @ngInject */</h2><ul>
-<li><p>由于项目使用脚手架构建的，使用了Gulp，所以可以用/<em> @ngInject </em>/对需要自动依赖注入的function进行注释。避免了一个个输入的麻烦和意外的错误。<br>*前提是在Gulp中使用了<code>ng-annotate</code>。</p>
+<li><p>由于项目使用脚手架构建的，使用了Gulp，所以可以用/* @ngInject */对需要自动依赖注入的function进行注释。避免了一个个输入的麻烦和意外的错误。<br>*前提是在Gulp中使用了<code>ng-annotate</code>。</p>
 <ul>
 <li>可以避免代码中的依赖使用到任何不安全的写法.</li>
 <li>不推荐用<code>ng-min</code>.</li>
@@ -158,19 +163,26 @@
 </li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WindController</span> </span>&#123;</span><br><span class="line">  public sender: IOrderSender;</span><br><span class="line">  public checkJavaRes: any;</span><br><span class="line">  <span class="hljs-comment">/* @ngInject */</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span> (</span><br><span class="line">    private $uibModal,</span><br><span class="line">    private url</span><br><span class="line">  )&#123;</span><br><span class="line">	...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>当它在<a href="https://github.com/olov/ng-annotate" target="_blank" rel="noopener">ng-annotate</a>(压缩注释工具?)下运行时，会输出依赖注入的数组.</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WindController.$inject = [<span class="hljs-string">'$uibModal'</span>, <span class="hljs-string">'url'</span>]</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>这样原本在index.module.ts(统一写路由的地方)中需要依赖注入的地方就可以无需再输入</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="hljs-string">'wind'</span>, [<span class="hljs-string">'ngCookies'</span>,...])</span><br><span class="line">.controller(<span class="hljs-string">'WindController'</span>, [<span class="hljs-string">'$scope'</span>, <span class="hljs-string">'$http'</span>, WindController])</span><br><span class="line">	...</span><br><span class="line">	更新后</span><br><span class="line">angular.module(<span class="hljs-string">'wind'</span>, [<span class="hljs-string">'ngCookies'</span>,...])</span><br><span class="line">.controller(<span class="hljs-string">'WindController'</span>, WindController)</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>假如不加入注释的话，使用后者的写法会报错</li>
 <li><code>Error: [$injector:strictdi] WindController is not using explicit annotation and cannot be invoked in strict mode</code>.必须要依赖注入。</li>
 </ul>
-<blockquote><br>    参考:<br>    <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md" target="_blank" rel="noopener">angular中文规范</a><br><br></blockquote>
+<blockquote>
+    参考:
+    [angular中文规范](https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md)
+
+</blockquote>
 
 
         <!-- 引入打赏图片即显示打赏功能 -->

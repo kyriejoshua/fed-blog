@@ -145,20 +145,26 @@
         <hr>
 
 <img src="/2016/11/01/wechat-compatible-problems/unphoto.jpeg" title="Actually I dont like wechat">
-<blockquote><br>本文列举了个人在微信公众号里开发时所遇到的浏览器兼容性问题。不定期更新。<br><br></blockquote>
+
+<blockquote><br>本文列举了个人在微信公众号里开发时所遇到的浏览器兼容性问题。不定期更新。
+
+</blockquote>
 
 <a id="more"></a>
+
 <p>1.ios内置微信浏览器不支持active伪类。</p>
 <ul>
 <li>解决办法：添加触摸事件：</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'touchstart'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>2.百度地图api在微信内不生效，应当是微信做了屏蔽工作</p>
 <p>3.ios端微信浏览器会给input框加上自带的样式，例如圆角和内阴影。是因为-webkit-appearance这个属性的影响</p>
 <ul>
 <li><a href="http://www.w3school.com.cn/cssref/pr_appearance.asp" target="_blank" rel="noopener">appearance CSS规范</a><br>*解决办法：给input添加以下样式</li>
 </ul>
 <figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">input</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">appearance</span>: none;</span><br><span class="line">    <span class="hljs-attribute">-webkit-appearance</span>: none; <span class="hljs-comment">/* safari */</span></span><br><span class="line">    <span class="hljs-attribute">-moz-appearance</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>4.ios端微信浏览器，包括ios上所有使用Safari内核的浏览器，都会有该问题——</p>
 <ul>
 <li><p>直接在window, document, body下绑定click事件，点击body不会触发</p>
@@ -171,6 +177,7 @@
 </li>
 <li><p>已触发情况：safari对事件的解析比较特殊，事件有响应过，则会一直冒泡（捕获）到根节点，对于<strong>大规模</strong>触发的情况，只要在body元素的所有子元素绑定一个空事件，如：</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="hljs-string">'body &gt; *'</span>).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 </li>

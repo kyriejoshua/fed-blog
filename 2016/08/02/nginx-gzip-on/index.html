@@ -145,9 +145,15 @@
         <hr>
 
 <img src="/2016/08/02/nginx-gzip-on/unphoto.jpeg" title="jake">
-<blockquote><br>  近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……<br><br></blockquote>
+
+<blockquote>
+  近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……
+
+</blockquote>
 
 <a id="more"></a>
+
+
 <h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><ul>
 <li>Gzip是若干种文件压缩程序的简称，通常指GNU计划的实现，此处的gzip代表GNU zip。也经常用来表示gzip这种文件格式。软件的作者是Jean-loup Gailly和Mark Adler。在1992年10月31日第一次公开发布，版本号0.1。</li>
 <li><a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html" target="_blank" rel="noopener">gzip</a></li>
@@ -159,6 +165,7 @@
 <li><code>vim /etc/nginx/nginx.conf</code></li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_min_length <span class="hljs-number">1</span>k;</span><br><span class="line">gzip_http_version <span class="hljs-number">1.1</span>;</span><br><span class="line">gzip_buffers <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;</span><br><span class="line">gzip_types text/plain application/x-javascript text/css text/javascript;</span><br><span class="line">gzip_comp_level <span class="hljs-number">2</span>;</span><br><span class="line">gzip_vary off;</span><br><span class="line">gzip_disable <span class="hljs-string">"MSIE [1-6]."</span></span><br></pre></td></tr></table></figure>
+
 <ol>
 <li><code>gzip on</code> 开启gzip</li>
 <li><code>gzip_min_length</code> 当返回内容大于这个值时会进行压缩，以K为单位，如果值为0，所有页面都进行压缩，但没有必要。</li>
@@ -174,7 +181,10 @@
 <li><code>gzip_disable</code> 禁用IE6的gzip，IE6支持不好，不过这年头用IE的人也不太想理会了……</li>
 </ol>
 <p>PS：公司缺少运维，真心锻炼前端的全栈能力……</p>
-<blockquote><br>    参考：<a href="https://www.insp.top/article/open-nginx-gzip-module" target="_blank" rel="noopener">开启Nginx的Gzip压缩功能</a><br><br></blockquote>
+<blockquote>
+    参考：[开启Nginx的Gzip压缩功能](https://www.insp.top/article/open-nginx-gzip-module)
+
+</blockquote>
 
 
 

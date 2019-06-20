@@ -147,6 +147,7 @@
 <p><img src="/2018/01/07/how-to-use-parcel-with-react-in-15-mins/unphoto.jpeg" alt></p>
 <p>最近准备新开一个 Threejs 学习的坑，因为重点在 Threejs 上，所以想构建一个简易方便的环境。于是我自然而然的想到了最近火热的 parcel 来替代以往的 webpack. 在我自己尝试了之后，这简直比我想象中的还要简单方便——当然是指搭建一个基本环境啦。<br>推荐：★★☆</p>
 <a id="more"></a>
+
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
 <li><a href="#技术栈">确立技术栈</a></li>
 <li><a href="#安装依赖">安装依赖</a></li>
@@ -160,6 +161,7 @@
 <li>所以最终确认下技术栈和版本。</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node v8<span class="hljs-number">.0</span><span class="hljs-number">.0</span></span><br><span class="line">react v16<span class="hljs-number">.2</span><span class="hljs-number">.0</span></span><br><span class="line">yarn v1<span class="hljs-number">.3</span><span class="hljs-number">.2</span></span><br><span class="line">parcel v1<span class="hljs-number">.4</span><span class="hljs-number">.1</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><ul>
 <li><code>mkdir [your project]</code> —— 在一个合适的目录下新建个项目。</li>
 <li><code>yarn init</code> 初始化新项目，一顿回车后即完成。<ul>
@@ -197,19 +199,23 @@
 <li>配置 .babelrc 文件来使用 babel。</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-string">"presets"</span>: [<span class="hljs-string">"env"</span>, <span class="hljs-string">"react"</span>, <span class="hljs-string">"stage-0"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>配置首页入口。</li>
 </ul>
 <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;!DOCTYPE&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"src/index.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>配置 js 文件。使用 react.</li>
 </ul>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span></span><br><span class="line"><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">static</span> propTypes = &#123;</span><br><span class="line">    name: PropTypes.string</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span> hello &#123; this.props.name &#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> app = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#app'</span>)</span><br><span class="line">ReactDOM.render(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'world'</span>/&gt;</span>, app)</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>这样就已经接近完成。</li>
 <li>剩下的，只要在 package 中加上 scripts.</li>
 </ul>
 <figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "parcel index.html"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>最终只要在项目下运行 <code>npm start</code>，再打开 <code>open http://localhost:1234</code>. 几乎是一眨眼的功夫，就可以看到 <code>hello world</code> 了。</li>
 <li>是不是非常快捷而简单呢。</li>
