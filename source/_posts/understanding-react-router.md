@@ -129,7 +129,7 @@ categories: React
   * [`<MemoryRouter>`](./MemoryRouter.md)
   * [`<NativeRouter>`](../../../react-router-native/docs/api/NativeRouter.md)
   * [`<StaticRouter>`](./StaticRouter.md)
-  * `BrowserRouter` 是在现代浏览器里使用较多的组件，它在支持 `HTML5` 的 `history API` 的地方可以使用。通过独立的包 `react-router-dom` 提供。做的事情类似，只是使用方式略有不同，这里不再赘述。
+  * `BrowserRouter` 是在现代浏览器里使用较多的组件，它在支持 `HTML5` 的 `history API` 的地方使用。通过独立的包 `react-router-dom` 提供。其余组件做的事情类似，只是使用方式略有不同，这里不再赘述。
   * [**这里是具体的文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Router.md)
 <span></span>
 
@@ -207,11 +207,14 @@ categories: React
 
 * 在静态 `props` 里可以看到，`history` 是必须的。印证了我们的常规用法。生成 `history` 后再传入组件内。`<Router history={history}>`
 
-* 然后在生命周期 `componentWillMount` 里，使用 `history.listen` 注册了 `setState` 事件。当路由变化时，会自动触发 `history` 内的 `setState` 事件，进而触发当前传入的更新 `state` 的事件。原理就是上文的 `Link` 的内部逻辑，和之前分析的 `history` 的 `push` 方法里的逻辑和事件订阅发布逻辑。
+* 然后在生命周期 `componentWillMount` 里，使用 `history.listen` 注册了 `setState` 事件。当路由变化时，会自动触发 `history` 内的 `setState` 事件，进而触发当前传入的更新 `state` 的事件。原理就是上文的 `Link` 的内部逻辑，加上之前分析的 `history` 的 `push` 方法里的逻辑和事件订阅发布逻辑。
+  * 注意这里，使用箭头函数保证 `this` 的指向仍是 `Router`.
 
 * 然后它返回一个解绑函数。在组件卸载 `componentWillUnmount` 时调用 `unlisten`。
 
 * 这就解释了，为什么 `Link` 里，点击后的事件，会导致当前 `Router` 的 `state` 的变化，进而改变 `context.router` 里的内容。然后将此传递给子组件 `Route`.
+
+* *到这里，这就是动作变化引起视图变化的核心逻辑了。接下来是，视图如何根据传入的值匹配应当显示的组件。*
 
 * [**context.router 的简单介绍**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/context.router.md)
 
@@ -234,6 +237,8 @@ categories: React
 <span></span>
 
 * **`children`**: 一个函数，和 `render` 类似。但它在任何情况下，只要传入值就会渲染。它接收的 `props` 和其他方式相同，除了在不匹配的情况下，`match` 的值为 `null` 这点不同。它的业务场景，可能是用于一些固定显示在页面的组件，然后通过 `match` 的值来控制样式。
+
+* 以下是简化的 `Route` 源码。
 
   ```javascript
   import matchPath from './matchPath'
@@ -387,7 +392,7 @@ categories: React
   ```
 
 * `matchPath` 通过返回一个对象，来确定路由是否匹配。(官方文档有关于这个对象的介绍[**match**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/match.md))如果匹配，则返回一个包含 `path`, `url`, `isExact`, `params` 等属性的对象。否则，则返回 `null`.
-* 判断的主要逻辑是通过正则。
+* **判断的主要逻辑是通过正则。**
 * 引入了外部的独立的库 [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 来将地址转化成正则。
   * `compilePath` 方法里： `const re = pathToRegexp(pattern, keys, options)`
   * `const { re, keys } = compilePath(path, { end: exact, strict, sensitive })`
@@ -484,7 +489,7 @@ categories: React
 
 ### 小结
 
-* 在了解完这么多组件的内容和原理后，相信我们对于 `react-router` 的实现，有了一定的清晰的思路了。我们会发现，和最初理解的不一样。其实就是自己的理解在一开始是不完善的，甚至有些误解。这个时候，让我们再把流程图再重新梳理，画一遍。下面是简略的更新逻辑过程。
+* 在了解完这么多组件的内容和原理后，相信我们对于 `react-router` 的实现，有了一定的清晰思路了。我们会发现，最终总结的和最初理解的不一样。其实就是自己的理解在一开始是不完善的，甚至有些误解。这个时候，让我们再把流程图再重新梳理，画一遍。下面是简略的更新逻辑过程。
 
 {% asset_img react-router-road.png %}
 
