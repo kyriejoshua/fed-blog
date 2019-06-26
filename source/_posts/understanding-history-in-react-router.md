@@ -13,8 +13,8 @@ categories: React
 
 对 `react-router` 的分析，目前准备主要集中在三点：
 a. `history` 的分析。
-b. `react-router` 原理分析。
-c. `react-router` 内部匹配原理。
+b. `history` 与 `react-router` 的联系。
+c. `react-router` 内部匹配及显示原理。
 这篇文章准备着重理解 `history`.
 推荐：★★★☆
 
@@ -49,13 +49,13 @@ c. `react-router` 内部匹配原理。
   ```
 
 * 在 `react` v16+ 版本里，通常 `react-router` 也升级到了 4 以上。
-* 而 `react-router` v4+ 通常是配合 `history` 使用的。
+* 而 `react-router` v4+ 通常是配合 `history` v4.6+ 使用的。
 * 下面就先从 `history` 开始，让我们一步一步走近 `react-router` 的神秘世界。
 
 ### history核心
 
 * [*history源码*](https://github.com/ReactTraining/history)
-* `history` v4.6+ 在内部主要导出了三个方法:
+* `history` 在内部主要导出了三个方法:
   * `createBrowserHistory`, `createHashHistory`, `createMemoryHistory`.
   * 它们分别有着自己的作用:
     * `createBrowserHistory` 是为现代主流且支持 HTML5 history 浏览器提供的 API.
@@ -75,8 +75,8 @@ c. `react-router` 内部匹配原理。
    * pushState, replaceState, and the popstate event.
    */
   ```
-* 在该方法开始的注释里，它说明了是基于 H5 的 `history` 创建对象，对象内包括了一些常用的方法譬如
-  * `pushState`,`replaceState`,`popstate` 等
+* 在该方法的注释里，它说明了是它基于 H5 的 `history` 创建的对象，对象内包括了一些常用的方法譬如
+  * `pushState`,`replaceState`,`popstate` 等等。
 
 #### ***`history` 对象***
 
@@ -110,7 +110,7 @@ c. `react-router` 内部匹配原理。
 * 其中，`go`/`goBack`/`goForward` 是对原生 `history.go` 的简单封装。
 * 剩下的方法相对复杂些，因此在介绍 `push`, `replace` 等方法之前，先来了解下 `transitionManager`. 因为下面的很多实现，都用到了这个对象所提供的方法。
 
-#### ***[`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法介绍***
+#### *** [`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法介绍 ***
 
 * 首先看下该对象返回了哪些方法：
   ```javascript
@@ -121,8 +121,8 @@ c. `react-router` 内部匹配原理。
     notifyListeners
   }
   ```
-* 在后续 `popstate` 相关方法中，它就应用了 `appendListener` 和与之有关的 `notifyListeners` 方法，我们就先从这些方法看起。
-* 它们的设计体现了常见的订阅-发布模式，前者负责实现订阅事件逻辑，后者负责最终发布逻辑。
+* 在后续 `popstate` 相关的方法中，它就应用了 `appendListener` 和与之有关的 `notifyListeners` 方法，我们就先从这些方法看起。
+* 它们的设计体现了常见的**订阅-发布**模式，前者负责实现订阅事件逻辑，后者负责最终发布逻辑。
 
   ```javascript
     let listeners = [];
@@ -237,10 +237,10 @@ c. `react-router` 内部匹配原理。
     };
   ```
 * 简言之，调用 `listen` 就是给 `window` 绑定了相应方法，再次调用之前 `listen` 返回的函数则是取消。
-* 然后来看看发布事件的具体调用方。
+* 然后来看看发布事件的具体调用方 `setState`。**它在 `createBrowserHistory.js` 中定义，在 `push` 与 `replace` 中调用。**
 
   ```javascript
-  // 在该方法中最终发布
+  // 在该方法中发布
   const setState = nextState => {
     Object.assign(history, nextState);
     history.length = globalHistory.length;
@@ -251,14 +251,14 @@ c. `react-router` 内部匹配原理。
 
 ##### 下面的方法则应用了 `confirmTransitionTo`.
 
-* `push`, `replace`  是原生方法的扩展，它们都用到了上述方法，都负责实现跳转，因此内部有较多逻辑相同。
+* `push`, `replace` 这两个上文提到的重要方法，是原生方法的扩展。它们都用到了上述分析过的方法，都负责实现跳转，因此内部有较多逻辑相同。
 * 后面会以 `push` 为例, 它其实就是对原生的 `history.pushState` 的强化。
-* 这里先从原生的 `history.pushState` 开始了解。
+* 那么这里就先从原生的 `history.pushState` 开始熟悉了解。
 * [**`history.pushState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 接收三个参数，第一个为状态对象，第二个为标题，第三个为 Url.
-  * 状态对象：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许 `react-router` 用来标识页面的变化，以此渲染组件）
-  * 标题(目前被忽略)：给页面添加标题。目前使用空字符串作为参数是安全的，未来则是不安全的。Firefox 目前还未实现它。
-  * URL(可选)：新的历史 URL 记录。直接调用并不会加载它，但在其他情况下，重新打开浏览器或者刷新时会加载新页面。
-  * 一个正常的调用是 `history.pushState({ foo: 'bar'}, 'page1', 'bar.html')`.
+  * **状态对象**：一个可序列化的对象，且序列化后小于 640k. 否则该方法会抛出异常。（暂时不知这对象可以拿来做什么用，或许 `react-router` 用来标识页面的变化，以此渲染组件）
+  * **标题(目前被忽略**)：给页面添加标题。目前使用空字符串作为参数是安全的，未来则是不安全的。Firefox 目前还未实现它。
+  * **URL(可选)**：新的历史 URL 记录。直接调用并不会加载它，但在其他情况下，重新打开浏览器或者刷新时会加载新页面。
+  * 一个常见的调用是 `history.pushState({ foo: 'bar'}, 'page1', 'bar.html')`.
   * 调用后浏览器的 url 会立即更新，但页面并不会重新加载。例如 www.google.com 变更为 www.google.com/bar.html. 但页面不会刷新。
   * 注意，此时并不会调用 `popstate` 事件。只有在上述操作后，访问了其他页面，然后点击返回，或者调用 `history.go(-1)/history.back()` 时，`popstate` 会被触发。
   * 让我们在代码中更直观的看吧。
@@ -268,8 +268,8 @@ c. `react-router` 内部匹配原理。
   window.onpopstate = function(event) {
     console.info(event.state)
   }
-  let page1 = { page: 'page1' }
-  let page2 = { page: 'page2' }
+  const page1 = { page: 'page1' }
+  const page2 = { page: 'page2' }
   history.pushState(page1, 'page1', 'page1.html')
   // 页面地址由 www.google.com => www.google.com/page1.html
   // 但不会刷新或重新渲染
@@ -316,8 +316,9 @@ c. `react-router` 内部匹配原理。
     };
   ```
 
+* 关键代码：**`globalHistory.pushState({ key, state }, null, href);`** 和上文分析的一致。
 * `pushState` 和 `push` 方法讲完，`replaceState` 和 `replace` 也就很好理解了。
-* [**`replaceState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 只是把**推进栈**的方式改为**替换栈**的行为。它接收的参数与 `pushState` 完全相同。只是调用后方法执行的效果不同。
+* [**`replaceState`**](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) 只是把**推进栈**的方式改为**替换栈**的行为。它接收的参数与 `pushState` 完全相同。只是方法调用后执行的效果不同。
 
 * 补：本来如果仅仅是介绍当前的 `history`. 我之前以为找到 `pushState` 这个核心就已经足够了。但当我继续深入，探究 `react-router` 原理的时候，才发现这里遗漏了重要的一点。那就是 `setState` 方法。
 * 那么这个方法具体做了什么呢。在上文中已经做了简单介绍，这里再重申一遍：**就是将当前 `state` 存入 `history`, 同时发布事件，也就是调用之前订阅时的保存的所有方法。参数则是 `[history.location, history.action]`. 或许现在，我们可能对该方法的重要性没有那么深的理解，当你再结合后一篇分析 `react-router` 的文章，就知道它起的作用了。**
@@ -371,4 +372,5 @@ c. `react-router` 内部匹配原理。
 <hr>
 {% asset_img reward.jpeg Thanks %}
 
-<!-- 4h + 2h + 0.5h -->
+<!-- 4h + 2h + 0.5h + 0.5h-->
+<!-- 7h-->

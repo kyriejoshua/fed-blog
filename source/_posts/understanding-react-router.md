@@ -499,7 +499,7 @@ categories: React
 
 ### 遗漏的坑
 
-* 到此，相关的主要的逻辑就解释完毕了。
+* 到此，相关的主要逻辑就解释完毕了。
 * 以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。
 * `react-router` 或 `history` 在 `node` 中的应用。
 * [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 的原理及为何使用缓存。
@@ -515,5 +515,5 @@ categories: React
 <hr>
 {% asset_img reward.jpeg Thanks %}
 
-<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h-->
+<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h + 0.5h-->
 <!-- 6.4h -->
