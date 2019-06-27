@@ -108,7 +108,7 @@ categories: React
 
 * 而在 `click` 方法里，最主要的处理就是**禁用默认事件**，也就是阻止 `a` 标签默认的跳转 `href` 的行为。避免直接跳转页面。然后使用 `history` 的 `push`(`pushState`) 和 `replace`(`replaceState`) 方法进行跳转。
 
-* `push` 方法里除了核心的 `pushState` 逻辑，还有另一个操作 `setState`. [详情可见](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js) 在它的逻辑里，它调用了之前注册的方法。后文会提到。
+* **`push` 方法里除了核心的 `pushState` 逻辑，还有另一个核心操作 `setState`.** [详情可见](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js) 在它的逻辑里，它调用了之前注册的方法。后文会提到。
 
 * 这里的 `history` 就是上篇文章分析的 `history`，只不过在 `react-router` 库里，它被当成 `props` 的部分，由最上层往下传递。至于为何这样做，是可以更好的管理 `history`, 和在组件里进行 `diff` 比对从而去做其他处理。
 

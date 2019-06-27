@@ -209,7 +209,7 @@ c. `react-router` 内部匹配及显示原理。
     const checkDOMListeners = delta => {
       listenerCount += delta;
       if (listenerCount === 1) {
-        // 其实也是最常见最简单的订阅事件
+        // 其实也是最常见最简单的订阅事件, handlePopState 对应的内容在下文有说明
         window.addEventListener(PopStateEvent, handlePopState);
         if (needsHashChangeListener)
           window.addEventListener(HashChangeEvent, handleHashChange);
@@ -237,10 +237,13 @@ c. `react-router` 内部匹配及显示原理。
     };
   ```
 * 简言之，调用 `listen` 就是给 `window` 绑定了相应方法，再次调用之前 `listen` 返回的函数则是取消。
-* 然后来看看发布事件的具体调用方 `setState`。**它在 `createBrowserHistory.js` 中定义，在 `push` 与 `replace` 中调用。**
+* 然后来看看发布事件的具体调用方 `setState`。**它在 `createBrowserHistory.js` 中定义，在 `popstate` 、 `push` 与 `replace` 中均有调用。**
 
   ```javascript
-  // 在该方法中发布
+  /**
+   * 在该方法中发布
+   * @param {*} nextState [入参合并到 history]
+   */
   const setState = nextState => {
     Object.assign(history, nextState);
     history.length = globalHistory.length;
@@ -248,6 +251,38 @@ c. `react-router` 内部匹配及显示原理。
     transitionManager.notifyListeners(history.location, history.action);
   };
   ```
+
+* 以上是 `setState` 的定义。我们来看看它在 `popstate` 中的使用。
+  * 上文有许多代码，以此关键代码为例：
+  * `window.addEventListener(PopStateEvent, handlePopState);`
+
+  ```javascript
+  const handlePopState = (event) => {
+    handlePop(getDOMLocation(event.state))
+  }
+
+  let forceNextPop = false
+
+  const handlePop = (location) => {
+    if (forceNextPop) {
+      forceNextPop = false
+      setState()
+    } else {
+      const action = 'POP'
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, (ok) => {
+        if (ok) {
+          setState({ action, location })
+        } else {
+          revertPop(location)
+        }
+      })
+    }
+  }
+  ```
+
+* 浏览器注册了 `popstate` 事件，对应的 `handlePopState` 的方法则最终调用了 `setState` 方法。
+* 翻译成白话就是浏览器回退操作的时候，会触发 `setState` 方法。它将在下文以及后一篇博文里起到重要作用。
 
 ##### 下面的方法则应用了 `confirmTransitionTo`.
 
