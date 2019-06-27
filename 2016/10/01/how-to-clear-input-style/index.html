@@ -49,7 +49,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/foundation.min.css">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -106,7 +106,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
                 
                 <i class="fab fa-github"></i>
                 
@@ -164,7 +164,7 @@
 <li><p>查阅部分资料后找到解决办法如下：</p>
 </li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input[type=number]::-webkit-inner-spin-button,</span><br><span class="line">input[type=number]::-webkit-outer-spin-button &#123;</span><br><span class="line">  -webkit-appearance: none;</span><br><span class="line">  -moz-appearance: none;</span><br><span class="line">  appearance: none;</span><br><span class="line">  margin: <span class="hljs-number">0</span>; <span class="hljs-comment">// Apparently some margin are still there even though it's hidden -清除margin。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input[type=number]::-webkit-inner-spin-button,</span><br><span class="line">input[type=number]::-webkit-outer-spin-button &#123;</span><br><span class="line">  -webkit-appearance: none;</span><br><span class="line">  -moz-appearance: none;</span><br><span class="line">  appearance: none;</span><br><span class="line">  margin: <span class="number">0</span>; <span class="comment">// Apparently some margin are still there even though it's hidden -清除margin。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><strong><em>原理就是关闭input自带的number按钮选项。</em></strong></li>
@@ -178,7 +178,7 @@
 <li><p>这里有两种解决方案：</p>
 </li>
 <li><p>1.修改自动填充的样式（推荐）:</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 使用以下样式来覆盖原有的，更改了背景和字体颜色</span></span><br><span class="line">input: -webkit-autofill,</span><br><span class="line">textarea: -webkit-autofill,</span><br><span class="line">select: -webkit-autofill &#123;</span><br><span class="line">  -webkit-box-shadow: 0 0 0 1000px #323339 inset;</span><br><span class="line">  -webkit-text-fill-color: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 覆盖以下的chrome自带样式</span></span><br><span class="line">input: -webkit-autofill, <span class="hljs-attr">textarea</span>: -webkit-autofill, <span class="hljs-attr">select</span>: -webkit-autofill &#123;</span><br><span class="line">  background-color: rgb(<span class="hljs-number">250</span>, <span class="hljs-number">255</span>, <span class="hljs-number">189</span>);</span><br><span class="line">  background-image: none;</span><br><span class="line">  color: rgb(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用以下样式来覆盖原有的，更改了背景和字体颜色</span></span><br><span class="line">input: -webkit-autofill,</span><br><span class="line">textarea: -webkit-autofill,</span><br><span class="line">select: -webkit-autofill &#123;</span><br><span class="line">  -webkit-box-shadow: 0 0 0 1000px #323339 inset;</span><br><span class="line">  -webkit-text-fill-color: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 覆盖以下的chrome自带样式</span></span><br><span class="line">input: -webkit-autofill, <span class="attr">textarea</span>: -webkit-autofill, <span class="attr">select</span>: -webkit-autofill &#123;</span><br><span class="line">  background-color: rgb(<span class="number">250</span>, <span class="number">255</span>, <span class="number">189</span>);</span><br><span class="line">  background-image: none;</span><br><span class="line">  color: rgb(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>原理是通过打补丁来解决自定义样式——是不是优雅了很多~</p>
 </li>
@@ -188,7 +188,7 @@
 <ul>
 <li>2.通过关闭表单的自动填充功能来彻底根除该问题：</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="hljs-string">"number"</span> autocomplete=<span class="hljs-string">"off"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"number"</span> autocomplete=<span class="string">"off"</span>/&gt;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>这样就连提示也没有了~也是种解决办法。</li>
@@ -286,7 +286,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
                     
                     GitHub
                     
@@ -402,9 +402,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 

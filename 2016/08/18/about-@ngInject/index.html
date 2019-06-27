@@ -46,7 +46,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/foundation.min.css">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -103,7 +103,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
                 
                 <i class="fab fa-github"></i>
                 
@@ -162,17 +162,17 @@
 <p>*只需在函数前添加即可</p>
 </li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WindController</span> </span>&#123;</span><br><span class="line">  public sender: IOrderSender;</span><br><span class="line">  public checkJavaRes: any;</span><br><span class="line">  <span class="hljs-comment">/* @ngInject */</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span> (</span><br><span class="line">    private $uibModal,</span><br><span class="line">    private url</span><br><span class="line">  )&#123;</span><br><span class="line">	...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">WindController</span> </span>&#123;</span><br><span class="line">  public sender: IOrderSender;</span><br><span class="line">  public checkJavaRes: any;</span><br><span class="line">  <span class="comment">/* @ngInject */</span></span><br><span class="line">  <span class="keyword">constructor</span> (</span><br><span class="line">    private $uibModal,</span><br><span class="line">    private url</span><br><span class="line">  )&#123;</span><br><span class="line">	...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>当它在<a href="https://github.com/olov/ng-annotate" target="_blank" rel="noopener">ng-annotate</a>(压缩注释工具?)下运行时，会输出依赖注入的数组.</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WindController.$inject = [<span class="hljs-string">'$uibModal'</span>, <span class="hljs-string">'url'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WindController.$inject = [<span class="string">'$uibModal'</span>, <span class="string">'url'</span>]</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>这样原本在index.module.ts(统一写路由的地方)中需要依赖注入的地方就可以无需再输入</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="hljs-string">'wind'</span>, [<span class="hljs-string">'ngCookies'</span>,...])</span><br><span class="line">.controller(<span class="hljs-string">'WindController'</span>, [<span class="hljs-string">'$scope'</span>, <span class="hljs-string">'$http'</span>, WindController])</span><br><span class="line">	...</span><br><span class="line">	更新后</span><br><span class="line">angular.module(<span class="hljs-string">'wind'</span>, [<span class="hljs-string">'ngCookies'</span>,...])</span><br><span class="line">.controller(<span class="hljs-string">'WindController'</span>, WindController)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'wind'</span>, [<span class="string">'ngCookies'</span>,...])</span><br><span class="line">.controller(<span class="string">'WindController'</span>, [<span class="string">'$scope'</span>, <span class="string">'$http'</span>, WindController])</span><br><span class="line">	...</span><br><span class="line">	更新后</span><br><span class="line">angular.module(<span class="string">'wind'</span>, [<span class="string">'ngCookies'</span>,...])</span><br><span class="line">.controller(<span class="string">'WindController'</span>, WindController)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>假如不加入注释的话，使用后者的写法会报错</li>
@@ -275,7 +275,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
                     
                     GitHub
                     
@@ -391,9 +391,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
