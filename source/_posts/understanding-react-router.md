@@ -218,6 +218,7 @@ categories: React
   * 注意这里，使用箭头函数保证 `this` 的指向仍是 `Router`.
   * 当 `Link` 点击事件触发时，实际上调用的是当前的 `this.setState({ match: this.computeMatch(history.location.pathname) })` 方法。
   * 此时返回的 `match` 是形如 `{ path: '/', url: '/', params: {}, isExact: pathname === '/'}` 的对象。
+  * `return { router: { route: { match: this.state.match } } }` 通过 `getChildContext` 方法以上下文 `context` 的方式传给子组件 `route`.
 
 
 * 这就一部分解释了为什么 `Link` 里，点击后的事件，会导致当前 `Router` 的 `state` 的变化，进而改变 `context.router` 里的内容。然后将此传递给子组件 `Route`.
