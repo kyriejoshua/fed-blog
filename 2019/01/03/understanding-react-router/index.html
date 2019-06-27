@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-road.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-06-25T11:05:34.940Z">
+<meta property="og:updated_time" content="2019-06-27T03:44:40.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈 react-router 实现原理">
 <meta name="twitter:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
@@ -140,7 +140,7 @@
         <span class="column is-narrow">
             
             
-            26 分钟 读完 (约 3846 字)
+            26 分钟 读完 (约 3848 字)
         </span>
         
     </div>
@@ -194,7 +194,7 @@
 </li>
 <li><p>而在 <code>click</code> 方法里，最主要的处理就是<strong>禁用默认事件</strong>，也就是阻止 <code>a</code> 标签默认的跳转 <code>href</code> 的行为。避免直接跳转页面。然后使用 <code>history</code> 的 <code>push</code>(<code>pushState</code>) 和 <code>replace</code>(<code>replaceState</code>) 方法进行跳转。</p>
 </li>
-<li><p><code>push</code> 方法里除了核心的 <code>pushState</code> 逻辑，还有另一个操作 <code>setState</code>. <a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js" target="_blank" rel="noopener">详情可见</a> 在它的逻辑里，它调用了之前注册的方法。后文会提到。</p>
+<li><p><strong><code>push</code> 方法里除了核心的 <code>pushState</code> 逻辑，还有另一个核心操作 <code>setState</code>.</strong> <a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js" target="_blank" rel="noopener">详情可见</a> 在它的逻辑里，它调用了之前注册的方法。后文会提到。</p>
 </li>
 <li><p>这里的 <code>history</code> 就是上篇文章分析的 <code>history</code>，只不过在 <code>react-router</code> 库里，它被当成 <code>props</code> 的部分，由最上层往下传递。至于为何这样做，是可以更好的管理 <code>history</code>, 和在组件里进行 <code>diff</code> 比对从而去做其他处理。</p>
 </li>
