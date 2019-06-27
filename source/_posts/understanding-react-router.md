@@ -41,13 +41,18 @@ categories: React
 
 ### 组件
 
-* 我最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 `replaceState` 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面，不会让页面重新加载。
+* 我最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 `pushState`/`replaceState` 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面，不会让页面重新加载。
+
 * 因此，让我们还是从组件入手。
+
+* 从[这里](https://github.com/ReactTraining/react-router/tree/v4.2.2/packages/react-router-dom/modules)可以看到有许多组件。我们着重分析其中的 `Link`、`Router`、`Route`、`Switch`. 剩余的也就顺理成章去理解了。
 
 #### [Link](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/Link.js)
 
-* `Link` 是 `react-router-dom` 提供的一个组件。用来实现路由间的切换。`react-router-dom` 和 `react-router` 的关系后文会说。
+* `Link` 是 `react-router-dom` 提供的一个组件。用来实现路由间的切换。至于 `react-router-dom` 和 `react-router` 的关系后文会说。
+
 * 那为什么 `Link` 就可以轻松做到跳转呢。让我们一步步来看 `Link` 里都有什么。
+
 * 打印出 `Link`，简化后，主要是以下的部分。
 
   ```javascript
@@ -59,6 +64,7 @@ categories: React
       replace: false
     }
 
+    // 参数都是必传的
     static contextTypes = {
       router: PropTypes.shape({
         history: PropTypes.shape({
@@ -110,7 +116,7 @@ categories: React
 
 * **`push` 方法里除了核心的 `pushState` 逻辑，还有另一个核心操作 `setState`.** [详情可见](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js) 在它的逻辑里，它调用了之前注册的方法。后文会提到。
 
-* 这里的 `history` 就是上篇文章分析的 `history`，只不过在 `react-router` 库里，它被当成 `props` 的部分，由最上层往下传递。至于为何这样做，是可以更好的管理 `history`, 和在组件里进行 `diff` 比对从而去做其他处理。
+* 这里的 `history` 就是上篇文章分析的 `history`，只不过在 `react-router` 库里，它被当成 `props` 的部分，由最上层往下传递。至于为何这样做，是可以更好的管理 `history`, 和在组件里进行 `diff` 比对从而去做其他处理。上篇文末有说明。
 
 * 然后观察传入给 `a` 的参数 `to`. 它接受 `String` 或者 `Object`. 通常我们会以 `String` 的形式传入。但最终它会被包装成类似 `{ pathname: to }` 这样的格式。
 
@@ -118,11 +124,10 @@ categories: React
 
 * [**Link 文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/Link.md?1546863412144)
 
-<!-- 打印下 link 方法里的东西 -->
-
 #### [Router](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Router.js)
 
 * `Router` 是 `react-router` 里最常用的组件之一，它接收 `history` 和 `children` 两个参数。
+
 * 这个组件属于较底层的组件，实际应用的时候可能会使用基于它扩展后的组件，来应对不同场景下的需求。例如在官方文档里，列举了以下几个具体的组件。
   * [`<BrowserRouter>`](../../../react-router-dom/docs/api/BrowserRouter.md)
   * [`<HashRouter>`](../../../react-router-dom/docs/api/HashRouter.md)
@@ -132,8 +137,10 @@ categories: React
   * `BrowserRouter` 是在现代浏览器里使用较多的组件，它在支持 `HTML5` 的 `history API` 的地方使用。通过独立的包 `react-router-dom` 提供。其余组件做的事情类似，只是使用方式略有不同，这里不再赘述。
   * [**这里是具体的文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Router.md)
 <span></span>
+<span></span>
 
 * 通常情况下，`Router` 作为父组件，包裹着 `Route` 和 `Switch` 等组件。
+
 * 观察它的源码。它本质上也是 `React` 组件。在渲染的时候，注册监听了事件。下文细说。
 
   ```javascript
@@ -205,14 +212,17 @@ categories: React
   export default Router
   ```
 
-* 在静态 `props` 里可以看到，`history` 是必须的。印证了我们的常规用法。生成 `history` 后再传入组件内。`<Router history={history}>`
+* 在静态 `props` 里可以看到，`history` 是必须的。印证了我们的常规用法。生成 `history` 后再作为上下文传入组件内，向下传递给子组件。`<Router history={history}>`
 
 * 然后在生命周期 `componentWillMount` 里，使用 `history.listen` 注册了 `setState` 事件。当路由变化时，会自动触发 `history` 内的 `setState` 事件，进而触发当前传入的更新 `state` 的事件。原理就是上文的 `Link` 的内部逻辑，加上之前分析的 `history` 的 `push` 方法里的逻辑和事件订阅发布逻辑。
   * 注意这里，使用箭头函数保证 `this` 的指向仍是 `Router`.
+  * 当 `Link` 点击事件触发时，实际上调用的是当前的 `this.setState({ match: this.computeMatch(history.location.pathname) })` 方法。
+  * 此时返回的 `match` 是形如 `{ path: '/', url: '/', params: {}, isExact: pathname === '/'}` 的对象。
 
-* 然后它返回一个解绑函数。在组件卸载 `componentWillUnmount` 时调用 `unlisten`。
 
-* 这就解释了，为什么 `Link` 里，点击后的事件，会导致当前 `Router` 的 `state` 的变化，进而改变 `context.router` 里的内容。然后将此传递给子组件 `Route`.
+* 这就一部分解释了为什么 `Link` 里，点击后的事件，会导致当前 `Router` 的 `state` 的变化，进而改变 `context.router` 里的内容。然后将此传递给子组件 `Route`.
+
+* 然后它返回一个解绑函数。在组件卸载 `componentWillUnmount` 时调用 `unlisten` 卸载。
 
 * *到这里，这就是动作变化引起视图变化的核心逻辑了。接下来是，视图如何根据传入的值匹配应当显示的组件。*
 
@@ -391,7 +401,7 @@ categories: React
   export default matchPath
   ```
 
-* `matchPath` 通过返回一个对象，来确定路由是否匹配。(官方文档有关于这个对象的介绍[**match**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/match.md))如果匹配，则返回一个包含 `path`, `url`, `isExact`, `params` 等属性的对象。否则，则返回 `null`.
+* **`matchPath` 通过返回一个对象，来确定路由是否匹配。(官方文档有关于这个对象的介绍[match](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/match.md))如果匹配，则返回一个包含 `path`, `url`, `isExact`, `params` 等属性的对象。否则，则返回 `null`.**
 * **判断的主要逻辑是通过正则。**
 * 引入了外部的独立的库 [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 来将地址转化成正则。
   * `compilePath` 方法里： `const re = pathToRegexp(pattern, keys, options)`
