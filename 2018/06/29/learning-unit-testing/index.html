@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/unphoto.jpeg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/testing.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/reward.jpeg">
-<meta property="og:updated_time" content="2019-04-24T12:00:58.599Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:02.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单测入门笔记">
 <meta name="twitter:description" content="以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。推荐：★★★">
@@ -55,6 +55,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -568,6 +572,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -582,6 +588,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

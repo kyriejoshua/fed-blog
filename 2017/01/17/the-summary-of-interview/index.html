@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/01/17/the-summary-of-interview/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/01/17/the-summary-of-interview/reward.jpeg">
-<meta property="og:updated_time" content="2018-07-01T11:40:35.082Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:02.590Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跳槽面试小结——那些在我下次面试前我想知道的事">
 <meta name="twitter:description" content="不久前，我做了一个较为艰难但对我以后的发展绝对有利的决定——从前公司离职。这是我呆的第一家互联网公司，也是我作为前端的第一份工作。一年多的工作经历并没有特别多的感慨，但我想记录下相关的事，来避免以后所走的弯路。">
@@ -54,6 +54,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -444,6 +448,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -458,6 +464,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/unphoto.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/solar-system.gif">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/12/19/how-to-create-a-solar-system-using-by-threejs/reward.jpeg">
-<meta property="og:updated_time" content="2019-04-24T12:01:00.252Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:02.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识 Threejs(下) —— 实现一个太阳系模型">
 <meta name="twitter:description" content="在上一篇文章中，我整理了 Threejs 中的一些基本概念。现在这一篇，就使用上次所整理的内容加上一些不复杂的算法，来实现一个运转着的太阳系模型。这里的所有行星大小及公转时间，尽量贴合实际。">
@@ -55,6 +55,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -542,6 +546,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -556,6 +562,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

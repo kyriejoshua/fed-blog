@@ -25,7 +25,7 @@
 <meta property="og:description" content="不久前，正好是我以前端身份工作的一周年。很难相信，毕业前迷茫得找不到北的我，会在没多久后找到一个与自己兴趣相投的职位并且决定长期发展。人总是是要向前看的，但有些时候也需要回顾，我想就这篇文章，来记录这一年里踩过的大大小小的坑，和经历前端风云变化的一些事。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/12/26/my-2016-with-front-end/unphoto.jpg">
-<meta property="og:updated_time" content="2018-07-01T11:40:34.882Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:02.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端入坑周年记——野蛮生长">
 <meta name="twitter:description" content="不久前，正好是我以前端身份工作的一周年。很难相信，毕业前迷茫得找不到北的我，会在没多久后找到一个与自己兴趣相投的职位并且决定长期发展。人总是是要向前看的，但有些时候也需要回顾，我想就这篇文章，来记录这一年里踩过的大大小小的坑，和经历前端风云变化的一些事。">
@@ -53,6 +53,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -389,6 +393,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -403,6 +409,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

@@ -17,7 +17,7 @@
 
 
     <meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
-<meta name="keywords" content="ES2015,HTTP,Angular,JavaScript,chrome,CSS3,eslint,wepay,git,css,WebGl,Parcel,Unit-Testing,Shell,sublime,Git,nginx,interview,React,DOM,compatibility,webpack,WebGL,React-Router,兼容性,zhihu live">
+<meta name="keywords" content="ES2015,HTTP,Angular,JavaScript,chrome,CSS3,eslint,wepay,git,css,WebGl,Parcel,Shell,Unit-Testing,sublime,Git,nginx,interview,React,DOM,compatibility,webpack,WebGL,React-Router,兼容性,zhihu live">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Deadpool Front-end">
 <meta property="og:url" content="http://kyriejoshua.github.io/categories/index.html">
@@ -50,6 +50,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -159,11 +163,11 @@
             </span>
             
             <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/Unit-Testing/">Unit-Testing&nbsp;(1)</a>
+                <a class="tag is-light article-tag" href="/categories/Shell/">Shell&nbsp;(1)</a>
             </span>
             
             <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/Shell/">Shell&nbsp;(1)</a>
+                <a class="tag is-light article-tag" href="/categories/Unit-Testing/">Unit-Testing&nbsp;(1)</a>
             </span>
             
             <span class="column is-narrow">
@@ -347,6 +351,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -361,6 +367,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

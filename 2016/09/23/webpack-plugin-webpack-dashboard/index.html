@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/dashboard-wrong.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/webpack-dashboard.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/reward.jpeg">
-<meta property="og:updated_time" content="2018-07-01T11:40:35.108Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:02.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack实用插件安利之webpack-dashboard">
 <meta name="twitter:description" content="在github上explore的时候偶然发现这款插件，非常火爆，推出没多久就收货了几千stars。我在踩了几个坑后成功引入到公司的项目里。">
@@ -60,6 +60,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -497,6 +501,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -511,6 +517,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

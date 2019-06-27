@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="About Me     **平淡无奇的前端攻城狮。**     偏爱美好的设计，注重用户体验。     遵循简洁的代码规范，拥有良好的代码习惯。  #Mac 重度用户 #ES6 &amp;amp;&amp;amp; Typescript &amp;amp;&amp;amp; Coffeescript #React &amp;amp;&amp;amp; Redux #Git &amp;amp;&amp;amp; Github #Nodejs 入坑中 #Webp">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-07-01T11:40:35.231Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:02.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Deadpool Front-end">
 <meta name="twitter:description" content="About Me     **平淡无奇的前端攻城狮。**     偏爱美好的设计，注重用户体验。     遵循简洁的代码规范，拥有良好的代码习惯。  #Mac 重度用户 #ES6 &amp;amp;&amp;amp; Typescript &amp;amp;&amp;amp; Coffeescript #React &amp;amp;&amp;amp; Redux #Git &amp;amp;&amp;amp; Github #Nodejs 入坑中 #Webp">
@@ -50,6 +50,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -121,7 +125,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2019-06-20T07:52:40.300Z" itemprop="datePublished">6月 20 2019</time>
+            <time datetime="2019-06-27T10:17:02.822Z" itemprop="datePublished">6月 27 2019</time>
         </span>
         
         
@@ -371,6 +375,8 @@ github: https://github.com/kyriejoshua</code></pre></blockquote>
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -385,6 +391,71 @@ github: https://github.com/kyriejoshua</code></pre></blockquote>
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     

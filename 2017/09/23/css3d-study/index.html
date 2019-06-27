@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/09/23/css3d-study/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/09/23/css3d-study/dice.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/09/23/css3d-study/reward.jpeg">
-<meta property="og:updated_time" content="2019-04-24T12:01:01.303Z">
+<meta property="og:updated_time" content="2019-06-27T10:17:01.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS3 实现🎲旋转教程">
 <meta name="twitter:description" content="最近的工作开始接触到可视化的 3D 部分，因此自己也抽时间温习了以前学习的 css3 知识点，顺便完成一个入门小 demo —— 实现一个旋转的骰子。这个例子里有重温 css3 的一些知识点——用它来实现立体和旋转效果，然后用 flex 布局来实现骰子的点的排列。这个案例对于以后熟练使用 css 和 flex 有一定的帮助，所以这里也做一份教程和总结。最终效果就在页面右下角，相信眼不尖的人也">
@@ -55,6 +55,10 @@
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
+    
+    
+    
+    
     
     
     
@@ -524,6 +528,8 @@
 
     
     
+    
+    
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -538,6 +544,71 @@
         });
     })(jQuery);
 </script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
 
     
     
