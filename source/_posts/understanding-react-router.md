@@ -330,13 +330,13 @@ categories: React
 
 * 在 `Route` 组件里，首先我们看到 `render` 里，由组件的内容类型来决定渲染是 `component` 或 `render` 或 `children`. 然后由 `this.state.match` 这个字段决定了当前的元素是否渲染。
 
-* 接着在上述源码里，`this.state.macth` 字段是在 `componentWillReceiveProps` 和初始化里可以看到。而这个变量，由一个比较重要的函数 `computeMatch` 返回。它是用来对比当前路由是否匹配，依此来决定渲染组件或者不渲染。它的具体的值下文会讲到。
+* 接着在上述源码里，`this.state.match` 字段是在 `componentWillReceiveProps` 和初始化里可以看到。而这个变量，由一个比较重要的函数 `computeMatch` 返回。它是用来对比当前路由是否匹配，依此来决定渲染组件或者不渲染。它的具体的值下文会讲到。
 
 * `computeMatch` 接收 `nextProps` 和 `context.router` 作为参数。首先判断是否处于 `Switch` 组件中，如果在其中，则直接走 `Switch` 安排的逻辑，它有着自己的一套计算匹配逻辑。否则，则继续判断。
 
 * 接下来的核心判断，是获取 `pathname`, 通过 `props.location` || `context.router.route.pathname` 获取。然后将其作为参数，传入另一个重要方法 `matchPath` 中，做计算匹配的逻辑。
 
-* 当然，有一些参数作为辅助判断，例如 `exact` `sensitive` `strict`等。
+* 当然，有一些参数作为辅助判断，例如 `exact`、`sensitive`、`strict`等。
 
 * `matchPath` 是外部引入的，独立的一个文件包装的方法。可以直接看源码。
 
@@ -416,6 +416,7 @@ categories: React
 #### [Switch](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Switch.js?1546508592999)
 
 * 观察 `Switch` 的源码可以发现，它本质上也是调用了 `matchPath` 来判断匹配结果。
+* `{ computedMatch: match }` 作为入参传入，呼应了上文的判断。
 * [**这里是文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Switch.md?1546863502437)
 
   ```javascript
@@ -504,17 +505,18 @@ categories: React
 
 {% asset_img react-router-road.png %}
 
-* 下面是一张调用栈的图，或许可以更直观地展示调用了哪些方法调用以及他们的执行顺序。
+* 下面是一张调用栈的图，或许可以更直观地展示调用了哪些方法以及它们的执行顺序。以 `Link` 的点击事件流程为例。
 
 {% asset_img react-router-stack.png %}
 
 ### 遗漏的坑
 
-* 到此，相关的主要逻辑就解释完毕了。
+* 到此，主要的逻辑就解释完毕了。
 * 以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。
-* `react-router` 或 `history` 在 `node` 中的应用。
-* [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 的原理及为何使用缓存。
-* `popstate` 和 `hashchange` 最后到底在哪些地方进行了调用和应用。
+  *  `react-router` 或 `history` 在 `node` 中的应用。
+  * [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 的原理及为何使用缓存。
+  * [x] `popstate` 和 `hashchange` 最后到底在哪些地方进行了调用和应用。
+    * 在上篇 history 的文章已有说明。
 
 ### 参考
 
