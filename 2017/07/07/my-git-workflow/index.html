@@ -179,8 +179,7 @@
 <li><p>首先是最基本的操作，从一次工作的开始到结束。这是一个比较基础的流程。</p>
 </li>
 <li><p><code>Working Directory</code>(工作区) =&gt; <code>Staging Area</code>(暂存区) =&gt; <code>Git Repository</code>(git 仓库)</p>
-  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-new</span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit [-m <span class="hljs-string">'commit message'</span>]</span><br><span class="line">git checkout develop|master</span><br><span class="line">git merge feature-new</span><br></pre></td></tr></table></figure>
-
+<p>  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-new</span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit [-m <span class="hljs-string">'commit message'</span>]</span><br><span class="line">git checkout develop|master</span><br><span class="line">git merge feature-new</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>从当前分支切出一个新分支，在该分支下进行开发。</li>
 <li>在工作区内修改文件，当任务完成时，添加所有改动文件到暂存区，然后提交，注明提交信息。</li>

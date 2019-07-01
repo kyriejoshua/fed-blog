@@ -170,8 +170,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">  <span class="hljs-keyword">super</span>(props)</span><br><span class="line">  <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">    type: props.initialType</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">  <span class="hljs-keyword">super</span>(props)</span><br><span class="line">  <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">    type: props.initialType</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount"></a>componentWillMount</h4><ul>
 <li><strong>执行阶段</strong>: 组件将要挂载的阶段。在 <code>render</code> 前调用，只会调用一次。</li>
 <li>这里或许可以添加一些接口请求数据的逻辑，但在这里进行 state 的更新是异步的，它并不会触发 <code>re-render</code> 也就是 <code>render</code> 重新渲染。通常情况下，更推荐使用 <code>constructor</code> 来替代.</li>
@@ -193,8 +192,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> [</span><br><span class="line">    &lt;div key=<span class="hljs-string">"A"</span>&gt;First&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">"B"</span>&gt;Second&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">"C"</span>&gt;Third&lt;div/&gt;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> [</span><br><span class="line">    &lt;div key=<span class="hljs-string">"A"</span>&gt;First&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">"B"</span>&gt;Second&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">"C"</span>&gt;Third&lt;div/&gt;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h4><ul>
 <li>组件挂载完毕时即调用。生命周期内只会调用一次。</li>
 <li><strong>应用场景</strong>：通常可以将请求后端数据—— ajax/fetch 放在这里。此时界面上 <code>DOM</code> 已经存在。可以做有关 <code>DOM</code> 的操作。例如 <code>findDOMNode</code>.</li>
