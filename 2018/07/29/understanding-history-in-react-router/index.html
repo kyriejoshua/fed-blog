@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2018/07/29/understanding-history-in-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:02.632Z">
+<meta property="og:updated_time" content="2019-07-05T08:35:36.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 react-router 中的 history">
 <meta name="twitter:description" content="对 react-router 的分析，目前准备主要集中在三点：a. history 的分析。b. history 与 react-router 的联系。c. react-router 内部匹配及显示原理。这篇文章准备着重理解 history. 推荐：★★★☆">
@@ -141,7 +141,7 @@
         <span class="column is-narrow">
             
             
-            23 分钟 读完 (约 3450 字)
+            23 分钟 读完 (约 3466 字)
         </span>
         
     </div>
@@ -167,7 +167,7 @@
 </ul>
 <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
 <li><p>一段显而易见出现在各大 react v16+ 项目中的代码是这样的:</p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123;Component&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; render &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span></span><br><span class="line"><span class="hljs-keyword">import</span> AppRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'./routes/'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; createBrowserHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'history'</span></span><br><span class="line"><span class="hljs-keyword">const</span> history = createBrowserHistory()</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;AppRouter history=&#123;history&#125; /&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">render(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, <span class="hljs-built_in">document</span>.body.querySelector(<span class="hljs-string">'#app'</span>))</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123;Component&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; render &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; Router, Route &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; createBrowserHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'history'</span></span><br><span class="line"><span class="hljs-keyword">const</span> history = createBrowserHistory()</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;AppRouter history=&#123;history&#125;&gt;</span><br><span class="line">    &lt;div id=<span class="hljs-string">"content"</span>&gt;</span><br><span class="line">      &#123;<span class="hljs-comment">/* something */</span>&#125;</span><br><span class="line">    &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">  &lt;/</span>AppRouter&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">render(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, <span class="hljs-built_in">document</span>.body.querySelector(<span class="hljs-string">'#app'</span>))</span><br></pre></td></tr></table></figure></p>
 </li>
 <li><p>在 <code>react</code> v16+ 版本里，通常 <code>react-router</code> 也升级到了 4 以上。</p>
 </li>
@@ -177,7 +177,7 @@
 </li>
 </ul>
 <h3 id="history核心"><a href="#history核心" class="headerlink" title="history核心"></a>history核心</h3><ul>
-<li><a href="https://github.com/ReactTraining/history" target="_blank" rel="noopener"><em>history源码</em></a></li>
+<li><a href="https://github.com/ReactTraining/history/tree/v4.6.0" target="_blank" rel="noopener"><em>history源码</em></a></li>
 <li><code>history</code> 在内部主要导出了三个方法:<ul>
 <li><code>createBrowserHistory</code>, <code>createHashHistory</code>, <code>createMemoryHistory</code>.</li>
 <li>它们分别有着自己的作用:<ul>
@@ -225,7 +225,7 @@
 <li><p>剩下的方法相对复杂些，因此在介绍 <code>push</code>, <code>replace</code> 等方法之前，先来了解下 <code>transitionManager</code>. 因为下面的很多实现，都用到了这个对象所提供的方法。</p>
 </li>
 </ul>
-<h4 id="transitionManager-方法介绍"><a href="#transitionManager-方法介绍" class="headerlink" title="* transitionManager 方法介绍 *"></a><strong>* <a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194" target="_blank" rel="noopener"><code>transitionManager</code></a> 方法介绍 *</strong></h4><ul>
+<h4 id="transitionManager-方法介绍"><a href="#transitionManager-方法介绍" class="headerlink" title="*transitionManager 方法介绍*"></a><strong>*<a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194" target="_blank" rel="noopener"><code>transitionManager</code></a> 方法介绍*</strong></h4><ul>
 <li><p>首先看下该对象返回了哪些方法：<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> transitionManager = &#123;</span><br><span class="line">  setPrompt,</span><br><span class="line">  confirmTransitionTo,</span><br><span class="line">  appendListener,</span><br><span class="line">  notifyListeners</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </li>
 <li><p>在后续 <code>popstate</code> 相关的方法中，它就应用了 <code>appendListener</code> 和与之有关的 <code>notifyListeners</code> 方法，我们就先从这些方法看起。</p>
@@ -242,9 +242,9 @@
 </li>
 </ul>
 <h4 id="transitionManager-调用"><a href="#transitionManager-调用" class="headerlink" title="transitionManager 调用"></a><strong><em><code>transitionManager</code> 调用</em></strong></h4><ul>
-<li>再然后我们来看看上述方法<code>appendListener</code>, <code>notifyListeners</code> 的具体应用。前者体现在了 <code>popstate</code> 事件的订阅中。</li>
+<li>再然后我们来看看上述方法 <code>appendListener</code>, <code>notifyListeners</code> 的具体应用。前者体现在了 <code>popstate</code> 事件的订阅中。</li>
 <li>那么就先简单谈谈 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/popstate" target="_blank" rel="noopener"><strong><code>popstate</code></strong></a> 事件。<ul>
-<li>当做出浏览器动作时，会触发 <code>popstate</code> 事件, 也就是说，<code>popstate</code> 本身并不是像 <code>pushState</code> 或 <code>replaceState</code> 一样是 <code>history</code> 的方法。</li>
+<li>当做出浏览器动作时，会触发 <code>popstate</code> 事件, 例如点击浏览器的回退。也就是说，<code>popstate</code> 本身并不是像 <code>pushState</code> 或 <code>replaceState</code> 一样是 <code>history</code> 的方法。</li>
 <li>不能使用 <code>history.popState</code> 这样的方式来调用。</li>
 <li>而且，直接调用 <code>history.pushState</code> 或 <code>history.replaceState</code> 不会触发 <code>popstate</code> 事件。</li>
 </ul>

@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-road.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-07-01T10:54:43.101Z">
+<meta property="og:updated_time" content="2019-07-02T06:40:02.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈 react-router 实现原理">
 <meta name="twitter:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
@@ -144,7 +144,7 @@
         <span class="column is-narrow">
             
             
-            27 分钟 读完 (约 4046 字)
+            27 分钟 读完 (约 4090 字)
         </span>
         
     </div>
@@ -310,7 +310,7 @@
 </ul>
 <p><span></span></p>
 <ul>
-<li>可以看到，除了上述常规判断以外，加了一层缓存逻辑。<code>cache[pattern]</code> 保存了上次的记录。而且属性名也很奇怪，类似 <code>truefalsefalse</code> 的形式。这里暂未理解。</li>
+<li><code>compilePath</code> 中可以看到，除了上述常规判断以外，加了一层缓存逻辑。<code>cache[pattern]</code> 保存了上次的记录，可以直接从缓存中读取。只是属性名比较奇怪，类似 <code>truefalsefalse</code> 的形式。这里不确定只是幽默还是有意义的设计。</li>
 </ul>
 <h4 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Switch.js?1546508592999" target="_blank" rel="noopener">Switch</a></h4><ul>
 <li><p>观察 <code>Switch</code> 的源码可以发现，它本质上也是调用了 <code>matchPath</code> 来判断匹配结果。</p>
@@ -350,9 +350,12 @@
 <li>到此，主要的逻辑就解释完毕了。</li>
 <li>以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。<ul>
 <li><code>react-router</code> 或 <code>history</code> 在 <code>node</code> 中的应用。</li>
-<li><a href="https://github.com/pillarjs/path-to-regexp" target="_blank" rel="noopener"><strong><code>path-to-regexp</code></strong></a> 的原理及为何使用缓存。</li>
+<li><a href="https://github.com/pillarjs/path-to-regexp" target="_blank" rel="noopener"><strong><code>path-to-regexp</code></strong></a> 的原理及为何使用缓存。<ul>
+<li><input checked disabled type="checkbox"> 使用缓存来节约内存空间。2019-06 补坑。</li>
+</ul>
+</li>
 <li><input checked disabled type="checkbox"> <code>popstate</code> 和 <code>hashchange</code> 最后到底在哪些地方进行了调用和应用。<ul>
-<li>在上篇 history 的文章已有说明。</li>
+<li>在上篇 history 的文章已有说明。2019-06 补坑。</li>
 </ul>
 </li>
 </ul>
@@ -364,8 +367,8 @@
 <hr>
 <img src="/2019/01/03/understanding-react-router/reward.jpeg" title="Thanks">
 
-<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h + 0.5h-->
-<!-- 6.4h -->
+<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h + 0.5h + 0.6h -->
+<!-- 7h -->
 
         <!-- 引入打赏图片即显示打赏功能 -->
         
