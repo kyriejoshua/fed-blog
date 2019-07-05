@@ -37,12 +37,16 @@ c. `react-router` 内部匹配及显示原理。
   ```javascript
   import React, {Component} from 'react'
   import { render } from 'react-dom'
-  import AppRouter from './routes/'
+  import { Router, Route } from 'react-router'
   import { createBrowserHistory } from 'history'
   const history = createBrowserHistory()
 
   const App = () => (
-    <AppRouter history={history} />
+    <AppRouter history={history}>
+      <div id="content">
+        {/* something */}
+      </div>
+    </AppRouter>
   )
 
   render(<App/>, document.body.querySelector('#app'))
@@ -54,7 +58,7 @@ c. `react-router` 内部匹配及显示原理。
 
 ### history核心
 
-* [*history源码*](https://github.com/ReactTraining/history)
+* [*history源码*](https://github.com/ReactTraining/history/tree/v4.6.0)
 * `history` 在内部主要导出了三个方法:
   * `createBrowserHistory`, `createHashHistory`, `createMemoryHistory`.
   * 它们分别有着自己的作用:
@@ -110,7 +114,7 @@ c. `react-router` 内部匹配及显示原理。
 * 其中，`go`/`goBack`/`goForward` 是对原生 `history.go` 的简单封装。
 * 剩下的方法相对复杂些，因此在介绍 `push`, `replace` 等方法之前，先来了解下 `transitionManager`. 因为下面的很多实现，都用到了这个对象所提供的方法。
 
-#### *** [`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法介绍 ***
+#### ***[`transitionManager`](https://github.com/ReactTraining/history/blob/v4.6.0/modules/createTransitionManager.js?1543756692194) 方法介绍***
 
 * 首先看下该对象返回了哪些方法：
   ```javascript
@@ -187,9 +191,9 @@ c. `react-router` 内部匹配及显示原理。
 
 #### ***`transitionManager` 调用***
 
-* 再然后我们来看看上述方法`appendListener`, `notifyListeners` 的具体应用。前者体现在了 `popstate` 事件的订阅中。
+* 再然后我们来看看上述方法 `appendListener`, `notifyListeners` 的具体应用。前者体现在了 `popstate` 事件的订阅中。
 * 那么就先简单谈谈 [**`popstate`**](https://developer.mozilla.org/zh-CN/docs/Web/Events/popstate) 事件。
-  * 当做出浏览器动作时，会触发 `popstate` 事件, 也就是说，`popstate` 本身并不是像 `pushState` 或 `replaceState` 一样是 `history` 的方法。
+  * 当做出浏览器动作时，会触发 `popstate` 事件, 例如点击浏览器的回退。也就是说，`popstate` 本身并不是像 `pushState` 或 `replaceState` 一样是 `history` 的方法。
   * 不能使用 `history.popState` 这样的方式来调用。
   * 而且，直接调用 `history.pushState` 或 `history.replaceState` 不会触发 `popstate` 事件。
 

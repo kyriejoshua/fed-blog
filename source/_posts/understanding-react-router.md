@@ -411,7 +411,7 @@ categories: React
   * **这里的返回对象，最终在 `Route` 组件的 `render` 中起到了决定性的作用。每一个 `Route` 都会根据这个 `match` 对象来判断，符合则渲染，不符合则返回 `null`.**
 
 <span></span>
-* 可以看到，除了上述常规判断以外，加了一层缓存逻辑。`cache[pattern]` 保存了上次的记录。而且属性名也很奇怪，类似 `truefalsefalse` 的形式。这里暂未理解。
+* `compilePath` 中可以看到，除了上述常规判断以外，加了一层缓存逻辑。`cache[pattern]` 保存了上次的记录，可以直接从缓存中读取。只是属性名比较奇怪，类似 `truefalsefalse` 的形式。这里不确定只是幽默还是有意义的设计。
 
 #### [Switch](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Switch.js?1546508592999)
 
@@ -515,8 +515,9 @@ categories: React
 * 以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。
   *  `react-router` 或 `history` 在 `node` 中的应用。
   * [**`path-to-regexp`**](https://github.com/pillarjs/path-to-regexp) 的原理及为何使用缓存。
+    * [x] 使用缓存来节约内存空间。2019-06 补坑。
   * [x] `popstate` 和 `hashchange` 最后到底在哪些地方进行了调用和应用。
-    * 在上篇 history 的文章已有说明。
+    * 在上篇 history 的文章已有说明。2019-06 补坑。
 
 ### 参考
 
@@ -528,5 +529,5 @@ categories: React
 <hr>
 {% asset_img reward.jpeg Thanks %}
 
-<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h + 0.5h-->
-<!-- 6.4h -->
+<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h + 0.5h + 0.6h -->
+<!-- 7h -->
