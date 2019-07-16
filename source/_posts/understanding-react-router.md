@@ -497,6 +497,10 @@ categories: React
 * 好了，现在来补充这两个库的不同。
 * `react-router` 是一个底层的库，任何其他的基于 `React` 的路由库都基于它。但是在实际应用中，我们可能要对不同的场景做一些细分，以便更好地使用它们。
 * 于是，就有了为现代浏览器提供的 `react-router-dom`. 观察代码可以发现，它的核心组件，例如 `Route`、`Switch`、`withRouter` 都是从 `react-router` 直接引入的。
+  * 另外，例如 [`BrowserRouter`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/BrowserRouter.js) 这个组件则是在内部自己创建了 `history`, 从而略去了手动创建。它本质上仍然是 `Router`, 外加一个自给自足的过程。
+  * [`history = createHistory(this.props)`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/BrowserRouter.js#L19)
+
+
 * 除此之外，自然还有在 `React-Native` 中使用的 `react-router-native`, 以及结合 `redux` 使用的 `react-router-redux` 等等。
 
 ### 小结

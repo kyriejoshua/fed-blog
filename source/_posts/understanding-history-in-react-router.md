@@ -42,11 +42,11 @@ c. `react-router` 内部匹配及显示原理。
   const history = createBrowserHistory()
 
   const App = () => (
-    <AppRouter history={history}>
-      <div id="content">
+    <Router history={history}>
+      <div id="app">
         {/* something */}
       </div>
-    </AppRouter>
+    </Router>
   )
 
   render(<App/>, document.body.querySelector('#app'))
