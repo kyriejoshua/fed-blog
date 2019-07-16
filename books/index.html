@@ -234,6 +234,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/assets/douban-loading.gif">
 <meta property="og:image" content="http://kyriejoshua.github.io/assets/douban-loading.gif">
 <meta property="og:image" content="http://kyriejoshua.github.io/assets/douban-loading.gif">
+<meta property="og:image" content="http://kyriejoshua.github.io/assets/douban-loading.gif">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你们为什么不跳个舞">
 <meta name="twitter:description" content="我自以为我在写作，但事实上我从来就不曾写过，我以为在爱，但我从来也不曾爱过，我什么也没有做，不过是站在那紧闭的门前等待罢了。 ——《情人》         .hexo-douban-tabs {     margin-bottom: 15px;     margin-top: 15px; }  .hexo-douban-tab {     padding: 5px">
@@ -336,7 +337,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2019-07-05T10:21:40.665Z" itemprop="datePublished">7月 5 2019</time>
+            <time datetime="2019-07-16T12:00:57.705Z" itemprop="datePublished">7月 16 2019</time>
         </span>
         
         
@@ -439,7 +440,7 @@
         (34)</a>
     <a class="hexo-douban-tab" id="hexo-douban-tab3" href="javascript:;" rel="external">
         bookRead
-        (176)</a>
+        (177)</a>
 </div>
 <div>
     <div id="hexo-douban-item1">
@@ -1140,6 +1141,28 @@
 
     </div>
     <div id="hexo-douban-item3">
+        
+        <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="/assets/douban-loading.gif" data-src="https://img1.doubanio.com/view/subject/m/public/s29767358.jpg" referrerpolicy="no-referrer"></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://book.douban.com/subject/30159097/"> 在切瑟尔海滩上</a></div>
+        <div class="hexo-douban-meta">
+        
+  
+  [英] 伊恩·麦克尤恩 / 黄昱宁 / 上海译文出版社 / 2018-6 / 39.00
+
+      </div>
+        <div class="hexo-douban-meta">2019-07-16
+      读过 /  伊恩·麦克尤恩 小说 英国文学 外国文学 长篇小说 外国小说 英国 爱情 / </div>
+        <div class="hexo-douban-comments">
+      直接以性开篇，不同于寻常小说，开篇便点题、亮明主旨，不同于寻常的小说，结局是悲剧的非主流方式也正投我所好。不知该对译文作何评价，因为据译文作者所言，麦克尤恩是英文作者里的大师。个人感受而言，翻译可能稍欠水准。通读下来有些言语并不那么流畅，或者说，是因为原作太过优秀，相比之下稍显瑕疵。除此之外，文学史上最著名的一根阴毛，也是有趣的。
+      
+  
+
+  </div>
+    </div>
+</div>
+
         
         <div class="hexo-douban-item">
     <div class="hexo-douban-picture"><img src="/assets/douban-loading.gif" data-src="https://img1.doubanio.com/view/subject/m/public/s11337287.jpg" referrerpolicy="no-referrer"></div>
@@ -4845,7 +4868,7 @@ var lastpages = document.getElementsByClassName("hexo-douban-lastpage");
 var pagenums = document.getElementsByClassName("hexo-douban-pagenum");
 
 function makePageNum(num, arr) {
-    return (num + 1) + ' / ' + (Math.ceil(arr.length / 10 === 0 ? 1 : Math.ceil(arr.length / 10)));
+    return (num + 1) + ' / ' + (Math.ceil(arr.length / 20 === 0 ? 1 : Math.ceil(arr.length / 20)));
 }
 
 function firstBtn() {
@@ -4858,7 +4881,7 @@ function previousBtn() {
     var sibs = this.parentNode.siblings();
     var currNum = this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText;
     currNum = currNum.substr(0, currNum.indexOf('/') - 1);
-    currNum = parseInt(currNum, 10) - 1;
+    currNum = parseInt(currNum, 20) - 1;
     if (currNum > 0) {
         currNum--;
     }
@@ -4870,8 +4893,8 @@ function nextBtn() {
     var sibs = this.parentNode.siblings();
     var currNum = this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText;
     currNum = currNum.substr(0, currNum.indexOf('/') - 1);
-    currNum = parseInt(currNum, 10) - 1;
-    if (currNum < Math.ceil(sibs.length / 10) - 1) {
+    currNum = parseInt(currNum, 20) - 1;
+    if (currNum < Math.ceil(sibs.length / 20) - 1) {
         currNum++;
     }
     displayPage(sibs, currNum);
@@ -4880,13 +4903,13 @@ function nextBtn() {
 
 function lastBtn() {
     var sibs = this.parentNode.siblings();
-    displayPage(sibs, Math.ceil(sibs.length / 10) - 1);
-    this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText = makePageNum(Math.ceil(sibs.length / 10) - 1 === -1 ? 0 : Math.ceil(sibs.length / 10) - 1, sibs);
+    displayPage(sibs, Math.ceil(sibs.length / 20) - 1);
+    this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText = makePageNum(Math.ceil(sibs.length / 20) - 1 === -1 ? 0 : Math.ceil(sibs.length / 20) - 1, sibs);
 }
 
 function displayPage(arr, num) {
     for (var i = 0; i < arr.length; i++) {
-        if (Math.floor(i / 10) === num) {
+        if (Math.floor(i / 20) === num) {
             arr[i].classList.remove('hexo-douban-hide');
             var img = arr[i].getElementsByTagName('img')[0];
             img.src = img.getAttribute('data-src');
@@ -4906,7 +4929,7 @@ for (var i = 0; i < firstpages.length; i++) {
 
     //set page num
     var size = pagenums[i].parentNode.siblings().length;
-    pagenums[i].innerText = '1 / ' + (Math.ceil(size / 10) === 0 ? 1 : Math.ceil(size / 10));
+    pagenums[i].innerText = '1 / ' + (Math.ceil(size / 20) === 0 ? 1 : Math.ceil(size / 20));
     firstpages[i].click();
 }
 

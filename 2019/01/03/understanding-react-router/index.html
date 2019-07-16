@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-road.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/reward.jpeg">
-<meta property="og:updated_time" content="2019-07-02T06:40:02.515Z">
+<meta property="og:updated_time" content="2019-07-16T11:43:58.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈 react-router 实现原理">
 <meta name="twitter:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
@@ -144,7 +144,7 @@
         <span class="column is-narrow">
             
             
-            27 分钟 读完 (约 4090 字)
+            28 分钟 读完 (约 4176 字)
         </span>
         
     </div>
@@ -333,7 +333,13 @@
 <h4 id="react-router与react-router-dom"><a href="#react-router与react-router-dom" class="headerlink" title="react-router与react-router-dom"></a><code>react-router</code>与<code>react-router-dom</code></h4><ul>
 <li>好了，现在来补充这两个库的不同。</li>
 <li><code>react-router</code> 是一个底层的库，任何其他的基于 <code>React</code> 的路由库都基于它。但是在实际应用中，我们可能要对不同的场景做一些细分，以便更好地使用它们。</li>
-<li>于是，就有了为现代浏览器提供的 <code>react-router-dom</code>. 观察代码可以发现，它的核心组件，例如 <code>Route</code>、<code>Switch</code>、<code>withRouter</code> 都是从 <code>react-router</code> 直接引入的。</li>
+<li>于是，就有了为现代浏览器提供的 <code>react-router-dom</code>. 观察代码可以发现，它的核心组件，例如 <code>Route</code>、<code>Switch</code>、<code>withRouter</code> 都是从 <code>react-router</code> 直接引入的。<ul>
+<li>另外，例如 <a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/BrowserRouter.js" target="_blank" rel="noopener"><code>BrowserRouter</code></a> 这个组件则是在内部自己创建了 <code>history</code>, 从而略去了手动创建。它本质上仍然是 <code>Router</code>, 外加一个自给自足的过程。</li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/BrowserRouter.js#L19" target="_blank" rel="noopener"><code>history = createHistory(this.props)</code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li>除此之外，自然还有在 <code>React-Native</code> 中使用的 <code>react-router-native</code>, 以及结合 <code>redux</code> 使用的 <code>react-router-redux</code> 等等。</li>
 </ul>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
