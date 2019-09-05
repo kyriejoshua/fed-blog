@@ -129,11 +129,11 @@ categories: React
 * `Router` 是 `react-router` 里最常用的组件之一，它接收 `history` 和 `children` 两个参数。
 
 * 这个组件属于较底层的组件，实际应用的时候可能会使用基于它扩展后的组件，来应对不同场景下的需求。例如在官方文档里，列举了以下几个具体的组件。
-  * [`<BrowserRouter>`](../../../react-router-dom/docs/api/BrowserRouter.md)
-  * [`<HashRouter>`](../../../react-router-dom/docs/api/HashRouter.md)
-  * [`<MemoryRouter>`](./MemoryRouter.md)
-  * [`<NativeRouter>`](../../../react-router-native/docs/api/NativeRouter.md)
-  * [`<StaticRouter>`](./StaticRouter.md)
+  * [`<BrowserRouter>`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/BrowserRouter.md)
+  * [`<HashRouter>`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/HashRouter.md)
+  * [`<MemoryRouter>`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/MemoryRouter.md)
+  * [`<NativeRouter>`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-native/docs/api/NativeRouter.md)
+  * [`<StaticRouter>`](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/StaticRouter.md)
   * `BrowserRouter` 是在现代浏览器里使用较多的组件，它在支持 `HTML5` 的 `history API` 的地方使用。通过独立的包 `react-router-dom` 提供。其余组件做的事情类似，只是使用方式略有不同，这里不再赘述。
   * [**这里是具体的文档**](https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Router.md)
 <span></span>
