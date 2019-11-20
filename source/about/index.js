@@ -156,7 +156,42 @@ var threeAnimation = function() {
 }
 threeAnimation()
 
+// audio 自动播放漫威音乐部分
+var createAudio = function(src = 'sound.mp3') {
+  return new Audio(src)
+}
+
+var audio = null
+
+/**
+ * 下载后自动开始播放视频
+ */
+var autoPlayAudio = function(src = "sound.mp3") {
+  audio = createAudio(src)
+  audio.loop = true
+
+  audio.addEventListener("canplaythrough", function() {
+    document.body.click() // 浏览器需要有用户操作之后才能自动播放，否则会被浏览器禁止
+    audio.play()
+  })
+}
+
+console.info('loadstart', new Date());
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  console.info('dom loaded', new Date())
+  document.body.click() // 浏览器需要有用户操作之后才能自动播放，否则会被浏览器禁止
+
+  window.setTimeout(function (params) {
+    console.info('audio play', new Date(), audio)
+    var audioUrl = "./MarvelStudiosFanfare.mp3" || "./Bye.mp3"
+    autoPlayAudio(audioUrl)
+  }, 7000)
+})
+
 // events
 block.addEventListener('click', function() {
+  audio && audio.play();
+  console.info(audio)
   starwar.style.display = 'block'
 })

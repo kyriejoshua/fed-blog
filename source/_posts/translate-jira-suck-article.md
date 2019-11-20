@@ -6,9 +6,9 @@ tags: translate
 
 <hr>
 
-![](https://miro.medium.com/max/2386/1*4XHSBOrTW6uUNLO4cXMBUQ.png)
+![](/2019/10/25/translate-jira-suck-article/unphoto.png)
 
-> 呕心沥血翻译的国外小哥吐槽 jira。他从用户交互来体会，了解 jira 的同时理解为什么它这样难用。
+> 呕心沥血翻译的国外小哥吐槽 jira。他从用户交互来体会，了解 jira 的同时理解为什么它这样难用。(提示：部分图片需要科学上网才能显示)
 [原文链接](https://medium.com/@jtomaszewski/15-reasons-why-jira-and-confluence-suck-37507361cbdf)
 
 以下是正文：

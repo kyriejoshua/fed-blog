@@ -27,6 +27,15 @@
 </blockquote>
 
 <div id="starwar" style="width: 100%;height: 520px;cursor: pointer" title="starwar" alt="This is for a lovely girl"></div>
+<!-- <div id="audio" style="position: relative;background: white">
+	<div style="width:10px;height:10px;border:none;position:absolute;top:0;left:0;background:white;z-index:1;">
+	</div>
+	<iframe allow="autoplay" src="./MarvelStudiosFanfare.mp3" style="width:10px;height:10px;border:none;position:absolute;top:0;left:0;" loop>
+		<audio src="./MarvelStudiosFanfare.mp3" autoplay loop>
+			Your browser does not support the <code>audio</code> element.
+		</audio>
+	</iframe>
+</div> -->
 <script src="https://cdn.bootcss.com/three.js/87/three.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
 <script src="./index.js">
