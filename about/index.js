@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     console.info('audio play', new Date(), audio)
     var audioUrl = "./MarvelStudiosFanfare.mp3" || "./Bye.mp3"
     autoPlayAudio(audioUrl)
-  }, 10000)
+  }, 7000)
 })
 
 // events
