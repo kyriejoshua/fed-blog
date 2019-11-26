@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>熟悉 JSON 及应用 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="JSON 很常用，但它的某些属性，并不常用，却挺好用的。推荐：★★★">
+<meta name="keywords" content="JavaScirpt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="熟悉 JSON 及应用">
+<meta property="og:url" content="http://kyriejoshua.github.io/2019/11/26/learning-about-json/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="JSON 很常用，但它的某些属性，并不常用，却挺好用的。推荐：★★★">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/11/26/learning-about-json/unphoto.jpeg">
+<meta property="og:updated_time" content="2019-11-26T14:54:10.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="熟悉 JSON 及应用">
+<meta name="twitter:description" content="JSON 很常用，但它的某些属性，并不常用，却挺好用的。推荐：★★★">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2019/11/26/learning-about-json/unphoto.jpeg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/books">Books</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            熟悉 JSON 及应用
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-26T12:48:38.000Z" itemprop="datePublished">11月 26 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 分钟 读完 (约 1503 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/2019/11/26/learning-about-json/unphoto.jpeg" alt><br>JSON 很常用，但它的某些属性，并不常用，却挺好用的。<br>推荐：★★★</p>
+<a id="more"></a>
+
+<ul>
+<li><a href="#JSON">JSON</a></li>
+<li><a href="#语法">语法</a></li>
+<li><a href="#解析与序列化">解析与序列化</a></li>
+<li><a href="#应用场景">应用场景</a></li>
+<li><a href="#小结&延伸">小结&amp;延伸</a></li>
+</ul>
+<h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><p>JSON 是前端中非常常见的数据格式。现在常用来定义配置文件，或者与后端交互。它是 javascript 的子集。</p>
+<p>与 Javascript 不同之处在于</p>
+<ul>
+<li>它的语法里只有三种格式，简单值，对象，数组。</li>
+<li>没有声明变量。</li>
+<li>简单值里的字符串，和对象中的所有属性名必须以双引号包裹。</li>
+</ul>
+<h4 id="简单值"><a href="#简单值" class="headerlink" title="简单值"></a>简单值</h4><ul>
+<li>对应 js 中的数字，字符串，布尔值，<code>null</code>, 但不包括 <code>undefined</code>.</li>
+<li>字符串需要用双引号包裹：<code>&quot;hello&quot;</code></li>
+<li>数字：<code>5</code></li>
+</ul>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><ul>
+<li>几乎和 js 中的对象是一样的。只是它不需要声明变量。</li>
+<li><code>{ &quot;name&quot;: &quot;bob&quot; }</code></li>
+</ul>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><ul>
+<li><code>[1, 2, null, &quot;hello&quot;]</code> 和 js 没有差别。同样不需要声明变量。</li>
+</ul>
+<h3 id="解析与序列化"><a href="#解析与序列化" class="headerlink" title="解析与序列化"></a>解析与序列化</h3><h4 id="JSON-stringify"><a href="#JSON-stringify" class="headerlink" title="JSON.stringify()"></a>JSON.stringify()</h4><ul>
+<li><p>这个是非常常见的方法，传递数据的时候常常需要用到，它的作用是将 js 变量进行序列化。</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> params = &#123;</span><br><span class="line">  name: <span class="hljs-string">'bob'</span>,</span><br><span class="line">  phone: <span class="hljs-number">123123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.stringify(params)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>我们通常只用到第一个参数。实际上 <code>JSON.stringify</code> 方法接收三个参数。</p>
+</li>
+</ul>
+<h5 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h5><ul>
+<li><p>第二个参数用于过滤，接收数组或函数的形式。</p>
+</li>
+<li><p>当参数是数组时，会过滤掉其他的属性， 只取到数组内属性所对应的内容。如下：</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> book = &#123;</span><br><span class="line">  title: <span class="hljs-string">'Professional javascript'</span>,</span><br><span class="line">  authors: [<span class="hljs-string">'Nico'</span>],</span><br><span class="line">  edition: <span class="hljs-number">3</span>,</span><br><span class="line">  year: <span class="hljs-number">2011</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> bookCopy = <span class="hljs-built_in">JSON</span>.stringify(book, [<span class="hljs-string">'edition'</span>, authors])</span><br><span class="line"><span class="hljs-built_in">console</span>.info(bookCopy)</span><br><span class="line"><span class="hljs-comment">// output "&#123;"title": 'Professional javascript',"authors":["Nico"],"edition":3, "year": 2011&#125;"</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>而如果参数是函数，那么就可以直接改变对象中的属性值。</p>
+</li>
+<li><p>函数接受 key, value 两个参数，对应属性名和属性值。</p>
+</li>
+<li><p>可以据此进行值的操作，例如过滤值或者更新值。</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [replacer description]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; key   [键]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;[type]&#125; value [值]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;[type]&#125;       [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">replacer</span>(<span class="hljs-params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (key === <span class="hljs-string">'title'</span> || key === <span class="hljs-string">'authors'</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">''</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> bookCopy2 = <span class="hljs-built_in">JSON</span>.stringify(book, replacer)</span><br><span class="line"><span class="hljs-built_in">console</span>.info(bookCopy2)</span><br><span class="line"><span class="hljs-comment">// output &#123; "edition": 3, "year": 2011 &#125;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>当然要对其他格式的值调用序列化，并传入第二个参数也没有问题。只是没有效果罢了。会如实返回。</p>
+<ul>
+<li><code>JSON.stringify(1, [&quot;name&quot;])</code></li>
+<li><code>JSON.stringify(&quot;hello&quot;, [&quot;name&quot;])</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="字符串缩进"><a href="#字符串缩进" class="headerlink" title="字符串缩进"></a>字符串缩进</h5><ul>
+<li><p>序列化的第三个参数，则是对应着缩进数。</p>
+</li>
+<li><p>通常我们以 2 格或四格为缩进。那么代码便是这样的。</p>
+<ul>
+<li><code>JSON.stringify(book, null, 2)</code></li>
+<li><code>JSON.stringify(book, null, 4)</code></li>
+</ul>
+</li>
+<li><p>传入更大的值也不是不可以，但最终它都会转换为 10.</p>
+<ul>
+<li><code>JSON.stringify(book, null, 200)</code> 和 <code>JSON.stringify(book, null, 10)</code> 效果是一样的。</li>
+</ul>
+</li>
+<li><p>有意思的是，它还接受字符串作为参数，字符串的长度对应着缩进数。例如可以这样</p>
+<ul>
+<li><code>JSON.stringify(book, null, &#39;aaaa&#39;)</code></li>
+<li>这样：<code>JSON.stringify(book, null, &#39;--&#39;)</code></li>
+<li>甚至这样也没问题：<code>JSON.stringify(book, null, &#39;长日&#39;)</code></li>
+<li>而且输出时是换行显示的。在调试时非常方便。</li>
+<li>以下分别是字符串缩进设置为 10 和字符串的效果。</li>
+</ul>
+<p><figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"&#123;</span></span><br><span class="line">        "title": "Professional javascript",</span><br><span class="line">        "authors": [</span><br><span class="line">                  <span class="hljs-string">"Nico"</span></span><br><span class="line">        ],</span><br><span class="line">        "edition": 3,</span><br><span class="line">        "year": 2011</span><br><span class="line">&#125;"</span><br><span class="line"><span class="hljs-string">"&#123;</span></span><br><span class="line">--"title": "Professional javascript",</span><br><span class="line">--"authors": [</span><br><span class="line">----"Nico"</span><br><span class="line">--],</span><br><span class="line">--"edition": 3,</span><br><span class="line">--"year": 2011</span><br><span class="line">&#125;"</span><br><span class="line"><span class="hljs-string">"&#123;</span></span><br><span class="line">长日"title": "Professional javascript",</span><br><span class="line">长日"authors": [</span><br><span class="line">长日长日"Nico"</span><br><span class="line">长日],</span><br><span class="line">长日"edition": 3,</span><br><span class="line">长日"year": 2011</span><br><span class="line">&#125;"</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h5 id="toJSON"><a href="#toJSON" class="headerlink" title="toJSON"></a>toJSON</h5><ul>
+<li><p>作为对象的方法存在， 自定义 json 的返回值。优先级比第二个参数高。</p>
+</li>
+<li><p>如下，只取出 <code>title</code> 属性.</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> bookToJSON = &#123;</span><br><span class="line">  title: <span class="hljs-string">"Professional javascript"</span>,</span><br><span class="line">  authors: [<span class="hljs-string">"Nico"</span>],</span><br><span class="line">  edition: <span class="hljs-number">3</span>,</span><br><span class="line">  year: <span class="hljs-number">2011</span>,</span><br><span class="line">  toJSON: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.title</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-built_in">JSON</span>.stringify(bookToJSON)</span><br><span class="line"><span class="hljs-comment">// output "Professional javascript"</span></span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4 id="JSON-parse"><a href="#JSON-parse" class="headerlink" title="JSON.parse()"></a>JSON.parse()</h4><ul>
+<li><p>解析方法用来还原序列化后的对象字符串。</p>
+</li>
+<li><p>除了常用的第一个参数外，同样有一个类似的转换器参数。</p>
+</li>
+<li><p>但只接收函数形式，和上文提到的函数过滤器，形参是一样的。</p>
+</li>
+<li><p>它可以用来做如下的操作。</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> book = &#123;</span><br><span class="line">  title: <span class="hljs-string">'Professional javascript'</span>,</span><br><span class="line">  authors: [<span class="hljs-string">'Nico'</span>],</span><br><span class="line">  releaseDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2019</span>, <span class="hljs-number">11</span>, <span class="hljs-number">25</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> bookCopy3 = <span class="hljs-built_in">JSON</span>.stringify(book)</span><br><span class="line"><span class="hljs-built_in">console</span>.info(bookCopy3)</span><br><span class="line"><span class="hljs-comment">// output "&#123;"authors":["Nico"],"edition":3&#125;"</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>平平无奇，除了日期看起来是字符串了。</p>
+</li>
+<li><p>这时候可以应用 <code>JSON.parse</code> 的转换器方法了。把日期字符串转换回日期对象。</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [reviver description]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; key   [键]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;[type]&#125; value [值]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;[type]&#125;       [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reviver</span>(<span class="hljs-params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (key === <span class="hljs-string">'releaseDate'</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 转换回日期对象</span></span><br><span class="line"><span class="hljs-built_in">console</span>.info(<span class="hljs-built_in">JSON</span>.parse(bookCopy3, reviver))</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><p>上述介绍的方法属性，有的适合调试，有的适合操作数据。</p>
+</li>
+<li><p><code>JSON.stringify</code> 字符串缩进的能力对日志调试时有很好的帮助，让日志更加直观。</p>
+</li>
+<li><p>过滤器则可以应用在实际业务中。有如下场景：</p>
+<ul>
+<li>搜索页面，可以传入许多参数。</li>
+<li>后端接收参数，只接收 <code>null</code> 和相应的数据格式，否则会报错。</li>
+<li>而前端的数据有时是 <code>&#39;&#39;</code>, 有时是 <code>undefined</code>. 需统一处理成 <code>null</code>.</li>
+</ul>
+</li>
+<li><p>如果对象属性不涉及多层，可以用函数过滤器的方式实现。</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">replacer</span>(<span class="hljs-params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (value === <span class="hljs-string">''</span> || value === <span class="hljs-literal">undefined</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> newData = <span class="hljs-built_in">JSON</span>.stringify(data, replacer)</span><br><span class="line"><span class="hljs-comment">// 新数据中会转化空数据为 null</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>过滤器类似的应用还有，如果想从对象里取出某些属性值，这时数组过滤器可以实现。</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [pickPropsFromObjByArray 取出某些属性，这里为了表明功能，刻意取得比较长的名字]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Object&#125; obj   [description]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;Array&#125;  props [description]</span></span><br><span class="line"><span class="hljs-comment"> * @return &#123;[type]&#125;       [description]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pickPropsFromObjByArray</span>(<span class="hljs-params">obj = &#123;&#125;, props = []</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(obj, [...props]))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> book = &#123;</span><br><span class="line">  title: <span class="hljs-string">'Professional javascript'</span>,</span><br><span class="line">  authors: [<span class="hljs-string">'Nico'</span>],</span><br><span class="line">  edition: <span class="hljs-number">3</span>,</span><br><span class="line">  year: <span class="hljs-number">2011</span></span><br><span class="line">&#125;</span><br><span class="line">pickPropsFromObjByArray(book, [<span class="hljs-string">'authors'</span>, <span class="hljs-string">'edition'</span>])</span><br><span class="line"><span class="hljs-comment">// output &#123;authors: ["Nico"], edition: 3&#125;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>如果用过 <code>lodash</code>, 这个方法是不是很熟悉。</p>
+</li>
+<li><p>像极了 <code>_.pick</code> 方法。</p>
+</li>
+</ul>
+<h3 id="小结-amp-延伸"><a href="#小结-amp-延伸" class="headerlink" title="小结&amp;延伸"></a>小结&amp;延伸</h3><ul>
+<li>JSON 自带的方法其实还有多种玩法，只是我们平时不常用。</li>
+<li>了解上述方法以后，对日常调试和开发，是有一定的帮助的。</li>
+<li>其他延伸：<ul>
+<li>如何手动实现 <code>JSON.stringify</code></li>
+<li>如何用 <code>JSON.stringify</code> 实现深拷贝</li>
+</ul>
+</li>
+</ul>
+<!--2.5h-->
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/JavaScirpt/">#JavaScirpt</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/10/25/translate-jira-suck-article/">「翻译」16 个理由说明为啥 Jira 工作流这么难用</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2019/11/26/learning-about-json/';
+        this.page.identifier = '2019/11/26/learning-about-json/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>
