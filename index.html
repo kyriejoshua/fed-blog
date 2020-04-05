@@ -120,6 +120,68 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/2019/11/30/something-about-h5/" itemprop="url">H5 兼容问题整理及解决方案</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-30T13:59:22.000Z" itemprop="datePublished">11月 30 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 分钟 读完 (约 1694 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <hr>
+
+<p><img src="/2019/11/30/something-about-h5/unphoto.jpg" alt></p>
+<p>一些 H5 的兼容问题及解决方案。<br>推荐：★★★</p>
+        <p class="article-more-link">
+            <a href="/2019/11/30/something-about-h5/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/2019/11/26/learning-about-json/" itemprop="url">聊聊你所不知道的 JSON</a>
         
     </h1>
@@ -755,7 +817,7 @@
         <span class="column is-narrow">
             
             
-            8 分钟 读完 (约 1178 字)
+            8 分钟 读完 (约 1218 字)
         </span>
         
     </div>
@@ -767,68 +829,6 @@
 <p>不久前，sublime text 官方推出了一次大更新。这次更新几乎时隔一年，而且有重大改动，虽然我早用 dev 版提前体验了新版本，但也借此机会再鼓捣了下自己的工具。</p>
         <p class="article-more-link">
             <a href="/2017/10/07/the-introduction-of-sublime-text-plugins/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-    <script>
-    // 打赏相关逻辑
-    var img = document.body.querySelector('img[title="Thanks"]');
-    if (img && img.style) {
-        var reward = document.body.querySelector('.page-reward-btn');
-        img.className += ' reward-qrcode';
-        var className = img.getAttribute('class');
-        img.style.display = 'none';
-        img.style.width = '200px';
-        reward.addEventListener('click', function () {
-            if (img.style.display === 'none' || className === 'pay-hide') {
-                $('img.reward-qrcode').fadeIn('slow');
-            } else {
-                $('img.reward-qrcode').fadeOut();
-            }
-        })
-    }
-    </script>
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2017/09/23/css3d-study/" itemprop="url">CSS3 实现🎲旋转教程</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2017-09-23T09:03:18.000Z" itemprop="datePublished">9月 23 2017</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/CSS/">CSS</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            14 分钟 读完 (约 2075 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <hr>
-
-<p><img src="/2017/09/23/css3d-study/unphoto.jpg" alt></p>
-<p>最近的工作开始接触到可视化的 3D 部分，因此自己也抽时间温习了以前学习的 css3 知识点，顺便完成一个入门小 demo —— 实现一个旋转的骰子。这个例子里有重温 css3 的一些知识点——用它来实现立体和旋转效果，然后用 flex 布局来实现骰子的点的排列。这个案例对于以后熟练使用 css 和 flex 有一定的帮助，所以这里也做一份教程和总结。最终效果就在页面右下角，相信眼不尖的人也注意到了。</p>
-        <p class="article-more-link">
-            <a href="/2017/09/23/css3d-study/#more">阅读更多</a>
         </p>
     
     </div>
@@ -874,9 +874,9 @@
         
         <li><a class="pagination-link" href="/page/2/">2</a></li>
         
-        <li><a class="pagination-link" href="/page/3/">3</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
         
-        <li><a class="pagination-link" href="/page/4/">4</a></li>
+        <li><a class="pagination-link" href="/page/5/">5</a></li>
         
     </ul>
 </nav>
@@ -887,7 +887,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 朱征原&nbsp;
+                &copy; 2020 朱征原&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
