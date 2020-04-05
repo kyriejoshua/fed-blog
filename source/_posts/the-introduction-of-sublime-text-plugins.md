@@ -61,6 +61,14 @@ categories: Tools
 
 * 右键在 MDN 上查询属性相关信息。快捷方便。
 
+##### 7.1 [CSS3](https://packagecontrol.io/packages/CSS3)
+
+* CSS3 自动补全，高亮，检查插件。
+
+##### 7.2 [CSS Format](https://packagecontrol.io/packages/CSS%20Format)
+
+* CSS 格式化插件，统一格式。
+
 #### 8. [SyncedSideBar](https://packagecontrol.io/packages/SyncedSideBar)
 
 * 打开文件时侧边栏定位到当前文件。在查看文件时会十分方便。
@@ -71,7 +79,7 @@ categories: Tools
 * 高亮括号对应项。
 * 后者高亮使用错误的括号。
 
-#### 10. [Material Theme](https://packagecontrol.io/packages/Material Theme)、[DA UI](https://packagecontrol.io/packages/DA%20UI)
+#### 10. [Material Theme](https://packagecontrol.io/packages/Material%20Theme)、[DA UI](https://packagecontrol.io/packages/DA%20UI)
 
 * 最后推荐两款清爽的浅色主题。以下是效果图。
 
