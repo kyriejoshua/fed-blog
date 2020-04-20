@@ -6,15 +6,15 @@
     "version": "4.2.0"
   },
   "scripts": {
+    "prestart": "hexo clean",
     "start": "hexo s",
     "clean": "hexo clean",
     "douban": "hexo douban",
     "ge": "hexo g",
     "deploy": "hexo deploy",
     "prepublish": "npm run clean",
-    "prepare": "npm run douban",
-    "prepublishOnly": "npm run ge",
-    "publish": "npm run deploy",
+    "publish": "hexo douban && hexo g",
+    "postpublish": "hexo deploy",
     "build": "hexo clean && hexo douban && hexo g && hexo deploy"
   },
   "dependencies": {
