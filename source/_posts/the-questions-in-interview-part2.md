@@ -252,7 +252,8 @@ function curry(fn, args) {
 currySum(1)(2)(3) === sum(1, 2, 3) // 6
 
 // 30 秒代码上的实现，更加简约
-// https://30secondsofcode.org/function#curry
+// 该地址已失效：https://30secondsofcode.org/function#curry
+// https://www.30secondsofcode.org/js/s/curry/
 // args 这里不是很理解
 const curry = (fn, len = fn.length, ...args) => {
   return len <= args.length ? fn(...args) : curry.bind(null, fn, len, ...args)
