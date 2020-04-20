@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>webpack实用插件安利之webpack-dashboard - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,14 +16,13 @@
 
 
 
-    <meta name="description" content="在github上explore的时候偶然发现这款插件，非常火爆，推出没多久就收货了几千stars。我在踩了几个坑后成功引入到公司的项目里。">
-<meta name="keywords" content="webpack">
+    <meta name="description" content="&amp;#x5728;github&amp;#x4E0A;explore&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x5076;&amp;#x7136;&amp;#x53D1;&amp;#x73B0;&amp;#x8FD9;&amp;#x6B3E;&amp;#x63D2;&amp;#x4EF6;&amp;#xFF0C;&amp;#x975E;&amp;#x5E38;&amp;#x706B;&amp;#x7206;&amp;#xFF0C;&amp;#x63A8;&amp;#x51FA;&amp;#x6CA1;&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack实用插件安利之webpack-dashboard">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="在github上explore的时候偶然发现这款插件，非常火爆，推出没多久就收货了几千stars。我在踩了几个坑后成功引入到公司的项目里。">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x5728;github&amp;#x4E0A;explore&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x5076;&amp;#x7136;&amp;#x53D1;&amp;#x73B0;&amp;#x8FD9;&amp;#x6B3E;&amp;#x63D2;&amp;#x4EF6;&amp;#xFF0C;&amp;#x975E;&amp;#x5E38;&amp;#x706B;&amp;#x7206;&amp;#xFF0C;&amp;#x63A8;&amp;#x51FA;&amp;#x6CA1;&amp;#">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/dash.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/webpack.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack2.png">
@@ -32,10 +31,11 @@
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/dashboard-wrong.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/webpack-dashboard.png">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/reward.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:02.645Z">
+<meta property="article:published_time" content="2016-09-23T08:48:45.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:02.645Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="webpack实用插件安利之webpack-dashboard">
-<meta name="twitter:description" content="在github上explore的时候偶然发现这款插件，非常火爆，推出没多久就收货了几千stars。我在踩了几个坑后成功引入到公司的项目里。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/09/23/webpack-plugin-webpack-dashboard/dash.png">
 
 
@@ -55,7 +55,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -74,7 +76,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -82,7 +84,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -94,15 +96,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -114,7 +121,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -153,105 +160,105 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2016/09/23/webpack-plugin-webpack-dashboard/dash.png" title="Dashboard">
+<img src="/2016/09/23/webpack-plugin-webpack-dashboard/dash.png" class title="Dashboard">
 
 <blockquote>
-    在github上explore的时候偶然发现这款插件，非常火爆，推出没多久就收货了几千stars。我在踩了几个坑后成功引入到公司的项目里。
+    &#x5728;github&#x4E0A;explore&#x7684;&#x65F6;&#x5019;&#x5076;&#x7136;&#x53D1;&#x73B0;&#x8FD9;&#x6B3E;&#x63D2;&#x4EF6;&#xFF0C;&#x975E;&#x5E38;&#x706B;&#x7206;&#xFF0C;&#x63A8;&#x51FA;&#x6CA1;&#x591A;&#x4E45;&#x5C31;&#x6536;&#x8D27;&#x4E86;&#x51E0;&#x5343;stars&#x3002;&#x6211;&#x5728;&#x8E29;&#x4E86;&#x51E0;&#x4E2A;&#x5751;&#x540E;&#x6210;&#x529F;&#x5F15;&#x5165;&#x5230;&#x516C;&#x53F8;&#x7684;&#x9879;&#x76EE;&#x91CC;&#x3002;
 
 </blockquote>
 
 <a id="more"></a>
 
-<h3 id="webpack-dashboard是什么"><a href="#webpack-dashboard是什么" class="headerlink" title="webpack-dashboard是什么"></a>webpack-dashboard是什么</h3><ul>
-<li>它是webpack的一个面板，显示webpack在编译时的各种配置和提示信息。</li>
+<h3 id="webpack-dashboard&#x662F;&#x4EC0;&#x4E48;"><a href="#webpack-dashboard&#x662F;&#x4EC0;&#x4E48;" class="headerlink" title="webpack-dashboard&#x662F;&#x4EC0;&#x4E48;"></a>webpack-dashboard&#x662F;&#x4EC0;&#x4E48;</h3><ul>
+<li>&#x5B83;&#x662F;webpack&#x7684;&#x4E00;&#x4E2A;&#x9762;&#x677F;&#xFF0C;&#x663E;&#x793A;webpack&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x7684;&#x5404;&#x79CD;&#x914D;&#x7F6E;&#x548C;&#x63D0;&#x793A;&#x4FE1;&#x606F;&#x3002;</li>
 </ul>
 <ul>
-<li><p>在wd(webpack-dashboard这里简称为wd)引入之前，我们的命令行是这样显示的。</p>
-<img src="/2016/09/23/webpack-plugin-webpack-dashboard/webpack.png" title="webpack">
+<li><p>&#x5728;wd(webpack-dashboard&#x8FD9;&#x91CC;&#x7B80;&#x79F0;&#x4E3A;wd)&#x5F15;&#x5165;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x662F;&#x8FD9;&#x6837;&#x663E;&#x793A;&#x7684;&#x3002;</p>
+<img src="/2016/09/23/webpack-plugin-webpack-dashboard/webpack.png" class title="webpack">
 </li>
-<li><p>而使用了wd之后，就有了封面的效果。显示上不仅酷炫了很多，各种配置信息，文件大小，占用空间，语法检查也一目了然。</p>
+<li><p>&#x800C;&#x4F7F;&#x7528;&#x4E86;wd&#x4E4B;&#x540E;&#xFF0C;&#x5C31;&#x6709;&#x4E86;&#x5C01;&#x9762;&#x7684;&#x6548;&#x679C;&#x3002;&#x663E;&#x793A;&#x4E0A;&#x4E0D;&#x4EC5;&#x9177;&#x70AB;&#x4E86;&#x5F88;&#x591A;&#xFF0C;&#x5404;&#x79CD;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#xFF0C;&#x5360;&#x7528;&#x7A7A;&#x95F4;&#xFF0C;&#x8BED;&#x6CD5;&#x68C0;&#x67E5;&#x4E5F;&#x4E00;&#x76EE;&#x4E86;&#x7136;&#x3002;</p>
 </li>
-<li><p>它的使用也非常简单，虽然我在引入时踩了一个不大不小的坑。在这里我要引以为戒。</p>
+<li><p>&#x5B83;&#x7684;&#x4F7F;&#x7528;&#x4E5F;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x867D;&#x7136;&#x6211;&#x5728;&#x5F15;&#x5165;&#x65F6;&#x8E29;&#x4E86;&#x4E00;&#x4E2A;&#x4E0D;&#x5927;&#x4E0D;&#x5C0F;&#x7684;&#x5751;&#x3002;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x8981;&#x5F15;&#x4EE5;&#x4E3A;&#x6212;&#x3002;</p>
 </li>
-<li><p>以我的webpack.config.js为例，这是未加wd之前的js。</p>
+<li><p>&#x4EE5;&#x6211;&#x7684;webpack.config.js&#x4E3A;&#x4F8B;&#xFF0C;&#x8FD9;&#x662F;&#x672A;&#x52A0;wd&#x4E4B;&#x524D;&#x7684;js&#x3002;</p>
 </li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> root_path = path.resolve(__dirname);</span><br><span class="line"><span class="hljs-keyword">var</span> build_path = path.resolve(root_path, <span class="hljs-string">'build'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">  <span class="hljs-string">'page/homepage/index'</span>: <span class="hljs-string">'./src/page/homepage/index.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output:&#123;</span><br><span class="line">    path: build_path,</span><br><span class="line">    filename: <span class="hljs-string">'[name].js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-built_in">module</span>: &#123;</span><br><span class="line">    loaders: [</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css'</span> &#125;, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader')&#125;,</span></span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css!less'</span>, <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> &#125;, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')&#125;,</span></span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'url?limit=8192&amp;name=img/[name].[ext]'</span> &#125;,</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'babel?presets[]=es2015'</span>], <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webpack&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> root_path = path.resolve(__dirname);</span><br><span class="line"><span class="hljs-keyword">var</span> build_path = path.resolve(root_path, <span class="hljs-string">&apos;build&apos;</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = {</span><br><span class="line">  entry: {</span><br><span class="line">  <span class="hljs-string">&apos;page/homepage/index&apos;</span>: <span class="hljs-string">&apos;./src/page/homepage/index.js&apos;</span></span><br><span class="line">  },</span><br><span class="line">  output:{</span><br><span class="line">    path: build_path,</span><br><span class="line">    filename: <span class="hljs-string">&apos;[name].js&apos;</span></span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-built_in">module</span>: {</span><br><span class="line">    loaders: [</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">&apos;style!css&apos;</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract(&apos;style-loader&apos;, &apos;css-loader&apos;)},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">&apos;style!css!less&apos;</span>, <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract(&apos;style-loader&apos;, &apos;css-loader!less-loader&apos;)},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">&apos;url?limit=8192&amp;name=img/[name].[ext]&apos;</span> },</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loaders</span>: [<span class="hljs-string">&apos;babel?presets[]=es2015&apos;</span>], <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> }</span><br><span class="line">    ]</span><br><span class="line">  }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure><p></p>
 <ul>
-<li>我运行<code>webpack-dev-server --inline --devtool eval</code>来进行webpack-dev-server的实时编译。</li>
-<li>得到的效果如下，即和第二张图类似。</li>
+<li>&#x6211;&#x8FD0;&#x884C;<code>webpack-dev-server --inline --devtool eval</code>&#x6765;&#x8FDB;&#x884C;webpack-dev-server&#x7684;&#x5B9E;&#x65F6;&#x7F16;&#x8BD1;&#x3002;</li>
+<li>&#x5F97;&#x5230;&#x7684;&#x6548;&#x679C;&#x5982;&#x4E0B;&#xFF0C;&#x5373;&#x548C;&#x7B2C;&#x4E8C;&#x5F20;&#x56FE;&#x7C7B;&#x4F3C;&#x3002;</li>
 </ul>
-  <img src="/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack2.png" title="old-webpack2">
+  <img src="/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack2.png" class title="old-webpack2">
 
 <br>
 
-  <img src="/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack3.png" title="old-webpack3">
+  <img src="/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack3.png" class title="old-webpack3">
 
 <br>
 
-  <img src="/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack.png" title="old-webpack">
+  <img src="/2016/09/23/webpack-plugin-webpack-dashboard/old-webpack.png" class title="old-webpack">
 
 <br>
 
 <ul>
-<li>(请自动忽略那些低级报错)</li>
-<li>虽然有log,但这些列表琳琅满目，让人无所适从。密密麻麻的给人里压迫感，使人窒息。</li>
-<li>下面来试试wd。</li>
+<li>(&#x8BF7;&#x81EA;&#x52A8;&#x5FFD;&#x7565;&#x90A3;&#x4E9B;&#x4F4E;&#x7EA7;&#x62A5;&#x9519;)</li>
+<li>&#x867D;&#x7136;&#x6709;log,&#x4F46;&#x8FD9;&#x4E9B;&#x5217;&#x8868;&#x7433;&#x7405;&#x6EE1;&#x76EE;&#xFF0C;&#x8BA9;&#x4EBA;&#x65E0;&#x6240;&#x9002;&#x4ECE;&#x3002;&#x5BC6;&#x5BC6;&#x9EBB;&#x9EBB;&#x7684;&#x7ED9;&#x4EBA;&#x91CC;&#x538B;&#x8FEB;&#x611F;&#xFF0C;&#x4F7F;&#x4EBA;&#x7A92;&#x606F;&#x3002;</li>
+<li>&#x4E0B;&#x9762;&#x6765;&#x8BD5;&#x8BD5;wd&#x3002;</li>
 </ul>
-<h3 id="webpack-dashboard使用"><a href="#webpack-dashboard使用" class="headerlink" title="webpack-dashboard使用"></a>webpack-dashboard使用</h3><ul>
-<li><p><strong>install</strong> : 在项目目录下<code>npm install webpack-dashboard --save-dev</code></p>
+<h3 id="webpack-dashboard&#x4F7F;&#x7528;"><a href="#webpack-dashboard&#x4F7F;&#x7528;" class="headerlink" title="webpack-dashboard&#x4F7F;&#x7528;"></a>webpack-dashboard&#x4F7F;&#x7528;</h3><ul>
+<li><p><strong>install</strong> : &#x5728;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E0B;<code>npm install webpack-dashboard --save-dev</code></p>
 </li>
-<li><p>这里主要说明的是配合webback-dev-server使用的方式。</p>
+<li><p>&#x8FD9;&#x91CC;&#x4E3B;&#x8981;&#x8BF4;&#x660E;&#x7684;&#x662F;&#x914D;&#x5408;webback-dev-server&#x4F7F;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
 <ul>
-<li>首先，引入dashboard和插件。</li>
+<li>&#x9996;&#x5148;&#xFF0C;&#x5F15;&#x5165;dashboard&#x548C;&#x63D2;&#x4EF6;&#x3002;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> Dashboard = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack-dashboard'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> DashboardPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack-dashboard/plugin'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> dashboard = <span class="hljs-keyword">new</span> Dashboard();</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> Dashboard = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webpack-dashboard&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> DashboardPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webpack-dashboard/plugin&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> dashboard = <span class="hljs-keyword">new</span> Dashboard();</span><br></pre></td></tr></tbody></table></figure><p></p>
 <hr>
 
 <ul>
-<li>其次，在配置部分加入实例化的插件。</li>
+<li>&#x5176;&#x6B21;&#xFF0C;&#x5728;&#x914D;&#x7F6E;&#x90E8;&#x5206;&#x52A0;&#x5165;&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x63D2;&#x4EF6;&#x3002;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> DashboardPlugin(dashboard, setData);</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> DashboardPlugin(dashboard, setData);</span><br></pre></td></tr></tbody></table></figure><p></p>
 <hr>
 
 <ul>
-<li>然后，更新webpack-dev-server的配置。</li>
+<li>&#x7136;&#x540E;&#xFF0C;&#x66F4;&#x65B0;webpack-dev-server&#x7684;&#x914D;&#x7F6E;&#x3002;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> devServer&#123;</span><br><span class="line">  publicPath: setting.output.publicPath, <span class="hljs-comment">// 输出路径</span></span><br><span class="line">  inline: <span class="hljs-literal">true</span>,</span><br><span class="line">  port: <span class="hljs-number">2333</span>, <span class="hljs-comment">// 端口设置</span></span><br><span class="line">  quite: <span class="hljs-literal">true</span> <span class="hljs-comment">// 必要参数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> devServer{</span><br><span class="line">  publicPath: setting.output.publicPath, <span class="hljs-comment">// &#x8F93;&#x51FA;&#x8DEF;&#x5F84;</span></span><br><span class="line">  inline: <span class="hljs-literal">true</span>,</span><br><span class="line">  port: <span class="hljs-number">2333</span>, <span class="hljs-comment">// &#x7AEF;&#x53E3;&#x8BBE;&#x7F6E;</span></span><br><span class="line">  quite: <span class="hljs-literal">true</span> <span class="hljs-comment">// &#x5FC5;&#x8981;&#x53C2;&#x6570;</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <ul>
-<li>最后，运行命令就可以看见炫酷的效果了。</li>
+<li>&#x6700;&#x540E;&#xFF0C;&#x8FD0;&#x884C;&#x547D;&#x4EE4;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x89C1;&#x70AB;&#x9177;&#x7684;&#x6548;&#x679C;&#x4E86;&#x3002;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package.json里配置</span><br><span class="line"><span class="hljs-string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="hljs-string">"start"</span>: <span class="hljs-string">"webpack-dev-server"</span></span><br><span class="line">&#125;</span><br><span class="line">再运行<span class="hljs-string">`npm start`</span>即可。</span><br></pre></td></tr></table></figure></p>
-<p>​</p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package.json&#x91CC;&#x914D;&#x7F6E;</span><br><span class="line"><span class="hljs-string">&quot;scripts&quot;</span>: {</span><br><span class="line">  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;webpack-dev-server&quot;</span></span><br><span class="line">}</span><br><span class="line">&#x518D;&#x8FD0;&#x884C;<span class="hljs-string">`npm start`</span>&#x5373;&#x53EF;&#x3002;</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>&#x200B;</p>
 </li>
 <li><p>Q&amp;A</p>
 <ul>
-<li>补充下我运行时发现的一些问题 。</li>
-<li>首次运行时有报错,如下。</li>
+<li>&#x8865;&#x5145;&#x4E0B;&#x6211;&#x8FD0;&#x884C;&#x65F6;&#x53D1;&#x73B0;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898; &#x3002;</li>
+<li>&#x9996;&#x6B21;&#x8FD0;&#x884C;&#x65F6;&#x6709;&#x62A5;&#x9519;,&#x5982;&#x4E0B;&#x3002;</li>
 </ul>
-<img src="/2016/09/23/webpack-plugin-webpack-dashboard/dashboard-wrong.png" title="dashboard-wrong">
+<img src="/2016/09/23/webpack-plugin-webpack-dashboard/dashboard-wrong.png" class title="dashboard-wrong">
 
 <ul>
-<li><p>找了很久，才意识到这是语法错误。它使用了ES6规范。而我当前的node版本是0.10.30,对ES6的支持很差。当我切换到<strong><em>0.12.x</em></strong>的时候，编译就成功了。最终我选择了<strong><em>0.12.10</em></strong>。</p>
+<li><p>&#x627E;&#x4E86;&#x5F88;&#x4E45;&#xFF0C;&#x624D;&#x610F;&#x8BC6;&#x5230;&#x8FD9;&#x662F;&#x8BED;&#x6CD5;&#x9519;&#x8BEF;&#x3002;&#x5B83;&#x4F7F;&#x7528;&#x4E86;ES6&#x89C4;&#x8303;&#x3002;&#x800C;&#x6211;&#x5F53;&#x524D;&#x7684;node&#x7248;&#x672C;&#x662F;0.10.30,&#x5BF9;ES6&#x7684;&#x652F;&#x6301;&#x5F88;&#x5DEE;&#x3002;&#x5F53;&#x6211;&#x5207;&#x6362;&#x5230;<strong><em>0.12.x</em></strong>&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7F16;&#x8BD1;&#x5C31;&#x6210;&#x529F;&#x4E86;&#x3002;&#x6700;&#x7EC8;&#x6211;&#x9009;&#x62E9;&#x4E86;<strong><em>0.12.10</em></strong>&#x3002;</p>
 </li>
-<li><p><code>npm start</code>时quiet配置会不生效，导致出现的dashboard面板上有重复的log信息。<strong>解决办法是运行时添加参数<code>--quiet</code></strong></p>
-</li>
-</ul>
-</li>
-<li><p>最后再来看看配置文件和效果图。</p>
+<li><p><code>npm start</code>&#x65F6;quiet&#x914D;&#x7F6E;&#x4F1A;&#x4E0D;&#x751F;&#x6548;&#xFF0C;&#x5BFC;&#x81F4;&#x51FA;&#x73B0;&#x7684;dashboard&#x9762;&#x677F;&#x4E0A;&#x6709;&#x91CD;&#x590D;&#x7684;log&#x4FE1;&#x606F;&#x3002;<strong>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x6DFB;&#x52A0;&#x53C2;&#x6570;<code>--quiet</code></strong></p>
 </li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> root_path = path.resolve(__dirname);</span><br><span class="line"><span class="hljs-keyword">var</span> build_path = path.resolve(root_path, <span class="hljs-string">'build'</span>);</span><br><span class="line"><span class="hljs-comment">// dashboard</span></span><br><span class="line"><span class="hljs-keyword">var</span> Dashboard = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack-dashboard'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> DashboardPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack-dashboard/plugin'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> dashboard = <span class="hljs-keyword">new</span> Dashboard();</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    <span class="hljs-string">'page/homepage/index'</span>: 	<span class="hljs-string">'./src/page/homepage/index.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output:&#123;</span><br><span class="line">    path: build_path,</span><br><span class="line">    filename: <span class="hljs-string">'[name].js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// webpack-dev-server</span></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    inline: <span class="hljs-literal">true</span>,</span><br><span class="line">    port: <span class="hljs-number">2333</span>,</span><br><span class="line">    <span class="hljs-comment">// quite: true // 拼写错误</span></span><br><span class="line">    quiet: <span class="hljs-literal">true</span> <span class="hljs-comment">// Add quiet option for webpack dashboard</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-built_in">module</span>: &#123;</span><br><span class="line">    loaders: [</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css'</span> &#125;, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader')&#125;,</span></span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css!less'</span>, <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> &#125;, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')&#125;,</span></span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'url?limit=8192&amp;name=img/[name].[ext]'</span> &#125;,</span><br><span class="line">      &#123; <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'babel?presets[]=es2015'</span>], <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="hljs-keyword">new</span> DashboardPlugin(dashboard.setData)</span><br><span class="line">  ]</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">package.json</span><br><span class="line">...</span><br><span class="line">  <span class="hljs-string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="hljs-string">"start"</span>: <span class="hljs-string">"webpack-dev-server --quiet --content-base src/"</span>,</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>&#x6700;&#x540E;&#x518D;&#x6765;&#x770B;&#x770B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x548C;&#x6548;&#x679C;&#x56FE;&#x3002;</p>
+</li>
+</ul>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webpack&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> root_path = path.resolve(__dirname);</span><br><span class="line"><span class="hljs-keyword">var</span> build_path = path.resolve(root_path, <span class="hljs-string">&apos;build&apos;</span>);</span><br><span class="line"><span class="hljs-comment">// dashboard</span></span><br><span class="line"><span class="hljs-keyword">var</span> Dashboard = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webpack-dashboard&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> DashboardPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webpack-dashboard/plugin&apos;</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> dashboard = <span class="hljs-keyword">new</span> Dashboard();</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = {</span><br><span class="line">  entry: {</span><br><span class="line">    <span class="hljs-string">&apos;page/homepage/index&apos;</span>: 	<span class="hljs-string">&apos;./src/page/homepage/index.js&apos;</span></span><br><span class="line">  },</span><br><span class="line">  output:{</span><br><span class="line">    path: build_path,</span><br><span class="line">    filename: <span class="hljs-string">&apos;[name].js&apos;</span></span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-comment">// webpack-dev-server</span></span><br><span class="line">  devServer: {</span><br><span class="line">    inline: <span class="hljs-literal">true</span>,</span><br><span class="line">    port: <span class="hljs-number">2333</span>,</span><br><span class="line">    <span class="hljs-comment">// quite: true // &#x62FC;&#x5199;&#x9519;&#x8BEF;</span></span><br><span class="line">    quiet: <span class="hljs-literal">true</span> <span class="hljs-comment">// Add quiet option for webpack dashboard</span></span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-built_in">module</span>: {</span><br><span class="line">    loaders: [</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">&apos;style!css&apos;</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract(&apos;style-loader&apos;, &apos;css-loader&apos;)},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">&apos;style!css!less&apos;</span>, <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract(&apos;style-loader&apos;, &apos;css-loader!less-loader&apos;)},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">&apos;url?limit=8192&amp;name=img/[name].[ext]&apos;</span> },</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loaders</span>: [<span class="hljs-string">&apos;babel?presets[]=es2015&apos;</span>], <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span> }</span><br><span class="line">    ]</span><br><span class="line">  },</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="hljs-keyword">new</span> DashboardPlugin(dashboard.setData)</span><br><span class="line">  ]</span><br><span class="line">  };</span><br><span class="line"></span><br><span class="line">package.json</span><br><span class="line">...</span><br><span class="line">  <span class="hljs-string">&quot;scripts&quot;</span>: {</span><br><span class="line">    <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;webpack-dev-server --quiet --content-base src/&quot;</span>,</span><br><span class="line">  }</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure><p></p>
 <hr>
 
-<img src="/2016/09/23/webpack-plugin-webpack-dashboard/webpack-dashboard.png" title="webpack-dashboard">
+<img src="/2016/09/23/webpack-plugin-webpack-dashboard/webpack-dashboard.png" class title="webpack-dashboard">
 
-<h2 id="Draft-for-Now"><a href="#Draft-for-Now" class="headerlink" title="Draft for Now"></a>Draft for Now</h2><div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top" target="_blank" rel="noopener"><div class="tooltip tooltip-east"><span class="tooltip-item">赏</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
+<h2 id="Draft-for-Now"><a href="#Draft-for-Now" class="headerlink" title="Draft for Now"></a>Draft for Now</h2><div class="page-reward"><a href="javascript:;" class="page-reward-btn tooltip-top"><div class="tooltip tooltip-east"><span class="tooltip-item">&#x8D4F;</span><span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner"><div class="reward-box"></div></span></span></span></div></a></div>
 
-<img src="/2016/09/23/webpack-plugin-webpack-dashboard/reward.jpeg" title="Thanks">
-
+<img src="/2016/09/23/webpack-plugin-webpack-dashboard/reward.jpeg" class title="Thanks">
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
             <div class="page-reward">
@@ -338,7 +345,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -350,7 +357,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -359,7 +367,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -447,7 +455,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -583,14 +591,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -613,7 +623,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

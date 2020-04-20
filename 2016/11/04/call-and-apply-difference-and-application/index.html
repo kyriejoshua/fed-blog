@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>call和apply的区别及各自应用场景 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="call和apply是js里非常常见的两个概念。但自己从来没有好好的深入理解这两者，尤其是在何时使用，如何使用才适合这两个问题上，没有进一步的思考。这里写一篇笔记来反思。">
-<meta name="keywords" content="JavaScript">
+    <meta name="description" content="call&amp;#x548C;apply&amp;#x662F;js&amp;#x91CC;&amp;#x975E;&amp;#x5E38;&amp;#x5E38;&amp;#x89C1;&amp;#x7684;&amp;#x4E24;&amp;#x4E2A;&amp;#x6982;&amp;#x5FF5;&amp;#x3002;&amp;#x4F46;&amp;#x81EA;&amp;#x5DF1;&amp;#x4ECE;&amp;#x6765;&amp;#x6CA1;&amp;#x6709;&amp;#x597D;&amp;#x597D;&amp;#x7684;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="call和apply的区别及各自应用场景">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/11/04/call-and-apply-difference-and-application/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="call和apply是js里非常常见的两个概念。但自己从来没有好好的深入理解这两者，尤其是在何时使用，如何使用才适合这两个问题上，没有进一步的思考。这里写一篇笔记来反思。">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="call&amp;#x548C;apply&amp;#x662F;js&amp;#x91CC;&amp;#x975E;&amp;#x5E38;&amp;#x5E38;&amp;#x89C1;&amp;#x7684;&amp;#x4E24;&amp;#x4E2A;&amp;#x6982;&amp;#x5FF5;&amp;#x3002;&amp;#x4F46;&amp;#x81EA;&amp;#x5DF1;&amp;#x4ECE;&amp;#x6765;&amp;#x6CA1;&amp;#x6709;&amp;#x597D;&amp;#x597D;&amp;#x7684;&amp;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/11/04/call-and-apply-difference-and-application/unphoto.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:01.520Z">
+<meta property="article:published_time" content="2016-11-04T08:16:10.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:01.520Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="call和apply的区别及各自应用场景">
-<meta name="twitter:description" content="call和apply是js里非常常见的两个概念。但自己从来没有好好的深入理解这两者，尤其是在何时使用，如何使用才适合这两个问题上，没有进一步的思考。这里写一篇笔记来反思。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/11/04/call-and-apply-difference-and-application/unphoto.jpeg">
 
 
@@ -48,7 +48,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -67,7 +69,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -75,7 +77,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -87,15 +89,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -107,7 +114,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -146,66 +153,68 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2016/11/04/call-and-apply-difference-and-application/unphoto.jpeg" title="Call and Apply">
+<img src="/2016/11/04/call-and-apply-difference-and-application/unphoto.jpeg" class title="Call and Apply">
 
-<blockquote><br>call和apply是js里非常常见的两个概念。但自己从来没有好好的深入理解这两者，尤其是在何时使用，如何使用才适合这两个问题上，没有进一步的思考。这里写一篇笔记来反思。
+<blockquote><br>call&#x548C;apply&#x662F;js&#x91CC;&#x975E;&#x5E38;&#x5E38;&#x89C1;&#x7684;&#x4E24;&#x4E2A;&#x6982;&#x5FF5;&#x3002;&#x4F46;&#x81EA;&#x5DF1;&#x4ECE;&#x6765;&#x6CA1;&#x6709;&#x597D;&#x597D;&#x7684;&#x6DF1;&#x5165;&#x7406;&#x89E3;&#x8FD9;&#x4E24;&#x8005;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5728;&#x4F55;&#x65F6;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x624D;&#x9002;&#x5408;&#x8FD9;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#x4E0A;&#xFF0C;&#x6CA1;&#x6709;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x601D;&#x8003;&#x3002;&#x8FD9;&#x91CC;&#x5199;&#x4E00;&#x7BC7;&#x7B14;&#x8BB0;&#x6765;&#x53CD;&#x601D;&#x3002;
 
 </blockquote>
 
 <a id="more"></a>
 
-<h3 id="call和apply的定义"><a href="#call和apply的定义" class="headerlink" title="call和apply的定义"></a>call和apply的定义</h3><ul>
-<li><p>在JavaScript权威指南上是这么定义的：</p>
+<h3 id="call&#x548C;apply&#x7684;&#x5B9A;&#x4E49;"><a href="#call&#x548C;apply&#x7684;&#x5B9A;&#x4E49;" class="headerlink" title="call&#x548C;apply&#x7684;&#x5B9A;&#x4E49;"></a>call&#x548C;apply&#x7684;&#x5B9A;&#x4E49;</h3><ul>
+<li><p>&#x5728;JavaScript&#x6743;&#x5A01;&#x6307;&#x5357;&#x4E0A;&#x662F;&#x8FD9;&#x4E48;&#x5B9A;&#x4E49;&#x7684;&#xFF1A;</p>
 </li>
-<li><p>call()和apply()可以看做是某个对象的方法，通过调用方法的形式来简洁调用函数。</p>
+<li><p>call()&#x548C;apply()&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x662F;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x7684;&#x5F62;&#x5F0F;&#x6765;&#x7B80;&#x6D01;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x3002;</p>
 </li>
-<li><p>call, apply都属于Function.prototype的方法。因此所有函数都有该方法。</p>
+<li><p>call, apply&#x90FD;&#x5C5E;&#x4E8E;Function.prototype&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x56E0;&#x6B64;&#x6240;&#x6709;&#x51FD;&#x6570;&#x90FD;&#x6709;&#x8BE5;&#x65B9;&#x6CD5;&#x3002;</p>
 </li>
-<li><p>call()和apply()的第一个实参是要调用函数的母对象，是调用上下文，在函数体内通过this来获得对它的引用。要想以对象o的方法来调用函数f(),可以这样使用它们。</p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f.call(o);</span><br><span class="line">f.apply(o);</span><br><span class="line">等同于</span><br><span class="line">o.m = f;</span><br><span class="line">o.m();</span><br><span class="line"><span class="hljs-keyword">delete</span> o.m;</span><br></pre></td></tr></table></figure></p>
+<li><p>call()&#x548C;apply()&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B9E;&#x53C2;&#x662F;&#x8981;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x7684;&#x6BCD;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x8C03;&#x7528;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x5728;&#x51FD;&#x6570;&#x4F53;&#x5185;&#x901A;&#x8FC7;this&#x6765;&#x83B7;&#x5F97;&#x5BF9;&#x5B83;&#x7684;&#x5F15;&#x7528;&#x3002;&#x8981;&#x60F3;&#x4EE5;&#x5BF9;&#x8C61;o&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x8C03;&#x7528;&#x51FD;&#x6570;f(),&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;</p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f.call(o);</span><br><span class="line">f.apply(o);</span><br><span class="line">&#x7B49;&#x540C;&#x4E8E;</span><br><span class="line">o.m = f;</span><br><span class="line">o.m();</span><br><span class="line"><span class="hljs-keyword">delete</span> o.m;</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p>代码可以理解，但描述理解起来实在困难。</p>
-</li>
-</ul>
-<h3 id="具体说明"><a href="#具体说明" class="headerlink" title="具体说明"></a>具体说明</h3><ul>
-<li><p>定义都是用来考试时死记硬背的。所以来看看实例。</p>
-</li>
-<li><p>首先要明确一点：<strong>call()和apply()的作用是一样的，只是调用方式不同。</strong></p>
-</li>
-<li><p>例如：<code>foo.call(this, arg1, arg2, arg3) == foo.apply(this, arguments) == this.foo(arg1, arg2, arg3/* arguments */)</code></p>
-</li>
-<li><p>两者唯一的不同点在于第二个传入的参数。</p>
-</li>
-<li><p>第一个实参指代当前调用的对象，如果在ES5严格模式下，第一个实参不管传入什么null或undefined或其他，都会变成this。</p>
-</li>
-<li><p>第二个实参，call方法可以传入任意的实参，不论数量长度。如<code>foo.call(this, arg1, arg2, arg3…)</code></p>
-</li>
-<li><p>apply方法则传入的是数组，可以是任意长度的数组，而且传入的数组包括类数组对象。如<code>foo.apply(this, arguments)</code></p>
+<li><p>&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#xFF0C;&#x4F46;&#x63CF;&#x8FF0;&#x7406;&#x89E3;&#x8D77;&#x6765;&#x5B9E;&#x5728;&#x56F0;&#x96BE;&#x3002;</p>
 </li>
 </ul>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
-<li><p>我觉得这部分才是要深入理解的，何时去调用它们，使用它们有什么方便之处。</p>
+<h3 id="&#x5177;&#x4F53;&#x8BF4;&#x660E;"><a href="#&#x5177;&#x4F53;&#x8BF4;&#x660E;" class="headerlink" title="&#x5177;&#x4F53;&#x8BF4;&#x660E;"></a>&#x5177;&#x4F53;&#x8BF4;&#x660E;</h3><ul>
+<li><p>&#x5B9A;&#x4E49;&#x90FD;&#x662F;&#x7528;&#x6765;&#x8003;&#x8BD5;&#x65F6;&#x6B7B;&#x8BB0;&#x786C;&#x80CC;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x6765;&#x770B;&#x770B;&#x5B9E;&#x4F8B;&#x3002;</p>
 </li>
-<li><p>call和apply的用途是借用别人的方法来调用，或者说，是动态改变this这个对象。</p>
+<li><p>&#x9996;&#x5148;&#x8981;&#x660E;&#x786E;&#x4E00;&#x70B9;&#xFF1A;<strong>call()&#x548C;apply()&#x7684;&#x4F5C;&#x7528;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x8C03;&#x7528;&#x65B9;&#x5F0F;&#x4E0D;&#x540C;&#x3002;</strong></p>
 </li>
-<li><p>前者或许更好理解。来看看这样一个例子。</p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> a = &#123;</span><br><span class="line">  name: <span class="hljs-string">'mdzz'</span>,</span><br><span class="line">  say: <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(name)</span><br><span class="line">    <span class="hljs-built_in">window</span>.alert(<span class="hljs-string">`我是 <span class="hljs-subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> b = &#123;&#125;;</span><br><span class="line"><span class="hljs-comment">// b也是zz,但没有相应的say方法，所以此时b想借用a的方法。</span></span><br><span class="line"><span class="hljs-comment">// 调用a的方法给b使用</span></span><br><span class="line">a.say.call(b);</span><br><span class="line">b.name = <span class="hljs-string">'yrmdzz'</span>;</span><br><span class="line"><span class="hljs-comment">// 传入参数时</span></span><br><span class="line">a.say.call(b, b.name);</span><br><span class="line">a.say.apply(b, [b.name]);</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 或者这样定义更为明显 */</span></span><br><span class="line"> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>)</span>&#123;&#125;;</span><br><span class="line"> <span class="hljs-comment">// 添加原型属性</span></span><br><span class="line"> Foo.prototype = &#123;</span><br><span class="line">   name: <span class="hljs-string">'mdzz'</span>,</span><br><span class="line">   say: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">// 当前调用的对象Foo</span></span><br><span class="line">     alert(<span class="hljs-string">`I am <span class="hljs-subst">$&#123;<span class="hljs-keyword">this</span>.name&#125;</span>`</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// new 生成一个实例对象</span></span><br><span class="line"> <span class="hljs-keyword">const</span> people = <span class="hljs-keyword">new</span> Foo();</span><br><span class="line"> <span class="hljs-built_in">console</span>.info(people);</span><br><span class="line"> people.say();</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 定义一个没有say方法的对象animal</span></span><br><span class="line"> <span class="hljs-comment">// 让它调用people的say方法</span></span><br><span class="line"> <span class="hljs-keyword">const</span> animal = &#123;</span><br><span class="line">   name: <span class="hljs-string">'kitty'</span></span><br><span class="line"> &#125;</span><br><span class="line"> people.say.call(animal);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* 一个更显而易见的例子 */</span></span><br><span class="line"><span class="hljs-comment">// 定义一个函数，可以判断传入参数的基本类型</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">type</span>(<span class="hljs-params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> toString = <span class="hljs-built_in">Object</span>.prototype.toString;</span><br><span class="line">    <span class="hljs-keyword">let</span> map = [</span><br><span class="line">       <span class="hljs-string">'[object Boolean]'</span>: <span class="hljs-string">'boolean'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Object]'</span>: <span class="hljs-string">'Object'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Array]'</span>: <span class="hljs-string">'array'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Number]'</span>: <span class="hljs-string">'number'</span>,</span><br><span class="line">       <span class="hljs-string">'[object String]'</span>: <span class="hljs-string">'string'</span>,</span><br><span class="line">       <span class="hljs-string">'[object RegExp]'</span>: <span class="hljs-string">'regExp'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Function]'</span>: <span class="hljs-string">'function'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Date]'</span>: <span class="hljs-string">'data'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Undefined]'</span>: <span class="hljs-string">'undefined'</span>,</span><br><span class="line">       <span class="hljs-string">'[object Null]'</span>: <span class="hljs-string">'null'</span>,</span><br><span class="line">    ];</span><br><span class="line">    <span class="hljs-keyword">return</span> map[toString.call(obj)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 在参数不定时，则可使用apply */</span></span><br><span class="line">  <span class="hljs-comment">// 这里的例子改写自权威指南</span></span><br><span class="line">  <span class="hljs-comment">// 内置Math对象有一个max方法，接受任意个参数，返回其中的最大值</span></span><br><span class="line">  <span class="hljs-comment">// 但有时我们调用时，无法预知参数的个数，而且这种取最大值的情况通常在数组中发生</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 假如有这样一个数组</span></span><br><span class="line">  <span class="hljs-keyword">let</span> arr = [<span class="hljs-number">4</span>,<span class="hljs-number">98</span>,<span class="hljs-number">34</span>,<span class="hljs-number">90</span>,<span class="hljs-number">41</span>,<span class="hljs-number">78</span>];</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 直接Math.max会返回NaN,因为它不接受数组作为参数</span></span><br><span class="line">  <span class="hljs-built_in">Math</span>.max(arr); <span class="hljs-comment">// 返回NaN</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// apply方法接受数组作为参数</span></span><br><span class="line">  <span class="hljs-keyword">let</span> biggest = <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-built_in">Math</span>, arr);</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(biggest); <span class="hljs-comment">// 98</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 第一个参数Math可以替换为任何其他值，如下的也都可以</span></span><br><span class="line">  <span class="hljs-keyword">let</span> biggest2 = <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-keyword">this</span>, arr);</span><br><span class="line">  <span class="hljs-keyword">let</span> biggest3 = <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-literal">null</span>, arr);</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(biggest2); <span class="hljs-comment">// 98</span></span><br><span class="line">  <span class="hljs-built_in">console</span>.info(biggest3); <span class="hljs-comment">// 98</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* 还有一个比较有意思的apply使用场景 */</span></span><br><span class="line">  <span class="hljs-comment">// 使用push方法来合并数组</span></span><br><span class="line">  <span class="hljs-keyword">let</span> arrayA = [<span class="hljs-string">'say'</span>, <span class="hljs-string">'hello'</span>];</span><br><span class="line">  <span class="hljs-keyword">let</span> arrayB = [<span class="hljs-string">'ok'</span>, <span class="hljs-string">'master'</span>];</span><br><span class="line">  <span class="hljs-built_in">Array</span>.prototype.push.apply(arrayA, arrayB);</span><br><span class="line">  <span class="hljs-comment">// arrayA: ['say', 'hello', 'ok', 'master']</span></span><br></pre></td></tr></table></figure></p>
+<li><p>&#x4F8B;&#x5982;&#xFF1A;<code>foo.call(this, arg1, arg2, arg3) == foo.apply(this, arguments) == this.foo(arg1, arg2, arg3/* arguments */)</code></p>
 </li>
-<li><p>所以我的理解是以下在两种情况下使用call(), apply():</p>
-<p>1.动态改变调用的对象，或者说使<strong>没有该方法的对象</strong>调用<strong>有该方法的对象</strong>的方法。</p>
-<p>2.改变方法的传入参数为数组。</p>
+<li><p>&#x4E24;&#x8005;&#x552F;&#x4E00;&#x7684;&#x4E0D;&#x540C;&#x70B9;&#x5728;&#x4E8E;&#x7B2C;&#x4E8C;&#x4E2A;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x3002;</p>
 </li>
-<li><p>就目前看来，肯定还有更多的使用场景。但我还未遇到，等遇到或理解的更深一步的时候，再来补充。</p>
+<li><p>&#x7B2C;&#x4E00;&#x4E2A;&#x5B9E;&#x53C2;&#x6307;&#x4EE3;&#x5F53;&#x524D;&#x8C03;&#x7528;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x5728;ES5&#x4E25;&#x683C;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x5B9E;&#x53C2;&#x4E0D;&#x7BA1;&#x4F20;&#x5165;&#x4EC0;&#x4E48;null&#x6216;undefined&#x6216;&#x5176;&#x4ED6;&#xFF0C;&#x90FD;&#x4F1A;&#x53D8;&#x6210;this&#x3002;</p>
+</li>
+<li><p>&#x7B2C;&#x4E8C;&#x4E2A;&#x5B9E;&#x53C2;&#xFF0C;call&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x4EFB;&#x610F;&#x7684;&#x5B9E;&#x53C2;&#xFF0C;&#x4E0D;&#x8BBA;&#x6570;&#x91CF;&#x957F;&#x5EA6;&#x3002;&#x5982;<code>foo.call(this, arg1, arg2, arg3&#x2026;)</code></p>
+</li>
+<li><p>apply&#x65B9;&#x6CD5;&#x5219;&#x4F20;&#x5165;&#x7684;&#x662F;&#x6570;&#x7EC4;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x610F;&#x957F;&#x5EA6;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x800C;&#x4E14;&#x4F20;&#x5165;&#x7684;&#x6570;&#x7EC4;&#x5305;&#x62EC;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x3002;&#x5982;<code>foo.apply(this, arguments)</code></p>
 </li>
 </ul>
-<blockquote><br> 参考：
+<h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;"><a href="#&#x5E94;&#x7528;&#x573A;&#x666F;" class="headerlink" title="&#x5E94;&#x7528;&#x573A;&#x666F;"></a>&#x5E94;&#x7528;&#x573A;&#x666F;</h3><ul>
+<li><p>&#x6211;&#x89C9;&#x5F97;&#x8FD9;&#x90E8;&#x5206;&#x624D;&#x662F;&#x8981;&#x6DF1;&#x5165;&#x7406;&#x89E3;&#x7684;&#xFF0C;&#x4F55;&#x65F6;&#x53BB;&#x8C03;&#x7528;&#x5B83;&#x4EEC;&#xFF0C;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x6709;&#x4EC0;&#x4E48;&#x65B9;&#x4FBF;&#x4E4B;&#x5904;&#x3002;</p>
+</li>
+<li><p>call&#x548C;apply&#x7684;&#x7528;&#x9014;&#x662F;&#x501F;&#x7528;&#x522B;&#x4EBA;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x8C03;&#x7528;&#xFF0C;&#x6216;&#x8005;&#x8BF4;&#xFF0C;&#x662F;&#x52A8;&#x6001;&#x6539;&#x53D8;this&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;</p>
+</li>
+<li><p>&#x524D;&#x8005;&#x6216;&#x8BB8;&#x66F4;&#x597D;&#x7406;&#x89E3;&#x3002;&#x6765;&#x770B;&#x770B;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x3002;</p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> a = {</span><br><span class="line">  name: <span class="hljs-string">&apos;mdzz&apos;</span>,</span><br><span class="line">  say: <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(name)</span><br><span class="line">    <span class="hljs-built_in">window</span>.alert(<span class="hljs-string">`&#x6211;&#x662F; <span class="hljs-subst">${name}</span>`</span>);</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">const</span> b = {};</span><br><span class="line"><span class="hljs-comment">// b&#x4E5F;&#x662F;zz,&#x4F46;&#x6CA1;&#x6709;&#x76F8;&#x5E94;&#x7684;say&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x6B64;&#x65F6;b&#x60F3;&#x501F;&#x7528;a&#x7684;&#x65B9;&#x6CD5;&#x3002;</span></span><br><span class="line"><span class="hljs-comment">// &#x8C03;&#x7528;a&#x7684;&#x65B9;&#x6CD5;&#x7ED9;b&#x4F7F;&#x7528;</span></span><br><span class="line">a.say.call(b);</span><br><span class="line">b.name = <span class="hljs-string">&apos;yrmdzz&apos;</span>;</span><br><span class="line"><span class="hljs-comment">// &#x4F20;&#x5165;&#x53C2;&#x6570;&#x65F6;</span></span><br><span class="line">a.say.call(b, b.name);</span><br><span class="line">a.say.apply(b, [b.name]);</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* &#x6216;&#x8005;&#x8FD9;&#x6837;&#x5B9A;&#x4E49;&#x66F4;&#x4E3A;&#x660E;&#x663E; */</span></span><br><span class="line"> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>)</span>{};</span><br><span class="line"> <span class="hljs-comment">// &#x6DFB;&#x52A0;&#x539F;&#x578B;&#x5C5E;&#x6027;</span></span><br><span class="line"> Foo.prototype = {</span><br><span class="line">   name: <span class="hljs-string">&apos;mdzz&apos;</span>,</span><br><span class="line">   say: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">// &#x5F53;&#x524D;&#x8C03;&#x7528;&#x7684;&#x5BF9;&#x8C61;Foo</span></span><br><span class="line">     alert(<span class="hljs-string">`I am <span class="hljs-subst">${<span class="hljs-keyword">this</span>.name}</span>`</span>);</span><br><span class="line">   }</span><br><span class="line"> }</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// new &#x751F;&#x6210;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;</span></span><br><span class="line"> <span class="hljs-keyword">const</span> people = <span class="hljs-keyword">new</span> Foo();</span><br><span class="line"> <span class="hljs-built_in">console</span>.info(people);</span><br><span class="line"> people.say();</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;say&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;animal</span></span><br><span class="line"> <span class="hljs-comment">// &#x8BA9;&#x5B83;&#x8C03;&#x7528;people&#x7684;say&#x65B9;&#x6CD5;</span></span><br><span class="line"> <span class="hljs-keyword">const</span> animal = {</span><br><span class="line">   name: <span class="hljs-string">&apos;kitty&apos;</span></span><br><span class="line"> }</span><br><span class="line"> people.say.call(animal);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* &#x4E00;&#x4E2A;&#x66F4;&#x663E;&#x800C;&#x6613;&#x89C1;&#x7684;&#x4F8B;&#x5B50; */</span></span><br><span class="line"><span class="hljs-comment">// &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x5224;&#x65AD;&#x4F20;&#x5165;&#x53C2;&#x6570;&#x7684;&#x57FA;&#x672C;&#x7C7B;&#x578B;</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">type</span>(<span class="hljs-params">obj</span>) </span>{</span><br><span class="line">    <span class="hljs-keyword">let</span> toString = <span class="hljs-built_in">Object</span>.prototype.toString;</span><br><span class="line">    <span class="hljs-keyword">let</span> map = [</span><br><span class="line">       <span class="hljs-string">&apos;[object Boolean]&apos;</span>: <span class="hljs-string">&apos;boolean&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Object]&apos;</span>: <span class="hljs-string">&apos;Object&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Array]&apos;</span>: <span class="hljs-string">&apos;array&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Number]&apos;</span>: <span class="hljs-string">&apos;number&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object String]&apos;</span>: <span class="hljs-string">&apos;string&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object RegExp]&apos;</span>: <span class="hljs-string">&apos;regExp&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Function]&apos;</span>: <span class="hljs-string">&apos;function&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Date]&apos;</span>: <span class="hljs-string">&apos;data&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Undefined]&apos;</span>: <span class="hljs-string">&apos;undefined&apos;</span>,</span><br><span class="line">       <span class="hljs-string">&apos;[object Null]&apos;</span>: <span class="hljs-string">&apos;null&apos;</span>,</span><br><span class="line">    ];</span><br><span class="line">    <span class="hljs-keyword">return</span> map[toString.call(obj)];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* &#x5728;&#x53C2;&#x6570;&#x4E0D;&#x5B9A;&#x65F6;&#xFF0C;&#x5219;&#x53EF;&#x4F7F;&#x7528;apply */</span></span><br><span class="line">  <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x7684;&#x4F8B;&#x5B50;&#x6539;&#x5199;&#x81EA;&#x6743;&#x5A01;&#x6307;&#x5357;</span></span><br><span class="line">  <span class="hljs-comment">// &#x5185;&#x7F6E;Math&#x5BF9;&#x8C61;&#x6709;&#x4E00;&#x4E2A;max&#x65B9;&#x6CD5;&#xFF0C;&#x63A5;&#x53D7;&#x4EFB;&#x610F;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x5176;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x503C;</span></span><br><span class="line">  <span class="hljs-comment">// &#x4F46;&#x6709;&#x65F6;&#x6211;&#x4EEC;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x65E0;&#x6CD5;&#x9884;&#x77E5;&#x53C2;&#x6570;&#x7684;&#x4E2A;&#x6570;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x79CD;&#x53D6;&#x6700;&#x5927;&#x503C;&#x7684;&#x60C5;&#x51B5;&#x901A;&#x5E38;&#x5728;&#x6570;&#x7EC4;&#x4E2D;&#x53D1;&#x751F;</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// &#x5047;&#x5982;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;</span></span><br><span class="line">  <span class="hljs-keyword">let</span> arr = [<span class="hljs-number">4</span>,<span class="hljs-number">98</span>,<span class="hljs-number">34</span>,<span class="hljs-number">90</span>,<span class="hljs-number">41</span>,<span class="hljs-number">78</span>];</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// &#x76F4;&#x63A5;Math.max&#x4F1A;&#x8FD4;&#x56DE;NaN,&#x56E0;&#x4E3A;&#x5B83;&#x4E0D;&#x63A5;&#x53D7;&#x6570;&#x7EC4;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;</span></span><br><span class="line">  <span class="hljs-built_in">Math</span>.max(arr); <span class="hljs-comment">// &#x8FD4;&#x56DE;NaN</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// apply&#x65B9;&#x6CD5;&#x63A5;&#x53D7;&#x6570;&#x7EC4;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;</span></span><br><span class="line">  <span class="hljs-keyword">let</span> biggest = <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-built_in">Math</span>, arr);</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(biggest); <span class="hljs-comment">// 98</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;Math&#x53EF;&#x4EE5;&#x66FF;&#x6362;&#x4E3A;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x503C;&#xFF0C;&#x5982;&#x4E0B;&#x7684;&#x4E5F;&#x90FD;&#x53EF;&#x4EE5;</span></span><br><span class="line">  <span class="hljs-keyword">let</span> biggest2 = <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-keyword">this</span>, arr);</span><br><span class="line">  <span class="hljs-keyword">let</span> biggest3 = <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-literal">null</span>, arr);</span><br><span class="line">  <span class="hljs-built_in">console</span>.info(biggest2); <span class="hljs-comment">// 98</span></span><br><span class="line">  <span class="hljs-built_in">console</span>.info(biggest3); <span class="hljs-comment">// 98</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* &#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x6709;&#x610F;&#x601D;&#x7684;apply&#x4F7F;&#x7528;&#x573A;&#x666F; */</span></span><br><span class="line">  <span class="hljs-comment">// &#x4F7F;&#x7528;push&#x65B9;&#x6CD5;&#x6765;&#x5408;&#x5E76;&#x6570;&#x7EC4;</span></span><br><span class="line">  <span class="hljs-keyword">let</span> arrayA = [<span class="hljs-string">&apos;say&apos;</span>, <span class="hljs-string">&apos;hello&apos;</span>];</span><br><span class="line">  <span class="hljs-keyword">let</span> arrayB = [<span class="hljs-string">&apos;ok&apos;</span>, <span class="hljs-string">&apos;master&apos;</span>];</span><br><span class="line">  <span class="hljs-built_in">Array</span>.prototype.push.apply(arrayA, arrayB);</span><br><span class="line">  <span class="hljs-comment">// arrayA: [&apos;say&apos;, &apos;hello&apos;, &apos;ok&apos;, &apos;master&apos;]</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+</li>
+</ul>
+<ul>
+<li><p>&#x6240;&#x4EE5;&#x6211;&#x7684;&#x7406;&#x89E3;&#x662F;&#x4EE5;&#x4E0B;&#x5728;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4F7F;&#x7528;call(), apply():</p>
+<p>1.&#x52A8;&#x6001;&#x6539;&#x53D8;&#x8C03;&#x7528;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x6216;&#x8005;&#x8BF4;&#x4F7F;<strong>&#x6CA1;&#x6709;&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;</strong>&#x8C03;&#x7528;<strong>&#x6709;&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;</strong>&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>2.&#x6539;&#x53D8;&#x65B9;&#x6CD5;&#x7684;&#x4F20;&#x5165;&#x53C2;&#x6570;&#x4E3A;&#x6570;&#x7EC4;&#x3002;</p>
+</li>
+<li><p>&#x5C31;&#x76EE;&#x524D;&#x770B;&#x6765;&#xFF0C;&#x80AF;&#x5B9A;&#x8FD8;&#x6709;&#x66F4;&#x591A;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;&#x4F46;&#x6211;&#x8FD8;&#x672A;&#x9047;&#x5230;&#xFF0C;&#x7B49;&#x9047;&#x5230;&#x6216;&#x7406;&#x89E3;&#x7684;&#x66F4;&#x6DF1;&#x4E00;&#x6B65;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x518D;&#x6765;&#x8865;&#x5145;&#x3002;</p>
+</li>
+</ul>
+<blockquote><br> &#x53C2;&#x8003;&#xFF1A;
 
-<p>《JavaScript权威指南》</p>
-</blockquote>
+<p>&#x300A;JavaScript&#x6743;&#x5A01;&#x6307;&#x5357;&#x300B;</p>
+</blockquote></body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -275,7 +284,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -287,7 +296,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -296,7 +306,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -384,7 +394,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -520,14 +530,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -550,7 +562,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

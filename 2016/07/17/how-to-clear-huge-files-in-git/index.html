@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>如何在git仓库中彻底清除大文件 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="坑的由来  事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了">
-<meta name="keywords" content="git">
+    <meta name="description" content="&amp;#x5751;&amp;#x7684;&amp;#x7531;&amp;#x6765;  &amp;#x4E8B;&amp;#x60C5;&amp;#x662F;&amp;#x8FD9;&amp;#x6837;&amp;#x7684;&amp;#xFF0C;&amp;#x76F8;&amp;#x4FE1;&amp;#x6BCF;&amp;#x4E2A;&amp;#x516C;&amp;#x53F8;&amp;#x90FD;&amp;#x6709;&amp;#x81EA;&amp;#x5DF1;&amp;#x7684;&amp;#x5B98;&amp;#x7F51;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在git仓库中彻底清除大文件">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="坑的由来  事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x5751;&amp;#x7684;&amp;#x7531;&amp;#x6765;  &amp;#x4E8B;&amp;#x60C5;&amp;#x662F;&amp;#x8FD9;&amp;#x6837;&amp;#x7684;&amp;#xFF0C;&amp;#x76F8;&amp;#x4FE1;&amp;#x6BCF;&amp;#x4E2A;&amp;#x516C;&amp;#x53F8;&amp;#x90FD;&amp;#x6709;&amp;#x81EA;&amp;#x5DF1;&amp;#x7684;&amp;#x5B98;&amp;#x7F51;&amp;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:01.710Z">
+<meta property="article:published_time" content="2016-07-17T10:58:52.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:01.710Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何在git仓库中彻底清除大文件">
-<meta name="twitter:description" content="坑的由来  事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg">
 
 
@@ -48,7 +48,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -67,7 +69,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -75,7 +77,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -87,15 +89,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -107,7 +114,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -146,95 +153,95 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg" title="monica my baby">
+<img src="/2016/07/17/how-to-clear-huge-files-in-git/unphoto.jpeg" class title="monica my baby">
 
 <blockquote>
-坑的由来
+&#x5751;&#x7684;&#x7531;&#x6765;
 
-<p>事情是这样的，相信每个公司都有自己的官网。我们也不例外，而由于历史及各种不具名的原因，我司先前的程序猿哥哥将许多视频放在了代码仓库里。结果可想而知，原本只有代码的仓库突然间变得无比臃肿(或者是慢慢臃肿)，从早期的几十MB,迅速飙升至1G以上。眼看要挤爆服务器。这时我们总监看不下去了，大手一挥删了所有视频。仓库眼看瞬间缩小。但是，理论上是该缩小的，直到你不经意间瞄了眼——又多了一个G，这时你紧张了，慌了，明明删了视频，怎么仓库竟还变大了。</p>
-<p>这一期，让我们走进git,细细体会git带给我们的欢乐与忧愁。</p>
+<p>&#x4E8B;&#x60C5;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF0C;&#x76F8;&#x4FE1;&#x6BCF;&#x4E2A;&#x516C;&#x53F8;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x5B98;&#x7F51;&#x3002;&#x6211;&#x4EEC;&#x4E5F;&#x4E0D;&#x4F8B;&#x5916;&#xFF0C;&#x800C;&#x7531;&#x4E8E;&#x5386;&#x53F2;&#x53CA;&#x5404;&#x79CD;&#x4E0D;&#x5177;&#x540D;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x6211;&#x53F8;&#x5148;&#x524D;&#x7684;&#x7A0B;&#x5E8F;&#x733F;&#x54E5;&#x54E5;&#x5C06;&#x8BB8;&#x591A;&#x89C6;&#x9891;&#x653E;&#x5728;&#x4E86;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x91CC;&#x3002;&#x7ED3;&#x679C;&#x53EF;&#x60F3;&#x800C;&#x77E5;&#xFF0C;&#x539F;&#x672C;&#x53EA;&#x6709;&#x4EE3;&#x7801;&#x7684;&#x4ED3;&#x5E93;&#x7A81;&#x7136;&#x95F4;&#x53D8;&#x5F97;&#x65E0;&#x6BD4;&#x81C3;&#x80BF;(&#x6216;&#x8005;&#x662F;&#x6162;&#x6162;&#x81C3;&#x80BF;)&#xFF0C;&#x4ECE;&#x65E9;&#x671F;&#x7684;&#x51E0;&#x5341;MB,&#x8FC5;&#x901F;&#x98D9;&#x5347;&#x81F3;1G&#x4EE5;&#x4E0A;&#x3002;&#x773C;&#x770B;&#x8981;&#x6324;&#x7206;&#x670D;&#x52A1;&#x5668;&#x3002;&#x8FD9;&#x65F6;&#x6211;&#x4EEC;&#x603B;&#x76D1;&#x770B;&#x4E0D;&#x4E0B;&#x53BB;&#x4E86;&#xFF0C;&#x5927;&#x624B;&#x4E00;&#x6325;&#x5220;&#x4E86;&#x6240;&#x6709;&#x89C6;&#x9891;&#x3002;&#x4ED3;&#x5E93;&#x773C;&#x770B;&#x77AC;&#x95F4;&#x7F29;&#x5C0F;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;&#x662F;&#x8BE5;&#x7F29;&#x5C0F;&#x7684;&#xFF0C;&#x76F4;&#x5230;&#x4F60;&#x4E0D;&#x7ECF;&#x610F;&#x95F4;&#x7784;&#x4E86;&#x773C;&#x2014;&#x2014;&#x53C8;&#x591A;&#x4E86;&#x4E00;&#x4E2A;G&#xFF0C;&#x8FD9;&#x65F6;&#x4F60;&#x7D27;&#x5F20;&#x4E86;&#xFF0C;&#x614C;&#x4E86;&#xFF0C;&#x660E;&#x660E;&#x5220;&#x4E86;&#x89C6;&#x9891;&#xFF0C;&#x600E;&#x4E48;&#x4ED3;&#x5E93;&#x7ADF;&#x8FD8;&#x53D8;&#x5927;&#x4E86;&#x3002;</p>
+<p>&#x8FD9;&#x4E00;&#x671F;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x8D70;&#x8FDB;git,&#x7EC6;&#x7EC6;&#x4F53;&#x4F1A;git&#x5E26;&#x7ED9;&#x6211;&#x4EEC;&#x7684;&#x6B22;&#x4E50;&#x4E0E;&#x5FE7;&#x6101;&#x3002;</p>
 </blockquote>
 
 <a id="more"></a>
 
-<h3 id="关于git"><a href="#关于git" class="headerlink" title="关于git"></a>关于git</h3><ul>
-<li>每个人都会有过去，git也不例外。<br><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E7%AE%80%E5%8F%B2" target="_blank" rel="noopener">git是个什么东西</a></li>
+<h3 id="&#x5173;&#x4E8E;git"><a href="#&#x5173;&#x4E8E;git" class="headerlink" title="&#x5173;&#x4E8E;git"></a>&#x5173;&#x4E8E;git</h3><ul>
+<li>&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x4F1A;&#x6709;&#x8FC7;&#x53BB;&#xFF0C;git&#x4E5F;&#x4E0D;&#x4F8B;&#x5916;&#x3002;<br><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E7%AE%80%E5%8F%B2" target="_blank" rel="noopener">git&#x662F;&#x4E2A;&#x4EC0;&#x4E48;&#x4E1C;&#x897F;</a></li>
 </ul>
-<h3 id="到底发生了什么"><a href="#到底发生了什么" class="headerlink" title="到底发生了什么"></a>到底发生了什么</h3><p>早些时候我对git的原理并不是很了解，只是随着日常使用，终于开始理解git其实是一个指针指向一次提交的对象，当你在各个分支间切换的时候，指针就随之切换，版本也随之更改。</p>
-<p>那么，git 是如何做到的能在各个版本间无缝切换的呢。即使long long ago的代码，只要来一句<code>git reset --hard sesd54f54sdf5sd4sd5f</code> 照样给你打回原形。</p>
-<p><strong>真相只有一个</strong>，那就是其实所有的版本，不管是否存在了多久，都仍然存在于硬盘里。所以你才可以任性地对代码为所欲为。然而，为所欲为也要付出代价。</p>
-<p>代价就是，你删了几次，就会有几个快照存在于硬盘里。删一个大视频，表面上少了500M空间，实则增加了一次至少500M的历史提交记录，虽然现在的代码仓库里不再有这个视频，但是你试试<code>du -sh .git</code>看看.git 文件大小，是不是有惊喜？我在这儿体会的最恐怖的一次，见证了3个多G的.git。</p>
-<h3 id="如何-solve-it"><a href="#如何-solve-it" class="headerlink" title="如何 solve it"></a>如何 <code>solve it</code></h3><ul>
-<li><p>首先我们看看git相关文件占用的空间，运行<code>git count-objects -v</code></p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">count: <span class="hljs-number">35</span></span><br><span class="line">size: <span class="hljs-number">4404</span></span><br><span class="line"><span class="hljs-keyword">in</span>-pack: <span class="hljs-number">20775</span></span><br><span class="line">packs: <span class="hljs-number">1</span></span><br><span class="line">size-pack: <span class="hljs-number">1502667</span></span><br><span class="line">prune-packable: <span class="hljs-number">0</span></span><br><span class="line">garbage: <span class="hljs-number">1</span></span><br><span class="line">size-garbage: <span class="hljs-number">136679</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="&#x5230;&#x5E95;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;"><a href="#&#x5230;&#x5E95;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;" class="headerlink" title="&#x5230;&#x5E95;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;"></a>&#x5230;&#x5E95;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;</h3><p>&#x65E9;&#x4E9B;&#x65F6;&#x5019;&#x6211;&#x5BF9;git&#x7684;&#x539F;&#x7406;&#x5E76;&#x4E0D;&#x662F;&#x5F88;&#x4E86;&#x89E3;&#xFF0C;&#x53EA;&#x662F;&#x968F;&#x7740;&#x65E5;&#x5E38;&#x4F7F;&#x7528;&#xFF0C;&#x7EC8;&#x4E8E;&#x5F00;&#x59CB;&#x7406;&#x89E3;git&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x6307;&#x5411;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5F53;&#x4F60;&#x5728;&#x5404;&#x4E2A;&#x5206;&#x652F;&#x95F4;&#x5207;&#x6362;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6307;&#x9488;&#x5C31;&#x968F;&#x4E4B;&#x5207;&#x6362;&#xFF0C;&#x7248;&#x672C;&#x4E5F;&#x968F;&#x4E4B;&#x66F4;&#x6539;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#xFF0C;git &#x662F;&#x5982;&#x4F55;&#x505A;&#x5230;&#x7684;&#x80FD;&#x5728;&#x5404;&#x4E2A;&#x7248;&#x672C;&#x95F4;&#x65E0;&#x7F1D;&#x5207;&#x6362;&#x7684;&#x5462;&#x3002;&#x5373;&#x4F7F;long long ago&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x53EA;&#x8981;&#x6765;&#x4E00;&#x53E5;<code>git reset --hard sesd54f54sdf5sd4sd5f</code> &#x7167;&#x6837;&#x7ED9;&#x4F60;&#x6253;&#x56DE;&#x539F;&#x5F62;&#x3002;</p>
+<p><strong>&#x771F;&#x76F8;&#x53EA;&#x6709;&#x4E00;&#x4E2A;</strong>&#xFF0C;&#x90A3;&#x5C31;&#x662F;&#x5176;&#x5B9E;&#x6240;&#x6709;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x5426;&#x5B58;&#x5728;&#x4E86;&#x591A;&#x4E45;&#xFF0C;&#x90FD;&#x4ECD;&#x7136;&#x5B58;&#x5728;&#x4E8E;&#x786C;&#x76D8;&#x91CC;&#x3002;&#x6240;&#x4EE5;&#x4F60;&#x624D;&#x53EF;&#x4EE5;&#x4EFB;&#x6027;&#x5730;&#x5BF9;&#x4EE3;&#x7801;&#x4E3A;&#x6240;&#x6B32;&#x4E3A;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x4E3A;&#x6240;&#x6B32;&#x4E3A;&#x4E5F;&#x8981;&#x4ED8;&#x51FA;&#x4EE3;&#x4EF7;&#x3002;</p>
+<p>&#x4EE3;&#x4EF7;&#x5C31;&#x662F;&#xFF0C;&#x4F60;&#x5220;&#x4E86;&#x51E0;&#x6B21;&#xFF0C;&#x5C31;&#x4F1A;&#x6709;&#x51E0;&#x4E2A;&#x5FEB;&#x7167;&#x5B58;&#x5728;&#x4E8E;&#x786C;&#x76D8;&#x91CC;&#x3002;&#x5220;&#x4E00;&#x4E2A;&#x5927;&#x89C6;&#x9891;&#xFF0C;&#x8868;&#x9762;&#x4E0A;&#x5C11;&#x4E86;500M&#x7A7A;&#x95F4;&#xFF0C;&#x5B9E;&#x5219;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x6B21;&#x81F3;&#x5C11;500M&#x7684;&#x5386;&#x53F2;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#xFF0C;&#x867D;&#x7136;&#x73B0;&#x5728;&#x7684;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x91CC;&#x4E0D;&#x518D;&#x6709;&#x8FD9;&#x4E2A;&#x89C6;&#x9891;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x8BD5;&#x8BD5;<code>du -sh .git</code>&#x770B;&#x770B;.git &#x6587;&#x4EF6;&#x5927;&#x5C0F;&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x6709;&#x60CA;&#x559C;&#xFF1F;&#x6211;&#x5728;&#x8FD9;&#x513F;&#x4F53;&#x4F1A;&#x7684;&#x6700;&#x6050;&#x6016;&#x7684;&#x4E00;&#x6B21;&#xFF0C;&#x89C1;&#x8BC1;&#x4E86;3&#x4E2A;&#x591A;G&#x7684;.git&#x3002;</p>
+<h3 id="&#x5982;&#x4F55;-solve-it"><a href="#&#x5982;&#x4F55;-solve-it" class="headerlink" title="&#x5982;&#x4F55; solve it"></a>&#x5982;&#x4F55; <code>solve it</code></h3><ul>
+<li><p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x770B;&#x770B;git&#x76F8;&#x5173;&#x6587;&#x4EF6;&#x5360;&#x7528;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x8FD0;&#x884C;<code>git count-objects -v</code></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">count: <span class="hljs-number">35</span></span><br><span class="line">size: <span class="hljs-number">4404</span></span><br><span class="line"><span class="hljs-keyword">in</span>-pack: <span class="hljs-number">20775</span></span><br><span class="line">packs: <span class="hljs-number">1</span></span><br><span class="line">size-pack: <span class="hljs-number">1502667</span></span><br><span class="line">prune-packable: <span class="hljs-number">0</span></span><br><span class="line">garbage: <span class="hljs-number">1</span></span><br><span class="line">size-garbage: <span class="hljs-number">136679</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p><code>size-pack</code>以千字节为单位表示，那么这里就有1.5G大小，这对代码仓库来说可是个恐怖的数字了。</p>
+<li><p><code>size-pack</code>&#x4EE5;&#x5343;&#x5B57;&#x8282;&#x4E3A;&#x5355;&#x4F4D;&#x8868;&#x793A;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x91CC;&#x5C31;&#x6709;1.5G&#x5927;&#x5C0F;&#xFF0C;&#x8FD9;&#x5BF9;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x6765;&#x8BF4;&#x53EF;&#x662F;&#x4E2A;&#x6050;&#x6016;&#x7684;&#x6570;&#x5B57;&#x4E86;&#x3002;</p>
 </li>
-<li><p>那么让我们来找出罪魁祸首——到底是哪些大文件在混淆视听。</p>
+<li><p>&#x90A3;&#x4E48;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x627E;&#x51FA;&#x7F6A;&#x9B41;&#x7978;&#x9996;&#x2014;&#x2014;&#x5230;&#x5E95;&#x662F;&#x54EA;&#x4E9B;&#x5927;&#x6587;&#x4EF6;&#x5728;&#x6DF7;&#x6DC6;&#x89C6;&#x542C;&#x3002;</p>
 </li>
-<li><p>将所有含这些大文件的历史提交记录，一个不漏的找出来。</p>
+<li><p>&#x5C06;&#x6240;&#x6709;&#x542B;&#x8FD9;&#x4E9B;&#x5927;&#x6587;&#x4EF6;&#x7684;&#x5386;&#x53F2;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#xFF0C;&#x4E00;&#x4E2A;&#x4E0D;&#x6F0F;&#x7684;&#x627E;&#x51FA;&#x6765;&#x3002;</p>
 <ul>
-<li><code>git verify-pack</code>可以识别出大对象，使用<code>sort</code>参数对输出的5列信息排序，再进行定向</li>
-<li>运行<code>git verify-pack -v .git/objects/pack/pack-15esdkfdksjfd...asd.idx | sort -k 3 -n | tail -5</code></li>
-<li>如果你的仓库确实有点臃肿的话，让代码飞一会儿。</li>
-<li>得到以下结果:</li>
+<li><code>git verify-pack</code>&#x53EF;&#x4EE5;&#x8BC6;&#x522B;&#x51FA;&#x5927;&#x5BF9;&#x8C61;&#xFF0C;&#x4F7F;&#x7528;<code>sort</code>&#x53C2;&#x6570;&#x5BF9;&#x8F93;&#x51FA;&#x7684;5&#x5217;&#x4FE1;&#x606F;&#x6392;&#x5E8F;&#xFF0C;&#x518D;&#x8FDB;&#x884C;&#x5B9A;&#x5411;</li>
+<li>&#x8FD0;&#x884C;<code>git verify-pack -v .git/objects/pack/pack-15esdkfdksjfd...asd.idx | sort -k 3 -n | tail -5</code></li>
+<li>&#x5982;&#x679C;&#x4F60;&#x7684;&#x4ED3;&#x5E93;&#x786E;&#x5B9E;&#x6709;&#x70B9;&#x81C3;&#x80BF;&#x7684;&#x8BDD;&#xFF0C;&#x8BA9;&#x4EE3;&#x7801;&#x98DE;&#x4E00;&#x4F1A;&#x513F;&#x3002;</li>
+<li>&#x5F97;&#x5230;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;:</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b9e5fc1ea2a87e95ddea6fed47f29c184595485b blob   <span class="hljs-number">70580712</span> <span class="hljs-number">62447447</span> <span class="hljs-number">1360078567</span></span><br><span class="line">b8b3833e7f8e8207033b9f7e34e497a3207ecae2 blob   <span class="hljs-number">103319718</span> <span class="hljs-number">102366768</span> <span class="hljs-number">1157294281</span></span><br><span class="line">bc4f928a65692d19ab8d9378778463c13be7204c blob   <span class="hljs-number">117527265</span> <span class="hljs-number">117467079</span> <span class="hljs-number">1026728111</span></span><br><span class="line"><span class="hljs-number">52565</span>aeb9009bb4d07ca8d7c130425d9bf31f7b2 blob   <span class="hljs-number">201567615</span> <span class="hljs-number">181006235</span> <span class="hljs-number">788162224</span></span><br><span class="line"><span class="hljs-number">98</span>c5dc977918aaf3b45a999ae92e031b4b15191b blob   <span class="hljs-number">590381017</span> <span class="hljs-number">589431074</span> <span class="hljs-number">198731150</span></span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b9e5fc1ea2a87e95ddea6fed47f29c184595485b blob   <span class="hljs-number">70580712</span> <span class="hljs-number">62447447</span> <span class="hljs-number">1360078567</span></span><br><span class="line">b8b3833e7f8e8207033b9f7e34e497a3207ecae2 blob   <span class="hljs-number">103319718</span> <span class="hljs-number">102366768</span> <span class="hljs-number">1157294281</span></span><br><span class="line">bc4f928a65692d19ab8d9378778463c13be7204c blob   <span class="hljs-number">117527265</span> <span class="hljs-number">117467079</span> <span class="hljs-number">1026728111</span></span><br><span class="line"><span class="hljs-number">52565</span>aeb9009bb4d07ca8d7c130425d9bf31f7b2 blob   <span class="hljs-number">201567615</span> <span class="hljs-number">181006235</span> <span class="hljs-number">788162224</span></span><br><span class="line"><span class="hljs-number">98</span>c5dc977918aaf3b45a999ae92e031b4b15191b blob   <span class="hljs-number">590381017</span> <span class="hljs-number">589431074</span> <span class="hljs-number">198731150</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p><strong>unbelievable!</strong>都是huge的文件!最底下的那家伙，到底是什么啊！</p>
+<li><p><strong>unbelievable!</strong>&#x90FD;&#x662F;huge&#x7684;&#x6587;&#x4EF6;!&#x6700;&#x5E95;&#x4E0B;&#x7684;&#x90A3;&#x5BB6;&#x4F19;&#xFF0C;&#x5230;&#x5E95;&#x662F;&#x4EC0;&#x4E48;&#x554A;&#xFF01;</p>
 </li>
-<li><p>让我们用rev-list命令来查看commit 的 SHA值和文件路径：</p>
+<li><p>&#x8BA9;&#x6211;&#x4EEC;&#x7528;rev-list&#x547D;&#x4EE4;&#x6765;&#x67E5;&#x770B;commit &#x7684; SHA&#x503C;&#x548C;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF1A;</p>
 </li>
 <li><p><code>git rev-list --objects --all | grep 98c5dc9779</code></p>
-<p> <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">98</span>c5dc977918aaf3b45a999ae92e031b4b15191b public/video/feng-mv.mp4</span><br></pre></td></tr></table></figure></p>
+<p> </p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">98</span>c5dc977918aaf3b45a999ae92e031b4b15191b public/video/feng-mv.mp4</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p>这次倒很快，答案揭晓——是公司宣传视频。我们明明有七牛。这玩意儿就不该出现在这里。</p>
+<li><p>&#x8FD9;&#x6B21;&#x5012;&#x5F88;&#x5FEB;&#xFF0C;&#x7B54;&#x6848;&#x63ED;&#x6653;&#x2014;&#x2014;&#x662F;&#x516C;&#x53F8;&#x5BA3;&#x4F20;&#x89C6;&#x9891;&#x3002;&#x6211;&#x4EEC;&#x660E;&#x660E;&#x6709;&#x4E03;&#x725B;&#x3002;&#x8FD9;&#x73A9;&#x610F;&#x513F;&#x5C31;&#x4E0D;&#x8BE5;&#x51FA;&#x73B0;&#x5728;&#x8FD9;&#x91CC;&#x3002;</p>
 </li>
-<li><p>再来看看所有包含这家伙的提交历史:</p>
+<li><p>&#x518D;&#x6765;&#x770B;&#x770B;&#x6240;&#x6709;&#x5305;&#x542B;&#x8FD9;&#x5BB6;&#x4F19;&#x7684;&#x63D0;&#x4EA4;&#x5386;&#x53F2;:</p>
 </li>
 <li><p><code>git log --pretty=oneline --branches -- public/video/feng.mp4</code></p>
-<p> <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">9364</span>a4f65f03d3a6d0873106ba21bd3172418176 chore: 删除视频文件</span><br><span class="line">da24a01e46876a495518f9617501b4b360177f2b improve(官网首页)</span><br></pre></td></tr></table></figure></p>
+<p> </p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">9364</span>a4f65f03d3a6d0873106ba21bd3172418176 chore: &#x5220;&#x9664;&#x89C6;&#x9891;&#x6587;&#x4EF6;</span><br><span class="line">da24a01e46876a495518f9617501b4b360177f2b improve(&#x5B98;&#x7F51;&#x9996;&#x9875;)</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p>一个大文件的一删一减两个操作，就会占据很多空间，更何况还有其他的较大文件。</p>
+<li><p>&#x4E00;&#x4E2A;&#x5927;&#x6587;&#x4EF6;&#x7684;&#x4E00;&#x5220;&#x4E00;&#x51CF;&#x4E24;&#x4E2A;&#x64CD;&#x4F5C;&#xFF0C;&#x5C31;&#x4F1A;&#x5360;&#x636E;&#x5F88;&#x591A;&#x7A7A;&#x95F4;&#xFF0C;&#x66F4;&#x4F55;&#x51B5;&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x7684;&#x8F83;&#x5927;&#x6587;&#x4EF6;&#x3002;</p>
 </li>
-<li><p>找到了根源所在，是时候让我们大干一场:</p>
+<li><p>&#x627E;&#x5230;&#x4E86;&#x6839;&#x6E90;&#x6240;&#x5728;&#xFF0C;&#x662F;&#x65F6;&#x5019;&#x8BA9;&#x6211;&#x4EEC;&#x5927;&#x5E72;&#x4E00;&#x573A;:</p>
 <ul>
-<li><code>git filter-branch --index-filter &#39;git rm --ignore-unmatch --cached public/video/feng.mp4&#39; -- da24a01^..</code></li>
-<li>使用<code>filter-branch</code>重写所有相关的提交历史。</li>
-<li><code>index-filter</code> 修改暂存区域或索引。</li>
-<li><code>git rm --cache</code> 从git仓库里删除文件。</li>
-<li><code>ignore-unmatch</code> 忽略不匹配文件的提交记录，不会抛出错误。</li>
-<li>最后一个哈希值指重写从这次提交开始的所有提交记录，避免索引所有的提交历史</li>
-<li>好了，开始运行吧。一阵眼花缭乱的滚动之后，它宣布重写完成。</li>
+<li><code>git filter-branch --index-filter &apos;git rm --ignore-unmatch --cached public/video/feng.mp4&apos; -- da24a01^..</code></li>
+<li>&#x4F7F;&#x7528;<code>filter-branch</code>&#x91CD;&#x5199;&#x6240;&#x6709;&#x76F8;&#x5173;&#x7684;&#x63D0;&#x4EA4;&#x5386;&#x53F2;&#x3002;</li>
+<li><code>index-filter</code> &#x4FEE;&#x6539;&#x6682;&#x5B58;&#x533A;&#x57DF;&#x6216;&#x7D22;&#x5F15;&#x3002;</li>
+<li><code>git rm --cache</code> &#x4ECE;git&#x4ED3;&#x5E93;&#x91CC;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x3002;</li>
+<li><code>ignore-unmatch</code> &#x5FFD;&#x7565;&#x4E0D;&#x5339;&#x914D;&#x6587;&#x4EF6;&#x7684;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#xFF0C;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x9519;&#x8BEF;&#x3002;</li>
+<li>&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x54C8;&#x5E0C;&#x503C;&#x6307;&#x91CD;&#x5199;&#x4ECE;&#x8FD9;&#x6B21;&#x63D0;&#x4EA4;&#x5F00;&#x59CB;&#x7684;&#x6240;&#x6709;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#xFF0C;&#x907F;&#x514D;&#x7D22;&#x5F15;&#x6240;&#x6709;&#x7684;&#x63D0;&#x4EA4;&#x5386;&#x53F2;</li>
+<li>&#x597D;&#x4E86;&#xFF0C;&#x5F00;&#x59CB;&#x8FD0;&#x884C;&#x5427;&#x3002;&#x4E00;&#x9635;&#x773C;&#x82B1;&#x7F2D;&#x4E71;&#x7684;&#x6EDA;&#x52A8;&#x4E4B;&#x540E;&#xFF0C;&#x5B83;&#x5BA3;&#x5E03;&#x91CD;&#x5199;&#x5B8C;&#x6210;&#x3002;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">Rewrite <span class="hljs-number">38</span>f2b11070b7e21cbce465b5f6b384156e3a8e61 (<span class="hljs-number">475</span>/<span class="hljs-number">475</span>)</span><br><span class="line">Ref <span class="hljs-string">'refs/heads/master'</span> was rewritten</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">Rewrite <span class="hljs-number">38</span>f2b11070b7e21cbce465b5f6b384156e3a8e61 (<span class="hljs-number">475</span>/<span class="hljs-number">475</span>)</span><br><span class="line">Ref <span class="hljs-string">&apos;refs/heads/master&apos;</span> was rewritten</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p>此时的历史提交记录中已经不再会有指向那位大文件的引用了。</p>
+<li><p>&#x6B64;&#x65F6;&#x7684;&#x5386;&#x53F2;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#x4E2D;&#x5DF2;&#x7ECF;&#x4E0D;&#x518D;&#x4F1A;&#x6709;&#x6307;&#x5411;&#x90A3;&#x4F4D;&#x5927;&#x6587;&#x4EF6;&#x7684;&#x5F15;&#x7528;&#x4E86;&#x3002;</p>
 </li>
-<li><p>但仍然需要以下两条命令来删除refs对他的引用(关于这部分的理解我也有待深究)。</p>
-<p><strong><em>你的历史中将不再包含对那个文件的引用。 不过，你的引用日志和你在 .git/refs/original 通过     filter-branch 选项添加的新引用中还存有对这个文件的引用，所以你必须移除它们然后重新打包数据    库。 在重新打包前需要移除任何包含指向那些旧提交的指针的文件:</em></strong></p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rm -Rf .git/refs/original</span><br><span class="line">rm -Rf .git/logs/</span><br><span class="line">git gc</span><br><span class="line">Counting objects: <span class="hljs-number">21406</span>, done.</span><br><span class="line">Delta compression using up to <span class="hljs-number">4</span> threads.</span><br><span class="line">Compressing objects: <span class="hljs-number">100</span>% (<span class="hljs-number">9323</span>/<span class="hljs-number">9323</span>), done.</span><br><span class="line">Writing objects: <span class="hljs-number">100</span>% (<span class="hljs-number">21406</span>/<span class="hljs-number">21406</span>), done.</span><br><span class="line">Total <span class="hljs-number">21406</span> (delta <span class="hljs-number">11867</span>), reused <span class="hljs-number">20640</span> (delta <span class="hljs-number">11348</span>)</span><br></pre></td></tr></table></figure></p>
+<li><p>&#x4F46;&#x4ECD;&#x7136;&#x9700;&#x8981;&#x4EE5;&#x4E0B;&#x4E24;&#x6761;&#x547D;&#x4EE4;&#x6765;&#x5220;&#x9664;refs&#x5BF9;&#x4ED6;&#x7684;&#x5F15;&#x7528;(&#x5173;&#x4E8E;&#x8FD9;&#x90E8;&#x5206;&#x7684;&#x7406;&#x89E3;&#x6211;&#x4E5F;&#x6709;&#x5F85;&#x6DF1;&#x7A76;)&#x3002;</p>
+<p><strong><em>&#x4F60;&#x7684;&#x5386;&#x53F2;&#x4E2D;&#x5C06;&#x4E0D;&#x518D;&#x5305;&#x542B;&#x5BF9;&#x90A3;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5F15;&#x7528;&#x3002; &#x4E0D;&#x8FC7;&#xFF0C;&#x4F60;&#x7684;&#x5F15;&#x7528;&#x65E5;&#x5FD7;&#x548C;&#x4F60;&#x5728; .git/refs/original &#x901A;&#x8FC7;     filter-branch &#x9009;&#x9879;&#x6DFB;&#x52A0;&#x7684;&#x65B0;&#x5F15;&#x7528;&#x4E2D;&#x8FD8;&#x5B58;&#x6709;&#x5BF9;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x5FC5;&#x987B;&#x79FB;&#x9664;&#x5B83;&#x4EEC;&#x7136;&#x540E;&#x91CD;&#x65B0;&#x6253;&#x5305;&#x6570;&#x636E;    &#x5E93;&#x3002; &#x5728;&#x91CD;&#x65B0;&#x6253;&#x5305;&#x524D;&#x9700;&#x8981;&#x79FB;&#x9664;&#x4EFB;&#x4F55;&#x5305;&#x542B;&#x6307;&#x5411;&#x90A3;&#x4E9B;&#x65E7;&#x63D0;&#x4EA4;&#x7684;&#x6307;&#x9488;&#x7684;&#x6587;&#x4EF6;:</em></strong></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rm -Rf .git/refs/original</span><br><span class="line">rm -Rf .git/logs/</span><br><span class="line">git gc</span><br><span class="line">Counting objects: <span class="hljs-number">21406</span>, done.</span><br><span class="line">Delta compression using up to <span class="hljs-number">4</span> threads.</span><br><span class="line">Compressing objects: <span class="hljs-number">100</span>% (<span class="hljs-number">9323</span>/<span class="hljs-number">9323</span>), done.</span><br><span class="line">Writing objects: <span class="hljs-number">100</span>% (<span class="hljs-number">21406</span>/<span class="hljs-number">21406</span>), done.</span><br><span class="line">Total <span class="hljs-number">21406</span> (delta <span class="hljs-number">11867</span>), reused <span class="hljs-number">20640</span> (delta <span class="hljs-number">11348</span>)</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p>再看看节约了多少空间:</p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git count-objects -v</span><br><span class="line">warning: garbage found: .git/objects/pack/tmp_pack_zG7GCb</span><br><span class="line">count: <span class="hljs-number">154</span></span><br><span class="line">size: <span class="hljs-number">4884</span></span><br><span class="line"><span class="hljs-keyword">in</span>-pack: <span class="hljs-number">21406</span></span><br><span class="line">packs: <span class="hljs-number">1</span></span><br><span class="line">size-pack: <span class="hljs-number">1502752</span></span><br><span class="line">prune-packable: <span class="hljs-number">0</span></span><br><span class="line">garbage: <span class="hljs-number">1</span></span><br><span class="line">size-garbage: <span class="hljs-number">136679</span></span><br></pre></td></tr></table></figure></p>
+<li><p>&#x518D;&#x770B;&#x770B;&#x8282;&#x7EA6;&#x4E86;&#x591A;&#x5C11;&#x7A7A;&#x95F4;:</p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git count-objects -v</span><br><span class="line">warning: garbage found: .git/objects/pack/tmp_pack_zG7GCb</span><br><span class="line">count: <span class="hljs-number">154</span></span><br><span class="line">size: <span class="hljs-number">4884</span></span><br><span class="line"><span class="hljs-keyword">in</span>-pack: <span class="hljs-number">21406</span></span><br><span class="line">packs: <span class="hljs-number">1</span></span><br><span class="line">size-pack: <span class="hljs-number">1502752</span></span><br><span class="line">prune-packable: <span class="hljs-number">0</span></span><br><span class="line">garbage: <span class="hljs-number">1</span></span><br><span class="line">size-garbage: <span class="hljs-number">136679</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
-<li><p>尽管表面上看去没有什么软用，但是当我运行<code>du -sh .git</code>查看大小时，发现.  git文件夹确实缩小了。</p>
+<li><p>&#x5C3D;&#x7BA1;&#x8868;&#x9762;&#x4E0A;&#x770B;&#x53BB;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x8F6F;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x6211;&#x8FD0;&#x884C;<code>du -sh .git</code>&#x67E5;&#x770B;&#x5927;&#x5C0F;&#x65F6;&#xFF0C;&#x53D1;&#x73B0;.  git&#x6587;&#x4EF6;&#x5939;&#x786E;&#x5B9E;&#x7F29;&#x5C0F;&#x4E86;&#x3002;</p>
 </li>
-<li><p>现在这个视频文件存在于松散对象(size)中。虽然它没有彻底消失，但已经不再出现于推送或克隆中。</p>
+<li><p>&#x73B0;&#x5728;&#x8FD9;&#x4E2A;&#x89C6;&#x9891;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x4E8E;&#x677E;&#x6563;&#x5BF9;&#x8C61;(size)&#x4E2D;&#x3002;&#x867D;&#x7136;&#x5B83;&#x6CA1;&#x6709;&#x5F7B;&#x5E95;&#x6D88;&#x5931;&#xFF0C;&#x4F46;&#x5DF2;&#x7ECF;&#x4E0D;&#x518D;&#x51FA;&#x73B0;&#x4E8E;&#x63A8;&#x9001;&#x6216;&#x514B;&#x9686;&#x4E2D;&#x3002;</p>
 </li>
-<li><p>如果需要彻底移除，运行<code>git prune --expire now</code>。</p>
+<li><p>&#x5982;&#x679C;&#x9700;&#x8981;&#x5F7B;&#x5E95;&#x79FB;&#x9664;&#xFF0C;&#x8FD0;&#x884C;<code>git prune --expire now</code>&#x3002;</p>
 </li>
-<li><p>再次查看    <code>git count-objects -v</code>。</p>
+<li><p>&#x518D;&#x6B21;&#x67E5;&#x770B;    <code>git count-objects -v</code>&#x3002;</p>
 </li>
 </ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li>讲道理走到这一步应当是成功了，只是刚才运行<code>git count-objects -v</code>的结果并不那么尽如人意，它并没有缩减的很明显。</li>
-<li>这点在以后解决成功时再另起一篇。</li>
-<li>最后一点–作为一个前端攻城狮，可不能什么都往城墙里放啊!!!</li>
+<h3 id="&#x5C0F;&#x7ED3;"><a href="#&#x5C0F;&#x7ED3;" class="headerlink" title="&#x5C0F;&#x7ED3;"></a>&#x5C0F;&#x7ED3;</h3><ul>
+<li>&#x8BB2;&#x9053;&#x7406;&#x8D70;&#x5230;&#x8FD9;&#x4E00;&#x6B65;&#x5E94;&#x5F53;&#x662F;&#x6210;&#x529F;&#x4E86;&#xFF0C;&#x53EA;&#x662F;&#x521A;&#x624D;&#x8FD0;&#x884C;<code>git count-objects -v</code>&#x7684;&#x7ED3;&#x679C;&#x5E76;&#x4E0D;&#x90A3;&#x4E48;&#x5C3D;&#x5982;&#x4EBA;&#x610F;&#xFF0C;&#x5B83;&#x5E76;&#x6CA1;&#x6709;&#x7F29;&#x51CF;&#x7684;&#x5F88;&#x660E;&#x663E;&#x3002;</li>
+<li>&#x8FD9;&#x70B9;&#x5728;&#x4EE5;&#x540E;&#x89E3;&#x51B3;&#x6210;&#x529F;&#x65F6;&#x518D;&#x53E6;&#x8D77;&#x4E00;&#x7BC7;&#x3002;</li>
+<li>&#x6700;&#x540E;&#x4E00;&#x70B9;&#x2013;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x524D;&#x7AEF;&#x653B;&#x57CE;&#x72EE;&#xFF0C;&#x53EF;&#x4E0D;&#x80FD;&#x4EC0;&#x4E48;&#x90FD;&#x5F80;&#x57CE;&#x5899;&#x91CC;&#x653E;&#x554A;!!!</li>
 </ul>
-
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -304,7 +311,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -316,7 +323,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -325,7 +333,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -413,7 +421,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -549,14 +557,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -579,7 +589,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>H5 兼容问题整理及解决方案 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,20 +16,20 @@
 
 
 
-    <meta name="description" content="一些 H5 的兼容问题及解决方案。推荐：★★★">
-<meta name="keywords" content="JavaScript">
+    <meta name="description" content="&amp;#x4E00;&amp;#x4E9B; H5 &amp;#x7684;&amp;#x517C;&amp;#x5BB9;&amp;#x95EE;&amp;#x9898;&amp;#x53CA;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848;&amp;#x3002;&amp;#x63A8;&amp;#x8350;&amp;#xFF1A;&amp;#x2605;&amp;#x2605;&amp;#x2605;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="H5 兼容问题整理及解决方案">
 <meta property="og:url" content="http://kyriejoshua.github.io/2019/11/30/something-about-h5/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="一些 H5 的兼容问题及解决方案。推荐：★★★">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x4E9B; H5 &amp;#x7684;&amp;#x517C;&amp;#x5BB9;&amp;#x95EE;&amp;#x9898;&amp;#x53CA;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848;&amp;#x3002;&amp;#x63A8;&amp;#x8350;&amp;#xFF1A;&amp;#x2605;&amp;#x2605;&amp;#x2605;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/11/30/something-about-h5/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2019/11/30/something-about-h5/demo.png">
-<meta property="og:updated_time" content="2020-04-05T14:52:11.048Z">
+<meta property="article:published_time" content="2019-11-30T13:59:22.000Z">
+<meta property="article:modified_time" content="2020-04-05T14:52:11.048Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="H5 兼容问题整理及解决方案">
-<meta name="twitter:description" content="一些 H5 的兼容问题及解决方案。推荐：★★★">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2019/11/30/something-about-h5/unphoto.jpg">
 
 
@@ -49,7 +49,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -68,7 +70,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -76,7 +78,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -88,15 +90,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -108,7 +115,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -147,94 +154,94 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2019/11/30/something-about-h5/unphoto.jpg" alt></p>
-<p>一些 H5 的兼容问题及解决方案。<br>推荐：★★★</p>
+<p>&#x4E00;&#x4E9B; H5 &#x7684;&#x517C;&#x5BB9;&#x95EE;&#x9898;&#x53CA;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;<br>&#x63A8;&#x8350;&#xFF1A;&#x2605;&#x2605;&#x2605;</p>
 <a id="more"></a>
 
 <ul>
 <li><a href="#issue1">Issue1</a></li>
 <li><a href="#issue2">Issue2</a></li>
-<li><a href="#小结">小结</a></li>
+<li><a href="#&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</a></li>
 </ul>
-<h3 id="Issue1"><a href="#Issue1" class="headerlink" title="Issue1"></a>Issue1</h3><p>简述：input 设置为只读后，ios 中仍然可以点击。</p>
+<h3 id="Issue1"><a href="#Issue1" class="headerlink" title="Issue1"></a>Issue1</h3><p>&#x7B80;&#x8FF0;&#xFF1A;input &#x8BBE;&#x7F6E;&#x4E3A;&#x53EA;&#x8BFB;&#x540E;&#xFF0C;ios &#x4E2D;&#x4ECD;&#x7136;&#x53EF;&#x4EE5;&#x70B9;&#x51FB;&#x3002;</p>
 <ul>
-<li><p>业务场景：</p>
+<li><p>&#x4E1A;&#x52A1;&#x573A;&#x666F;&#xFF1A;</p>
 <ul>
-<li>页面某个表单填写完成后，手机号等剩余输入框内容设置为只读。</li>
+<li>&#x9875;&#x9762;&#x67D0;&#x4E2A;&#x8868;&#x5355;&#x586B;&#x5199;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x624B;&#x673A;&#x53F7;&#x7B49;&#x5269;&#x4F59;&#x8F93;&#x5165;&#x6846;&#x5185;&#x5BB9;&#x8BBE;&#x7F6E;&#x4E3A;&#x53EA;&#x8BFB;&#x3002;</li>
 </ul>
 </li>
-<li><p>具体问题：</p>
+<li><p>&#x5177;&#x4F53;&#x95EE;&#x9898;&#xFF1A;</p>
 <ul>
-<li>input 设置为只读后，ios 上仍然可点击，可以上下切换，交互上比较怪异。</li>
+<li>input &#x8BBE;&#x7F6E;&#x4E3A;&#x53EA;&#x8BFB;&#x540E;&#xFF0C;ios &#x4E0A;&#x4ECD;&#x7136;&#x53EF;&#x70B9;&#x51FB;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0A;&#x4E0B;&#x5207;&#x6362;&#xFF0C;&#x4EA4;&#x4E92;&#x4E0A;&#x6BD4;&#x8F83;&#x602A;&#x5F02;&#x3002;</li>
 </ul>
 </li>
-<li><p>解决思路：</p>
+<li><p>&#x89E3;&#x51B3;&#x601D;&#x8DEF;&#xFF1A;</p>
 <ul>
-<li>最初的角度是从取消元素的默认事件切入，<code>event.preventDefault()</code>. 但是不生效。</li>
-<li>因为 <code>input</code> 的默认事件是当值变化时触发，而不是点击事件。</li>
-<li>但我仍然觉得需要从事件的角度触发，那么  <strong><code>js</code> 不行，试试 <code>css</code>?</strong></li>
-<li>查阅后发现还真有属性来控制鼠标事件 —— <code>pointer-events</code></li>
-<li><em>这个属性指定当前元素在什么情况下成为鼠标事件的目标。</em></li>
-<li>在当前的场景下，答案自然是任何情况下，都不要成为鼠标事件目标，这样，元素变不可点击了。</li>
+<li>&#x6700;&#x521D;&#x7684;&#x89D2;&#x5EA6;&#x662F;&#x4ECE;&#x53D6;&#x6D88;&#x5143;&#x7D20;&#x7684;&#x9ED8;&#x8BA4;&#x4E8B;&#x4EF6;&#x5207;&#x5165;&#xFF0C;<code>event.preventDefault()</code>. &#x4F46;&#x662F;&#x4E0D;&#x751F;&#x6548;&#x3002;</li>
+<li>&#x56E0;&#x4E3A; <code>input</code> &#x7684;&#x9ED8;&#x8BA4;&#x4E8B;&#x4EF6;&#x662F;&#x5F53;&#x503C;&#x53D8;&#x5316;&#x65F6;&#x89E6;&#x53D1;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;</li>
+<li>&#x4F46;&#x6211;&#x4ECD;&#x7136;&#x89C9;&#x5F97;&#x9700;&#x8981;&#x4ECE;&#x4E8B;&#x4EF6;&#x7684;&#x89D2;&#x5EA6;&#x89E6;&#x53D1;&#xFF0C;&#x90A3;&#x4E48;  <strong><code>js</code> &#x4E0D;&#x884C;&#xFF0C;&#x8BD5;&#x8BD5; <code>css</code>?</strong></li>
+<li>&#x67E5;&#x9605;&#x540E;&#x53D1;&#x73B0;&#x8FD8;&#x771F;&#x6709;&#x5C5E;&#x6027;&#x6765;&#x63A7;&#x5236;&#x9F20;&#x6807;&#x4E8B;&#x4EF6; &#x2014;&#x2014; <code>pointer-events</code></li>
+<li><em>&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x6307;&#x5B9A;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x5728;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;&#x6210;&#x4E3A;&#x9F20;&#x6807;&#x4E8B;&#x4EF6;&#x7684;&#x76EE;&#x6807;&#x3002;</em></li>
+<li>&#x5728;&#x5F53;&#x524D;&#x7684;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x7B54;&#x6848;&#x81EA;&#x7136;&#x662F;&#x4EFB;&#x4F55;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x90FD;&#x4E0D;&#x8981;&#x6210;&#x4E3A;&#x9F20;&#x6807;&#x4E8B;&#x4EF6;&#x76EE;&#x6807;&#xFF0C;&#x8FD9;&#x6837;&#xFF0C;&#x5143;&#x7D20;&#x53D8;&#x4E0D;&#x53EF;&#x70B9;&#x51FB;&#x4E86;&#x3002;</li>
 </ul>
 </li>
-<li><p>解决方案：</p>
-<p><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">input</span> &#123;</span><br><span class="line">	<span class="hljs-attribute">pointer-events</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<li><p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</p>
+<p></p><figure class="highlight css hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">input</span> {</span><br><span class="line">	<span class="hljs-attribute">pointer-events</span>: none;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
 </ul>
-<h4 id="pointer-events文档地址"><a href="#pointer-events文档地址" class="headerlink" title="pointer-events文档地址"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/pointer-events" target="_blank" rel="noopener">pointer-events文档地址</a></h4><h3 id="Issue2"><a href="#Issue2" class="headerlink" title="Issue2"></a>Issue2</h3><p>简述：ios 端键盘弹起后，直接关闭键盘，会导致底部区域多出一片空白——原先键盘占据的位置。</p>
+<h4 id="pointer-events&#x6587;&#x6863;&#x5730;&#x5740;"><a href="#pointer-events&#x6587;&#x6863;&#x5730;&#x5740;" class="headerlink" title="pointer-events&#x6587;&#x6863;&#x5730;&#x5740;"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/pointer-events" target="_blank" rel="noopener">pointer-events&#x6587;&#x6863;&#x5730;&#x5740;</a></h4><h3 id="Issue2"><a href="#Issue2" class="headerlink" title="Issue2"></a>Issue2</h3><p>&#x7B80;&#x8FF0;&#xFF1A;ios &#x7AEF;&#x952E;&#x76D8;&#x5F39;&#x8D77;&#x540E;&#xFF0C;&#x76F4;&#x63A5;&#x5173;&#x95ED;&#x952E;&#x76D8;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x5E95;&#x90E8;&#x533A;&#x57DF;&#x591A;&#x51FA;&#x4E00;&#x7247;&#x7A7A;&#x767D;&#x2014;&#x2014;&#x539F;&#x5148;&#x952E;&#x76D8;&#x5360;&#x636E;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
 <ul>
-<li>业务场景：<ul>
-<li>在某些申请贷款的业务场景里，存在页面有许多输入项，输入内容几乎占据整个页面。如下图。</li>
+<li>&#x4E1A;&#x52A1;&#x573A;&#x666F;&#xFF1A;<ul>
+<li>&#x5728;&#x67D0;&#x4E9B;&#x7533;&#x8BF7;&#x8D37;&#x6B3E;&#x7684;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x91CC;&#xFF0C;&#x5B58;&#x5728;&#x9875;&#x9762;&#x6709;&#x8BB8;&#x591A;&#x8F93;&#x5165;&#x9879;&#xFF0C;&#x8F93;&#x5165;&#x5185;&#x5BB9;&#x51E0;&#x4E4E;&#x5360;&#x636E;&#x6574;&#x4E2A;&#x9875;&#x9762;&#x3002;&#x5982;&#x4E0B;&#x56FE;&#x3002;</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2019/11/30/something-about-h5/demo.png" alt="展示输入的页面"></p>
+<p><img src="/2019/11/30/something-about-h5/demo.png" alt="&#x5C55;&#x793A;&#x8F93;&#x5165;&#x7684;&#x9875;&#x9762;"></p>
 <ul>
-<li><p>具体问题：</p>
+<li><p>&#x5177;&#x4F53;&#x95EE;&#x9898;&#xFF1A;</p>
 <ul>
-<li>输入内容较多时，当较底部的输入项输入完毕后，直接关闭键盘，底部会多出空白的键盘区域，整个页面布局上移，表面上元素正常显示，但元素内容的点击事件等却错位，导致 bug 产生。</li>
+<li>&#x8F93;&#x5165;&#x5185;&#x5BB9;&#x8F83;&#x591A;&#x65F6;&#xFF0C;&#x5F53;&#x8F83;&#x5E95;&#x90E8;&#x7684;&#x8F93;&#x5165;&#x9879;&#x8F93;&#x5165;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x76F4;&#x63A5;&#x5173;&#x95ED;&#x952E;&#x76D8;&#xFF0C;&#x5E95;&#x90E8;&#x4F1A;&#x591A;&#x51FA;&#x7A7A;&#x767D;&#x7684;&#x952E;&#x76D8;&#x533A;&#x57DF;&#xFF0C;&#x6574;&#x4E2A;&#x9875;&#x9762;&#x5E03;&#x5C40;&#x4E0A;&#x79FB;&#xFF0C;&#x8868;&#x9762;&#x4E0A;&#x5143;&#x7D20;&#x6B63;&#x5E38;&#x663E;&#x793A;&#xFF0C;&#x4F46;&#x5143;&#x7D20;&#x5185;&#x5BB9;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x7B49;&#x5374;&#x9519;&#x4F4D;&#xFF0C;&#x5BFC;&#x81F4; bug &#x4EA7;&#x751F;&#x3002;</li>
 </ul>
 </li>
-<li><p>解决思路：</p>
+<li><p>&#x89E3;&#x51B3;&#x601D;&#x8DEF;&#xFF1A;</p>
 <ul>
-<li>比较直观的思路是，监听键盘关闭的事件，然后手动将页面滚动至底部。</li>
-<li>但事实是，没有直接监听键盘关闭的事件，小程序中有，但 H5 中没有。</li>
-<li>于是要从侧面去判断，有两个方向。<ul>
-<li><strong>一个是监听页面大小变化——键盘的弹起收回是否会引起页面整体高度变化。</strong></li>
-<li><strong>另一个是监听输入框失焦——输入完毕后，点击键盘，输入框自然就失焦了。</strong></li>
+<li>&#x6BD4;&#x8F83;&#x76F4;&#x89C2;&#x7684;&#x601D;&#x8DEF;&#x662F;&#xFF0C;&#x76D1;&#x542C;&#x952E;&#x76D8;&#x5173;&#x95ED;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x624B;&#x52A8;&#x5C06;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x81F3;&#x5E95;&#x90E8;&#x3002;</li>
+<li>&#x4F46;&#x4E8B;&#x5B9E;&#x662F;&#xFF0C;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x76D1;&#x542C;&#x952E;&#x76D8;&#x5173;&#x95ED;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x5C0F;&#x7A0B;&#x5E8F;&#x4E2D;&#x6709;&#xFF0C;&#x4F46; H5 &#x4E2D;&#x6CA1;&#x6709;&#x3002;</li>
+<li>&#x4E8E;&#x662F;&#x8981;&#x4ECE;&#x4FA7;&#x9762;&#x53BB;&#x5224;&#x65AD;&#xFF0C;&#x6709;&#x4E24;&#x4E2A;&#x65B9;&#x5411;&#x3002;<ul>
+<li><strong>&#x4E00;&#x4E2A;&#x662F;&#x76D1;&#x542C;&#x9875;&#x9762;&#x5927;&#x5C0F;&#x53D8;&#x5316;&#x2014;&#x2014;&#x952E;&#x76D8;&#x7684;&#x5F39;&#x8D77;&#x6536;&#x56DE;&#x662F;&#x5426;&#x4F1A;&#x5F15;&#x8D77;&#x9875;&#x9762;&#x6574;&#x4F53;&#x9AD8;&#x5EA6;&#x53D8;&#x5316;&#x3002;</strong></li>
+<li><strong>&#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x76D1;&#x542C;&#x8F93;&#x5165;&#x6846;&#x5931;&#x7126;&#x2014;&#x2014;&#x8F93;&#x5165;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x70B9;&#x51FB;&#x952E;&#x76D8;&#xFF0C;&#x8F93;&#x5165;&#x6846;&#x81EA;&#x7136;&#x5C31;&#x5931;&#x7126;&#x4E86;&#x3002;</strong></li>
 </ul>
 </li>
-<li>查阅后，发现监听大小的方式，在 ios 中不生效，因为它并没有改变页面整体大小，而是把页面往上推移，因此不予采用。</li>
-<li>那么就要从输入框失焦的角度。</li>
-<li>查到了事件 <code>focusin</code> 和 <code>focusout</code>. 并且这两个事件是可以<strong>冒泡</strong>的，因此可以直接绑定在 <code>body</code> 上。这时，以为解决了，惊喜的写下:</li>
+<li>&#x67E5;&#x9605;&#x540E;&#xFF0C;&#x53D1;&#x73B0;&#x76D1;&#x542C;&#x5927;&#x5C0F;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5728; ios &#x4E2D;&#x4E0D;&#x751F;&#x6548;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5E76;&#x6CA1;&#x6709;&#x6539;&#x53D8;&#x9875;&#x9762;&#x6574;&#x4F53;&#x5927;&#x5C0F;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x9875;&#x9762;&#x5F80;&#x4E0A;&#x63A8;&#x79FB;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4E88;&#x91C7;&#x7528;&#x3002;</li>
+<li>&#x90A3;&#x4E48;&#x5C31;&#x8981;&#x4ECE;&#x8F93;&#x5165;&#x6846;&#x5931;&#x7126;&#x7684;&#x89D2;&#x5EA6;&#x3002;</li>
+<li>&#x67E5;&#x5230;&#x4E86;&#x4E8B;&#x4EF6; <code>focusin</code> &#x548C; <code>focusout</code>. &#x5E76;&#x4E14;&#x8FD9;&#x4E24;&#x4E2A;&#x4E8B;&#x4EF6;&#x662F;&#x53EF;&#x4EE5;<strong>&#x5192;&#x6CE1;</strong>&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7ED1;&#x5B9A;&#x5728; <code>body</code> &#x4E0A;&#x3002;&#x8FD9;&#x65F6;&#xFF0C;&#x4EE5;&#x4E3A;&#x89E3;&#x51B3;&#x4E86;&#xFF0C;&#x60CA;&#x559C;&#x7684;&#x5199;&#x4E0B;:</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [失焦时控制的滚动事件]</span></span><br><span class="line"><span class="hljs-comment">   * @param  &#123;[type]&#125; e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.handleScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-built_in">document</span>.body.scrollIntoView()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'focusout'</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 别忘了卸载事件</span></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">'focusout'</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() {</span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [&#x5931;&#x7126;&#x65F6;&#x63A7;&#x5236;&#x7684;&#x6EDA;&#x52A8;&#x4E8B;&#x4EF6;]</span></span><br><span class="line"><span class="hljs-comment">   * @param  {[type]} e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.handleScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-built_in">document</span>.body.scrollIntoView()</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">	<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&apos;focusout&apos;</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x522B;&#x5FD8;&#x4E86;&#x5378;&#x8F7D;&#x4E8B;&#x4EF6;</span></span><br><span class="line">componentWillUnmount() {</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">&apos;focusout&apos;</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <ul>
-<li>当在手机上实际操作时，尽管每次点击键盘上的关闭，屏幕底部不再出现空白，但却发现输入完每一项，不关闭键盘而直接进入下一项时，页面都会自动向下滚动一次，直接滚到底部，输入框并不在屏幕正中了，体验十分不好。</li>
-<li>那，既然每次滚动到底部的体验不好，就每次让他滚动到输入的当前位置，使得输入项仍在屏幕中央，用户是可见的。</li>
-<li>要实现这样的效果，就需要每次记录下页面滚动的距离。在 <code>focusin</code> 方法中记录。</li>
+<li>&#x5F53;&#x5728;&#x624B;&#x673A;&#x4E0A;&#x5B9E;&#x9645;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5C3D;&#x7BA1;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x952E;&#x76D8;&#x4E0A;&#x7684;&#x5173;&#x95ED;&#xFF0C;&#x5C4F;&#x5E55;&#x5E95;&#x90E8;&#x4E0D;&#x518D;&#x51FA;&#x73B0;&#x7A7A;&#x767D;&#xFF0C;&#x4F46;&#x5374;&#x53D1;&#x73B0;&#x8F93;&#x5165;&#x5B8C;&#x6BCF;&#x4E00;&#x9879;&#xFF0C;&#x4E0D;&#x5173;&#x95ED;&#x952E;&#x76D8;&#x800C;&#x76F4;&#x63A5;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x9879;&#x65F6;&#xFF0C;&#x9875;&#x9762;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x5411;&#x4E0B;&#x6EDA;&#x52A8;&#x4E00;&#x6B21;&#xFF0C;&#x76F4;&#x63A5;&#x6EDA;&#x5230;&#x5E95;&#x90E8;&#xFF0C;&#x8F93;&#x5165;&#x6846;&#x5E76;&#x4E0D;&#x5728;&#x5C4F;&#x5E55;&#x6B63;&#x4E2D;&#x4E86;&#xFF0C;&#x4F53;&#x9A8C;&#x5341;&#x5206;&#x4E0D;&#x597D;&#x3002;</li>
+<li>&#x90A3;&#xFF0C;&#x65E2;&#x7136;&#x6BCF;&#x6B21;&#x6EDA;&#x52A8;&#x5230;&#x5E95;&#x90E8;&#x7684;&#x4F53;&#x9A8C;&#x4E0D;&#x597D;&#xFF0C;&#x5C31;&#x6BCF;&#x6B21;&#x8BA9;&#x4ED6;&#x6EDA;&#x52A8;&#x5230;&#x8F93;&#x5165;&#x7684;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#xFF0C;&#x4F7F;&#x5F97;&#x8F93;&#x5165;&#x9879;&#x4ECD;&#x5728;&#x5C4F;&#x5E55;&#x4E2D;&#x592E;&#xFF0C;&#x7528;&#x6237;&#x662F;&#x53EF;&#x89C1;&#x7684;&#x3002;</li>
+<li>&#x8981;&#x5B9E;&#x73B0;&#x8FD9;&#x6837;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x6BCF;&#x6B21;&#x8BB0;&#x5F55;&#x4E0B;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x7684;&#x8DDD;&#x79BB;&#x3002;&#x5728; <code>focusin</code> &#x65B9;&#x6CD5;&#x4E2D;&#x8BB0;&#x5F55;&#x3002;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 这里使用了一个兼容的获取滚动距离的函数</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getScrollTop</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.body.scrollTop</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [聚焦时记录下滚动距离]</span></span><br><span class="line"><span class="hljs-comment">   * @param  &#123;[type]&#125; e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.recordScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.scrollTop = getScrollTop()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">this</span>.handleScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-built_in">document</span>.body.scrollIntoView()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'focusin'</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'focusout'</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">  <span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">'focusin'</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">'focusout'</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x4E2A;&#x517C;&#x5BB9;&#x7684;&#x83B7;&#x53D6;&#x6EDA;&#x52A8;&#x8DDD;&#x79BB;&#x7684;&#x51FD;&#x6570;</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getScrollTop</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.body.scrollTop</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">componentDidMount() {</span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [&#x805A;&#x7126;&#x65F6;&#x8BB0;&#x5F55;&#x4E0B;&#x6EDA;&#x52A8;&#x8DDD;&#x79BB;]</span></span><br><span class="line"><span class="hljs-comment">   * @param  {[type]} e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.recordScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">this</span>.scrollTop = getScrollTop()</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">this</span>.handleScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-built_in">document</span>.body.scrollIntoView()</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&apos;focusin&apos;</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&apos;focusout&apos;</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">componentWillUnmount() {</span><br><span class="line">  <span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">&apos;focusin&apos;</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">&apos;focusout&apos;</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <ul>
-<li>输入时乱滚到底部的现象没有了，每次他都会乖乖滚到当前的位置。但是……每次都滚动，给人的感觉还是很怪异，尤其是这里有这么多输入的场景。还是得想办法控制滚动，能不能只在关闭的时候滚动。</li>
-<li>先究其原因，<code>focusout</code> 事件是冒泡的，因此每一个 input 的失焦事件，都会向上冒泡，而我们从上到下切换输入框时，实际上触发了上一个 input 的失焦事件，从而冒泡至 body. 引发滚动。</li>
-<li>要解决，就要区分这类的失焦事件和关闭键盘的失焦事件，然而实际上，并没有专门分方法或属性来区分事件。这里的判断仍然要靠我们自己。</li>
-<li>没有办法直接判断，那就每次都执行，但，也每次都取消，直至最后一次。</li>
-<li>最终的解决方案有些类似于<strong>函数防抖</strong>，在每次<strong>聚焦时取消失焦时注册的事件</strong>，从而让最终的失焦事件触发。</li>
-<li>这里，只有输入框相关的事件，因此我们会做判断，以避免其他意外情况。</li>
+<li>&#x8F93;&#x5165;&#x65F6;&#x4E71;&#x6EDA;&#x5230;&#x5E95;&#x90E8;&#x7684;&#x73B0;&#x8C61;&#x6CA1;&#x6709;&#x4E86;&#xFF0C;&#x6BCF;&#x6B21;&#x4ED6;&#x90FD;&#x4F1A;&#x4E56;&#x4E56;&#x6EDA;&#x5230;&#x5F53;&#x524D;&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x4F46;&#x662F;&#x2026;&#x2026;&#x6BCF;&#x6B21;&#x90FD;&#x6EDA;&#x52A8;&#xFF0C;&#x7ED9;&#x4EBA;&#x7684;&#x611F;&#x89C9;&#x8FD8;&#x662F;&#x5F88;&#x602A;&#x5F02;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x8FD9;&#x91CC;&#x6709;&#x8FD9;&#x4E48;&#x591A;&#x8F93;&#x5165;&#x7684;&#x573A;&#x666F;&#x3002;&#x8FD8;&#x662F;&#x5F97;&#x60F3;&#x529E;&#x6CD5;&#x63A7;&#x5236;&#x6EDA;&#x52A8;&#xFF0C;&#x80FD;&#x4E0D;&#x80FD;&#x53EA;&#x5728;&#x5173;&#x95ED;&#x7684;&#x65F6;&#x5019;&#x6EDA;&#x52A8;&#x3002;</li>
+<li>&#x5148;&#x7A76;&#x5176;&#x539F;&#x56E0;&#xFF0C;<code>focusout</code> &#x4E8B;&#x4EF6;&#x662F;&#x5192;&#x6CE1;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x6BCF;&#x4E00;&#x4E2A; input &#x7684;&#x5931;&#x7126;&#x4E8B;&#x4EF6;&#xFF0C;&#x90FD;&#x4F1A;&#x5411;&#x4E0A;&#x5192;&#x6CE1;&#xFF0C;&#x800C;&#x6211;&#x4EEC;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x5207;&#x6362;&#x8F93;&#x5165;&#x6846;&#x65F6;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x89E6;&#x53D1;&#x4E86;&#x4E0A;&#x4E00;&#x4E2A; input &#x7684;&#x5931;&#x7126;&#x4E8B;&#x4EF6;&#xFF0C;&#x4ECE;&#x800C;&#x5192;&#x6CE1;&#x81F3; body. &#x5F15;&#x53D1;&#x6EDA;&#x52A8;&#x3002;</li>
+<li>&#x8981;&#x89E3;&#x51B3;&#xFF0C;&#x5C31;&#x8981;&#x533A;&#x5206;&#x8FD9;&#x7C7B;&#x7684;&#x5931;&#x7126;&#x4E8B;&#x4EF6;&#x548C;&#x5173;&#x95ED;&#x952E;&#x76D8;&#x7684;&#x5931;&#x7126;&#x4E8B;&#x4EF6;&#xFF0C;&#x7136;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x4E13;&#x95E8;&#x5206;&#x65B9;&#x6CD5;&#x6216;&#x5C5E;&#x6027;&#x6765;&#x533A;&#x5206;&#x4E8B;&#x4EF6;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x5224;&#x65AD;&#x4ECD;&#x7136;&#x8981;&#x9760;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x3002;</li>
+<li>&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#x76F4;&#x63A5;&#x5224;&#x65AD;&#xFF0C;&#x90A3;&#x5C31;&#x6BCF;&#x6B21;&#x90FD;&#x6267;&#x884C;&#xFF0C;&#x4F46;&#xFF0C;&#x4E5F;&#x6BCF;&#x6B21;&#x90FD;&#x53D6;&#x6D88;&#xFF0C;&#x76F4;&#x81F3;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x3002;</li>
+<li>&#x6700;&#x7EC8;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x6709;&#x4E9B;&#x7C7B;&#x4F3C;&#x4E8E;<strong>&#x51FD;&#x6570;&#x9632;&#x6296;</strong>&#xFF0C;&#x5728;&#x6BCF;&#x6B21;<strong>&#x805A;&#x7126;&#x65F6;&#x53D6;&#x6D88;&#x5931;&#x7126;&#x65F6;&#x6CE8;&#x518C;&#x7684;&#x4E8B;&#x4EF6;</strong>&#xFF0C;&#x4ECE;&#x800C;&#x8BA9;&#x6700;&#x7EC8;&#x7684;&#x5931;&#x7126;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x3002;</li>
+<li>&#x8FD9;&#x91CC;&#xFF0C;&#x53EA;&#x6709;&#x8F93;&#x5165;&#x6846;&#x76F8;&#x5173;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x4F1A;&#x505A;&#x5224;&#x65AD;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x5176;&#x4ED6;&#x610F;&#x5916;&#x60C5;&#x51B5;&#x3002;</li>
 </ul>
 </li>
-<li><p>解决方案：</p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 这里使用了一个兼容的获取滚动距离的函数</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getScrollTop</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.body.scrollTop</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [聚焦时取消失焦时注册的事件]</span></span><br><span class="line"><span class="hljs-comment">   * @param  &#123;[type]&#125; e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.recordScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (e.target &amp;&amp; e.target.tagName === <span class="hljs-string">'INPUT'</span>) &#123;</span><br><span class="line">  	  <span class="hljs-built_in">window</span>.clearTimeout(<span class="hljs-keyword">this</span>.timer)</span><br><span class="line">	    <span class="hljs-keyword">this</span>.scrollTop = getScrollTop()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [失焦时设置定时器异步触发事件，并记录返回值以供取消]</span></span><br><span class="line"><span class="hljs-comment">   * @param  &#123;[type]&#125; e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.handleScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (e.target &amp;&amp; e.target.tagName === <span class="hljs-string">'INPUT'</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.timer = <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">		    <span class="hljs-built_in">document</span>.documentElement.scrollTop = <span class="hljs-keyword">this</span>.scrollTop;</span><br><span class="line">    		<span class="hljs-built_in">document</span>.body.scrollTop = <span class="hljs-keyword">this</span>.scrollTop;</span><br><span class="line">      &#125;, <span class="hljs-number">10</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'focusin'</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'focusout'</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">  <span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">'focusin'</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">'focusout'</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<li><p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x4E2A;&#x517C;&#x5BB9;&#x7684;&#x83B7;&#x53D6;&#x6EDA;&#x52A8;&#x8DDD;&#x79BB;&#x7684;&#x51FD;&#x6570;</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getScrollTop</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.body.scrollTop</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">componentDidMount() {</span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [&#x805A;&#x7126;&#x65F6;&#x53D6;&#x6D88;&#x5931;&#x7126;&#x65F6;&#x6CE8;&#x518C;&#x7684;&#x4E8B;&#x4EF6;]</span></span><br><span class="line"><span class="hljs-comment">   * @param  {[type]} e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.recordScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">if</span> (e.target &amp;&amp; e.target.tagName === <span class="hljs-string">&apos;INPUT&apos;</span>) {</span><br><span class="line">  	  <span class="hljs-built_in">window</span>.clearTimeout(<span class="hljs-keyword">this</span>.timer)</span><br><span class="line">	    <span class="hljs-keyword">this</span>.scrollTop = getScrollTop()</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * [&#x5931;&#x7126;&#x65F6;&#x8BBE;&#x7F6E;&#x5B9A;&#x65F6;&#x5668;&#x5F02;&#x6B65;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x8BB0;&#x5F55;&#x8FD4;&#x56DE;&#x503C;&#x4EE5;&#x4F9B;&#x53D6;&#x6D88;]</span></span><br><span class="line"><span class="hljs-comment">   * @param  {[type]} e [description]</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">this</span>.handleScroll = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">if</span> (e.target &amp;&amp; e.target.tagName === <span class="hljs-string">&apos;INPUT&apos;</span>) {</span><br><span class="line">      <span class="hljs-keyword">this</span>.timer = <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><br><span class="line">		    <span class="hljs-built_in">document</span>.documentElement.scrollTop = <span class="hljs-keyword">this</span>.scrollTop;</span><br><span class="line">    		<span class="hljs-built_in">document</span>.body.scrollTop = <span class="hljs-keyword">this</span>.scrollTop;</span><br><span class="line">      }, <span class="hljs-number">10</span>)</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&apos;focusin&apos;</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&apos;focusout&apos;</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">componentWillUnmount() {</span><br><span class="line">  <span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">&apos;focusin&apos;</span>, <span class="hljs-keyword">this</span>.recordScroll)</span><br><span class="line">	<span class="hljs-built_in">document</span>.body.removeEventListener(<span class="hljs-string">&apos;focusout&apos;</span>, <span class="hljs-keyword">this</span>.handleScroll)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 </li>
 </ul>
-<h4 id="focusin文档"><a href="#focusin文档" class="headerlink" title="focusin文档"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/focusin" target="_blank" rel="noopener">focusin文档</a></h4><h4 id="focusout文档"><a href="#focusout文档" class="headerlink" title="focusout文档"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/focusout" target="_blank" rel="noopener">focusout文档</a></h4><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li>有段时间没有开发 H5 内容了，兼容性上还是踩了不少坑，这里取了两个比较有代表性也比较常见的，解决方案可以参考，或者互相探讨是否有更好的解决方案，后续如果有新的问题，也会一一记录。</li>
+<h4 id="focusin&#x6587;&#x6863;"><a href="#focusin&#x6587;&#x6863;" class="headerlink" title="focusin&#x6587;&#x6863;"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/focusin" target="_blank" rel="noopener">focusin&#x6587;&#x6863;</a></h4><h4 id="focusout&#x6587;&#x6863;"><a href="#focusout&#x6587;&#x6863;" class="headerlink" title="focusout&#x6587;&#x6863;"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/focusout" target="_blank" rel="noopener">focusout&#x6587;&#x6863;</a></h4><h3 id="&#x5C0F;&#x7ED3;"><a href="#&#x5C0F;&#x7ED3;" class="headerlink" title="&#x5C0F;&#x7ED3;"></a>&#x5C0F;&#x7ED3;</h3><ul>
+<li>&#x6709;&#x6BB5;&#x65F6;&#x95F4;&#x6CA1;&#x6709;&#x5F00;&#x53D1; H5 &#x5185;&#x5BB9;&#x4E86;&#xFF0C;&#x517C;&#x5BB9;&#x6027;&#x4E0A;&#x8FD8;&#x662F;&#x8E29;&#x4E86;&#x4E0D;&#x5C11;&#x5751;&#xFF0C;&#x8FD9;&#x91CC;&#x53D6;&#x4E86;&#x4E24;&#x4E2A;&#x6BD4;&#x8F83;&#x6709;&#x4EE3;&#x8868;&#x6027;&#x4E5F;&#x6BD4;&#x8F83;&#x5E38;&#x89C1;&#x7684;&#xFF0C;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF0C;&#x6216;&#x8005;&#x4E92;&#x76F8;&#x63A2;&#x8BA8;&#x662F;&#x5426;&#x6709;&#x66F4;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x540E;&#x7EED;&#x5982;&#x679C;&#x6709;&#x65B0;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4E5F;&#x4F1A;&#x4E00;&#x4E00;&#x8BB0;&#x5F55;&#x3002;</li>
 </ul>
-
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -302,7 +309,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -314,7 +321,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -323,7 +331,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -411,7 +419,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -547,14 +555,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -577,7 +587,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

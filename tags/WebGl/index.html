@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>标签: WebGL - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -22,10 +22,9 @@
 <meta property="og:url" content="http://kyriejoshua.github.io/tags/WebGL/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="朱征原">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deadpool Front-end">
-<meta name="twitter:description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
 
 
 
@@ -44,7 +43,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -63,7 +64,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -71,7 +72,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -83,15 +84,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -103,7 +109,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -150,10 +156,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2017/11/23/the-usage-of-threejs/unphoto.jpg" alt></p>
-<p>近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获。</p>
+<p>&#x8FD1;&#x671F;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x6709;&#x89C4;&#x5212; 3D &#x7EC4;&#x4EF6;&#x7684;&#x9700;&#x6C42;&#x3002;&#x5728;&#x53D1;&#x73B0; echarts-gl &#x4E0D;&#x80FD;&#x6EE1;&#x8DB3;&#x9700;&#x6C42;&#x540E;&#xFF0C;&#x6211;&#x5728;d3&#x7B49;&#x4E00;&#x4F17;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x4E2D;&#x65E0;&#x6240;&#x9002;&#x4ECE;&#x3002;&#x6700;&#x7EC8;&#x6211;&#x51B3;&#x5B9A;&#x6311;&#x6218;&#x4E00;&#x4E0B; Three.js. &#x5F53;&#x7136;&#x5728;&#x4E00;&#x5F00;&#x59CB;&#xFF0C;&#x6211;&#x9047;&#x5230;&#x4E86;&#x5F88;&#x591A;&#x9EBB;&#x70E6;&#xFF0C;&#x6240;&#x5E78;&#x5230;&#x4E86;&#x4E34;&#x8FD1;&#x6700;&#x540E;&#x65F6;&#xFF0C;&#x6211;&#x89E3;&#x51B3;&#x4E86;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x7684;&#x95EE;&#x9898;&#x3002;&#x6211;&#x5728;&#x672A;&#x5B66;&#x4E60; webgl &#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x76F4;&#x63A5;&#x4F7F;&#x7528; threejs, &#x5176;&#x5B9E;&#x5E76;&#x4E0D;&#x662F;&#x4E2A;&#x8F83;&#x597D;&#x7684;&#x65B9;&#x6848;&#xFF0C;&#x5374;&#x662F;&#x80FD;&#x8F83;&#x5FEB;&#x51FA;&#x7ED3;&#x679C;&#x7684;&#x65B9;&#x6848;&#x3002;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x8BB0;&#x5F55;&#x4E86;&#x6211;&#x4F7F;&#x7528; Three.js &#x7684;&#x75DB;&#x82E6;&#x548C;&#x6536;&#x83B7;&#x3002;</p></body></html>
         <p class="article-more-link">
             <a href="/2017/11/23/the-usage-of-threejs/#more">阅读更多</a>
         </p>
@@ -194,7 +200,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -203,7 +210,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -291,7 +298,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -427,14 +434,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -457,7 +466,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -22,10 +22,9 @@
 <meta property="og:url" content="http://kyriejoshua.github.io/page/2/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="朱征原">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deadpool Front-end">
-<meta name="twitter:description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
 
 
 
@@ -44,7 +43,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -63,7 +64,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -71,7 +72,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -83,15 +84,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -103,7 +109,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -143,10 +149,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2017/09/23/css3d-study/unphoto.jpg" alt></p>
-<p>最近的工作开始接触到可视化的 3D 部分，因此自己也抽时间温习了以前学习的 css3 知识点，顺便完成一个入门小 demo —— 实现一个旋转的骰子。这个例子里有重温 css3 的一些知识点——用它来实现立体和旋转效果，然后用 flex 布局来实现骰子的点的排列。这个案例对于以后熟练使用 css 和 flex 有一定的帮助，所以这里也做一份教程和总结。最终效果就在页面右下角，相信眼不尖的人也注意到了。</p>
+<p>&#x6700;&#x8FD1;&#x7684;&#x5DE5;&#x4F5C;&#x5F00;&#x59CB;&#x63A5;&#x89E6;&#x5230;&#x53EF;&#x89C6;&#x5316;&#x7684; 3D &#x90E8;&#x5206;&#xFF0C;&#x56E0;&#x6B64;&#x81EA;&#x5DF1;&#x4E5F;&#x62BD;&#x65F6;&#x95F4;&#x6E29;&#x4E60;&#x4E86;&#x4EE5;&#x524D;&#x5B66;&#x4E60;&#x7684; css3 &#x77E5;&#x8BC6;&#x70B9;&#xFF0C;&#x987A;&#x4FBF;&#x5B8C;&#x6210;&#x4E00;&#x4E2A;&#x5165;&#x95E8;&#x5C0F; demo &#x2014;&#x2014; &#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x65CB;&#x8F6C;&#x7684;&#x9AB0;&#x5B50;&#x3002;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#x6709;&#x91CD;&#x6E29; css3 &#x7684;&#x4E00;&#x4E9B;&#x77E5;&#x8BC6;&#x70B9;&#x2014;&#x2014;&#x7528;&#x5B83;&#x6765;&#x5B9E;&#x73B0;&#x7ACB;&#x4F53;&#x548C;&#x65CB;&#x8F6C;&#x6548;&#x679C;&#xFF0C;&#x7136;&#x540E;&#x7528; flex &#x5E03;&#x5C40;&#x6765;&#x5B9E;&#x73B0;&#x9AB0;&#x5B50;&#x7684;&#x70B9;&#x7684;&#x6392;&#x5217;&#x3002;&#x8FD9;&#x4E2A;&#x6848;&#x4F8B;&#x5BF9;&#x4E8E;&#x4EE5;&#x540E;&#x719F;&#x7EC3;&#x4F7F;&#x7528; css &#x548C; flex &#x6709;&#x4E00;&#x5B9A;&#x7684;&#x5E2E;&#x52A9;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x4E5F;&#x505A;&#x4E00;&#x4EFD;&#x6559;&#x7A0B;&#x548C;&#x603B;&#x7ED3;&#x3002;&#x6700;&#x7EC8;&#x6548;&#x679C;&#x5C31;&#x5728;&#x9875;&#x9762;&#x53F3;&#x4E0B;&#x89D2;&#xFF0C;&#x76F8;&#x4FE1;&#x773C;&#x4E0D;&#x5C16;&#x7684;&#x4EBA;&#x4E5F;&#x6CE8;&#x610F;&#x5230;&#x4E86;&#x3002;</p></body></html>
         <p class="article-more-link">
             <a href="/2017/09/23/css3d-study/#more">阅读更多</a>
         </p>
@@ -205,10 +211,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2017/08/30/react-component-lifecycle/unphoto.jpg" alt></p>
-<p>近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。</p>
+<p>&#x8FD1;&#x671F; React &#x53EF;&#x8C13;&#x662F;&#x7AD9;&#x5728;&#x4E86;&#x98CE;&#x53E3;&#x6D6A;&#x5C16;&#x4E0A;&#x3002;&#x67D0;&#x4E9B;&#x5927;&#x5382;&#x4EEC;&#x7EB7;&#x7EB7;&#x5F00;&#x59CB;&#x629B;&#x5F03;&#x5B83;&#x8F6C;&#x800C;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x6846;&#x67B6;&#x3002;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;React &#x53EA;&#x624B;&#x906E;&#x5929;&#x7684;&#x52BF;&#x529B;&#x96BE;&#x4EE5;&#x4E00;&#x65F6;&#x78E8;&#x706D;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x4E9B;&#x5C0F;&#x5382;&#x91CC;&#x7684;&#x524D;&#x7AEF;&#x5176;&#x5B9E;&#x4E0D;&#x5FC5;&#x592A;&#x8FC7;&#x62C5;&#x5FC3;&#x3002;&#x771F;&#x5230;&#x4E86; React &#x672B;&#x65E5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E16;&#x754C;&#x4E5F;&#x4E00;&#x5B9A;&#x53D1;&#x751F;&#x4E86;&#x5DE8;&#x53D8;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x5F53;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x4E13;&#x6CE8;&#x4E8E;&#x5F53;&#x524D;&#xFF0C;&#x4F7F;&#x7528;&#x597D; React. &#x4E8E;&#x662F;&#x6211;&#x5728;&#x8FD9;&#x91CC;&#x603B;&#x7ED3;&#x4E86;&#x8FD9;&#x5927;&#x534A;&#x5E74;&#x4F7F;&#x7528; React &#x7684;&#x4F53;&#x9A8C;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x548C;&#x5B83;&#x5E38;&#x89C1;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#x3002;</p></body></html>
         <p class="article-more-link">
             <a href="/2017/08/30/react-component-lifecycle/#more">阅读更多</a>
         </p>
@@ -267,10 +273,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2017/07/07/my-git-workflow/unphoto.jpg" alt></p>
-<p>这篇文章的契机是曾经有个同事问我为什么要在终端里使用 git, 当时我愣了会，因为从没有人问我这个问题，我也没有为这问题好好总结过。虽然其实有很多显而易见的好处，但我还未好好总结一番。既然自己平时在工作中使用 git 的地方非常多，也有着一套标准和工作方式在执行，那我希望通过这次整理把这流程体系更完善的加以说明。既规范化、提高工作效率，也可留作记录。</p>
+<p>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x7684;&#x5951;&#x673A;&#x662F;&#x66FE;&#x7ECF;&#x6709;&#x4E2A;&#x540C;&#x4E8B;&#x95EE;&#x6211;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5728;&#x7EC8;&#x7AEF;&#x91CC;&#x4F7F;&#x7528; git, &#x5F53;&#x65F6;&#x6211;&#x6123;&#x4E86;&#x4F1A;&#xFF0C;&#x56E0;&#x4E3A;&#x4ECE;&#x6CA1;&#x6709;&#x4EBA;&#x95EE;&#x6211;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4E5F;&#x6CA1;&#x6709;&#x4E3A;&#x8FD9;&#x95EE;&#x9898;&#x597D;&#x597D;&#x603B;&#x7ED3;&#x8FC7;&#x3002;&#x867D;&#x7136;&#x5176;&#x5B9E;&#x6709;&#x5F88;&#x591A;&#x663E;&#x800C;&#x6613;&#x89C1;&#x7684;&#x597D;&#x5904;&#xFF0C;&#x4F46;&#x6211;&#x8FD8;&#x672A;&#x597D;&#x597D;&#x603B;&#x7ED3;&#x4E00;&#x756A;&#x3002;&#x65E2;&#x7136;&#x81EA;&#x5DF1;&#x5E73;&#x65F6;&#x5728;&#x5DE5;&#x4F5C;&#x4E2D;&#x4F7F;&#x7528; git &#x7684;&#x5730;&#x65B9;&#x975E;&#x5E38;&#x591A;&#xFF0C;&#x4E5F;&#x6709;&#x7740;&#x4E00;&#x5957;&#x6807;&#x51C6;&#x548C;&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;&#x5728;&#x6267;&#x884C;&#xFF0C;&#x90A3;&#x6211;&#x5E0C;&#x671B;&#x901A;&#x8FC7;&#x8FD9;&#x6B21;&#x6574;&#x7406;&#x628A;&#x8FD9;&#x6D41;&#x7A0B;&#x4F53;&#x7CFB;&#x66F4;&#x5B8C;&#x5584;&#x7684;&#x52A0;&#x4EE5;&#x8BF4;&#x660E;&#x3002;&#x65E2;&#x89C4;&#x8303;&#x5316;&#x3001;&#x63D0;&#x9AD8;&#x5DE5;&#x4F5C;&#x6548;&#x7387;&#xFF0C;&#x4E5F;&#x53EF;&#x7559;&#x4F5C;&#x8BB0;&#x5F55;&#x3002;</p></body></html>
         <p class="article-more-link">
             <a href="/2017/07/07/my-git-workflow/#more">阅读更多</a>
         </p>
@@ -329,13 +335,13 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/05/21/introduce-fish-shell/unphoto.jpg" title="terminal">
+<img src="/2017/05/21/introduce-fish-shell/unphoto.jpg" class title="terminal">
 
-<blockquote><br>前阵子关注到阮老师更新了一篇博文，内容是介绍一个 shell —— fish.自己去尝试之后发现确实值得推荐，准备当做主力 shell 来替代原有的 zsh. 
+<blockquote><br>&#x524D;&#x9635;&#x5B50;&#x5173;&#x6CE8;&#x5230;&#x962E;&#x8001;&#x5E08;&#x66F4;&#x65B0;&#x4E86;&#x4E00;&#x7BC7;&#x535A;&#x6587;&#xFF0C;&#x5185;&#x5BB9;&#x662F;&#x4ECB;&#x7ECD;&#x4E00;&#x4E2A; shell &#x2014;&#x2014; fish.&#x81EA;&#x5DF1;&#x53BB;&#x5C1D;&#x8BD5;&#x4E4B;&#x540E;&#x53D1;&#x73B0;&#x786E;&#x5B9E;&#x503C;&#x5F97;&#x63A8;&#x8350;&#xFF0C;&#x51C6;&#x5907;&#x5F53;&#x505A;&#x4E3B;&#x529B; shell &#x6765;&#x66FF;&#x4EE3;&#x539F;&#x6709;&#x7684; zsh. 
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/05/21/introduce-fish-shell/#more">阅读更多</a>
         </p>
@@ -394,13 +400,13 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/04/01/zhihulive-vczero/unphoto.jpeg" title="zhihu live">
+<img src="/2017/04/01/zhihulive-vczero/unphoto.jpeg" class title="zhihu live">
 
-<blockquote><br>知乎 live：三年从前端小工到架构分享的笔记及感悟
+<blockquote><br>&#x77E5;&#x4E4E; live&#xFF1A;&#x4E09;&#x5E74;&#x4ECE;&#x524D;&#x7AEF;&#x5C0F;&#x5DE5;&#x5230;&#x67B6;&#x6784;&#x5206;&#x4EAB;&#x7684;&#x7B14;&#x8BB0;&#x53CA;&#x611F;&#x609F;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/04/01/zhihulive-vczero/#more">阅读更多</a>
         </p>
@@ -459,12 +465,12 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/03/07/the-problems-in-using-webpack-dev-server/unphoto.jpg" title="webpack-dev-server">
+<img src="/2017/03/07/the-problems-in-using-webpack-dev-server/unphoto.jpg" class title="webpack-dev-server">
 
-<blockquote><p>记一次工作中踩的坑。坑不大，但耗时非常长。</p>
-</blockquote>
+<blockquote><p>&#x8BB0;&#x4E00;&#x6B21;&#x5DE5;&#x4F5C;&#x4E2D;&#x8E29;&#x7684;&#x5751;&#x3002;&#x5751;&#x4E0D;&#x5927;&#xFF0C;&#x4F46;&#x8017;&#x65F6;&#x975E;&#x5E38;&#x957F;&#x3002;</p>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/03/07/the-problems-in-using-webpack-dev-server/#more">阅读更多</a>
         </p>
@@ -523,14 +529,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/02/12/review-dom/unphoto.jpg" title="DOM">
+<img src="/2017/02/12/review-dom/unphoto.jpg" class title="DOM">
 
 <blockquote>
-  回顾部分重要的 DOM 知识点。
+  &#x56DE;&#x987E;&#x90E8;&#x5206;&#x91CD;&#x8981;&#x7684; DOM &#x77E5;&#x8BC6;&#x70B9;&#x3002;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/02/12/review-dom/#more">阅读更多</a>
         </p>
@@ -589,14 +595,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/02/05/zhihulive-xiaojue/unphoto.jpg" title="zhihu live">
+<img src="/2017/02/05/zhihulive-xiaojue/unphoto.jpg" class title="zhihu live">
 
 <blockquote>
-  记录一次知乎 Live 的笔记，加上部分自己的理解。
+  &#x8BB0;&#x5F55;&#x4E00;&#x6B21;&#x77E5;&#x4E4E; Live &#x7684;&#x7B14;&#x8BB0;&#xFF0C;&#x52A0;&#x4E0A;&#x90E8;&#x5206;&#x81EA;&#x5DF1;&#x7684;&#x7406;&#x89E3;&#x3002;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/02/05/zhihulive-xiaojue/#more">阅读更多</a>
         </p>
@@ -655,14 +661,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/02/05/zhihulive-Jasin-Yip/unphoto.jpg" title="zhihu live">
+<img src="/2017/02/05/zhihulive-Jasin-Yip/unphoto.jpg" class title="zhihu live">
 
 <blockquote>
-  一次知乎 Live 听讲的笔记记录。
+  &#x4E00;&#x6B21;&#x77E5;&#x4E4E; Live &#x542C;&#x8BB2;&#x7684;&#x7B14;&#x8BB0;&#x8BB0;&#x5F55;&#x3002;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/02/05/zhihulive-Jasin-Yip/#more">阅读更多</a>
         </p>
@@ -721,14 +727,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/01/25/review-js-part2/unphoto.jpg" title="review javascript">
+<img src="/2017/01/25/review-js-part2/unphoto.jpg" class title="review javascript">
 
 <blockquote>
-第二部分。
+&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x3002;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/01/25/review-js-part2/#more">阅读更多</a>
         </p>
@@ -787,14 +793,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/01/23/the-problem-about-host/unphoto.jpg" title="localhost">
+<img src="/2017/01/23/the-problem-about-host/unphoto.jpg" class title="localhost">
 
 <blockquote>
-  有关 getaddrinfo 报错的解决方式。
+  &#x6709;&#x5173; getaddrinfo &#x62A5;&#x9519;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x5F0F;&#x3002;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/01/23/the-problem-about-host/#more">阅读更多</a>
         </p>
@@ -853,14 +859,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/01/17/the-summary-of-interview/unphoto.jpg" title="bye and hello">
+<img src="/2017/01/17/the-summary-of-interview/unphoto.jpg" class title="bye and hello">
 
 <blockquote>
-不久前，我做了一个较为艰难但对我以后的发展绝对有利的决定——从前公司离职。这是我呆的第一家互联网公司，也是我作为前端的第一份工作。一年多的工作经历并没有特别多的感慨，但我想记录下相关的事，来避免以后所走的弯路。
+&#x4E0D;&#x4E45;&#x524D;&#xFF0C;&#x6211;&#x505A;&#x4E86;&#x4E00;&#x4E2A;&#x8F83;&#x4E3A;&#x8270;&#x96BE;&#x4F46;&#x5BF9;&#x6211;&#x4EE5;&#x540E;&#x7684;&#x53D1;&#x5C55;&#x7EDD;&#x5BF9;&#x6709;&#x5229;&#x7684;&#x51B3;&#x5B9A;&#x2014;&#x2014;&#x4ECE;&#x524D;&#x516C;&#x53F8;&#x79BB;&#x804C;&#x3002;&#x8FD9;&#x662F;&#x6211;&#x5446;&#x7684;&#x7B2C;&#x4E00;&#x5BB6;&#x4E92;&#x8054;&#x7F51;&#x516C;&#x53F8;&#xFF0C;&#x4E5F;&#x662F;&#x6211;&#x4F5C;&#x4E3A;&#x524D;&#x7AEF;&#x7684;&#x7B2C;&#x4E00;&#x4EFD;&#x5DE5;&#x4F5C;&#x3002;&#x4E00;&#x5E74;&#x591A;&#x7684;&#x5DE5;&#x4F5C;&#x7ECF;&#x5386;&#x5E76;&#x6CA1;&#x6709;&#x7279;&#x522B;&#x591A;&#x7684;&#x611F;&#x6168;&#xFF0C;&#x4F46;&#x6211;&#x60F3;&#x8BB0;&#x5F55;&#x4E0B;&#x76F8;&#x5173;&#x7684;&#x4E8B;&#xFF0C;&#x6765;&#x907F;&#x514D;&#x4EE5;&#x540E;&#x6240;&#x8D70;&#x7684;&#x5F2F;&#x8DEF;&#x3002;
 
-</blockquote>
+</blockquote></body></html>
         <p class="article-more-link">
             <a href="/2017/01/17/the-summary-of-interview/#more">阅读更多</a>
         </p>
@@ -924,7 +930,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -933,7 +940,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -1021,7 +1028,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -1157,14 +1164,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1187,7 +1196,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

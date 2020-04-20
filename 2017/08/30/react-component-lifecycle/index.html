@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>理解 React 组件的生命周期 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,20 +16,20 @@
 
 
 
-    <meta name="description" content="近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。">
-<meta name="keywords" content="React">
+    <meta name="description" content="&amp;#x8FD1;&amp;#x671F; React &amp;#x53EF;&amp;#x8C13;&amp;#x662F;&amp;#x7AD9;&amp;#x5728;&amp;#x4E86;&amp;#x98CE;&amp;#x53E3;&amp;#x6D6A;&amp;#x5C16;&amp;#x4E0A;&amp;#x3002;&amp;#x67D0;&amp;#x4E9B;&amp;#x5927;&amp;#x5382;&amp;#x4EEC;&amp;#x7EB7;&amp;#x7EB7;&amp;#x5F00;&amp;#x59CB;&amp;#x629">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解 React 组件的生命周期">
 <meta property="og:url" content="http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x8FD1;&amp;#x671F; React &amp;#x53EF;&amp;#x8C13;&amp;#x662F;&amp;#x7AD9;&amp;#x5728;&amp;#x4E86;&amp;#x98CE;&amp;#x53E3;&amp;#x6D6A;&amp;#x5C16;&amp;#x4E0A;&amp;#x3002;&amp;#x67D0;&amp;#x4E9B;&amp;#x5927;&amp;#x5382;&amp;#x4EEC;&amp;#x7EB7;&amp;#x7EB7;&amp;#x5F00;&amp;#x59CB;&amp;#x629">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/unphoto.jpg">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:02.481Z">
+<meta property="article:published_time" content="2017-08-30T09:03:30.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:02.481Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解 React 组件的生命周期">
-<meta name="twitter:description" content="近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2017/08/30/react-component-lifecycle/unphoto.jpg">
 
 
@@ -49,7 +49,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -68,7 +70,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -76,7 +78,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -88,15 +90,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -108,7 +115,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -147,13 +154,13 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2017/08/30/react-component-lifecycle/unphoto.jpg" alt></p>
-<p>近期 React 可谓是站在了风口浪尖上。某些大厂们纷纷开始抛弃它转而使用其他框架。但实际上，React 只手遮天的势力难以一时磨灭，我们这些小厂里的前端其实不必太过担心。真到了 React 末日的时候，这个世界也一定发生了巨变。所以，在当下，我们还是专注于当前，使用好 React. 于是我在这里总结了这大半年使用 React 的体验，主要是组件的生命周期和它常见的应用场景。</p>
+<p>&#x8FD1;&#x671F; React &#x53EF;&#x8C13;&#x662F;&#x7AD9;&#x5728;&#x4E86;&#x98CE;&#x53E3;&#x6D6A;&#x5C16;&#x4E0A;&#x3002;&#x67D0;&#x4E9B;&#x5927;&#x5382;&#x4EEC;&#x7EB7;&#x7EB7;&#x5F00;&#x59CB;&#x629B;&#x5F03;&#x5B83;&#x8F6C;&#x800C;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x6846;&#x67B6;&#x3002;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;React &#x53EA;&#x624B;&#x906E;&#x5929;&#x7684;&#x52BF;&#x529B;&#x96BE;&#x4EE5;&#x4E00;&#x65F6;&#x78E8;&#x706D;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x4E9B;&#x5C0F;&#x5382;&#x91CC;&#x7684;&#x524D;&#x7AEF;&#x5176;&#x5B9E;&#x4E0D;&#x5FC5;&#x592A;&#x8FC7;&#x62C5;&#x5FC3;&#x3002;&#x771F;&#x5230;&#x4E86; React &#x672B;&#x65E5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E16;&#x754C;&#x4E5F;&#x4E00;&#x5B9A;&#x53D1;&#x751F;&#x4E86;&#x5DE8;&#x53D8;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x5F53;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x4E13;&#x6CE8;&#x4E8E;&#x5F53;&#x524D;&#xFF0C;&#x4F7F;&#x7528;&#x597D; React. &#x4E8E;&#x662F;&#x6211;&#x5728;&#x8FD9;&#x91CC;&#x603B;&#x7ED3;&#x4E86;&#x8FD9;&#x5927;&#x534A;&#x5E74;&#x4F7F;&#x7528; React &#x7684;&#x4F53;&#x9A8C;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x548C;&#x5B83;&#x5E38;&#x89C1;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#x3002;</p>
 <a id="more"></a>
 
-<h2 id="生命周期钩子方法"><a href="#生命周期钩子方法" class="headerlink" title="生命周期钩子方法"></a>生命周期钩子方法</h2><h3 id="组件的挂载阶段"><a href="#组件的挂载阶段" class="headerlink" title="组件的挂载阶段"></a>组件的挂载阶段</h3><ul>
+<h2 id="&#x751F;&#x547D;&#x5468;&#x671F;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;"><a href="#&#x751F;&#x547D;&#x5468;&#x671F;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;" class="headerlink" title="&#x751F;&#x547D;&#x5468;&#x671F;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;"></a>&#x751F;&#x547D;&#x5468;&#x671F;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;</h2><h3 id="&#x7EC4;&#x4EF6;&#x7684;&#x6302;&#x8F7D;&#x9636;&#x6BB5;"><a href="#&#x7EC4;&#x4EF6;&#x7684;&#x6302;&#x8F7D;&#x9636;&#x6BB5;" class="headerlink" title="&#x7EC4;&#x4EF6;&#x7684;&#x6302;&#x8F7D;&#x9636;&#x6BB5;"></a>&#x7EC4;&#x4EF6;&#x7684;&#x6302;&#x8F7D;&#x9636;&#x6BB5;</h3><ul>
 <li><a href="#constructor">constructor</a></li>
 <li><a href="#componentWillMount">componentWillMount</a></li>
 <li><a href="#render">render</a></li>
@@ -161,49 +168,49 @@
 <li><a href="#componentWillUnmount">componentWillUnmount</a></li>
 </ul>
 <h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><ul>
-<li><strong>执行阶段</strong>：在开始 <code>render</code> 之前。</li>
-<li>在这里进行 <code>state</code> 的初始化工作。但不要使用 <code>setState</code>.</li>
-<li>还可以做一些事件绑定的工作。</li>
+<li><strong>&#x6267;&#x884C;&#x9636;&#x6BB5;</strong>&#xFF1A;&#x5728;&#x5F00;&#x59CB; <code>render</code> &#x4E4B;&#x524D;&#x3002;</li>
+<li>&#x5728;&#x8FD9;&#x91CC;&#x8FDB;&#x884C; <code>state</code> &#x7684;&#x521D;&#x59CB;&#x5316;&#x5DE5;&#x4F5C;&#x3002;&#x4F46;&#x4E0D;&#x8981;&#x4F7F;&#x7528; <code>setState</code>.</li>
+<li>&#x8FD8;&#x53EF;&#x4EE5;&#x505A;&#x4E00;&#x4E9B;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x7684;&#x5DE5;&#x4F5C;&#x3002;</li>
 <li><strong>Note</strong>:<ul>
-<li>如果既不绑定事件也不初始化 <code>state</code>, 那么其实可以不使用 <code>consturctor</code>.</li>
-<li>在少数情况下，<code>constructor</code> 中的 <code>state</code> 可以使用 <code>props</code> 来替代，但如果要达到状态随 <code>props</code> 改变的效果，最好使用状态提升来实现，因为 <code>state</code> 并不会随着 <code>props</code> 的改变而改变。</li>
+<li>&#x5982;&#x679C;&#x65E2;&#x4E0D;&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#x4E5F;&#x4E0D;&#x521D;&#x59CB;&#x5316; <code>state</code>, &#x90A3;&#x4E48;&#x5176;&#x5B9E;&#x53EF;&#x4EE5;&#x4E0D;&#x4F7F;&#x7528; <code>consturctor</code>.</li>
+<li>&#x5728;&#x5C11;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>constructor</code> &#x4E2D;&#x7684; <code>state</code> &#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>props</code> &#x6765;&#x66FF;&#x4EE3;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x8981;&#x8FBE;&#x5230;&#x72B6;&#x6001;&#x968F; <code>props</code> &#x6539;&#x53D8;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x72B6;&#x6001;&#x63D0;&#x5347;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x56E0;&#x4E3A; <code>state</code> &#x5E76;&#x4E0D;&#x4F1A;&#x968F;&#x7740; <code>props</code> &#x7684;&#x6539;&#x53D8;&#x800C;&#x6539;&#x53D8;&#x3002;</li>
 </ul>
 </li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">  <span class="hljs-keyword">super</span>(props)</span><br><span class="line">  <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">    type: props.initialType</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">constructor</span>(props){</span><br><span class="line">  <span class="hljs-keyword">super</span>(props)</span><br><span class="line">  <span class="hljs-keyword">this</span>.state = {</span><br><span class="line">    type: props.initialType</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h4 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount"></a>componentWillMount</h4><ul>
-<li><strong>执行阶段</strong>: 组件将要挂载的阶段。在 <code>render</code> 前调用，只会调用一次。</li>
-<li>这里或许可以添加一些接口请求数据的逻辑，但在这里进行 state 的更新是异步的，它并不会触发 <code>re-render</code> 也就是 <code>render</code> 重新渲染。通常情况下，更推荐使用 <code>constructor</code> 来替代.</li>
-<li><strong>Note</strong>: 如果要避免一些副作用，更好的办法是将这里面的逻辑放在 <code>componentDidMount</code> 里来处理。</li>
+<li><strong>&#x6267;&#x884C;&#x9636;&#x6BB5;</strong>: &#x7EC4;&#x4EF6;&#x5C06;&#x8981;&#x6302;&#x8F7D;&#x7684;&#x9636;&#x6BB5;&#x3002;&#x5728; <code>render</code> &#x524D;&#x8C03;&#x7528;&#xFF0C;&#x53EA;&#x4F1A;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x3002;</li>
+<li>&#x8FD9;&#x91CC;&#x6216;&#x8BB8;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x63A5;&#x53E3;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x4F46;&#x5728;&#x8FD9;&#x91CC;&#x8FDB;&#x884C; state &#x7684;&#x66F4;&#x65B0;&#x662F;&#x5F02;&#x6B65;&#x7684;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x4F1A;&#x89E6;&#x53D1; <code>re-render</code> &#x4E5F;&#x5C31;&#x662F; <code>render</code> &#x91CD;&#x65B0;&#x6E32;&#x67D3;&#x3002;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x66F4;&#x63A8;&#x8350;&#x4F7F;&#x7528; <code>constructor</code> &#x6765;&#x66FF;&#x4EE3;.</li>
+<li><strong>Note</strong>: &#x5982;&#x679C;&#x8981;&#x907F;&#x514D;&#x4E00;&#x4E9B;&#x526F;&#x4F5C;&#x7528;&#xFF0C;&#x66F4;&#x597D;&#x7684;&#x529E;&#x6CD5;&#x662F;&#x5C06;&#x8FD9;&#x91CC;&#x9762;&#x7684;&#x903B;&#x8F91;&#x653E;&#x5728; <code>componentDidMount</code> &#x91CC;&#x6765;&#x5904;&#x7406;&#x3002;</li>
 </ul>
 <h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><ul>
-<li>渲染挂载组件。这步一定会执行的。</li>
-<li>在正常状态下，该方法会返回以下几种类型的值：<ul>
-<li>React element: 最常见的返回。即使用 <code>JSX</code> 创建的原生 <code>DOM</code> 或自定义的组件例如 <code>&lt;MyComponent/&gt;</code>.</li>
-<li>Protal: 使用 <code>ReactDOM.createPortal</code> 方法创建的对象。</li>
-<li>Boolean: <code>bool &amp;&amp; &lt;div/&gt;</code>, 当 <code>bool</code> 为 <code>false</code> 的时候，不渲染。</li>
-<li>String|Number: 文本节点。</li>
-<li>null: 不渲染。</li>
+<li>&#x6E32;&#x67D3;&#x6302;&#x8F7D;&#x7EC4;&#x4EF6;&#x3002;&#x8FD9;&#x6B65;&#x4E00;&#x5B9A;&#x4F1A;&#x6267;&#x884C;&#x7684;&#x3002;</li>
+<li>&#x5728;&#x6B63;&#x5E38;&#x72B6;&#x6001;&#x4E0B;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4F1A;&#x8FD4;&#x56DE;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x503C;&#xFF1A;<ul>
+<li>React element: &#x6700;&#x5E38;&#x89C1;&#x7684;&#x8FD4;&#x56DE;&#x3002;&#x5373;&#x4F7F;&#x7528; <code>JSX</code> &#x521B;&#x5EFA;&#x7684;&#x539F;&#x751F; <code>DOM</code> &#x6216;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x7EC4;&#x4EF6;&#x4F8B;&#x5982; <code>&lt;MyComponent/&gt;</code>.</li>
+<li>Protal: &#x4F7F;&#x7528; <code>ReactDOM.createPortal</code> &#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>Boolean: <code>bool &amp;&amp; &lt;div/&gt;</code>, &#x5F53; <code>bool</code> &#x4E3A; <code>false</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x6E32;&#x67D3;&#x3002;</li>
+<li>String|Number: &#x6587;&#x672C;&#x8282;&#x70B9;&#x3002;</li>
+<li>null: &#x4E0D;&#x6E32;&#x67D3;&#x3002;</li>
 </ul>
 </li>
 <li><strong>Note</strong>:<ul>
-<li>该方法是纯函数，不应有 <code>setState</code> 的操作。每次渲染只会输出同一个值。如果有对状态的变更，应该是放在 <code>componentDidMount</code> 里。</li>
-<li>该方法是可以返回数组的，这样就可以返回多个对象。</li>
+<li>&#x8BE5;&#x65B9;&#x6CD5;&#x662F;&#x7EAF;&#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x5E94;&#x6709; <code>setState</code> &#x7684;&#x64CD;&#x4F5C;&#x3002;&#x6BCF;&#x6B21;&#x6E32;&#x67D3;&#x53EA;&#x4F1A;&#x8F93;&#x51FA;&#x540C;&#x4E00;&#x4E2A;&#x503C;&#x3002;&#x5982;&#x679C;&#x6709;&#x5BF9;&#x72B6;&#x6001;&#x7684;&#x53D8;&#x66F4;&#xFF0C;&#x5E94;&#x8BE5;&#x662F;&#x653E;&#x5728; <code>componentDidMount</code> &#x91CC;&#x3002;</li>
+<li>&#x8BE5;&#x65B9;&#x6CD5;&#x662F;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x6570;&#x7EC4;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x591A;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;</li>
 </ul>
 </li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> [</span><br><span class="line">    &lt;div key=<span class="hljs-string">"A"</span>&gt;First&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">"B"</span>&gt;Second&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">"C"</span>&gt;Third&lt;div/&gt;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render() {</span><br><span class="line">  <span class="hljs-keyword">return</span> [</span><br><span class="line">    &lt;div key=<span class="hljs-string">&quot;A&quot;</span>&gt;First&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">&quot;B&quot;</span>&gt;Second&lt;div/&gt;</span><br><span class="line">    &lt;div key=<span class="hljs-string">&quot;C&quot;</span>&gt;Third&lt;div/&gt;</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h4 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h4><ul>
-<li>组件挂载完毕时即调用。生命周期内只会调用一次。</li>
-<li><strong>应用场景</strong>：通常可以将请求后端数据—— ajax/fetch 放在这里。此时界面上 <code>DOM</code> 已经存在。可以做有关 <code>DOM</code> 的操作。例如 <code>findDOMNode</code>.</li>
-<li><strong>Note</strong>: 在这里调用 <code>setState</code> 会进行一次额外的 <code>rendering</code>,虽然这会导致两次的 <code>render</code>, 但用户不会察觉这过度的时间。可能要多加考虑的地方是这会导致一定的性能问题。</li>
+<li>&#x7EC4;&#x4EF6;&#x6302;&#x8F7D;&#x5B8C;&#x6BD5;&#x65F6;&#x5373;&#x8C03;&#x7528;&#x3002;&#x751F;&#x547D;&#x5468;&#x671F;&#x5185;&#x53EA;&#x4F1A;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x3002;</li>
+<li><strong>&#x5E94;&#x7528;&#x573A;&#x666F;</strong>&#xFF1A;&#x901A;&#x5E38;&#x53EF;&#x4EE5;&#x5C06;&#x8BF7;&#x6C42;&#x540E;&#x7AEF;&#x6570;&#x636E;&#x2014;&#x2014; ajax/fetch &#x653E;&#x5728;&#x8FD9;&#x91CC;&#x3002;&#x6B64;&#x65F6;&#x754C;&#x9762;&#x4E0A; <code>DOM</code> &#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x3002;&#x53EF;&#x4EE5;&#x505A;&#x6709;&#x5173; <code>DOM</code> &#x7684;&#x64CD;&#x4F5C;&#x3002;&#x4F8B;&#x5982; <code>findDOMNode</code>.</li>
+<li><strong>Note</strong>: &#x5728;&#x8FD9;&#x91CC;&#x8C03;&#x7528; <code>setState</code> &#x4F1A;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x989D;&#x5916;&#x7684; <code>rendering</code>,&#x867D;&#x7136;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x4E24;&#x6B21;&#x7684; <code>render</code>, &#x4F46;&#x7528;&#x6237;&#x4E0D;&#x4F1A;&#x5BDF;&#x89C9;&#x8FD9;&#x8FC7;&#x5EA6;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x53EF;&#x80FD;&#x8981;&#x591A;&#x52A0;&#x8003;&#x8651;&#x7684;&#x5730;&#x65B9;&#x662F;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x4E00;&#x5B9A;&#x7684;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x3002;</li>
 </ul>
 <h4 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h4><ul>
-<li><strong>执行阶段</strong>：当组件卸载的时候的回调函数。</li>
-<li><strong>应用场景</strong>: 适用于清除定时器，取消请求等逻辑。</li>
-<li><strong>Note</strong>: 这个函数回调适合销毁那些在 <code>componentDidMount</code> 里创建的方法。</li>
+<li><strong>&#x6267;&#x884C;&#x9636;&#x6BB5;</strong>&#xFF1A;&#x5F53;&#x7EC4;&#x4EF6;&#x5378;&#x8F7D;&#x7684;&#x65F6;&#x5019;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</li>
+<li><strong>&#x5E94;&#x7528;&#x573A;&#x666F;</strong>: &#x9002;&#x7528;&#x4E8E;&#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;&#xFF0C;&#x53D6;&#x6D88;&#x8BF7;&#x6C42;&#x7B49;&#x903B;&#x8F91;&#x3002;</li>
+<li><strong>Note</strong>: &#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x56DE;&#x8C03;&#x9002;&#x5408;&#x9500;&#x6BC1;&#x90A3;&#x4E9B;&#x5728; <code>componentDidMount</code> &#x91CC;&#x521B;&#x5EFA;&#x7684;&#x65B9;&#x6CD5;&#x3002;</li>
 </ul>
-<h3 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h3><ul>
+<h3 id="&#x66F4;&#x65B0;&#x9636;&#x6BB5;"><a href="#&#x66F4;&#x65B0;&#x9636;&#x6BB5;" class="headerlink" title="&#x66F4;&#x65B0;&#x9636;&#x6BB5;"></a>&#x66F4;&#x65B0;&#x9636;&#x6BB5;</h3><ul>
 <li><a href="#componentWillReceiveProps">componentWillReceiveProps</a></li>
 <li><a href="#componentShouldUpdate">componentShouldUpdate</a></li>
 <li><a href="#componentWillUpdate">componentWillUpdate</a></li>
@@ -213,52 +220,52 @@
 <h4 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a>componentWillReceiveProps</h4><ul>
 <li><code>componentWillReceiveProps(nextProps)</code></li>
 <li><strong>Note</strong>:<ul>
-<li>每次接收到新的 <code>props</code> 调用。注意这里是接收到 <code>props</code> 就调用，但 <code>props</code> 的值不一定就和原来的值不一样，有可能还是相同的。在某些情况下，这会造成重复渲染。</li>
-<li>在组件完全挂载后才会调用。在完全挂载之前是不会调用的。</li>
-<li>可以在这里比较 <code>props</code> 和 <code>nextProps</code>, 然后更新 <code>state</code>, 但 <code>setState</code> 不会触发该方法。</li>
+<li>&#x6BCF;&#x6B21;&#x63A5;&#x6536;&#x5230;&#x65B0;&#x7684; <code>props</code> &#x8C03;&#x7528;&#x3002;&#x6CE8;&#x610F;&#x8FD9;&#x91CC;&#x662F;&#x63A5;&#x6536;&#x5230; <code>props</code> &#x5C31;&#x8C03;&#x7528;&#xFF0C;&#x4F46; <code>props</code> &#x7684;&#x503C;&#x4E0D;&#x4E00;&#x5B9A;&#x5C31;&#x548C;&#x539F;&#x6765;&#x7684;&#x503C;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x8FD8;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8FD9;&#x4F1A;&#x9020;&#x6210;&#x91CD;&#x590D;&#x6E32;&#x67D3;&#x3002;</li>
+<li>&#x5728;&#x7EC4;&#x4EF6;&#x5B8C;&#x5168;&#x6302;&#x8F7D;&#x540E;&#x624D;&#x4F1A;&#x8C03;&#x7528;&#x3002;&#x5728;&#x5B8C;&#x5168;&#x6302;&#x8F7D;&#x4E4B;&#x524D;&#x662F;&#x4E0D;&#x4F1A;&#x8C03;&#x7528;&#x7684;&#x3002;</li>
+<li>&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x6BD4;&#x8F83; <code>props</code> &#x548C; <code>nextProps</code>, &#x7136;&#x540E;&#x66F4;&#x65B0; <code>state</code>, &#x4F46; <code>setState</code> &#x4E0D;&#x4F1A;&#x89E6;&#x53D1;&#x8BE5;&#x65B9;&#x6CD5;&#x3002;</li>
 </ul>
 </li>
 </ul>
 <h4 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a>shouldComponentUpdate</h4><ul>
 <li><code>shouldComponentUpdate(nextProps, nextState)</code></li>
-<li>当每次 <code>props</code> 或 <code>state</code> 更新时调用。在首次 <code>render</code> 之后的每次 <code>render</code> 之前执行。</li>
+<li>&#x5F53;&#x6BCF;&#x6B21; <code>props</code> &#x6216; <code>state</code> &#x66F4;&#x65B0;&#x65F6;&#x8C03;&#x7528;&#x3002;&#x5728;&#x9996;&#x6B21; <code>render</code> &#x4E4B;&#x540E;&#x7684;&#x6BCF;&#x6B21; <code>render</code> &#x4E4B;&#x524D;&#x6267;&#x884C;&#x3002;</li>
 <li><strong>Note</strong>:<ul>
-<li>该方法的返回值将会影响 <code>componentWillUpdate</code>、<code>render</code>、<code>componentDidUpdate</code> 的执行。但在未来这一点有可能会改变。</li>
-<li>可以在这里可以进行一些值是否相等的判断，但最好不要将对象，数组等判断放在这里，因为这可能会引起性能问题。</li>
+<li>&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C06;&#x4F1A;&#x5F71;&#x54CD; <code>componentWillUpdate</code>&#x3001;<code>render</code>&#x3001;<code>componentDidUpdate</code> &#x7684;&#x6267;&#x884C;&#x3002;&#x4F46;&#x5728;&#x672A;&#x6765;&#x8FD9;&#x4E00;&#x70B9;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x6539;&#x53D8;&#x3002;</li>
+<li>&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x503C;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x7684;&#x5224;&#x65AD;&#xFF0C;&#x4F46;&#x6700;&#x597D;&#x4E0D;&#x8981;&#x5C06;&#x5BF9;&#x8C61;&#xFF0C;&#x6570;&#x7EC4;&#x7B49;&#x5224;&#x65AD;&#x653E;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x5F15;&#x8D77;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x3002;</li>
 </ul>
 </li>
 </ul>
 <h4 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate"></a>componentWillUpdate</h4><ul>
 <li><code>componentWillUpdate(nextProps, nextState)</code></li>
-<li><code>shouldComponentUpdate</code> 方法返回 <code>true</code> 之后执行。</li>
+<li><code>shouldComponentUpdate</code> &#x65B9;&#x6CD5;&#x8FD4;&#x56DE; <code>true</code> &#x4E4B;&#x540E;&#x6267;&#x884C;&#x3002;</li>
 <li><strong>Note</strong>:<ul>
-<li>在这里不能调用 <code>setState</code> 方法，也不能进行 <code>redux</code> 的 <code>action</code>, 因为他会重复调用该方法。</li>
-<li>如果需要在 <code>state</code> 更新后操作 <code>props</code>, 把这部分逻辑放在 <code>componentWillReceiveProps</code>.</li>
+<li>&#x5728;&#x8FD9;&#x91CC;&#x4E0D;&#x80FD;&#x8C03;&#x7528; <code>setState</code> &#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x4E0D;&#x80FD;&#x8FDB;&#x884C; <code>redux</code> &#x7684; <code>action</code>, &#x56E0;&#x4E3A;&#x4ED6;&#x4F1A;&#x91CD;&#x590D;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x9700;&#x8981;&#x5728; <code>state</code> &#x66F4;&#x65B0;&#x540E;&#x64CD;&#x4F5C; <code>props</code>, &#x628A;&#x8FD9;&#x90E8;&#x5206;&#x903B;&#x8F91;&#x653E;&#x5728; <code>componentWillReceiveProps</code>.</li>
 </ul>
 </li>
 </ul>
 <h4 id="render-1"><a href="#render-1" class="headerlink" title="render"></a>render</h4><ul>
-<li>渲染挂载组件。</li>
+<li>&#x6E32;&#x67D3;&#x6302;&#x8F7D;&#x7EC4;&#x4EF6;&#x3002;</li>
 </ul>
 <h4 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h4><ul>
 <li><code>componentDidUpdate(prevProps, prevState)</code></li>
-<li>在初次 <code>render</code> 以后的每次渲染之后执行。执行逻辑和 <code>componentWillUpdate</code> 一样，当 <code>shouldComponentUpdate</code> 返回 <code>false</code> 时不会执行。</li>
-<li><strong>应用场景</strong>：该方法总是在 <code>DOM</code> 存在后才会执行，所以可以在这里进行一些操作 <code>DOM</code> 的逻辑。也可以在这里发起一些网络请求，但前提 <code>props</code> 发生了更改，否则可能也会引起性能问题。</li>
+<li>&#x5728;&#x521D;&#x6B21; <code>render</code> &#x4EE5;&#x540E;&#x7684;&#x6BCF;&#x6B21;&#x6E32;&#x67D3;&#x4E4B;&#x540E;&#x6267;&#x884C;&#x3002;&#x6267;&#x884C;&#x903B;&#x8F91;&#x548C; <code>componentWillUpdate</code> &#x4E00;&#x6837;&#xFF0C;&#x5F53; <code>shouldComponentUpdate</code> &#x8FD4;&#x56DE; <code>false</code> &#x65F6;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x3002;</li>
+<li><strong>&#x5E94;&#x7528;&#x573A;&#x666F;</strong>&#xFF1A;&#x8BE5;&#x65B9;&#x6CD5;&#x603B;&#x662F;&#x5728; <code>DOM</code> &#x5B58;&#x5728;&#x540E;&#x624D;&#x4F1A;&#x6267;&#x884C;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C; <code>DOM</code> &#x7684;&#x903B;&#x8F91;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x53D1;&#x8D77;&#x4E00;&#x4E9B;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#xFF0C;&#x4F46;&#x524D;&#x63D0; <code>props</code> &#x53D1;&#x751F;&#x4E86;&#x66F4;&#x6539;&#xFF0C;&#x5426;&#x5219;&#x53EF;&#x80FD;&#x4E5F;&#x4F1A;&#x5F15;&#x8D77;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x3002;</li>
 </ul>
-<h4 id="componentDidCatch-16版本引进"><a href="#componentDidCatch-16版本引进" class="headerlink" title="componentDidCatch (16版本引进)"></a>componentDidCatch (16版本引进)</h4><ul>
+<h4 id="componentDidCatch-16&#x7248;&#x672C;&#x5F15;&#x8FDB;"><a href="#componentDidCatch-16&#x7248;&#x672C;&#x5F15;&#x8FDB;" class="headerlink" title="componentDidCatch (16&#x7248;&#x672C;&#x5F15;&#x8FDB;)"></a>componentDidCatch (16&#x7248;&#x672C;&#x5F15;&#x8FDB;)</h4><ul>
 <li><code>componentDidCatch(err, info)</code></li>
-<li>捕捉异常。</li>
-<li><code>try/catch</code> 固然很好，但它会立即捕获异常。在 <code>React</code> 中，有时我们虽然遇到错误，但不希望影响挂载或渲染过程。所以统一在这个回调里进行处理。对用户来说，业务仍然是正常的，错误维护了 <code>React</code> 的生态，并不会影响组件挂载。</li>
-<li><code>React</code> 组件都必须是纯函数，并禁止修改其自身 props.</li>
+<li>&#x6355;&#x6349;&#x5F02;&#x5E38;&#x3002;</li>
+<li><code>try/catch</code> &#x56FA;&#x7136;&#x5F88;&#x597D;&#xFF0C;&#x4F46;&#x5B83;&#x4F1A;&#x7ACB;&#x5373;&#x6355;&#x83B7;&#x5F02;&#x5E38;&#x3002;&#x5728; <code>React</code> &#x4E2D;&#xFF0C;&#x6709;&#x65F6;&#x6211;&#x4EEC;&#x867D;&#x7136;&#x9047;&#x5230;&#x9519;&#x8BEF;&#xFF0C;&#x4F46;&#x4E0D;&#x5E0C;&#x671B;&#x5F71;&#x54CD;&#x6302;&#x8F7D;&#x6216;&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;&#x3002;&#x6240;&#x4EE5;&#x7EDF;&#x4E00;&#x5728;&#x8FD9;&#x4E2A;&#x56DE;&#x8C03;&#x91CC;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x5BF9;&#x7528;&#x6237;&#x6765;&#x8BF4;&#xFF0C;&#x4E1A;&#x52A1;&#x4ECD;&#x7136;&#x662F;&#x6B63;&#x5E38;&#x7684;&#xFF0C;&#x9519;&#x8BEF;&#x7EF4;&#x62A4;&#x4E86; <code>React</code> &#x7684;&#x751F;&#x6001;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x7EC4;&#x4EF6;&#x6302;&#x8F7D;&#x3002;</li>
+<li><code>React</code> &#x7EC4;&#x4EF6;&#x90FD;&#x5FC5;&#x987B;&#x662F;&#x7EAF;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x7981;&#x6B62;&#x4FEE;&#x6539;&#x5176;&#x81EA;&#x8EAB; props.</li>
 </ul>
-<h3 id="这里以图片形式更直观地来理解这整个生命周期流程"><a href="#这里以图片形式更直观地来理解这整个生命周期流程" class="headerlink" title="这里以图片形式更直观地来理解这整个生命周期流程"></a>这里以图片形式更直观地来理解这整个生命周期流程</h3><ul>
-<li>组件的生命周期流程图<img src="/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg" title="React LifeCycle">
+<h3 id="&#x8FD9;&#x91CC;&#x4EE5;&#x56FE;&#x7247;&#x5F62;&#x5F0F;&#x66F4;&#x76F4;&#x89C2;&#x5730;&#x6765;&#x7406;&#x89E3;&#x8FD9;&#x6574;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#x6D41;&#x7A0B;"><a href="#&#x8FD9;&#x91CC;&#x4EE5;&#x56FE;&#x7247;&#x5F62;&#x5F0F;&#x66F4;&#x76F4;&#x89C2;&#x5730;&#x6765;&#x7406;&#x89E3;&#x8FD9;&#x6574;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8FD9;&#x91CC;&#x4EE5;&#x56FE;&#x7247;&#x5F62;&#x5F0F;&#x66F4;&#x76F4;&#x89C2;&#x5730;&#x6765;&#x7406;&#x89E3;&#x8FD9;&#x6574;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#x6D41;&#x7A0B;"></a>&#x8FD9;&#x91CC;&#x4EE5;&#x56FE;&#x7247;&#x5F62;&#x5F0F;&#x66F4;&#x76F4;&#x89C2;&#x5730;&#x6765;&#x7406;&#x89E3;&#x8FD9;&#x6574;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#x6D41;&#x7A0B;</h3><ul>
+<li>&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x6D41;&#x7A0B;&#x56FE;<img src="/2017/08/30/react-component-lifecycle/react-lifecycle.jpeg" class title="React LifeCycle">
 
 </li>
 </ul>
-<h5 id="PS-截止-9-月份，React-宣布将会随着-16-版本更新，修改原有的-license，-将原专利许可和-BSD-协议改为-MIT-协议。算是给这场风波一个较为圆满的结果。"><a href="#PS-截止-9-月份，React-宣布将会随着-16-版本更新，修改原有的-license，-将原专利许可和-BSD-协议改为-MIT-协议。算是给这场风波一个较为圆满的结果。" class="headerlink" title="PS: 截止 9 月份，React 宣布将会随着 16 版本更新，修改原有的 license， 将原专利许可和 BSD 协议改为 MIT 协议。算是给这场风波一个较为圆满的结果。"></a><em>PS: 截止 9 月份，<code>React</code> 宣布将会随着 16 版本更新，修改原有的 <code>license</code>， 将原专利许可和 BSD 协议改为 MIT 协议。算是给这场风波一个较为圆满的结果。</em></h5><blockquote><p>参考：<br>  1.<a href="https://devhints.io/react" target="_blank" rel="noopener">react</a><br>  2.<a href="https://reactcheatsheet.com/" target="_blank" rel="noopener">reactchectsheet</a><br>  3.<a href="https://reactjs.org/docs/react-component.html" target="_blank" rel="noopener">reactjs</a></p>
+<h5 id="PS-&#x622A;&#x6B62;-9-&#x6708;&#x4EFD;&#xFF0C;React-&#x5BA3;&#x5E03;&#x5C06;&#x4F1A;&#x968F;&#x7740;-16-&#x7248;&#x672C;&#x66F4;&#x65B0;&#xFF0C;&#x4FEE;&#x6539;&#x539F;&#x6709;&#x7684;-license&#xFF0C;-&#x5C06;&#x539F;&#x4E13;&#x5229;&#x8BB8;&#x53EF;&#x548C;-BSD-&#x534F;&#x8BAE;&#x6539;&#x4E3A;-MIT-&#x534F;&#x8BAE;&#x3002;&#x7B97;&#x662F;&#x7ED9;&#x8FD9;&#x573A;&#x98CE;&#x6CE2;&#x4E00;&#x4E2A;&#x8F83;&#x4E3A;&#x5706;&#x6EE1;&#x7684;&#x7ED3;&#x679C;&#x3002;"><a href="#PS-&#x622A;&#x6B62;-9-&#x6708;&#x4EFD;&#xFF0C;React-&#x5BA3;&#x5E03;&#x5C06;&#x4F1A;&#x968F;&#x7740;-16-&#x7248;&#x672C;&#x66F4;&#x65B0;&#xFF0C;&#x4FEE;&#x6539;&#x539F;&#x6709;&#x7684;-license&#xFF0C;-&#x5C06;&#x539F;&#x4E13;&#x5229;&#x8BB8;&#x53EF;&#x548C;-BSD-&#x534F;&#x8BAE;&#x6539;&#x4E3A;-MIT-&#x534F;&#x8BAE;&#x3002;&#x7B97;&#x662F;&#x7ED9;&#x8FD9;&#x573A;&#x98CE;&#x6CE2;&#x4E00;&#x4E2A;&#x8F83;&#x4E3A;&#x5706;&#x6EE1;&#x7684;&#x7ED3;&#x679C;&#x3002;" class="headerlink" title="PS: &#x622A;&#x6B62; 9 &#x6708;&#x4EFD;&#xFF0C;React &#x5BA3;&#x5E03;&#x5C06;&#x4F1A;&#x968F;&#x7740; 16 &#x7248;&#x672C;&#x66F4;&#x65B0;&#xFF0C;&#x4FEE;&#x6539;&#x539F;&#x6709;&#x7684; license&#xFF0C; &#x5C06;&#x539F;&#x4E13;&#x5229;&#x8BB8;&#x53EF;&#x548C; BSD &#x534F;&#x8BAE;&#x6539;&#x4E3A; MIT &#x534F;&#x8BAE;&#x3002;&#x7B97;&#x662F;&#x7ED9;&#x8FD9;&#x573A;&#x98CE;&#x6CE2;&#x4E00;&#x4E2A;&#x8F83;&#x4E3A;&#x5706;&#x6EE1;&#x7684;&#x7ED3;&#x679C;&#x3002;"></a><em>PS: &#x622A;&#x6B62; 9 &#x6708;&#x4EFD;&#xFF0C;<code>React</code> &#x5BA3;&#x5E03;&#x5C06;&#x4F1A;&#x968F;&#x7740; 16 &#x7248;&#x672C;&#x66F4;&#x65B0;&#xFF0C;&#x4FEE;&#x6539;&#x539F;&#x6709;&#x7684; <code>license</code>&#xFF0C; &#x5C06;&#x539F;&#x4E13;&#x5229;&#x8BB8;&#x53EF;&#x548C; BSD &#x534F;&#x8BAE;&#x6539;&#x4E3A; MIT &#x534F;&#x8BAE;&#x3002;&#x7B97;&#x662F;&#x7ED9;&#x8FD9;&#x573A;&#x98CE;&#x6CE2;&#x4E00;&#x4E2A;&#x8F83;&#x4E3A;&#x5706;&#x6EE1;&#x7684;&#x7ED3;&#x679C;&#x3002;</em></h5><blockquote><p>&#x53C2;&#x8003;&#xFF1A;<br>  1.<a href="https://devhints.io/react" target="_blank" rel="noopener">react</a><br>  2.<a href="https://reactcheatsheet.com/" target="_blank" rel="noopener">reactchectsheet</a><br>  3.<a href="https://reactjs.org/docs/react-component.html" target="_blank" rel="noopener">reactjs</a></p>
 </blockquote>
-
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -328,7 +335,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -340,7 +347,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -349,7 +357,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -437,7 +445,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -573,14 +581,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -603,7 +613,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

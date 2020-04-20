@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>标签: CSS3 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -22,10 +22,9 @@
 <meta property="og:url" content="http://kyriejoshua.github.io/tags/CSS3/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
 <meta property="og:description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="朱征原">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deadpool Front-end">
-<meta name="twitter:description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
 
 
 
@@ -44,7 +43,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -63,7 +64,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -71,7 +72,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -83,15 +84,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -103,7 +109,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -150,10 +156,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
 <p><img src="/2017/09/23/css3d-study/unphoto.jpg" alt></p>
-<p>最近的工作开始接触到可视化的 3D 部分，因此自己也抽时间温习了以前学习的 css3 知识点，顺便完成一个入门小 demo —— 实现一个旋转的骰子。这个例子里有重温 css3 的一些知识点——用它来实现立体和旋转效果，然后用 flex 布局来实现骰子的点的排列。这个案例对于以后熟练使用 css 和 flex 有一定的帮助，所以这里也做一份教程和总结。最终效果就在页面右下角，相信眼不尖的人也注意到了。</p>
+<p>&#x6700;&#x8FD1;&#x7684;&#x5DE5;&#x4F5C;&#x5F00;&#x59CB;&#x63A5;&#x89E6;&#x5230;&#x53EF;&#x89C6;&#x5316;&#x7684; 3D &#x90E8;&#x5206;&#xFF0C;&#x56E0;&#x6B64;&#x81EA;&#x5DF1;&#x4E5F;&#x62BD;&#x65F6;&#x95F4;&#x6E29;&#x4E60;&#x4E86;&#x4EE5;&#x524D;&#x5B66;&#x4E60;&#x7684; css3 &#x77E5;&#x8BC6;&#x70B9;&#xFF0C;&#x987A;&#x4FBF;&#x5B8C;&#x6210;&#x4E00;&#x4E2A;&#x5165;&#x95E8;&#x5C0F; demo &#x2014;&#x2014; &#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x65CB;&#x8F6C;&#x7684;&#x9AB0;&#x5B50;&#x3002;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#x6709;&#x91CD;&#x6E29; css3 &#x7684;&#x4E00;&#x4E9B;&#x77E5;&#x8BC6;&#x70B9;&#x2014;&#x2014;&#x7528;&#x5B83;&#x6765;&#x5B9E;&#x73B0;&#x7ACB;&#x4F53;&#x548C;&#x65CB;&#x8F6C;&#x6548;&#x679C;&#xFF0C;&#x7136;&#x540E;&#x7528; flex &#x5E03;&#x5C40;&#x6765;&#x5B9E;&#x73B0;&#x9AB0;&#x5B50;&#x7684;&#x70B9;&#x7684;&#x6392;&#x5217;&#x3002;&#x8FD9;&#x4E2A;&#x6848;&#x4F8B;&#x5BF9;&#x4E8E;&#x4EE5;&#x540E;&#x719F;&#x7EC3;&#x4F7F;&#x7528; css &#x548C; flex &#x6709;&#x4E00;&#x5B9A;&#x7684;&#x5E2E;&#x52A9;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x4E5F;&#x505A;&#x4E00;&#x4EFD;&#x6559;&#x7A0B;&#x548C;&#x603B;&#x7ED3;&#x3002;&#x6700;&#x7EC8;&#x6548;&#x679C;&#x5C31;&#x5728;&#x9875;&#x9762;&#x53F3;&#x4E0B;&#x89D2;&#xFF0C;&#x76F8;&#x4FE1;&#x773C;&#x4E0D;&#x5C16;&#x7684;&#x4EBA;&#x4E5F;&#x6CE8;&#x610F;&#x5230;&#x4E86;&#x3002;</p></body></html>
         <p class="article-more-link">
             <a href="/2017/09/23/css3d-study/#more">阅读更多</a>
         </p>
@@ -194,7 +200,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -203,7 +210,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -291,7 +298,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -427,14 +434,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -457,7 +466,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

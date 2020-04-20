@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>eslint有关import/prefer-default-export报错的解决 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错     *`error Prefer default export    ......     import/prefer-default-export`*         查了半天资料终于发现如何解决。">
-<meta name="keywords" content="eslint">
+    <meta name="description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5728;&amp;#x914D;&amp;#x7F6E;eslint&amp;#x53D1;&amp;#x73B0;&amp;#x4E00;&amp;#x4E2A;&amp;#x795E;&amp;#x5947;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#x2014;&amp;#x2014;&amp;#x91C7;&amp;#x7528;airbnb&amp;#x98CE;&amp;#x683C;&amp;#x7684;&amp;#x68C0;&amp;#x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eslint有关import&#x2F;prefer-default-export报错的解决">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/08/08/eslint-about-import-prefer-default-export/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错     *`error Prefer default export    ......     import/prefer-default-export`*         查了半天资料终于发现如何解决。">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5728;&amp;#x914D;&amp;#x7F6E;eslint&amp;#x53D1;&amp;#x73B0;&amp;#x4E00;&amp;#x4E2A;&amp;#x795E;&amp;#x5947;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#x2014;&amp;#x2014;&amp;#x91C7;&amp;#x7528;airbnb&amp;#x98CE;&amp;#x683C;&amp;#x7684;&amp;#x68C0;&amp;#x">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:01.629Z">
+<meta property="article:published_time" content="2016-08-08T13:11:39.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:01.629Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="eslint">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eslint有关import&#x2F;prefer-default-export报错的解决">
-<meta name="twitter:description" content="今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错     *`error Prefer default export    ......     import/prefer-default-export`*         查了半天资料终于发现如何解决。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg">
 
 
@@ -48,7 +48,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -67,7 +69,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -75,7 +77,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -87,15 +89,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -107,7 +114,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -146,40 +153,40 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg" title="miss hot">
+<img src="/2016/08/08/eslint-about-import-prefer-default-export/unphoto.jpeg" class title="miss hot">
 
 <blockquote>
-    今天在配置eslint发现一个神奇的问题——采用airbnb风格的检查时有一个报错
+    &#x4ECA;&#x5929;&#x5728;&#x914D;&#x7F6E;eslint&#x53D1;&#x73B0;&#x4E00;&#x4E2A;&#x795E;&#x5947;&#x7684;&#x95EE;&#x9898;&#x2014;&#x2014;&#x91C7;&#x7528;airbnb&#x98CE;&#x683C;&#x7684;&#x68C0;&#x67E5;&#x65F6;&#x6709;&#x4E00;&#x4E2A;&#x62A5;&#x9519;
     *`error Prefer default export    ......     import/prefer-default-export`*
-        查了半天资料终于发现如何解决。
+        &#x67E5;&#x4E86;&#x534A;&#x5929;&#x8D44;&#x6599;&#x7EC8;&#x4E8E;&#x53D1;&#x73B0;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x3002;
 
 </blockquote>
 
 <a id="more"></a>
 
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
-<li>原来是这样</li>
+<h3 id="&#x89E3;&#x51B3;"><a href="#&#x89E3;&#x51B3;" class="headerlink" title="&#x89E3;&#x51B3;"></a>&#x89E3;&#x51B3;</h3><ul>
+<li>&#x539F;&#x6765;&#x662F;&#x8FD9;&#x6837;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="hljs-string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>{</span><br><span class="line">  $log.debug(<span class="hljs-string">&apos;runBlock end&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <ul>
-<li>运行eslint检查的时候一直会报错 <code>error Prefer default export     ......    import/prefer-default-export</code></li>
-<li>查询了一些资料后发现是因为,这个单一接口并不是设置为默认的。需要添加参数<code>default</code>。</li>
-<li>更改后如下</li>
+<li>&#x8FD0;&#x884C;eslint&#x68C0;&#x67E5;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x76F4;&#x4F1A;&#x62A5;&#x9519; <code>error Prefer default export     ......    import/prefer-default-export</code></li>
+<li>&#x67E5;&#x8BE2;&#x4E86;&#x4E00;&#x4E9B;&#x8D44;&#x6599;&#x540E;&#x53D1;&#x73B0;&#x662F;&#x56E0;&#x4E3A;,&#x8FD9;&#x4E2A;&#x5355;&#x4E00;&#x63A5;&#x53E3;&#x5E76;&#x4E0D;&#x662F;&#x8BBE;&#x7F6E;&#x4E3A;&#x9ED8;&#x8BA4;&#x7684;&#x3002;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x53C2;&#x6570;<code>default</code>&#x3002;</li>
+<li>&#x66F4;&#x6539;&#x540E;&#x5982;&#x4E0B;</li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>&#123;</span><br><span class="line">  $log.debug(<span class="hljs-string">'runBlock end'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>{</span><br><span class="line">  $log.debug(<span class="hljs-string">&apos;runBlock end&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <ul>
-<li>具体原因有待详细追究。目前认为是当输出只有一个变量时，需要添加<code>default</code>。</li>
+<li>&#x5177;&#x4F53;&#x539F;&#x56E0;&#x6709;&#x5F85;&#x8BE6;&#x7EC6;&#x8FFD;&#x7A76;&#x3002;&#x76EE;&#x524D;&#x8BA4;&#x4E3A;&#x662F;&#x5F53;&#x8F93;&#x51FA;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6DFB;&#x52A0;<code>default</code>&#x3002;</li>
 </ul>
 <blockquote>
-<p>参考</p>
+<p>&#x53C2;&#x8003;</p>
 <ul>
-<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">es6…</a></li>
+<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">es6&#x2026;</a></li>
 <li><a href="https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md" target="_blank" rel="noopener">eslint-plugin-import</a></li>
 </ul>
 </blockquote>
-
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -249,7 +256,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -261,7 +268,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -270,7 +278,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -358,7 +366,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -494,14 +502,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -524,7 +534,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

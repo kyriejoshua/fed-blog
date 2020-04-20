@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>DOM 重要知识点回顾 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="回顾部分重要的 DOM 知识点。">
-<meta name="keywords" content="DOM">
+    <meta name="description" content="&amp;#x56DE;&amp;#x987E;&amp;#x90E8;&amp;#x5206;&amp;#x91CD;&amp;#x8981;&amp;#x7684; DOM &amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;&amp;#x3002;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DOM 重要知识点回顾">
 <meta property="og:url" content="http://kyriejoshua.github.io/2017/02/12/review-dom/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="回顾部分重要的 DOM 知识点。">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x56DE;&amp;#x987E;&amp;#x90E8;&amp;#x5206;&amp;#x91CD;&amp;#x8981;&amp;#x7684; DOM &amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;&amp;#x3002;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2017/02/12/review-dom/unphoto.jpg">
-<meta property="og:updated_time" content="2019-06-27T10:17:02.497Z">
+<meta property="article:published_time" content="2017-02-12T10:16:27.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:02.497Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="DOM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DOM 重要知识点回顾">
-<meta name="twitter:description" content="回顾部分重要的 DOM 知识点。">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2017/02/12/review-dom/unphoto.jpg">
 
 
@@ -48,7 +48,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -67,7 +69,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -75,7 +77,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -87,15 +89,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -107,7 +114,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -146,392 +153,370 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2017/02/12/review-dom/unphoto.jpg" title="DOM">
+<img src="/2017/02/12/review-dom/unphoto.jpg" class title="DOM">
 
 <blockquote>
-  回顾部分重要的 DOM 知识点。
+  &#x56DE;&#x987E;&#x90E8;&#x5206;&#x91CD;&#x8981;&#x7684; DOM &#x77E5;&#x8BC6;&#x70B9;&#x3002;
 
 </blockquote>
 
 <a id="more"></a>
 
 <h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><ul>
-<li>元素的增删改查。</li>
-<li>获取或设置元素的属性。</li>
+<li>&#x5143;&#x7D20;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;&#x3002;</li>
+<li>&#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5143;&#x7D20;&#x7684;&#x5C5E;&#x6027;&#x3002;</li>
 </ul>
 <h3 id="DHTML"><a href="#DHTML" class="headerlink" title="DHTML"></a>DHTML</h3><ul>
-<li>动态HTML。</li>
-<li>一系列实现网页动态效果的技术统称。</li>
-<li>区别:<ul>
-<li>HTML：超文本标记语言，标签名固定。</li>
-<li>XHTML：更严格的HTML语言标准。</li>
-<li>XML: 可扩展的标记语言，标签名可自定义，语法和HTML完全相同。</li>
+<li>&#x52A8;&#x6001;HTML&#x3002;</li>
+<li>&#x4E00;&#x7CFB;&#x5217;&#x5B9E;&#x73B0;&#x7F51;&#x9875;&#x52A8;&#x6001;&#x6548;&#x679C;&#x7684;&#x6280;&#x672F;&#x7EDF;&#x79F0;&#x3002;</li>
+<li>&#x533A;&#x522B;:<ul>
+<li>HTML&#xFF1A;&#x8D85;&#x6587;&#x672C;&#x6807;&#x8BB0;&#x8BED;&#x8A00;&#xFF0C;&#x6807;&#x7B7E;&#x540D;&#x56FA;&#x5B9A;&#x3002;</li>
+<li>XHTML&#xFF1A;&#x66F4;&#x4E25;&#x683C;&#x7684;HTML&#x8BED;&#x8A00;&#x6807;&#x51C6;&#x3002;</li>
+<li>XML: &#x53EF;&#x6269;&#x5C55;&#x7684;&#x6807;&#x8BB0;&#x8BED;&#x8A00;&#xFF0C;&#x6807;&#x7B7E;&#x540D;&#x53EF;&#x81EA;&#x5B9A;&#x4E49;&#xFF0C;&#x8BED;&#x6CD5;&#x548C;HTML&#x5B8C;&#x5168;&#x76F8;&#x540C;&#x3002;</li>
 </ul>
 </li>
 </ul>
-<h3 id="JS-ECMAScript、DOM、BOM"><a href="#JS-ECMAScript、DOM、BOM" class="headerlink" title="JS(ECMAScript、DOM、BOM)"></a>JS(ECMAScript、DOM、BOM)</h3><ul>
-<li>ECMAScript(核心语法)。</li>
-<li>文档对象模型。</li>
-<li>浏览器对象模型。</li>
+<h3 id="JS-ECMAScript&#x3001;DOM&#x3001;BOM"><a href="#JS-ECMAScript&#x3001;DOM&#x3001;BOM" class="headerlink" title="JS(ECMAScript&#x3001;DOM&#x3001;BOM)"></a>JS(ECMAScript&#x3001;DOM&#x3001;BOM)</h3><ul>
+<li>ECMAScript(&#x6838;&#x5FC3;&#x8BED;&#x6CD5;)&#x3002;</li>
+<li>&#x6587;&#x6863;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x3002;</li>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x3002;</li>
 </ul>
-<h3 id="DHTML-7大内置对象"><a href="#DHTML-7大内置对象" class="headerlink" title="DHTML: 7大内置对象"></a>DHTML: 7大内置对象</h3><ol>
-<li>window: 指代当前浏览器打开窗口。</li>
-<li>document: 指代当前页面的HTML文档。</li>
-<li>navigator: 封装了浏览器软件的版本信息和部分设置。</li>
-<li>history: 封装当前窗口成功浏览过的网址的历史记录栈。</li>
-<li>location: 指代当前窗口中地址栏。</li>
-<li>screen: 指代当前显示器。</li>
-<li>event: 指代事件对象。</li>
+<h3 id="DHTML-7&#x5927;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;"><a href="#DHTML-7&#x5927;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;" class="headerlink" title="DHTML: 7&#x5927;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;"></a>DHTML: 7&#x5927;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;</h3><ol>
+<li>window: &#x6307;&#x4EE3;&#x5F53;&#x524D;&#x6D4F;&#x89C8;&#x5668;&#x6253;&#x5F00;&#x7A97;&#x53E3;&#x3002;</li>
+<li>document: &#x6307;&#x4EE3;&#x5F53;&#x524D;&#x9875;&#x9762;&#x7684;HTML&#x6587;&#x6863;&#x3002;</li>
+<li>navigator: &#x5C01;&#x88C5;&#x4E86;&#x6D4F;&#x89C8;&#x5668;&#x8F6F;&#x4EF6;&#x7684;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x548C;&#x90E8;&#x5206;&#x8BBE;&#x7F6E;&#x3002;</li>
+<li>history: &#x5C01;&#x88C5;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6210;&#x529F;&#x6D4F;&#x89C8;&#x8FC7;&#x7684;&#x7F51;&#x5740;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x6808;&#x3002;</li>
+<li>location: &#x6307;&#x4EE3;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x4E2D;&#x5730;&#x5740;&#x680F;&#x3002;</li>
+<li>screen: &#x6307;&#x4EE3;&#x5F53;&#x524D;&#x663E;&#x793A;&#x5668;&#x3002;</li>
+<li>event: &#x6307;&#x4EE3;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#x3002;</li>
 </ol>
 <h3 id="DOM-1"><a href="#DOM-1" class="headerlink" title="DOM"></a>DOM</h3><ul>
-<li>网页中一切内容都是节点(Node)对象。</li>
-<li>所有节点对象以树形结构组织在一起(Dom Tree)。</li>
-<li>增删查改。</li>
+<li>&#x7F51;&#x9875;&#x4E2D;&#x4E00;&#x5207;&#x5185;&#x5BB9;&#x90FD;&#x662F;&#x8282;&#x70B9;(Node)&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x6240;&#x6709;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x4EE5;&#x6811;&#x5F62;&#x7ED3;&#x6784;&#x7EC4;&#x7EC7;&#x5728;&#x4E00;&#x8D77;(Dom Tree)&#x3002;</li>
+<li>&#x589E;&#x5220;&#x67E5;&#x6539;&#x3002;</li>
 </ul>
 <h4 id="DOM-TREE"><a href="#DOM-TREE" class="headerlink" title="DOM TREE"></a>DOM TREE</h4><ul>
-<li>网页加载时生成的文档模型。</li>
-<li>Document: Dom Tree根节点, 网页加载完成自动生成。</li>
-<li>继承自 HTML Document 的原型，Document 的原型中提供了 document 对象可用的 API.</li>
+<li>&#x7F51;&#x9875;&#x52A0;&#x8F7D;&#x65F6;&#x751F;&#x6210;&#x7684;&#x6587;&#x6863;&#x6A21;&#x578B;&#x3002;</li>
+<li>Document: Dom Tree&#x6839;&#x8282;&#x70B9;, &#x7F51;&#x9875;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x3002;</li>
+<li>&#x7EE7;&#x627F;&#x81EA; HTML Document &#x7684;&#x539F;&#x578B;&#xFF0C;Document &#x7684;&#x539F;&#x578B;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86; document &#x5BF9;&#x8C61;&#x53EF;&#x7528;&#x7684; API.</li>
 </ul>
-<h4 id="节点对象"><a href="#节点对象" class="headerlink" title="节点对象"></a>节点对象</h4><ul>
-<li>元素节点对象：指代 HTML 文档中每个元素。</li>
-<li>文本节点对象：指代 HTML 文档中的文本内容。</li>
+<h4 id="&#x8282;&#x70B9;&#x5BF9;&#x8C61;"><a href="#&#x8282;&#x70B9;&#x5BF9;&#x8C61;" class="headerlink" title="&#x8282;&#x70B9;&#x5BF9;&#x8C61;"></a>&#x8282;&#x70B9;&#x5BF9;&#x8C61;</h4><ul>
+<li>&#x5143;&#x7D20;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF1A;&#x6307;&#x4EE3; HTML &#x6587;&#x6863;&#x4E2D;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x3002;</li>
+<li>&#x6587;&#x672C;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF1A;&#x6307;&#x4EE3; HTML &#x6587;&#x6863;&#x4E2D;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x3002;</li>
 </ul>
-<h4 id="节点对象：所有节点对象都继承自一个父对象：Node-prototype"><a href="#节点对象：所有节点对象都继承自一个父对象：Node-prototype" class="headerlink" title="节点对象：所有节点对象都继承自一个父对象：Node.prototype."></a>节点对象：所有节点对象都继承自一个父对象：Node.prototype.</h4><ul>
-<li>Body 对象：<code>body -&gt; HTMLBodyElement.prototype -&gt; HTMLElement.prototype -&gt; Element.prototype -&gt; Node.prototype -&gt; 所有结节点共有属性</code>.</li>
-<li>document 对象：<code>document -&gt; HTMLDocument.prototype -&gt; Document.prototype -&gt; Node.prototype</code>.</li>
+<h4 id="&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF1A;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x90FD;&#x7EE7;&#x627F;&#x81EA;&#x4E00;&#x4E2A;&#x7236;&#x5BF9;&#x8C61;&#xFF1A;Node-prototype"><a href="#&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF1A;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x90FD;&#x7EE7;&#x627F;&#x81EA;&#x4E00;&#x4E2A;&#x7236;&#x5BF9;&#x8C61;&#xFF1A;Node-prototype" class="headerlink" title="&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF1A;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x90FD;&#x7EE7;&#x627F;&#x81EA;&#x4E00;&#x4E2A;&#x7236;&#x5BF9;&#x8C61;&#xFF1A;Node.prototype."></a>&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF1A;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x90FD;&#x7EE7;&#x627F;&#x81EA;&#x4E00;&#x4E2A;&#x7236;&#x5BF9;&#x8C61;&#xFF1A;Node.prototype.</h4><ul>
+<li>Body &#x5BF9;&#x8C61;&#xFF1A;<code>body -&gt; HTMLBodyElement.prototype -&gt; HTMLElement.prototype -&gt; Element.prototype -&gt; Node.prototype -&gt; &#x6240;&#x6709;&#x7ED3;&#x8282;&#x70B9;&#x5171;&#x6709;&#x5C5E;&#x6027;</code>.</li>
+<li>document &#x5BF9;&#x8C61;&#xFF1A;<code>document -&gt; HTMLDocument.prototype -&gt; Document.prototype -&gt; Node.prototype</code>.</li>
 <li>nodeType:<ul>
-<li>元素节点(1)。</li>
-<li>文本节点(3)。</li>
+<li>&#x5143;&#x7D20;&#x8282;&#x70B9;(1)&#x3002;</li>
+<li>&#x6587;&#x672C;&#x8282;&#x70B9;(3)&#x3002;</li>
 </ul>
 </li>
-<li>nodeName(返回全大写形式的标签名):<ul>
-<li>元素节点(标签名)。</li>
-<li>文本节点(#text)。</li>
+<li>nodeName(&#x8FD4;&#x56DE;&#x5168;&#x5927;&#x5199;&#x5F62;&#x5F0F;&#x7684;&#x6807;&#x7B7E;&#x540D;):<ul>
+<li>&#x5143;&#x7D20;&#x8282;&#x70B9;(&#x6807;&#x7B7E;&#x540D;)&#x3002;</li>
+<li>&#x6587;&#x672C;&#x8282;&#x70B9;(#text)&#x3002;</li>
 </ul>
 </li>
 <li>nodeValue:<ul>
-<li>文本节点(文本内容)。</li>
-<li>元素节点(null)。</li>
+<li>&#x6587;&#x672C;&#x8282;&#x70B9;(&#x6587;&#x672C;&#x5185;&#x5BB9;)&#x3002;</li>
+<li>&#x5143;&#x7D20;&#x8282;&#x70B9;(null)&#x3002;</li>
 </ul>
 </li>
 </ul>
-<h4 id="节点关系"><a href="#节点关系" class="headerlink" title="节点关系"></a>节点关系</h4><ul>
-<li><p>父子关系:</p>
-<ul>
-<li>node.parentNode: 获得 node 对象的父节点对象。</li>
-<li>node.childNode: 获得 node 对象的所有子节点对象。</li>
-<li>node.firstChild: 获得 node 对象下第一个子节点对象。</li>
-<li>node.lastChild: 获得 node 对象下最后一个子节点对象。</li>
-<li>返回 NodeList 类型的对象。</li>
-<li>NodeList 中的节点对象都是基于 Dom 树<strong>动态</strong>查询。</li>
-<li>Dom 树的变化随时反映在 NodeList 中。</li>
-<li>遍历所有子节点：<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; node.childNodes.length; i++) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(node.childNodes[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 每遍历一个元素，for 循环就会重新查找 childNodes 结果</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 优化如下</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = node.childNodes.length; i &lt; len; i++) &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(node.childNodes[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-string">`</span></span><br></pre></td></tr></table></figure></li>
+<h4 id="&#x8282;&#x70B9;&#x5173;&#x7CFB;"><a href="#&#x8282;&#x70B9;&#x5173;&#x7CFB;" class="headerlink" title="&#x8282;&#x70B9;&#x5173;&#x7CFB;"></a>&#x8282;&#x70B9;&#x5173;&#x7CFB;</h4><ul>
+<li>&#x7236;&#x5B50;&#x5173;&#x7CFB;:<ul>
+<li>node.parentNode: &#x83B7;&#x5F97; node &#x5BF9;&#x8C61;&#x7684;&#x7236;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>node.childNode: &#x83B7;&#x5F97; node &#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x5B50;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>node.firstChild: &#x83B7;&#x5F97; node &#x5BF9;&#x8C61;&#x4E0B;&#x7B2C;&#x4E00;&#x4E2A;&#x5B50;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>node.lastChild: &#x83B7;&#x5F97; node &#x5BF9;&#x8C61;&#x4E0B;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5B50;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x8FD4;&#x56DE; NodeList &#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>NodeList &#x4E2D;&#x7684;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x90FD;&#x662F;&#x57FA;&#x4E8E; Dom &#x6811;<strong>&#x52A8;&#x6001;</strong>&#x67E5;&#x8BE2;&#x3002;</li>
+<li>Dom &#x6811;&#x7684;&#x53D8;&#x5316;&#x968F;&#x65F6;&#x53CD;&#x6620;&#x5728; NodeList &#x4E2D;&#x3002;</li>
+<li>&#x904D;&#x5386;&#x6240;&#x6709;&#x5B50;&#x8282;&#x70B9;&#xFF1A;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; node.childNodes.length; i++) {</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(node.childNodes[i]);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x6BCF;&#x904D;&#x5386;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;for &#x5FAA;&#x73AF;&#x5C31;&#x4F1A;&#x91CD;&#x65B0;&#x67E5;&#x627E; childNodes &#x7ED3;&#x679C;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x4F18;&#x5316;&#x5982;&#x4E0B;</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = node.childNodes.length; i &lt; len; i++) {</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(node.childNodes[i]);</span><br><span class="line">}</span><br><span class="line"><span class="hljs-string">`</span></span><br></pre></td></tr></tbody></table></figure><br></li>
 </ul>
-<br></li>
-<li><p>兄弟关系</p>
-<ul>
-<li>node.previousSibling: 获得平级对象的前一个节点对象。</li>
-<li>node.nextSibling: 获得平级对象的后一个节点对象。</li>
+</li>
+<li>&#x5144;&#x5F1F;&#x5173;&#x7CFB;<ul>
+<li>node.previousSibling: &#x83B7;&#x5F97;&#x5E73;&#x7EA7;&#x5BF9;&#x8C61;&#x7684;&#x524D;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>node.nextSibling: &#x83B7;&#x5F97;&#x5E73;&#x7EA7;&#x5BF9;&#x8C61;&#x7684;&#x540E;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x3002;</li>
 </ul>
 </li>
 </ul>
-<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><ul>
-<li>id: <code>var elem = document.getElementById(&#39;id&#39;)</code>.</li>
+<h3 id="&#x67E5;&#x627E;&#x5143;&#x7D20;"><a href="#&#x67E5;&#x627E;&#x5143;&#x7D20;" class="headerlink" title="&#x67E5;&#x627E;&#x5143;&#x7D20;"></a>&#x67E5;&#x627E;&#x5143;&#x7D20;</h3><ul>
+<li>id: <code>var elem = document.getElementById(&apos;id&apos;)</code>.</li>
 <li>TagName:<ul>
-<li><code>var elems = element.getElementsByTagName(&#39;tagname&#39;)</code>.</li>
-<li><code>elems</code>是一个动态集合——HTMLCollection类型的对象。</li>
-<li>随着页面 Dom 的改变实时改变。</li>
+<li><code>var elems = element.getElementsByTagName(&apos;tagname&apos;)</code>.</li>
+<li><code>elems</code>&#x662F;&#x4E00;&#x4E2A;&#x52A8;&#x6001;&#x96C6;&#x5408;&#x2014;&#x2014;HTMLCollection&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x968F;&#x7740;&#x9875;&#x9762; Dom &#x7684;&#x6539;&#x53D8;&#x5B9E;&#x65F6;&#x6539;&#x53D8;&#x3002;</li>
 </ul>
 </li>
 <li>name:<ul>
-<li><code>var elem = document.getElementsByName(&#39;&#39;)</code>.</li>
-<li>直接获得表单元素: <code>var form = document.form[&#39;id&#39;]</code>.(存疑)</li>
-<li><code>elems = form[&#39;name&#39;]</code>.</li>
-<li>返回<strong>对象</strong>或者 <strong>HTMLCollection</strong>.</li>
+<li><code>var elem = document.getElementsByName(&apos;&apos;)</code>.</li>
+<li>&#x76F4;&#x63A5;&#x83B7;&#x5F97;&#x8868;&#x5355;&#x5143;&#x7D20;: <code>var form = document.form[&apos;id&apos;]</code>.(&#x5B58;&#x7591;)</li>
+<li><code>elems = form[&apos;name&apos;]</code>.</li>
+<li>&#x8FD4;&#x56DE;<strong>&#x5BF9;&#x8C61;</strong>&#x6216;&#x8005; <strong>HTMLCollection</strong>.</li>
 </ul>
 </li>
 <li>class(HTML5):<ul>
-<li><code>var elems = node.getElementsByClassName(&#39;class&#39;)</code>.</li>
+<li><code>var elems = node.getElementsByClassName(&apos;class&apos;)</code>.</li>
 </ul>
 </li>
-<li>选择器查找: Selector API<ul>
-<li>没有兼容性问题。</li>
-<li>原生API，执行效率高。</li>
-<li>返回值：包含全功能，全属性的元素对象集合。</li>
-<li><code>var elem = element.querySelector(&#39;selector&#39;)</code>.</li>
-<li><code>var elems = element.querySelectorAll(&#39;selectors&#39;)</code>.</li>
+<li>&#x9009;&#x62E9;&#x5668;&#x67E5;&#x627E;: Selector API<ul>
+<li>&#x6CA1;&#x6709;&#x517C;&#x5BB9;&#x6027;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x539F;&#x751F;API&#xFF0C;&#x6267;&#x884C;&#x6548;&#x7387;&#x9AD8;&#x3002;</li>
+<li>&#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x5305;&#x542B;&#x5168;&#x529F;&#x80FD;&#xFF0C;&#x5168;&#x5C5E;&#x6027;&#x7684;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x96C6;&#x5408;&#x3002;</li>
+<li><code>var elem = element.querySelector(&apos;selector&apos;)</code>.</li>
+<li><code>var elems = element.querySelectorAll(&apos;selectors&apos;)</code>.</li>
 </ul>
 </li>
 </ul>
-<h4 id="读写元素对象内容属性"><a href="#读写元素对象内容属性" class="headerlink" title="读写元素对象内容属性"></a>读写元素对象内容属性</h4><ul>
-<li><p>操作元素的内容：开始标签和结束标签之间的内容。</p>
+<h4 id="&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x5185;&#x5BB9;&#x5C5E;&#x6027;"><a href="#&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x5185;&#x5BB9;&#x5C5E;&#x6027;" class="headerlink" title="&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x5185;&#x5BB9;&#x5C5E;&#x6027;"></a>&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x5185;&#x5BB9;&#x5C5E;&#x6027;</h4><ul>
+<li><p>&#x64CD;&#x4F5C;&#x5143;&#x7D20;&#x7684;&#x5185;&#x5BB9;&#xFF1A;&#x5F00;&#x59CB;&#x6807;&#x7B7E;&#x548C;&#x7ED3;&#x675F;&#x6807;&#x7B7E;&#x4E4B;&#x95F4;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
 <ul>
-<li><p><code>elem.innerHTML</code>: 开始标签和结束标签的 HTML 原文。</p>
+<li><p><code>elem.innerHTML</code>: &#x5F00;&#x59CB;&#x6807;&#x7B7E;&#x548C;&#x7ED3;&#x675F;&#x6807;&#x7B7E;&#x7684; HTML &#x539F;&#x6587;&#x3002;</p>
 </li>
-<li><p>批量替换或删除一个元素下所有子节点的最快速高效的办法。</p>
+<li><p>&#x6279;&#x91CF;&#x66FF;&#x6362;&#x6216;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E0B;&#x6240;&#x6709;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x6700;&#x5FEB;&#x901F;&#x9AD8;&#x6548;&#x7684;&#x529E;&#x6CD5;&#x3002;</p>
 </li>
-<li><p>注意点：</p>
+<li><p>&#x6CE8;&#x610F;&#x70B9;&#xFF1A;</p>
 <ul>
-<li>替换内容不要包含事件处理程序。</li>
-<li>不是所有元素都支持:<ul>
-<li>table 极其子元素，除了 td 外都不支持。</li>
+<li>&#x66FF;&#x6362;&#x5185;&#x5BB9;&#x4E0D;&#x8981;&#x5305;&#x542B;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x3002;</li>
+<li>&#x4E0D;&#x662F;&#x6240;&#x6709;&#x5143;&#x7D20;&#x90FD;&#x652F;&#x6301;:<ul>
+<li>table &#x6781;&#x5176;&#x5B50;&#x5143;&#x7D20;&#xFF0C;&#x9664;&#x4E86; td &#x5916;&#x90FD;&#x4E0D;&#x652F;&#x6301;&#x3002;</li>
 <li>html/head/style.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><code>elem.textContent</code>: DOM 标准。</p>
+<li><p><code>elem.textContent</code>: DOM &#x6807;&#x51C6;&#x3002;</p>
 </li>
-<li><p>存在兼容性问题：</p>
+<li><p>&#x5B58;&#x5728;&#x517C;&#x5BB9;&#x6027;&#x95EE;&#x9898;&#xFF1A;</p>
 <ul>
-<li>IE8: elem.innerText. firefox 不支持。</li>
+<li>IE8: elem.innerText. firefox &#x4E0D;&#x652F;&#x6301;&#x3002;</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>性能问题：<ul>
-<li>每次设置 innterHTML 时，会临时创建解释器对象。频繁设置会导致内存浪费，效率差。<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">  ul.innerHTML += <span class="hljs-string">'&lt;li&gt;'</span> + values[i] + <span class="hljs-string">'&lt;/li&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 会创建多个解释器对象</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> lis = [];</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">  lis.push(<span class="hljs-string">'&lt;li&gt;'</span> + values[i] + <span class="hljs-string">'&lt;/li&gt;'</span>);</span><br><span class="line">&#125;</span><br><span class="line">ul.innerHTML = <span class="hljs-string">'&lt;li&gt;'</span> + lis.join(<span class="hljs-string">'&lt;/li&gt;&lt;li&gt;'</span>) + <span class="hljs-string">'&lt;/li&gt;'</span>;</span><br></pre></td></tr></table></figure></li>
+<li>&#x6027;&#x80FD;&#x95EE;&#x9898;&#xFF1A;<ul>
+<li>&#x6BCF;&#x6B21;&#x8BBE;&#x7F6E; innterHTML &#x65F6;&#xFF0C;&#x4F1A;&#x4E34;&#x65F6;&#x521B;&#x5EFA;&#x89E3;&#x91CA;&#x5668;&#x5BF9;&#x8C61;&#x3002;&#x9891;&#x7E41;&#x8BBE;&#x7F6E;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x6D6A;&#x8D39;&#xFF0C;&#x6548;&#x7387;&#x5DEE;&#x3002;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i++) {</span><br><span class="line">  ul.innerHTML += <span class="hljs-string">&apos;&lt;li&gt;&apos;</span> + values[i] + <span class="hljs-string">&apos;&lt;/li&gt;&apos;</span></span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// &#x4F1A;&#x521B;&#x5EFA;&#x591A;&#x4E2A;&#x89E3;&#x91CA;&#x5668;&#x5BF9;&#x8C61;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> lis = [];</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i++) {</span><br><span class="line">  lis.push(<span class="hljs-string">&apos;&lt;li&gt;&apos;</span> + values[i] + <span class="hljs-string">&apos;&lt;/li&gt;&apos;</span>);</span><br><span class="line">}</span><br><span class="line">ul.innerHTML = <span class="hljs-string">&apos;&lt;li&gt;&apos;</span> + lis.join(<span class="hljs-string">&apos;&lt;/li&gt;&lt;li&gt;&apos;</span>) + <span class="hljs-string">&apos;&lt;/li&gt;&apos;</span>;</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 </li>
 </ul>
-<h4 id="读写元素属性"><a href="#读写元素属性" class="headerlink" title="读写元素属性"></a>读写元素属性</h4><ol>
-<li>通过 HTMLElement 类型提供的标准属性: HTML DOM.<ul>
+<h4 id="&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5C5E;&#x6027;"><a href="#&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5C5E;&#x6027;" class="headerlink" title="&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5C5E;&#x6027;"></a>&#x8BFB;&#x5199;&#x5143;&#x7D20;&#x5C5E;&#x6027;</h4><ol>
+<li>&#x901A;&#x8FC7; HTMLElement &#x7C7B;&#x578B;&#x63D0;&#x4F9B;&#x7684;&#x6807;&#x51C6;&#x5C5E;&#x6027;: HTML DOM.<ul>
 <li><code>elem.[attr]</code><br></li>
 </ul>
 </li>
-<li>通过 get/setAttribute 函数——核心DOM.<ul>
-<li><code>elem.getAttribute(&#39;attr&#39;)</code>.</li>
-<li><code>elem.setAttribute(&#39;attr&#39;)</code>.</li>
-<li>获取或设置所有属性类型都是字符串。</li>
-<li>可读写 HTML 元素中自定义属性。</li>
-<li>attribute: 指 HTML 标签中属性或自定义属性。</li>
-<li>property: 指内存中对象的属性。</li>
+<li>&#x901A;&#x8FC7; get/setAttribute &#x51FD;&#x6570;&#x2014;&#x2014;&#x6838;&#x5FC3;DOM.<ul>
+<li><code>elem.getAttribute(&apos;attr&apos;)</code>.</li>
+<li><code>elem.setAttribute(&apos;attr&apos;)</code>.</li>
+<li>&#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x7C7B;&#x578B;&#x90FD;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x3002;</li>
+<li>&#x53EF;&#x8BFB;&#x5199; HTML &#x5143;&#x7D20;&#x4E2D;&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x3002;</li>
+<li>attribute: &#x6307; HTML &#x6807;&#x7B7E;&#x4E2D;&#x5C5E;&#x6027;&#x6216;&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x3002;</li>
+<li>property: &#x6307;&#x5185;&#x5B58;&#x4E2D;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x3002;</li>
 </ul>
 </li>
 </ol>
 <ul>
-<li>前两种方法不可通用。</li>
+<li>&#x524D;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x4E0D;&#x53EF;&#x901A;&#x7528;&#x3002;</li>
 </ul>
-<h4 id="读写内联样式"><a href="#读写内联样式" class="headerlink" title="读写内联样式"></a>读写内联样式</h4><ul>
-<li>返回一个 CSSStyleDeclaration.</li>
-<li>CSS 中的属性都是 style 对象的子属性。</li>
-<li>所有 CSS 紫属性都返回带单位的字符串。</li>
-<li>例如：<code>console.log(elem.style.width); // &#39;100px&#39;</code></li>
-<li>子属性的命名规则，去横线，改驼峰。</li>
-<li>修改属性：<ul>
-<li><code>elem.setAttribute(&#39;style&#39;, &#39;style string&#39;)</code>.</li>
-<li><code>elem.style.cssText = &#39;style string&#39;</code>.</li>
-</ul>
-</li>
-<li>移除属性：<ul>
-<li><code>elem.style.removeProperty(&#39;attr&#39;)</code>.</li>
+<h4 id="&#x8BFB;&#x5199;&#x5185;&#x8054;&#x6837;&#x5F0F;"><a href="#&#x8BFB;&#x5199;&#x5185;&#x8054;&#x6837;&#x5F0F;" class="headerlink" title="&#x8BFB;&#x5199;&#x5185;&#x8054;&#x6837;&#x5F0F;"></a>&#x8BFB;&#x5199;&#x5185;&#x8054;&#x6837;&#x5F0F;</h4><ul>
+<li>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; CSSStyleDeclaration.</li>
+<li>CSS &#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x90FD;&#x662F; style &#x5BF9;&#x8C61;&#x7684;&#x5B50;&#x5C5E;&#x6027;&#x3002;</li>
+<li>&#x6240;&#x6709; CSS &#x7D2B;&#x5C5E;&#x6027;&#x90FD;&#x8FD4;&#x56DE;&#x5E26;&#x5355;&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;</li>
+<li>&#x4F8B;&#x5982;&#xFF1A;<code>console.log(elem.style.width); // &apos;100px&apos;</code></li>
+<li>&#x5B50;&#x5C5E;&#x6027;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;&#xFF0C;&#x53BB;&#x6A2A;&#x7EBF;&#xFF0C;&#x6539;&#x9A7C;&#x5CF0;&#x3002;</li>
+<li>&#x4FEE;&#x6539;&#x5C5E;&#x6027;&#xFF1A;<ul>
+<li><code>elem.setAttribute(&apos;style&apos;, &apos;style string&apos;)</code>.</li>
+<li><code>elem.style.cssText = &apos;style string&apos;</code>.</li>
 </ul>
 </li>
-<li>大量修改样式建议如下：<ol>
-<li>CSS 中为元素的不同状态定义样式类</li>
-<li>JS 中控制对应的样式类改变</li>
+<li>&#x79FB;&#x9664;&#x5C5E;&#x6027;&#xFF1A;<ul>
+<li><code>elem.style.removeProperty(&apos;attr&apos;)</code>.</li>
+</ul>
+</li>
+<li>&#x5927;&#x91CF;&#x4FEE;&#x6539;&#x6837;&#x5F0F;&#x5EFA;&#x8BAE;&#x5982;&#x4E0B;&#xFF1A;<ol>
+<li>CSS &#x4E2D;&#x4E3A;&#x5143;&#x7D20;&#x7684;&#x4E0D;&#x540C;&#x72B6;&#x6001;&#x5B9A;&#x4E49;&#x6837;&#x5F0F;&#x7C7B;</li>
+<li>JS &#x4E2D;&#x63A7;&#x5236;&#x5BF9;&#x5E94;&#x7684;&#x6837;&#x5F0F;&#x7C7B;&#x6539;&#x53D8;</li>
 </ol>
 </li>
 </ul>
-<h3 id="遍历-DOM-TREE"><a href="#遍历-DOM-TREE" class="headerlink" title="遍历 DOM TREE"></a>遍历 DOM TREE</h3><ul>
-<li>遍历：以任意元素对象开始，以深度优先的原则，获取所有子对象。</li>
-<li>递归：函数内调用自己<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> blank = [];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getChildren</span>(<span class="hljs-params">parent</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(blank.join(<span class="hljs-string">''</span>) + <span class="hljs-string">'|-'</span> + (parent.nodeType != <span class="hljs-number">3</span> ? parent.nodeName : parent.nodeValue));</span><br><span class="line">  <span class="hljs-keyword">if</span> (parent.childNodes) &#123;</span><br><span class="line">    blank.push(<span class="hljs-string">'\t'</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = parent.childNodes.length; i &lt; len; i++) &#123;</span><br><span class="line">      getChildren(parent.childNodes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    blank.pop();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">getChildren(<span class="hljs-built_in">document</span>);</span><br></pre></td></tr></table></figure></li>
+<h3 id="&#x904D;&#x5386;-DOM-TREE"><a href="#&#x904D;&#x5386;-DOM-TREE" class="headerlink" title="&#x904D;&#x5386; DOM TREE"></a>&#x904D;&#x5386; DOM TREE</h3><ul>
+<li>&#x904D;&#x5386;&#xFF1A;&#x4EE5;&#x4EFB;&#x610F;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x5F00;&#x59CB;&#xFF0C;&#x4EE5;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x7684;&#x539F;&#x5219;&#xFF0C;&#x83B7;&#x53D6;&#x6240;&#x6709;&#x5B50;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x9012;&#x5F52;&#xFF1A;&#x51FD;&#x6570;&#x5185;&#x8C03;&#x7528;&#x81EA;&#x5DF1;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> blank = [];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getChildren</span>(<span class="hljs-params">parent</span>) </span>{</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(blank.join(<span class="hljs-string">&apos;&apos;</span>) + <span class="hljs-string">&apos;|-&apos;</span> + (parent.nodeType != <span class="hljs-number">3</span> ? parent.nodeName : parent.nodeValue));</span><br><span class="line">  <span class="hljs-keyword">if</span> (parent.childNodes) {</span><br><span class="line">    blank.push(<span class="hljs-string">&apos;\t&apos;</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = parent.childNodes.length; i &lt; len; i++) {</span><br><span class="line">      getChildren(parent.childNodes[i]);</span><br><span class="line">    }</span><br><span class="line">    blank.pop();</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">getChildren(<span class="hljs-built_in">document</span>);</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
-<h4 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a>递归遍历</h4><ul>
-<li>手写遍历元素树：仅包含元素节点的树结构</li>
+<h4 id="&#x9012;&#x5F52;&#x904D;&#x5386;"><a href="#&#x9012;&#x5F52;&#x904D;&#x5386;" class="headerlink" title="&#x9012;&#x5F52;&#x904D;&#x5386;"></a>&#x9012;&#x5F52;&#x904D;&#x5386;</h4><ul>
+<li>&#x624B;&#x5199;&#x904D;&#x5386;&#x5143;&#x7D20;&#x6811;&#xFF1A;&#x4EC5;&#x5305;&#x542B;&#x5143;&#x7D20;&#x8282;&#x70B9;&#x7684;&#x6811;&#x7ED3;&#x6784;</li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>tree</th>
-<th>节点数</th>
-<th>元素树</th>
+<th>&#x8282;&#x70B9;&#x6570;</th>
+<th>&#x5143;&#x7D20;&#x6811;</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>父子节点</td>
-<td>—</td>
-<td>—</td>
+<td>&#x7236;&#x5B50;&#x8282;&#x70B9;</td>
+<td>&#x2014;</td>
+<td>&#x2014;</td>
 </tr>
 <tr>
-<td>父节点</td>
+<td>&#x7236;&#x8282;&#x70B9;</td>
 <td>parentNode</td>
 <td>parentElementNode</td>
 </tr>
 <tr>
-<td>子节点</td>
+<td>&#x5B50;&#x8282;&#x70B9;</td>
 <td>childNode</td>
-<td>childElementNode(IE8支持)</td>
+<td>childElementNode(IE8&#x652F;&#x6301;)</td>
 </tr>
 <tr>
-<td>首末节点</td>
-<td>—</td>
-<td>—</td>
+<td>&#x9996;&#x672B;&#x8282;&#x70B9;</td>
+<td>&#x2014;</td>
+<td>&#x2014;</td>
 </tr>
 <tr>
-<td>首个子节点</td>
+<td>&#x9996;&#x4E2A;&#x5B50;&#x8282;&#x70B9;</td>
 <td>firstChild</td>
 <td>firstElementNode</td>
 </tr>
 <tr>
-<td>最后子节点</td>
+<td>&#x6700;&#x540E;&#x5B50;&#x8282;&#x70B9;</td>
 <td>lastChild</td>
 <td>lastElementNode</td>
 </tr>
 <tr>
-<td>兄弟节点</td>
-<td>—</td>
-<td>—</td>
+<td>&#x5144;&#x5F1F;&#x8282;&#x70B9;</td>
+<td>&#x2014;</td>
+<td>&#x2014;</td>
 </tr>
 <tr>
-<td>前一个</td>
+<td>&#x524D;&#x4E00;&#x4E2A;</td>
 <td>previousSibling</td>
 <td>previousElementSibling</td>
 </tr>
 <tr>
-<td>后一个</td>
+<td>&#x540E;&#x4E00;&#x4E2A;</td>
 <td>nextSibling</td>
 <td>nextElementSibling</td>
 </tr>
 </tbody></table>
-<h4 id="DOM-2级遍历API"><a href="#DOM-2级遍历API" class="headerlink" title="DOM 2级遍历API"></a>DOM 2级遍历API</h4><ol>
-<li><p>NodeIterator 迭代器：</p>
-<ul>
-<li>一个集合中每次金宝村一个对象的游标</li>
-<li>游标通过前后移动在集合中遍历每个元素</li>
-<li>迭代器<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [iterator 迭代器]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Object&#125; parentNode [开始遍历的父节点对象]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;String?&#125; nodeType [选择节点的类别(NodeFilter.SHOW_ALL|NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT)]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Function&#125; filterFun [筛选器函数对象]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Boolean&#125; boolean []</span></span><br><span class="line"><span class="hljs-comment"> * @type &#123;[type]&#125;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">var</span> iterator = <span class="hljs-built_in">document</span>.createNodeIterator(parentNode, nodeType, filerFun, boolean);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 调用 nextNode 方法</span></span><br><span class="line">iterator.nextNode();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 待完善</span></span><br></pre></td></tr></table></figure></li>
+<h4 id="DOM-2&#x7EA7;&#x904D;&#x5386;API"><a href="#DOM-2&#x7EA7;&#x904D;&#x5386;API" class="headerlink" title="DOM 2&#x7EA7;&#x904D;&#x5386;API"></a>DOM 2&#x7EA7;&#x904D;&#x5386;API</h4><ol>
+<li>NodeIterator &#x8FED;&#x4EE3;&#x5668;&#xFF1A;<ul>
+<li>&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x4E2D;&#x6BCF;&#x6B21;&#x91D1;&#x5B9D;&#x6751;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x6E38;&#x6807;</li>
+<li>&#x6E38;&#x6807;&#x901A;&#x8FC7;&#x524D;&#x540E;&#x79FB;&#x52A8;&#x5728;&#x96C6;&#x5408;&#x4E2D;&#x904D;&#x5386;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;</li>
+<li>&#x8FED;&#x4EE3;&#x5668;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [iterator &#x8FED;&#x4EE3;&#x5668;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Object} parentNode [&#x5F00;&#x59CB;&#x904D;&#x5386;&#x7684;&#x7236;&#x8282;&#x70B9;&#x5BF9;&#x8C61;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {String?} nodeType [&#x9009;&#x62E9;&#x8282;&#x70B9;&#x7684;&#x7C7B;&#x522B;(NodeFilter.SHOW_ALL|NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT)]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Function} filterFun [&#x7B5B;&#x9009;&#x5668;&#x51FD;&#x6570;&#x5BF9;&#x8C61;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Boolean} boolean []</span></span><br><span class="line"><span class="hljs-comment"> * @type {[type]}</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">var</span> iterator = <span class="hljs-built_in">document</span>.createNodeIterator(parentNode, nodeType, filerFun, boolean);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x8C03;&#x7528; nextNode &#x65B9;&#x6CD5;</span></span><br><span class="line">iterator.nextNode();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x5F85;&#x5B8C;&#x5584;</span></span><br></pre></td></tr></tbody></table></figure><br></li>
 </ul>
-<br></li>
-<li><p>TreeWalker: 用法和迭代器完全一样</p>
-<ul>
-<li>新增了部分API，所有如下：<code>firstChild</code>、<code>lastChild</code>、<code>previousNode</code>、<code>nextNode</code>、<code>previousSibling</code>、<code>nextSibling</code>、<code>parentNode</code>.</li>
+</li>
+<li>TreeWalker: &#x7528;&#x6CD5;&#x548C;&#x8FED;&#x4EE3;&#x5668;&#x5B8C;&#x5168;&#x4E00;&#x6837;<ul>
+<li>&#x65B0;&#x589E;&#x4E86;&#x90E8;&#x5206;API&#xFF0C;&#x6240;&#x6709;&#x5982;&#x4E0B;&#xFF1A;<code>firstChild</code>&#x3001;<code>lastChild</code>&#x3001;<code>previousNode</code>&#x3001;<code>nextNode</code>&#x3001;<code>previousSibling</code>&#x3001;<code>nextSibling</code>&#x3001;<code>parentNode</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="操作节点"><a href="#操作节点" class="headerlink" title="操作节点"></a>操作节点</h3><h4 id="创建、删除节点对象"><a href="#创建、删除节点对象" class="headerlink" title="创建、删除节点对象"></a>创建、删除节点对象</h4><ul>
-<li><p>核心 DOM.</p>
-</li>
-<li><p>创建：<code>var newElem = document.createElement(&#39;tagName&#39;);</code><br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newElem = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'tagName'</span>);</span><br><span class="line"><span class="hljs-comment">// var a = document.createElement('a');</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>在 DOM 树中添加：<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parent.appendChild(newTag);</span><br><span class="line">parent.insertBefore(newTag);</span><br><span class="line">parent.replaceChild(newTag);</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>HTML DOM: 部分常用元素对象可以直接生成。<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建新对象的同事插入 tr 到 table, i 为新行位置的索引</span></span><br><span class="line"><span class="hljs-comment">// HTMLTableElement:</span></span><br><span class="line"><span class="hljs-keyword">var</span> newTr = table.insertRow([i]);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// HTMLTableRowElement:</span></span><br><span class="line"><span class="hljs-keyword">var</span> newTd = tr.insertCell(i);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// HTMLSelectElement: onchange(),sel.selectedIndex</span></span><br><span class="line"><span class="hljs-keyword">var</span> sel = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'#select'</span>); <span class="hljs-comment">// ? 这步存疑</span></span><br><span class="line"><span class="hljs-keyword">var</span> opt = sel.add(<span class="hljs-keyword">new</span> Option(<span class="hljs-string">'innterHTML'</span>, <span class="hljs-string">'value'</span>));</span><br><span class="line"><span class="hljs-comment">// 创建一个新的空对象。</span></span><br><span class="line"><span class="hljs-comment">// 将第一个参数设置为 opt.innerHTML 属性</span></span><br><span class="line"><span class="hljs-comment">// 将第二个参数设置为 opt.value</span></span><br><span class="line"><span class="hljs-comment">// 将 opt 对象添加到 sel 中</span></span><br><span class="line">sel.remove(); <span class="hljs-comment">// 移除</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>性能：频繁添加节点会反复解析 DOM 树，导致效率低下。</p>
-</li>
-<li><p>文档片段：内存中临时保存多个 DOM 节点对象的空间。<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 向文档片段中临时存入节点对象</span></span><br><span class="line"><span class="hljs-keyword">var</span> tempFrag = <span class="hljs-built_in">document</span>.createDocumentFragment();</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>文档片段接入 DOM 树中时，不会在页面显示。</p>
-</li>
+<h3 id="&#x64CD;&#x4F5C;&#x8282;&#x70B9;"><a href="#&#x64CD;&#x4F5C;&#x8282;&#x70B9;" class="headerlink" title="&#x64CD;&#x4F5C;&#x8282;&#x70B9;"></a>&#x64CD;&#x4F5C;&#x8282;&#x70B9;</h3><h4 id="&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x8282;&#x70B9;&#x5BF9;&#x8C61;"><a href="#&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x8282;&#x70B9;&#x5BF9;&#x8C61;" class="headerlink" title="&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x8282;&#x70B9;&#x5BF9;&#x8C61;"></a>&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x8282;&#x70B9;&#x5BF9;&#x8C61;</h4><ul>
+<li>&#x6838;&#x5FC3; DOM.</li>
+<li>&#x521B;&#x5EFA;&#xFF1A;<code>var newElem = document.createElement(&apos;tagName&apos;);</code><br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newElem = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&apos;tagName&apos;</span>);</span><br><span class="line"><span class="hljs-comment">// var a = document.createElement(&apos;a&apos;);</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x5728; DOM &#x6811;&#x4E2D;&#x6DFB;&#x52A0;&#xFF1A;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parent.appendChild(newTag);</span><br><span class="line">parent.insertBefore(newTag);</span><br><span class="line">parent.replaceChild(newTag);</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure></li>
+<li>HTML DOM: &#x90E8;&#x5206;&#x5E38;&#x7528;&#x5143;&#x7D20;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x751F;&#x6210;&#x3002;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x521B;&#x5EFA;&#x65B0;&#x5BF9;&#x8C61;&#x7684;&#x540C;&#x4E8B;&#x63D2;&#x5165; tr &#x5230; table, i &#x4E3A;&#x65B0;&#x884C;&#x4F4D;&#x7F6E;&#x7684;&#x7D22;&#x5F15;</span></span><br><span class="line"><span class="hljs-comment">// HTMLTableElement:</span></span><br><span class="line"><span class="hljs-keyword">var</span> newTr = table.insertRow([i]);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// HTMLTableRowElement:</span></span><br><span class="line"><span class="hljs-keyword">var</span> newTd = tr.insertCell(i);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// HTMLSelectElement: onchange(),sel.selectedIndex</span></span><br><span class="line"><span class="hljs-keyword">var</span> sel = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;#select&apos;</span>); <span class="hljs-comment">// ? &#x8FD9;&#x6B65;&#x5B58;&#x7591;</span></span><br><span class="line"><span class="hljs-keyword">var</span> opt = sel.add(<span class="hljs-keyword">new</span> Option(<span class="hljs-string">&apos;innterHTML&apos;</span>, <span class="hljs-string">&apos;value&apos;</span>));</span><br><span class="line"><span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7A7A;&#x5BF9;&#x8C61;&#x3002;</span></span><br><span class="line"><span class="hljs-comment">// &#x5C06;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A; opt.innerHTML &#x5C5E;&#x6027;</span></span><br><span class="line"><span class="hljs-comment">// &#x5C06;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A; opt.value</span></span><br><span class="line"><span class="hljs-comment">// &#x5C06; opt &#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x5230; sel &#x4E2D;</span></span><br><span class="line">sel.remove(); <span class="hljs-comment">// &#x79FB;&#x9664;</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x6027;&#x80FD;&#xFF1A;&#x9891;&#x7E41;&#x6DFB;&#x52A0;&#x8282;&#x70B9;&#x4F1A;&#x53CD;&#x590D;&#x89E3;&#x6790; DOM &#x6811;&#xFF0C;&#x5BFC;&#x81F4;&#x6548;&#x7387;&#x4F4E;&#x4E0B;&#x3002;</li>
+<li>&#x6587;&#x6863;&#x7247;&#x6BB5;&#xFF1A;&#x5185;&#x5B58;&#x4E2D;&#x4E34;&#x65F6;&#x4FDD;&#x5B58;&#x591A;&#x4E2A; DOM &#x8282;&#x70B9;&#x5BF9;&#x8C61;&#x7684;&#x7A7A;&#x95F4;&#x3002;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x5411;&#x6587;&#x6863;&#x7247;&#x6BB5;&#x4E2D;&#x4E34;&#x65F6;&#x5B58;&#x5165;&#x8282;&#x70B9;&#x5BF9;&#x8C61;</span></span><br><span class="line"><span class="hljs-keyword">var</span> tempFrag = <span class="hljs-built_in">document</span>.createDocumentFragment();</span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x6587;&#x6863;&#x7247;&#x6BB5;&#x63A5;&#x5165; DOM &#x6811;&#x4E2D;&#x65F6;&#xFF0C;&#x4E0D;&#x4F1A;&#x5728;&#x9875;&#x9762;&#x663E;&#x793A;&#x3002;</li>
 </ul>
 <h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h3 id="WINDOW"><a href="#WINDOW" class="headerlink" title="WINDOW"></a>WINDOW</h3><ul>
-<li>在浏览器中代替 global 对象的全局对象。</li>
-<li>全局作用域。</li>
-<li>修改或设置浏览器窗口的相关属性。</li>
+<li>&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x4EE3;&#x66FF; global &#x5BF9;&#x8C61;&#x7684;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x3002;</li>
+<li>&#x4FEE;&#x6539;&#x6216;&#x8BBE;&#x7F6E;&#x6D4F;&#x89C8;&#x5668;&#x7A97;&#x53E3;&#x7684;&#x76F8;&#x5173;&#x5C5E;&#x6027;&#x3002;</li>
 </ul>
-<h4 id="打开新链接的方式"><a href="#打开新链接的方式" class="headerlink" title="打开新链接的方式"></a>打开新链接的方式</h4><ol>
-<li><p>在当前窗口内替换当前页：<br><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">'url'</span>, <span class="hljs-string">'self'</span>);</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>打开新窗口，可重复打开:<br><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">'url'</span>[, <span class="hljs-string">'blank'</span>] ); <span class="hljs-comment">// 默认是 blank</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>打开新窗口，不可重复打开<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">'url'</span>[, <span class="hljs-string">'blank'</span>]);</span><br></pre></td></tr></table></figure></p>
-</li>
+<h4 id="&#x6253;&#x5F00;&#x65B0;&#x94FE;&#x63A5;&#x7684;&#x65B9;&#x5F0F;"><a href="#&#x6253;&#x5F00;&#x65B0;&#x94FE;&#x63A5;&#x7684;&#x65B9;&#x5F0F;" class="headerlink" title="&#x6253;&#x5F00;&#x65B0;&#x94FE;&#x63A5;&#x7684;&#x65B9;&#x5F0F;"></a>&#x6253;&#x5F00;&#x65B0;&#x94FE;&#x63A5;&#x7684;&#x65B9;&#x5F0F;</h4><ol>
+<li>&#x5728;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x5185;&#x66FF;&#x6362;&#x5F53;&#x524D;&#x9875;&#xFF1A;<br><figure class="highlight html hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;url&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure><br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">&apos;url&apos;</span>, <span class="hljs-string">&apos;self&apos;</span>);</span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x6253;&#x5F00;&#x65B0;&#x7A97;&#x53E3;&#xFF0C;&#x53EF;&#x91CD;&#x590D;&#x6253;&#x5F00;:<br><figure class="highlight html hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure><br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">&apos;url&apos;</span>[, <span class="hljs-string">&apos;blank&apos;</span>] ); <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x662F; blank</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x6253;&#x5F00;&#x65B0;&#x7A97;&#x53E3;&#xFF0C;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x6253;&#x5F00;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> newWin = [<span class="hljs-built_in">window</span>.]open(<span class="hljs-string">&apos;url&apos;</span>[, <span class="hljs-string">&apos;blank&apos;</span>]);</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<h4 id="窗口定位、移动"><a href="#窗口定位、移动" class="headerlink" title="窗口定位、移动"></a>窗口定位、移动</h4><ul>
-<li>window.innerHeight/width: 浏览器窗口可见区域的大小。</li>
-<li>window.outerHeight/width: 浏览器窗口完整大小。</li>
-<li>window.moveTo(浏览器窗口左上角 x 坐标，浏览器 左上角 y 坐标).</li>
-<li>window.moveBy(x 坐标的变化量，y 坐标的变化量).</li>
-<li>在打开窗口时制定窗口大小和位置：<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [open]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; strUrl    [链接]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; strName   [名字]</span></span><br><span class="line"><span class="hljs-comment"> * @param  &#123;String&#125; config ['attr=value, attr=value' 键值对的方式保存]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line">open(<span class="hljs-string">'url'</span>, <span class="hljs-string">'name'</span>[, <span class="hljs-string">'config'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 例如：</span></span><br><span class="line"><span class="hljs-built_in">window</span>.open(<span class="hljs-string">'www.google.com'</span>, <span class="hljs-string">'google'</span>, <span class="hljs-string">'resizable=no, scrollbars=yes,status=no'</span>);</span><br><span class="line"><span class="hljs-comment">// config 可以写：</span></span><br><span class="line"><span class="hljs-comment">// height/width: 窗口文档显示区大小</span></span><br><span class="line"><span class="hljs-comment">// top/left: 窗口左上角 x 坐标，y 坐标</span></span><br><span class="line"><span class="hljs-comment">// resizable: 是否允许调整窗口大小</span></span><br><span class="line"><span class="hljs-comment">// location: 是否允许修改地址栏</span></span><br></pre></td></tr></table></figure></li>
+<h4 id="&#x7A97;&#x53E3;&#x5B9A;&#x4F4D;&#x3001;&#x79FB;&#x52A8;"><a href="#&#x7A97;&#x53E3;&#x5B9A;&#x4F4D;&#x3001;&#x79FB;&#x52A8;" class="headerlink" title="&#x7A97;&#x53E3;&#x5B9A;&#x4F4D;&#x3001;&#x79FB;&#x52A8;"></a>&#x7A97;&#x53E3;&#x5B9A;&#x4F4D;&#x3001;&#x79FB;&#x52A8;</h4><ul>
+<li>window.innerHeight/width: &#x6D4F;&#x89C8;&#x5668;&#x7A97;&#x53E3;&#x53EF;&#x89C1;&#x533A;&#x57DF;&#x7684;&#x5927;&#x5C0F;&#x3002;</li>
+<li>window.outerHeight/width: &#x6D4F;&#x89C8;&#x5668;&#x7A97;&#x53E3;&#x5B8C;&#x6574;&#x5927;&#x5C0F;&#x3002;</li>
+<li>window.moveTo(&#x6D4F;&#x89C8;&#x5668;&#x7A97;&#x53E3;&#x5DE6;&#x4E0A;&#x89D2; x &#x5750;&#x6807;&#xFF0C;&#x6D4F;&#x89C8;&#x5668; &#x5DE6;&#x4E0A;&#x89D2; y &#x5750;&#x6807;).</li>
+<li>window.moveBy(x &#x5750;&#x6807;&#x7684;&#x53D8;&#x5316;&#x91CF;&#xFF0C;y &#x5750;&#x6807;&#x7684;&#x53D8;&#x5316;&#x91CF;).</li>
+<li>&#x5728;&#x6253;&#x5F00;&#x7A97;&#x53E3;&#x65F6;&#x5236;&#x5B9A;&#x7A97;&#x53E3;&#x5927;&#x5C0F;&#x548C;&#x4F4D;&#x7F6E;&#xFF1A;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [open]</span></span><br><span class="line"><span class="hljs-comment"> * @param  {String} strUrl    [&#x94FE;&#x63A5;]</span></span><br><span class="line"><span class="hljs-comment"> * @param  {String} strName   [&#x540D;&#x5B57;]</span></span><br><span class="line"><span class="hljs-comment"> * @param  {String} config [&apos;attr=value, attr=value&apos; &#x952E;&#x503C;&#x5BF9;&#x7684;&#x65B9;&#x5F0F;&#x4FDD;&#x5B58;]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line">open(<span class="hljs-string">&apos;url&apos;</span>, <span class="hljs-string">&apos;name&apos;</span>[, <span class="hljs-string">&apos;config&apos;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x4F8B;&#x5982;&#xFF1A;</span></span><br><span class="line"><span class="hljs-built_in">window</span>.open(<span class="hljs-string">&apos;www.google.com&apos;</span>, <span class="hljs-string">&apos;google&apos;</span>, <span class="hljs-string">&apos;resizable=no, scrollbars=yes,status=no&apos;</span>);</span><br><span class="line"><span class="hljs-comment">// config &#x53EF;&#x4EE5;&#x5199;&#xFF1A;</span></span><br><span class="line"><span class="hljs-comment">// height/width: &#x7A97;&#x53E3;&#x6587;&#x6863;&#x663E;&#x793A;&#x533A;&#x5927;&#x5C0F;</span></span><br><span class="line"><span class="hljs-comment">// top/left: &#x7A97;&#x53E3;&#x5DE6;&#x4E0A;&#x89D2; x &#x5750;&#x6807;&#xFF0C;y &#x5750;&#x6807;</span></span><br><span class="line"><span class="hljs-comment">// resizable: &#x662F;&#x5426;&#x5141;&#x8BB8;&#x8C03;&#x6574;&#x7A97;&#x53E3;&#x5927;&#x5C0F;</span></span><br><span class="line"><span class="hljs-comment">// location: &#x662F;&#x5426;&#x5141;&#x8BB8;&#x4FEE;&#x6539;&#x5730;&#x5740;&#x680F;</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
-<h4 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h4><ul>
-<li><code>alert(&#39;warning&#39;);</code></li>
-<li><code>var input = prompt(&#39;tips&#39;);</code></li>
-<li><code>var bool = confirm(&#39;tips&#39;); // 含两个按钮</code></li>
+<h4 id="&#x5BF9;&#x8BDD;&#x6846;"><a href="#&#x5BF9;&#x8BDD;&#x6846;" class="headerlink" title="&#x5BF9;&#x8BDD;&#x6846;"></a>&#x5BF9;&#x8BDD;&#x6846;</h4><ul>
+<li><code>alert(&apos;warning&apos;);</code></li>
+<li><code>var input = prompt(&apos;tips&apos;);</code></li>
+<li><code>var bool = confirm(&apos;tips&apos;); // &#x542B;&#x4E24;&#x4E2A;&#x6309;&#x94AE;</code></li>
 </ul>
-<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><ul>
-<li><p>周期性定时器：反复执行。<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 定义任务函数。</span></span><br><span class="line"><span class="hljs-comment">// 全局变量保存定时器的 id.</span></span><br><span class="line"><span class="hljs-comment">// 启动定时器。</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [setInterval 周期性定时器]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Function&#125; function [须调用的函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Number&#125; time     [间隔时间]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">var</span> timer = setInterval(fun, time);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 例如：</span></span><br><span class="line"><span class="hljs-comment">// 定义它：</span></span><br><span class="line"><span class="hljs-keyword">var</span> timer = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line"> <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());</span><br><span class="line">&#125;, <span class="hljs-number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 清空它：</span></span><br><span class="line">clearInterval(timer);</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>一次性定时器：执行一次任务后便自动退出。<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 定义任务函数。</span></span><br><span class="line"><span class="hljs-comment">// 定义全局变量，保存定时器 id.</span></span><br><span class="line"><span class="hljs-comment">// 启动定时器。</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [setTimeout 一次性定时器]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Function&#125; function [任务函数]</span></span><br><span class="line"><span class="hljs-comment"> * @param &#123;Number&#125; time     [延迟时长]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"> <span class="hljs-keyword">var</span> timer = setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">   <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());</span><br><span class="line"> &#125;, <span class="hljs-number">3000</span>);</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 清空它：</span></span><br><span class="line"> cleatTimeout(timer);</span><br></pre></td></tr></table></figure></p>
-</li>
+<h4 id="&#x5B9A;&#x65F6;&#x5668;"><a href="#&#x5B9A;&#x65F6;&#x5668;" class="headerlink" title="&#x5B9A;&#x65F6;&#x5668;"></a>&#x5B9A;&#x65F6;&#x5668;</h4><ul>
+<li>&#x5468;&#x671F;&#x6027;&#x5B9A;&#x65F6;&#x5668;&#xFF1A;&#x53CD;&#x590D;&#x6267;&#x884C;&#x3002;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x5B9A;&#x4E49;&#x4EFB;&#x52A1;&#x51FD;&#x6570;&#x3002;</span></span><br><span class="line"><span class="hljs-comment">// &#x5168;&#x5C40;&#x53D8;&#x91CF;&#x4FDD;&#x5B58;&#x5B9A;&#x65F6;&#x5668;&#x7684; id.</span></span><br><span class="line"><span class="hljs-comment">// &#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x5668;&#x3002;</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [setInterval &#x5468;&#x671F;&#x6027;&#x5B9A;&#x65F6;&#x5668;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Function} function [&#x987B;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Number} time     [&#x95F4;&#x9694;&#x65F6;&#x95F4;]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">var</span> timer = setInterval(fun, time);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x4F8B;&#x5982;&#xFF1A;</span></span><br><span class="line"><span class="hljs-comment">// &#x5B9A;&#x4E49;&#x5B83;&#xFF1A;</span></span><br><span class="line"><span class="hljs-keyword">var</span> timer = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line"> <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());</span><br><span class="line">}, <span class="hljs-number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x6E05;&#x7A7A;&#x5B83;&#xFF1A;</span></span><br><span class="line">clearInterval(timer);</span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x4E00;&#x6B21;&#x6027;&#x5B9A;&#x65F6;&#x5668;&#xFF1A;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x4EFB;&#x52A1;&#x540E;&#x4FBF;&#x81EA;&#x52A8;&#x9000;&#x51FA;&#x3002;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x5B9A;&#x4E49;&#x4EFB;&#x52A1;&#x51FD;&#x6570;&#x3002;</span></span><br><span class="line"><span class="hljs-comment">// &#x5B9A;&#x4E49;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x4FDD;&#x5B58;&#x5B9A;&#x65F6;&#x5668; id.</span></span><br><span class="line"><span class="hljs-comment">// &#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x5668;&#x3002;</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * [setTimeout &#x4E00;&#x6B21;&#x6027;&#x5B9A;&#x65F6;&#x5668;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Function} function [&#x4EFB;&#x52A1;&#x51FD;&#x6570;]</span></span><br><span class="line"><span class="hljs-comment"> * @param {Number} time     [&#x5EF6;&#x8FDF;&#x65F6;&#x957F;]</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"> <span class="hljs-keyword">var</span> timer = setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">   <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());</span><br><span class="line"> }, <span class="hljs-number">3000</span>);</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// &#x6E05;&#x7A7A;&#x5B83;&#xFF1A;</span></span><br><span class="line"> cleatTimeout(timer);</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
-<h4 id="NAVIGATOR-封装浏览器软件版本信息的对象"><a href="#NAVIGATOR-封装浏览器软件版本信息的对象" class="headerlink" title="NAVIGATOR: 封装浏览器软件版本信息的对象"></a>NAVIGATOR: 封装浏览器软件版本信息的对象</h4><ul>
-<li>navigator: 检测插件。</li>
-<li>navigator: 检测 cookie 是否启用。<ul>
-<li>chrome -&gt; 设置 -&gt; 显示高级设置 -&gt; 隐私 -&gt; 内容设置 -&gt; 禁用</li>
+<h4 id="NAVIGATOR-&#x5C01;&#x88C5;&#x6D4F;&#x89C8;&#x5668;&#x8F6F;&#x4EF6;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;"><a href="#NAVIGATOR-&#x5C01;&#x88C5;&#x6D4F;&#x89C8;&#x5668;&#x8F6F;&#x4EF6;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;" class="headerlink" title="NAVIGATOR: &#x5C01;&#x88C5;&#x6D4F;&#x89C8;&#x5668;&#x8F6F;&#x4EF6;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;"></a>NAVIGATOR: &#x5C01;&#x88C5;&#x6D4F;&#x89C8;&#x5668;&#x8F6F;&#x4EF6;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;</h4><ul>
+<li>navigator: &#x68C0;&#x6D4B;&#x63D2;&#x4EF6;&#x3002;</li>
+<li>navigator: &#x68C0;&#x6D4B; cookie &#x662F;&#x5426;&#x542F;&#x7528;&#x3002;<ul>
+<li>chrome -&gt; &#x8BBE;&#x7F6E; -&gt; &#x663E;&#x793A;&#x9AD8;&#x7EA7;&#x8BBE;&#x7F6E; -&gt; &#x9690;&#x79C1; -&gt; &#x5185;&#x5BB9;&#x8BBE;&#x7F6E; -&gt; &#x7981;&#x7528;</li>
 </ul>
 </li>
-<li>navigator.userAgent: 包含了浏览器名称和版本号。</li>
+<li>navigator.userAgent: &#x5305;&#x542B;&#x4E86;&#x6D4F;&#x89C8;&#x5668;&#x540D;&#x79F0;&#x548C;&#x7248;&#x672C;&#x53F7;&#x3002;</li>
 </ul>
-<h4 id="LOCATION-封装当前窗口打开的-url-信息的对象"><a href="#LOCATION-封装当前窗口打开的-url-信息的对象" class="headerlink" title="LOCATION: 封装当前窗口打开的 url 信息的对象"></a>LOCATION: 封装当前窗口打开的 url 信息的对象</h4><ul>
-<li><p><code>window.location === document.location; // true</code></p>
-</li>
-<li><p>location.search: 获取 url 中查询字符串参数</p>
-</li>
-<li><p>在当前窗口内打开新 url:<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="hljs-string">'url'</span>;</span><br><span class="line"><span class="hljs-built_in">window</span>.location = <span class="hljs-string">'url'</span>;</span><br><span class="line">location.assign(url);</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p><code>location.replace(&#39;url&#39;)</code>: 禁止后退：</p>
-</li>
+<h4 id="LOCATION-&#x5C01;&#x88C5;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x7684;-url-&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;"><a href="#LOCATION-&#x5C01;&#x88C5;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x7684;-url-&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;" class="headerlink" title="LOCATION: &#x5C01;&#x88C5;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x7684; url &#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;"></a>LOCATION: &#x5C01;&#x88C5;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x7684; url &#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;</h4><ul>
+<li><code>window.location === document.location; // true</code></li>
+<li>location.search: &#x83B7;&#x53D6; url &#x4E2D;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x53C2;&#x6570;</li>
+<li>&#x5728;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x5185;&#x6253;&#x5F00;&#x65B0; url:<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="hljs-string">&apos;url&apos;</span>;</span><br><span class="line"><span class="hljs-built_in">window</span>.location = <span class="hljs-string">&apos;url&apos;</span>;</span><br><span class="line">location.assign(url);</span><br></pre></td></tr></tbody></table></figure></li>
+<li><code>location.replace(&apos;url&apos;)</code>: &#x7981;&#x6B62;&#x540E;&#x9000;&#xFF1A;</li>
 </ul>
-<h4 id="HISTORY-当前窗口打开后的历史记录栈"><a href="#HISTORY-当前窗口打开后的历史记录栈" class="headerlink" title="HISTORY: 当前窗口打开后的历史记录栈"></a>HISTORY: 当前窗口打开后的<em>历史记录栈</em></h4><p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 前进</span></span><br><span class="line">history.go(<span class="hljs-number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 刷新</span></span><br><span class="line">history.go(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 后退</span></span><br><span class="line">history.go(<span class="hljs-number">-1</span>);</span><br><span class="line">history.go(<span class="hljs-number">-2</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="HISTORY-&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x540E;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x6808;"><a href="#HISTORY-&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x540E;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x6808;" class="headerlink" title="HISTORY: &#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x540E;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x6808;"></a>HISTORY: &#x5F53;&#x524D;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#x540E;&#x7684;<em>&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x6808;</em></h4><p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x524D;&#x8FDB;</span></span><br><span class="line">history.go(<span class="hljs-number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x5237;&#x65B0;</span></span><br><span class="line">history.go(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x540E;&#x9000;</span></span><br><span class="line">history.go(<span class="hljs-number">-1</span>);</span><br><span class="line">history.go(<span class="hljs-number">-2</span>);</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h4 id="SCREEN"><a href="#SCREEN" class="headerlink" title="SCREEN"></a>SCREEN</h4><ul>
-<li>screen.width/height: 完整分辨率。</li>
-<li>screen.availWidth/availHeight: 除去任务栏后的剩余分辨率。</li>
-<li>window.innerWidth/innerHeight: 浏览器可视区域的大小，出去控制台等。</li>
-<li>window.outerWidth/outerHeight: 浏览器整体大小</li>
+<li>screen.width/height: &#x5B8C;&#x6574;&#x5206;&#x8FA8;&#x7387;&#x3002;</li>
+<li>screen.availWidth/availHeight: &#x9664;&#x53BB;&#x4EFB;&#x52A1;&#x680F;&#x540E;&#x7684;&#x5269;&#x4F59;&#x5206;&#x8FA8;&#x7387;&#x3002;</li>
+<li>window.innerWidth/innerHeight: &#x6D4F;&#x89C8;&#x5668;&#x53EF;&#x89C6;&#x533A;&#x57DF;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x51FA;&#x53BB;&#x63A7;&#x5236;&#x53F0;&#x7B49;&#x3002;</li>
+<li>window.outerWidth/outerHeight: &#x6D4F;&#x89C8;&#x5668;&#x6574;&#x4F53;&#x5927;&#x5C0F;</li>
 </ul>
-<h3 id="事件：网页中，人为触发或自动触发的状态改变"><a href="#事件：网页中，人为触发或自动触发的状态改变" class="headerlink" title="事件：网页中，人为触发或自动触发的状态改变"></a>事件：网页中，人为触发或自动触发的状态改变</h3><ul>
-<li>事件处理程序：一个对象的特殊属性。</li>
-<li>属性一般引用一个函数对象或 JS 程序块。</li>
-<li>当事件发生时，自动执行绑定在属性上的程序。</li>
-<li>例如：<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line">btn.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line">txt.onfocus = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line">select.onchange = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 其他</span></span><br><span class="line">div.onmouseover <span class="hljs-comment">// 鼠标跨入边界执行</span></span><br><span class="line">div.onmousemove <span class="hljs-comment">// 鼠标在范围内移动则执行</span></span><br><span class="line">div.onmouseout <span class="hljs-comment">// 鼠标跨出边界执行</span></span><br></pre></td></tr></table></figure></li>
+<h3 id="&#x4E8B;&#x4EF6;&#xFF1A;&#x7F51;&#x9875;&#x4E2D;&#xFF0C;&#x4EBA;&#x4E3A;&#x89E6;&#x53D1;&#x6216;&#x81EA;&#x52A8;&#x89E6;&#x53D1;&#x7684;&#x72B6;&#x6001;&#x6539;&#x53D8;"><a href="#&#x4E8B;&#x4EF6;&#xFF1A;&#x7F51;&#x9875;&#x4E2D;&#xFF0C;&#x4EBA;&#x4E3A;&#x89E6;&#x53D1;&#x6216;&#x81EA;&#x52A8;&#x89E6;&#x53D1;&#x7684;&#x72B6;&#x6001;&#x6539;&#x53D8;" class="headerlink" title="&#x4E8B;&#x4EF6;&#xFF1A;&#x7F51;&#x9875;&#x4E2D;&#xFF0C;&#x4EBA;&#x4E3A;&#x89E6;&#x53D1;&#x6216;&#x81EA;&#x52A8;&#x89E6;&#x53D1;&#x7684;&#x72B6;&#x6001;&#x6539;&#x53D8;"></a>&#x4E8B;&#x4EF6;&#xFF1A;&#x7F51;&#x9875;&#x4E2D;&#xFF0C;&#x4EBA;&#x4E3A;&#x89E6;&#x53D1;&#x6216;&#x81EA;&#x52A8;&#x89E6;&#x53D1;&#x7684;&#x72B6;&#x6001;&#x6539;&#x53D8;</h3><ul>
+<li>&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#xFF1A;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x7279;&#x6B8A;&#x5C5E;&#x6027;&#x3002;</li>
+<li>&#x5C5E;&#x6027;&#x4E00;&#x822C;&#x5F15;&#x7528;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x6216; JS &#x7A0B;&#x5E8F;&#x5757;&#x3002;</li>
+<li>&#x5F53;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#xFF0C;&#x81EA;&#x52A8;&#x6267;&#x884C;&#x7ED1;&#x5B9A;&#x5728;&#x5C5E;&#x6027;&#x4E0A;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</li>
+<li>&#x4F8B;&#x5982;&#xFF1A;<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{};</span><br><span class="line">btn.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{};</span><br><span class="line">txt.onfocus = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{};</span><br><span class="line">select.onchange = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{};</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// &#x5176;&#x4ED6;</span></span><br><span class="line">div.onmouseover <span class="hljs-comment">// &#x9F20;&#x6807;&#x8DE8;&#x5165;&#x8FB9;&#x754C;&#x6267;&#x884C;</span></span><br><span class="line">div.onmousemove <span class="hljs-comment">// &#x9F20;&#x6807;&#x5728;&#x8303;&#x56F4;&#x5185;&#x79FB;&#x52A8;&#x5219;&#x6267;&#x884C;</span></span><br><span class="line">div.onmouseout <span class="hljs-comment">// &#x9F20;&#x6807;&#x8DE8;&#x51FA;&#x8FB9;&#x754C;&#x6267;&#x884C;</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
-<h3 id="事件流：当事件出发时，内外层元素间的时间出发顺序"><a href="#事件流：当事件出发时，内外层元素间的时间出发顺序" class="headerlink" title="事件流：当事件出发时，内外层元素间的时间出发顺序"></a>事件流：当事件出发时，内外层元素间的时间出发顺序</h3><ul>
-<li>DOM 标准事件流：由外向内捕获 -&gt; 目标触发 -&gt; 由内向外冒泡触发。</li>
-<li>IE8 事件流： 目标触发 -&gt; 由内向外冒泡触发。没有捕获阶段。</li>
+<h3 id="&#x4E8B;&#x4EF6;&#x6D41;&#xFF1A;&#x5F53;&#x4E8B;&#x4EF6;&#x51FA;&#x53D1;&#x65F6;&#xFF0C;&#x5185;&#x5916;&#x5C42;&#x5143;&#x7D20;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x51FA;&#x53D1;&#x987A;&#x5E8F;"><a href="#&#x4E8B;&#x4EF6;&#x6D41;&#xFF1A;&#x5F53;&#x4E8B;&#x4EF6;&#x51FA;&#x53D1;&#x65F6;&#xFF0C;&#x5185;&#x5916;&#x5C42;&#x5143;&#x7D20;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x51FA;&#x53D1;&#x987A;&#x5E8F;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x6D41;&#xFF1A;&#x5F53;&#x4E8B;&#x4EF6;&#x51FA;&#x53D1;&#x65F6;&#xFF0C;&#x5185;&#x5916;&#x5C42;&#x5143;&#x7D20;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x51FA;&#x53D1;&#x987A;&#x5E8F;"></a>&#x4E8B;&#x4EF6;&#x6D41;&#xFF1A;&#x5F53;&#x4E8B;&#x4EF6;&#x51FA;&#x53D1;&#x65F6;&#xFF0C;&#x5185;&#x5916;&#x5C42;&#x5143;&#x7D20;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x51FA;&#x53D1;&#x987A;&#x5E8F;</h3><ul>
+<li>DOM &#x6807;&#x51C6;&#x4E8B;&#x4EF6;&#x6D41;&#xFF1A;&#x7531;&#x5916;&#x5411;&#x5185;&#x6355;&#x83B7; -&gt; &#x76EE;&#x6807;&#x89E6;&#x53D1; -&gt; &#x7531;&#x5185;&#x5411;&#x5916;&#x5192;&#x6CE1;&#x89E6;&#x53D1;&#x3002;</li>
+<li>IE8 &#x4E8B;&#x4EF6;&#x6D41;&#xFF1A; &#x76EE;&#x6807;&#x89E6;&#x53D1; -&gt; &#x7531;&#x5185;&#x5411;&#x5916;&#x5192;&#x6CE1;&#x89E6;&#x53D1;&#x3002;&#x6CA1;&#x6709;&#x6355;&#x83B7;&#x9636;&#x6BB5;&#x3002;</li>
 </ul>
-<h4 id="绑定事件处理程序"><a href="#绑定事件处理程序" class="headerlink" title="绑定事件处理程序"></a>绑定事件处理程序</h4><ol>
-<li>HTML 中设置事件属性:<ul>
-<li><code>&lt;div onclick=&quot;javascript&quot;&gt;&lt;/div&gt; // this 必须从页面中传入</code></li>
-</ul>
-</li>
-<li>DOM0 级 API: JS 中设置对象的时间属性<ul>
-<li><code>obj.onclick = function() {}; // this 指代正在调用时间处理程序的元素对象</code></li>
-<li>存在以下两个问题：<ul>
-<li>无法改变事件流中事件触发的顺序。</li>
-<li>同一对象的统一吹函数，同时绑定多个函数对象。</li>
+<h4 id="&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"><a href="#&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</h4><ol>
+<li>HTML &#x4E2D;&#x8BBE;&#x7F6E;&#x4E8B;&#x4EF6;&#x5C5E;&#x6027;:<ul>
+<li><code>&lt;div onclick=&quot;javascript&quot;&gt;&lt;/div&gt; // this &#x5FC5;&#x987B;&#x4ECE;&#x9875;&#x9762;&#x4E2D;&#x4F20;&#x5165;</code></li>
 </ul>
 </li>
+<li>DOM0 &#x7EA7; API: JS &#x4E2D;&#x8BBE;&#x7F6E;&#x5BF9;&#x8C61;&#x7684;&#x65F6;&#x95F4;&#x5C5E;&#x6027;<ul>
+<li><code>obj.onclick = function() {}; // this &#x6307;&#x4EE3;&#x6B63;&#x5728;&#x8C03;&#x7528;&#x65F6;&#x95F4;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x7684;&#x5143;&#x7D20;&#x5BF9;&#x8C61;</code></li>
+<li>&#x5B58;&#x5728;&#x4EE5;&#x4E0B;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;<ul>
+<li>&#x65E0;&#x6CD5;&#x6539;&#x53D8;&#x4E8B;&#x4EF6;&#x6D41;&#x4E2D;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x7684;&#x987A;&#x5E8F;&#x3002;</li>
+<li>&#x540C;&#x4E00;&#x5BF9;&#x8C61;&#x7684;&#x7EDF;&#x4E00;&#x5439;&#x51FD;&#x6570;&#xFF0C;&#x540C;&#x65F6;&#x7ED1;&#x5B9A;&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3002;</li>
 </ul>
 </li>
-<li>DOM2 级标准 API:<ul>
-<li><code>obj.addEventListener(&#39;click&#39;,function(){}[, boolean]); // 依次传入事件名，函数对象，是否在捕获阶段触发</code></li>
-<li>IE8 的处理：<code>obj.attchEvent(&#39;click&#39;, &#39;function() {}&#39;); // 依次传入事件名，函数对象</code></li>
+</ul>
+</li>
+<li>DOM2 &#x7EA7;&#x6807;&#x51C6; API:<ul>
+<li><code>obj.addEventListener(&apos;click&apos;,function(){}[, boolean]); // &#x4F9D;&#x6B21;&#x4F20;&#x5165;&#x4E8B;&#x4EF6;&#x540D;&#xFF0C;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x5426;&#x5728;&#x6355;&#x83B7;&#x9636;&#x6BB5;&#x89E6;&#x53D1;</code></li>
+<li>IE8 &#x7684;&#x5904;&#x7406;&#xFF1A;<code>obj.attchEvent(&apos;click&apos;, &apos;function() {}&apos;); // &#x4F9D;&#x6B21;&#x4F20;&#x5165;&#x4E8B;&#x4EF6;&#x540D;&#xFF0C;&#x51FD;&#x6570;&#x5BF9;&#x8C61;</code></li>
 </ul>
 </li>
 </ol>
-<h4 id="EVENT-事件触发时自动创建，自动传入事件处理函数内-默认为第一个参数"><a href="#EVENT-事件触发时自动创建，自动传入事件处理函数内-默认为第一个参数" class="headerlink" title="EVENT: 事件触发时自动创建，自动传入事件处理函数内(默认为第一个参数)"></a>EVENT: 事件触发时自动创建，自动传入事件处理函数内(默认为第一个参数)</h4><ul>
-<li>获取：<code>var event = window.event || arguments[0]; // 在函数内使用</code></li>
-<li>获得事件源(目标对象)：<code>var src = event.target || event.srcElement; // this 随着事件冒泡而变化</code></li>
-<li>取消冒泡：<ul>
+<h4 id="EVENT-&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x81EA;&#x52A8;&#x4F20;&#x5165;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x5185;-&#x9ED8;&#x8BA4;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;"><a href="#EVENT-&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x81EA;&#x52A8;&#x4F20;&#x5165;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x5185;-&#x9ED8;&#x8BA4;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;" class="headerlink" title="EVENT: &#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x81EA;&#x52A8;&#x4F20;&#x5165;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x5185;(&#x9ED8;&#x8BA4;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;)"></a>EVENT: &#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x81EA;&#x52A8;&#x4F20;&#x5165;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x5185;(&#x9ED8;&#x8BA4;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;)</h4><ul>
+<li>&#x83B7;&#x53D6;&#xFF1A;<code>var event = window.event || arguments[0]; // &#x5728;&#x51FD;&#x6570;&#x5185;&#x4F7F;&#x7528;</code></li>
+<li>&#x83B7;&#x5F97;&#x4E8B;&#x4EF6;&#x6E90;(&#x76EE;&#x6807;&#x5BF9;&#x8C61;)&#xFF1A;<code>var src = event.target || event.srcElement; // this &#x968F;&#x7740;&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;&#x800C;&#x53D8;&#x5316;</code></li>
+<li>&#x53D6;&#x6D88;&#x5192;&#x6CE1;&#xFF1A;<ul>
 <li><code>event.cancelBubble = true; // IE</code></li>
 <li><code>event.stopPropagation(); // DOM</code></li>
-<li>兼容写法：<code>if (e.stopPropagation) { e.stopPropagation(); } else {e.cancelBubble = true;}</code></li>
+<li>&#x517C;&#x5BB9;&#x5199;&#x6CD5;&#xFF1A;<code>if (e.stopPropagation) { e.stopPropagation(); } else {e.cancelBubble = true;}</code></li>
 </ul>
 </li>
-<li>取消事件：取消事件的默认行为，停止继续执行<ul>
+<li>&#x53D6;&#x6D88;&#x4E8B;&#x4EF6;&#xFF1A;&#x53D6;&#x6D88;&#x4E8B;&#x4EF6;&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#xFF0C;&#x505C;&#x6B62;&#x7EE7;&#x7EED;&#x6267;&#x884C;<ul>
 <li><code>if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; }</code></li>
 </ul>
 </li>
 </ul>
-
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -601,7 +586,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -613,7 +598,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -622,7 +608,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -710,7 +696,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -846,14 +832,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -876,7 +864,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
 <title>前端性能加快之nginx开启gzip压缩 - Deadpool Front-end</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,19 +16,19 @@
 
 
 
-    <meta name="description" content="近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……">
-<meta name="keywords" content="nginx">
+    <meta name="description" content="&amp;#x8FD1;&amp;#x671F;&amp;#x53D1;&amp;#x73B0;&amp;#x516C;&amp;#x53F8;&amp;#x5185;&amp;#x90E8;&amp;#x7F51;&amp;#x7AD9;&amp;#x52A0;&amp;#x8F7D;&amp;#x7279;&amp;#x522B;&amp;#x6162;&amp;#xFF0C;&amp;#x539F;&amp;#x56E0;&amp;#x662F;&amp;#x6211;&amp;#x4EEC;&amp;#x5C06;&amp;#x6240;&amp;#x6709;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端性能加快之nginx开启gzip压缩">
 <meta property="og:url" content="http://kyriejoshua.github.io/2016/08/02/nginx-gzip-on/index.html">
 <meta property="og:site_name" content="Deadpool Front-end">
-<meta property="og:description" content="近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……">
-<meta property="og:locale" content="zh-cn">
+<meta property="og:description" content="&amp;#x8FD1;&amp;#x671F;&amp;#x53D1;&amp;#x73B0;&amp;#x516C;&amp;#x53F8;&amp;#x5185;&amp;#x90E8;&amp;#x7F51;&amp;#x7AD9;&amp;#x52A0;&amp;#x8F7D;&amp;#x7279;&amp;#x522B;&amp;#x6162;&amp;#xFF0C;&amp;#x539F;&amp;#x56E0;&amp;#x662F;&amp;#x6211;&amp;#x4EEC;&amp;#x5C06;&amp;#x6240;&amp;#x6709;&amp;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://kyriejoshua.github.io/2016/08/02/nginx-gzip-on/unphoto.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:17:02.369Z">
+<meta property="article:published_time" content="2016-08-02T07:22:21.000Z">
+<meta property="article:modified_time" content="2019-06-27T10:17:02.369Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端性能加快之nginx开启gzip压缩">
-<meta name="twitter:description" content="近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……">
 <meta name="twitter:image" content="http://kyriejoshua.github.io/2016/08/02/nginx-gzip-on/unphoto.jpeg">
 
 
@@ -48,7 +48,9 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
 
+
 <link rel="stylesheet" href="/css/style.css">
+
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
@@ -67,7 +69,7 @@
     
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -75,7 +77,7 @@
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="/">
                 
-                <img src="/images/logo.png" alt height="28">
+                <img src="/images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -87,15 +89,20 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archives</a>
+            <a class="navbar-item "
+               href="/archives">Archives</a>
             
-            <a class="navbar-item " href="/categories">Categories</a>
+            <a class="navbar-item "
+               href="/categories">Categories</a>
             
-            <a class="navbar-item " href="/tags">Tags</a>
+            <a class="navbar-item "
+               href="/tags">Tags</a>
             
-            <a class="navbar-item " href="/books">Books</a>
+            <a class="navbar-item "
+               href="/books">Books</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -107,7 +114,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                 
                 <i class="fab fa-github"></i>
                 
@@ -146,12 +153,12 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <hr>
+        <html><head></head><body><hr>
 
-<img src="/2016/08/02/nginx-gzip-on/unphoto.jpeg" title="jake">
+<img src="/2016/08/02/nginx-gzip-on/unphoto.jpeg" class title="jake">
 
 <blockquote>
-  近期发现公司内部网站加载特别慢，原因是我们将所有样式文件，外部引入的文件都分别合成成一个文件，这文件少则1M，多则3、4M。大的简直不敢想象。导致打开速度几十秒甚至一分钟。实在无奈，经前辈指点终于发现nginx有个好配置……
+  &#x8FD1;&#x671F;&#x53D1;&#x73B0;&#x516C;&#x53F8;&#x5185;&#x90E8;&#x7F51;&#x7AD9;&#x52A0;&#x8F7D;&#x7279;&#x522B;&#x6162;&#xFF0C;&#x539F;&#x56E0;&#x662F;&#x6211;&#x4EEC;&#x5C06;&#x6240;&#x6709;&#x6837;&#x5F0F;&#x6587;&#x4EF6;&#xFF0C;&#x5916;&#x90E8;&#x5F15;&#x5165;&#x7684;&#x6587;&#x4EF6;&#x90FD;&#x5206;&#x522B;&#x5408;&#x6210;&#x6210;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x6587;&#x4EF6;&#x5C11;&#x5219;1M&#xFF0C;&#x591A;&#x5219;3&#x3001;4M&#x3002;&#x5927;&#x7684;&#x7B80;&#x76F4;&#x4E0D;&#x6562;&#x60F3;&#x8C61;&#x3002;&#x5BFC;&#x81F4;&#x6253;&#x5F00;&#x901F;&#x5EA6;&#x51E0;&#x5341;&#x79D2;&#x751A;&#x81F3;&#x4E00;&#x5206;&#x949F;&#x3002;&#x5B9E;&#x5728;&#x65E0;&#x5948;&#xFF0C;&#x7ECF;&#x524D;&#x8F88;&#x6307;&#x70B9;&#x7EC8;&#x4E8E;&#x53D1;&#x73B0;nginx&#x6709;&#x4E2A;&#x597D;&#x914D;&#x7F6E;&#x2026;&#x2026;
 
 </blockquote>
 
@@ -159,33 +166,33 @@
 
 
 <h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><ul>
-<li>Gzip是若干种文件压缩程序的简称，通常指GNU计划的实现，此处的gzip代表GNU zip。也经常用来表示gzip这种文件格式。软件的作者是Jean-loup Gailly和Mark Adler。在1992年10月31日第一次公开发布，版本号0.1。</li>
+<li>Gzip&#x662F;&#x82E5;&#x5E72;&#x79CD;&#x6587;&#x4EF6;&#x538B;&#x7F29;&#x7A0B;&#x5E8F;&#x7684;&#x7B80;&#x79F0;&#xFF0C;&#x901A;&#x5E38;&#x6307;GNU&#x8BA1;&#x5212;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x6B64;&#x5904;&#x7684;gzip&#x4EE3;&#x8868;GNU zip&#x3002;&#x4E5F;&#x7ECF;&#x5E38;&#x7528;&#x6765;&#x8868;&#x793A;gzip&#x8FD9;&#x79CD;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x3002;&#x8F6F;&#x4EF6;&#x7684;&#x4F5C;&#x8005;&#x662F;Jean-loup Gailly&#x548C;Mark Adler&#x3002;&#x5728;1992&#x5E74;10&#x6708;31&#x65E5;&#x7B2C;&#x4E00;&#x6B21;&#x516C;&#x5F00;&#x53D1;&#x5E03;&#xFF0C;&#x7248;&#x672C;&#x53F7;0.1&#x3002;</li>
 <li><a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html" target="_blank" rel="noopener">gzip</a></li>
-<li>HTTP协议上的GZIP编码是一种用来改进web应用程序性能的技术。通常可以将纯文本内容压缩到原有大小的40%甚至更小。</li>
-<li>减少文件大小，一是可以减少存储空间。二是通过网络传输文件时，可以减少传输时间。</li>
+<li>HTTP&#x534F;&#x8BAE;&#x4E0A;&#x7684;GZIP&#x7F16;&#x7801;&#x662F;&#x4E00;&#x79CD;&#x7528;&#x6765;&#x6539;&#x8FDB;web&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6027;&#x80FD;&#x7684;&#x6280;&#x672F;&#x3002;&#x901A;&#x5E38;&#x53EF;&#x4EE5;&#x5C06;&#x7EAF;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x538B;&#x7F29;&#x5230;&#x539F;&#x6709;&#x5927;&#x5C0F;&#x7684;40%&#x751A;&#x81F3;&#x66F4;&#x5C0F;&#x3002;</li>
+<li>&#x51CF;&#x5C11;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#xFF0C;&#x4E00;&#x662F;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x3002;&#x4E8C;&#x662F;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x4F20;&#x8F93;&#x65F6;&#x95F4;&#x3002;</li>
 </ul>
 <h3 id="USAGE"><a href="#USAGE" class="headerlink" title="USAGE"></a>USAGE</h3><ul>
-<li>在nginx中使用gzip压缩很方便。只要将默认的注释除去，加上一些配置即可。</li>
+<li>&#x5728;nginx&#x4E2D;&#x4F7F;&#x7528;gzip&#x538B;&#x7F29;&#x5F88;&#x65B9;&#x4FBF;&#x3002;&#x53EA;&#x8981;&#x5C06;&#x9ED8;&#x8BA4;&#x7684;&#x6CE8;&#x91CA;&#x9664;&#x53BB;&#xFF0C;&#x52A0;&#x4E0A;&#x4E00;&#x4E9B;&#x914D;&#x7F6E;&#x5373;&#x53EF;&#x3002;</li>
 <li><code>vim /etc/nginx/nginx.conf</code></li>
 </ul>
-<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_min_length <span class="hljs-number">1</span>k;</span><br><span class="line">gzip_http_version <span class="hljs-number">1.1</span>;</span><br><span class="line">gzip_buffers <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;</span><br><span class="line">gzip_types text/plain application/x-javascript text/css text/javascript;</span><br><span class="line">gzip_comp_level <span class="hljs-number">2</span>;</span><br><span class="line">gzip_vary off;</span><br><span class="line">gzip_disable <span class="hljs-string">"MSIE [1-6]."</span></span><br></pre></td></tr></table></figure></p>
+<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_min_length <span class="hljs-number">1</span>k;</span><br><span class="line">gzip_http_version <span class="hljs-number">1.1</span>;</span><br><span class="line">gzip_buffers <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;</span><br><span class="line">gzip_types text/plain application/x-javascript text/css text/javascript;</span><br><span class="line">gzip_comp_level <span class="hljs-number">2</span>;</span><br><span class="line">gzip_vary off;</span><br><span class="line">gzip_disable <span class="hljs-string">&quot;MSIE [1-6].&quot;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 <ol>
-<li><code>gzip on</code> 开启gzip</li>
-<li><code>gzip_min_length</code> 当返回内容大于这个值时会进行压缩，以K为单位，如果值为0，所有页面都进行压缩，但没有必要。</li>
-<li><code>gzip_http_version</code> 识别http协议的版本。默认值为1.1，就是对HTTP/1.1协议的请求才会进行压缩。</li>
-<li><code>gzip_buffers</code> 设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。</li>
-<li><code>gzip_types</code> 设置需要压缩的MIME类型，非设置值不进行压缩。<ul>
-<li><code>text/html</code>默认已经压缩</li>
-<li>图片可不开启压缩，jpg/gif/png格式的图片本身就是压缩过的。</li>
+<li><code>gzip on</code> &#x5F00;&#x542F;gzip</li>
+<li><code>gzip_min_length</code> &#x5F53;&#x8FD4;&#x56DE;&#x5185;&#x5BB9;&#x5927;&#x4E8E;&#x8FD9;&#x4E2A;&#x503C;&#x65F6;&#x4F1A;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#xFF0C;&#x4EE5;K&#x4E3A;&#x5355;&#x4F4D;&#xFF0C;&#x5982;&#x679C;&#x503C;&#x4E3A;0&#xFF0C;&#x6240;&#x6709;&#x9875;&#x9762;&#x90FD;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#xFF0C;&#x4F46;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x3002;</li>
+<li><code>gzip_http_version</code> &#x8BC6;&#x522B;http&#x534F;&#x8BAE;&#x7684;&#x7248;&#x672C;&#x3002;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;1.1&#xFF0C;&#x5C31;&#x662F;&#x5BF9;HTTP/1.1&#x534F;&#x8BAE;&#x7684;&#x8BF7;&#x6C42;&#x624D;&#x4F1A;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#x3002;</li>
+<li><code>gzip_buffers</code> &#x8BBE;&#x7F6E;&#x7CFB;&#x7EDF;&#x83B7;&#x53D6;&#x51E0;&#x4E2A;&#x5355;&#x4F4D;&#x7684;&#x7F13;&#x5B58;&#x7528;&#x4E8E;&#x5B58;&#x50A8;gzip&#x7684;&#x538B;&#x7F29;&#x7ED3;&#x679C;&#x6570;&#x636E;&#x6D41;&#x3002;</li>
+<li><code>gzip_types</code> &#x8BBE;&#x7F6E;&#x9700;&#x8981;&#x538B;&#x7F29;&#x7684;MIME&#x7C7B;&#x578B;&#xFF0C;&#x975E;&#x8BBE;&#x7F6E;&#x503C;&#x4E0D;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#x3002;<ul>
+<li><code>text/html</code>&#x9ED8;&#x8BA4;&#x5DF2;&#x7ECF;&#x538B;&#x7F29;</li>
+<li>&#x56FE;&#x7247;&#x53EF;&#x4E0D;&#x5F00;&#x542F;&#x538B;&#x7F29;&#xFF0C;jpg/gif/png&#x683C;&#x5F0F;&#x7684;&#x56FE;&#x7247;&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x538B;&#x7F29;&#x8FC7;&#x7684;&#x3002;</li>
 </ul>
 </li>
-<li><code>gzip_comp_level</code> 设置压缩等级，等级越低压缩速度越快文件压缩比越小，传输块但也比较耗费CPU。可设置为1-9，默认是4。</li>
-<li><code>gzip_vary</code> 判断HTTP是否支持压缩，如果不支持的就不压缩。</li>
-<li><code>gzip_disable</code> 禁用IE6的gzip，IE6支持不好，不过这年头用IE的人也不太想理会了……</li>
+<li><code>gzip_comp_level</code> &#x8BBE;&#x7F6E;&#x538B;&#x7F29;&#x7B49;&#x7EA7;&#xFF0C;&#x7B49;&#x7EA7;&#x8D8A;&#x4F4E;&#x538B;&#x7F29;&#x901F;&#x5EA6;&#x8D8A;&#x5FEB;&#x6587;&#x4EF6;&#x538B;&#x7F29;&#x6BD4;&#x8D8A;&#x5C0F;&#xFF0C;&#x4F20;&#x8F93;&#x5757;&#x4F46;&#x4E5F;&#x6BD4;&#x8F83;&#x8017;&#x8D39;CPU&#x3002;&#x53EF;&#x8BBE;&#x7F6E;&#x4E3A;1-9&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;4&#x3002;</li>
+<li><code>gzip_vary</code> &#x5224;&#x65AD;HTTP&#x662F;&#x5426;&#x652F;&#x6301;&#x538B;&#x7F29;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x5C31;&#x4E0D;&#x538B;&#x7F29;&#x3002;</li>
+<li><code>gzip_disable</code> &#x7981;&#x7528;IE6&#x7684;gzip&#xFF0C;IE6&#x652F;&#x6301;&#x4E0D;&#x597D;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD9;&#x5E74;&#x5934;&#x7528;IE&#x7684;&#x4EBA;&#x4E5F;&#x4E0D;&#x592A;&#x60F3;&#x7406;&#x4F1A;&#x4E86;&#x2026;&#x2026;</li>
 </ol>
-<p>PS：公司缺少运维，真心锻炼前端的全栈能力……</p>
+<p>PS&#xFF1A;&#x516C;&#x53F8;&#x7F3A;&#x5C11;&#x8FD0;&#x7EF4;&#xFF0C;&#x771F;&#x5FC3;&#x953B;&#x70BC;&#x524D;&#x7AEF;&#x7684;&#x5168;&#x6808;&#x80FD;&#x529B;&#x2026;&#x2026;</p>
 <blockquote>
-    参考：[开启Nginx的Gzip压缩功能](https://www.insp.top/article/open-nginx-gzip-module)
+    &#x53C2;&#x8003;&#xFF1A;[&#x5F00;&#x542F;Nginx&#x7684;Gzip&#x538B;&#x7F29;&#x529F;&#x80FD;](https://www.insp.top/article/open-nginx-gzip-module)
 
 </blockquote>
 
@@ -194,7 +201,7 @@
 
 
 
-
+</body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
         
     
@@ -264,7 +271,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -276,7 +283,8 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2020 朱征原&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -285,7 +293,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
                     
                     GitHub
                     
@@ -373,7 +381,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -509,14 +517,16 @@
     
 
 
+
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -539,7 +549,9 @@
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
     
 </body>
 </html>
