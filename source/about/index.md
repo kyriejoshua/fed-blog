@@ -38,5 +38,4 @@
 </div> -->
 <script src="https://cdn.bootcss.com/three.js/87/three.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
-<script src="./index.js">
-</script>
+<script src="./static/index.js"></script>

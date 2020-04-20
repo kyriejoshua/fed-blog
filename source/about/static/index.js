@@ -15,7 +15,7 @@ renderer.setSize(earthRect.width, earthRect.height)
  */
 var initEarth = function() {
   // var earthPic = 'https://kyriejoshua.github.io/jo.github.io/about/satelite.jpg'
-  var earthPic = './satelite.jpg'
+  var earthPic = './static/satelite.jpg'
   var textureEarth = new THREE.TextureLoader().load(earthPic || '')
   var sphereGeometry = new THREE.SphereGeometry(5, 32, 32)
   var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xfafaf6, map: textureEarth })
@@ -30,7 +30,7 @@ var initEarth = function() {
  * @return {Object} [description]
  */
 var initStars = function() {
-  var starPic = './star.png'
+  var starPic = './static/star.png'
   var textureStar = new THREE.TextureLoader().load(starPic)
   var starsGeometry = new THREE.Geometry()
   for (var i = 0; i < 200; i++) {
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   window.setTimeout(function (params) {
     console.info('audio play', new Date(), audio)
-    var audioUrl = "./MarvelStudiosFanfare.mp3" || "./Bye.mp3"
+    var audioUrl = "./static/MarvelStudiosFanfare.mp3" || "./Bye.mp3"
     autoPlayAudio(audioUrl)
   }, 7000)
 })

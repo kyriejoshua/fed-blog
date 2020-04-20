@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "private": true,
   "hexo": {
-    "version": "3.9.0"
+    "version": "4.2.0"
   },
   "scripts": {
     "start": "hexo s",
@@ -18,7 +18,8 @@
     "build": "hexo clean && hexo douban && hexo g && hexo deploy"
   },
   "dependencies": {
-    "hexo": "^3.9.0",
+    "cheerio": "^1.0.0-rc.3",
+    "hexo": "^4.2.0",
     "hexo-cli": "^2.0.0",
     "hexo-deployer-git": "^1.0.0",
     "hexo-douban": "^1.1.3",
