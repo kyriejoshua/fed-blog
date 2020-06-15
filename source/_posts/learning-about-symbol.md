@@ -4,7 +4,7 @@ date: 2020-06-13 16:48:38
 tags: JavaScript
 categories: JavaScript
 ---
-<hr>
+<hr/>
 
 ![](/2020/06/13/learning-about-symbol/unphoto.jpg)
 随着 ES6 的广泛应用，似乎其实还有一些它的特性，明明推出时影响巨大，却并没有掀起多少波澜。本文尝试着探究它，搞清楚它是什么，它能做什么，以及为什么它不火。
@@ -173,7 +173,7 @@ categories: JavaScript
   </Tabs>
   ```
 
-* 可以看到，不论是标题或是 key，都很适合使用 symbol 来标识，尤其是 key，它本身并无意义，只需保证它的唯一性，用 symbol 替换，可以以此消除逻辑与字符串之间的强耦合。
+* 可以看到，不论是标题或是 `key`，都很适合使用 `symbol` 来标识，尤其是 `key`，它本身并无意义，只需保证它的唯一性，用 `symbol` 替换，可以以此消除逻辑与字符串之间的强耦合。
 * 这里的改变很简单，只需定义一个对象来保持即可。
 
   ```javascript
@@ -258,4 +258,4 @@ categories: JavaScript
 > [Symbol in ES6](https://2ality.com/2014/12/es6-symbols.html)
 > [阮一峰文档](https://es6.ruanyifeng.com/#docs/symbol)
 
-<!--5h-->
+<!--5.5h-->
