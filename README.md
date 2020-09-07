@@ -31,6 +31,7 @@
   * `npm run publish` 也可以执行部署，依次执行 `prepublish`、`publish`、`postpublish`.
     * ~~执行时理论上应当按顺序执行 `prepublish`、`prepare`、`prepublishOnly`、`publish`. 但中间两个没有执行，似乎是 npm 版本的问题~~。
   * 部署电影和书时可能会耗时较长-3mins 左右。电影页面已生成，但不提供入口。入口自寻。
+  * 长时间不使用豆瓣功能，cookie 会失效，需要重新注入，在相应生成器里(book-generator)进行保存。
 
 #### Others
 
