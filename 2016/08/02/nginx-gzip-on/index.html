@@ -46,7 +46,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -69,7 +69,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -114,7 +114,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/kyriejoshua/hexo-theme-minos">
                 
                 <i class="fab fa-github"></i>
                 
@@ -162,12 +162,12 @@
 
 </blockquote>
 
-<a id="more"></a>
+<span id="more"></span>
 
 
 <h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><ul>
 <li>Gzip&#x662F;&#x82E5;&#x5E72;&#x79CD;&#x6587;&#x4EF6;&#x538B;&#x7F29;&#x7A0B;&#x5E8F;&#x7684;&#x7B80;&#x79F0;&#xFF0C;&#x901A;&#x5E38;&#x6307;GNU&#x8BA1;&#x5212;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x6B64;&#x5904;&#x7684;gzip&#x4EE3;&#x8868;GNU zip&#x3002;&#x4E5F;&#x7ECF;&#x5E38;&#x7528;&#x6765;&#x8868;&#x793A;gzip&#x8FD9;&#x79CD;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x3002;&#x8F6F;&#x4EF6;&#x7684;&#x4F5C;&#x8005;&#x662F;Jean-loup Gailly&#x548C;Mark Adler&#x3002;&#x5728;1992&#x5E74;10&#x6708;31&#x65E5;&#x7B2C;&#x4E00;&#x6B21;&#x516C;&#x5F00;&#x53D1;&#x5E03;&#xFF0C;&#x7248;&#x672C;&#x53F7;0.1&#x3002;</li>
-<li><a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html" target="_blank" rel="noopener">gzip</a></li>
+<li><a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html">gzip</a></li>
 <li>HTTP&#x534F;&#x8BAE;&#x4E0A;&#x7684;GZIP&#x7F16;&#x7801;&#x662F;&#x4E00;&#x79CD;&#x7528;&#x6765;&#x6539;&#x8FDB;web&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6027;&#x80FD;&#x7684;&#x6280;&#x672F;&#x3002;&#x901A;&#x5E38;&#x53EF;&#x4EE5;&#x5C06;&#x7EAF;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x538B;&#x7F29;&#x5230;&#x539F;&#x6709;&#x5927;&#x5C0F;&#x7684;40%&#x751A;&#x81F3;&#x66F4;&#x5C0F;&#x3002;</li>
 <li>&#x51CF;&#x5C11;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#xFF0C;&#x4E00;&#x662F;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x3002;&#x4E8C;&#x662F;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x4F20;&#x8F93;&#x65F6;&#x95F4;&#x3002;</li>
 </ul>
@@ -175,7 +175,8 @@
 <li>&#x5728;nginx&#x4E2D;&#x4F7F;&#x7528;gzip&#x538B;&#x7F29;&#x5F88;&#x65B9;&#x4FBF;&#x3002;&#x53EA;&#x8981;&#x5C06;&#x9ED8;&#x8BA4;&#x7684;&#x6CE8;&#x91CA;&#x9664;&#x53BB;&#xFF0C;&#x52A0;&#x4E0A;&#x4E00;&#x4E9B;&#x914D;&#x7F6E;&#x5373;&#x53EF;&#x3002;</li>
 <li><code>vim /etc/nginx/nginx.conf</code></li>
 </ul>
-<p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_min_length <span class="hljs-number">1</span>k;</span><br><span class="line">gzip_http_version <span class="hljs-number">1.1</span>;</span><br><span class="line">gzip_buffers <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;</span><br><span class="line">gzip_types text/plain application/x-javascript text/css text/javascript;</span><br><span class="line">gzip_comp_level <span class="hljs-number">2</span>;</span><br><span class="line">gzip_vary off;</span><br><span class="line">gzip_disable <span class="hljs-string">&quot;MSIE [1-6].&quot;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_min_length 1k;</span><br><span class="line">gzip_http_version <span class="hljs-number">1.1</span>;</span><br><span class="line">gzip_buffers <span class="hljs-number">4</span> 16k;</span><br><span class="line">gzip_types text/plain application/x-javascript text/css text/javascript;</span><br><span class="line">gzip_comp_level <span class="hljs-number">2</span>;</span><br><span class="line">gzip_vary off;</span><br><span class="line">gzip_disable <span class="hljs-string">&quot;MSIE [1-6].&quot;</span></span><br></pre></td></tr></tbody></table></figure>
+
 <ol>
 <li><code>gzip on</code> &#x5F00;&#x542F;gzip</li>
 <li><code>gzip_min_length</code> &#x5F53;&#x8FD4;&#x56DE;&#x5185;&#x5BB9;&#x5927;&#x4E8E;&#x8FD9;&#x4E2A;&#x503C;&#x65F6;&#x4F1A;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#xFF0C;&#x4EE5;K&#x4E3A;&#x5355;&#x4F4D;&#xFF0C;&#x5982;&#x679C;&#x503C;&#x4E3A;0&#xFF0C;&#x6240;&#x6709;&#x9875;&#x9762;&#x90FD;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#xFF0C;&#x4F46;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x3002;</li>
@@ -271,7 +272,7 @@
 
 <div id="disqus_thread">
     
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 
@@ -284,7 +285,7 @@
             <div class="column is-narrow has-text-centered">
                 &copy; 2021 朱征原&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -293,7 +294,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos" target="_blank" rel="noopener">
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/kyriejoshua/hexo-theme-minos">
                     
                     GitHub
                     
@@ -381,7 +382,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
