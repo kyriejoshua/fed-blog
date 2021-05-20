@@ -104,7 +104,7 @@ categories: React
 
 * 这是页面中， 组合搜索和表格的入口页面。这里我们统统使用原生的 `hooks` 和 ts 实现。
 
-```tsx
+```typescript
 const TeamBuilding: React.FC<MyProps> = props => {
     const [searchParams, setSearchParams] = useState(null);
 
@@ -131,7 +131,7 @@ const TeamBuilding: React.FC<MyProps> = props => {
 *  `setSearchParams` 方法则是提供了修改它的能力。
 * 表格的核心逻辑：
 
-```tsx
+```typescript
 const AdminTable: React.FC<TableProps> = ({ onSearch, tableData, searchParams = {} }) => {
     const { year, deptId } =  searchParams || {};
 
@@ -150,7 +150,7 @@ const AdminTable: React.FC<TableProps> = ({ onSearch, tableData, searchParams = 
                 onSearch(searchParams);
             });
     };
-  	// 注入该方法，供表格内部使用
+    // 注入该方法，供表格内部使用
     const columns = columnsFn(handleUseWalfare);
 
     return <>
@@ -176,7 +176,7 @@ const AdminTable: React.FC<TableProps> = ({ onSearch, tableData, searchParams = 
 * 下面我们使用原生 `context`，和 `hooks` 中的 ` useReducer` 的能力，来将这段逻辑改造成类 `redux` 的效果。
 * 原始上下文需要初始值，这里因为用到了 ts. 所以我们用 ts 的方式定义初始值，并建立上下文。这部分是完全新增的一个文件。
 
-```tsx
+```typescript
 export interface IState {
     searchParams?: {
         year?: string,
@@ -248,7 +248,7 @@ export const reducer: Reducer<IState, TAction> = (prevState: IState, action: TAc
 * 然后接下来看看使用的地方，需要对原来的代码进行一些修改。为了方便，我重新定义了一个入口文件 `index.js`，把原先的入口组件改造成了 `TeamBuildContainer.js` 作为容器。这样就可以将提供上下文的能力与业务组件进行解耦。
 * 这是入口文件 `index.js`
 
-```tsx
+```typescript
 import React from 'react';
 import TeamBuildingProvider from "./TeamBuildContext";
 import TeamBuildContainer from './TeamBuildContainer';
@@ -268,20 +268,20 @@ export default TeamBuildingHooks;
 * 这样我们就可以在子组件内使用导入的 `TeamBuildingContext` 上下文，获取我们所需的  `dispatch` 方法和 `state` 值。
 * 下面是改造后的 `TeamBuildContainer.js`
 
-```tsx
+```typescript
 import TeamBuildingProvider from "./TeamBuildContext";
 
 const TeamBuildingContainer: React.FC<MyProps> = props => {
-		const {dispatch} = useContext(TeamBuildingContext);
+    const {dispatch} = useContext(TeamBuildingContext);
   	const dispatchCb = (payload = {}, type) => dispatch && dispatch({payload, type });
 
-  	/**
+    /**
      * 请求团建费数据
      * @param values
      */
     const onSearch = (values) => {
         dispatchCb(values, UPDATE_PARAMS);
-      // do sth...
+        // do sth...
     };
 
     return (
@@ -300,7 +300,7 @@ export default Form.create()(TeamBuildingContainer);
 * 可以明显的看到，这里不需要使用 `props` 的方式传递数据了。
 * 再看看 `adminTable` 中是怎么取用数据的吧。
 
-```tsx
+```typescript
 import { TeamBuildingContext } from "./../../TeamBuildContext";
 
 const AdminTable: React.FC<TableProps> = ({ onSearch }) => {
