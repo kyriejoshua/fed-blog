@@ -78,12 +78,12 @@ google_analytics: UA-80993347-1
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/kyriejoshua/jo.github.io.git
+  repo: https://github.com/kyriejoshua/fed-blog
   branch: gh-pages
 
 douban:
   user: kyriejoshua
-  builtin: true # 构建时改为 true 调试时为 false
+  builtin: false # 构建时改为 true 调试时为 false
   book:
     title: '你们为什么不跳个舞'
     quote: '我自以为我在写作，但事实上我从来就不曾写过，我以为在爱，但我从来也不曾爱过，我什么也没有做，不过是站在那紧闭的门前等待罢了。 ——《情人》'
