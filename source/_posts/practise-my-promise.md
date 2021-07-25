@@ -1217,8 +1217,8 @@ categories: JavaScript
 
 ## 07.小结
 
-* 在这次尝试实现 `Promise` 的过程中，我自己也在边写边学。它内部显然还有许多值得探讨的地方，只是目前精力所限，先截到此。
-* 这次实现也是实践 typescipt 的过程，而且使用类的方式。如果需要查看 js 的代码，可以直接查看下面这个地址。编译后的代码是 js 且是函数的实现，其中内容的编译转换也是值得探索思考的。
+* 在这次尝试实现 `Promise` 的过程中，自己也在边写边学。这是我理解和实践的整个思路，并不一定适用其他人；希望它能作为一种参考，启发或者影响到他人。在写这篇文章之前，我没想到会投入了整整两天时间，却也只是弄懂了些皮毛。 而 `Promise` 内部显然还有许多值得探讨的地方，涉及的微任务， `async/await` 相关，迭代器和生成器；只是目前精力所限，先止于此。后面也许会解析迭代器和生成器的内容。
+* 整个实践，也是自己练习 `typescipt` 的过程，这里我使用类的方式编写，主要是便于自己理解；但它也完全可以用函数实现。`typescript` 编译后的代码就是函数的实现，而且是 js. 可以直接查看下面的地址了解。另外，其中内容的编译转换也是值得探索的。
 	* [Github](https://github.com/kyriejoshua/promise-like/blob/master/dist/index.js)
 
 ## 08.其他参考
@@ -1230,3 +1230,5 @@ categories: JavaScript
 > [内置对象 Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 > [Promise/A+](https://promisesaplus.com/)
 > [Promise 实现](https://juejin.cn/post/6945319439772434469)
+
+<!-- 12h+ -->
