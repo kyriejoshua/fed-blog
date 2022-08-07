@@ -12,7 +12,7 @@ categories: JavaScript
 
 <!--more-->
 
-## 01. 目录
+## 01.目录
 
 * [02.Proxy是什么](#02-Proxy是什么)
 * [03.Proxy有什么](#03-Proxy有什么)
@@ -42,8 +42,8 @@ const p1 = new Proxy(1, {}); // Uncaught TypeError: Cannot create proxy with a n
 
 #### 基本操作的拦截
 
-- 例如针对对象的读取属性和写入属性操作进行拦截。
-- 依次执行下面的代码，可以理解读写的基本操作拦截的简单实现。
+* 例如针对对象的读取属性和写入属性操作进行拦截。
+* 依次执行下面的代码，可以理解读写的基本操作拦截的简单实现。
 
 ```typescript
 const myTarget = { name: "Jack" };
@@ -115,7 +115,7 @@ console.log(proxy.foo); // baz
 
 ### 03.01 Proxy 的处理函数
 
-- 下面是所有可以**自定义**的处理函数以及它们的 TS 定义，这些函数也被称之为 traps，通常翻译成**捕获器，**也可以理解成**劫持**。
+* 下面是所有可以**自定义**的处理函数以及它们的 TS 定义，这些函数也被称之为 traps，通常翻译成**捕获器，**也可以理解成**劫持**。
 
 ```typescript
 interface ProxyHandler<T extends object> {
@@ -816,8 +816,9 @@ const arrayTraps = {
 
 ## 09.参考
 
+> [ES2015规范](https://262.ecma-international.org/6.0/#sec-invariants-of-the-essential-internal-methods)
 > [你可能不知道的Proxy](https://mp.weixin.qq.com/s/LFpHyiMHwsZ2aVKWqdM2hg)
 > [Proxy详解，运用与Mobx](https://juejin.cn/post/6844903741326360590)
 > [awesome-es2015-proxy](https://github.com/mikaelbr/awesome-es2015-proxy)
 
-<!-- 12h+ -->
+<!-- 14h+ -->
