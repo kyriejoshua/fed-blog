@@ -69,7 +69,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -167,26 +167,32 @@
 <span id="more"></span>
 
 <h3 id="&#x89E3;&#x51B3;"><a href="#&#x89E3;&#x51B3;" class="headerlink" title="&#x89E3;&#x51B3;"></a>&#x89E3;&#x51B3;</h3><ul>
-<li>&#x539F;&#x6765;&#x662F;&#x8FD9;&#x6837;</li>
+<li><pre><code>&#x539F;&#x6765;&#x662F;&#x8FD9;&#x6837;
+</code></pre>
+</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>{</span><br><span class="line">  $log.debug(<span class="hljs-string">&apos;runBlock end&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="title function_">runBlock</span>(<span class="hljs-params">$log</span>) {</span><br><span class="line">  $log.<span class="title function_">debug</span>(<span class="hljs-string">&apos;runBlock end&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>&#x8FD0;&#x884C;eslint&#x68C0;&#x67E5;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x76F4;&#x4F1A;&#x62A5;&#x9519; <code>error Prefer default export     ......    import/prefer-default-export</code></li>
-<li>&#x67E5;&#x8BE2;&#x4E86;&#x4E00;&#x4E9B;&#x8D44;&#x6599;&#x540E;&#x53D1;&#x73B0;&#x662F;&#x56E0;&#x4E3A;,&#x8FD9;&#x4E2A;&#x5355;&#x4E00;&#x63A5;&#x53E3;&#x5E76;&#x4E0D;&#x662F;&#x8BBE;&#x7F6E;&#x4E3A;&#x9ED8;&#x8BA4;&#x7684;&#x3002;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x53C2;&#x6570;<code>default</code>&#x3002;</li>
+<li><pre><code>&#x8FD0;&#x884C;eslint&#x68C0;&#x67E5;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x76F4;&#x4F1A;&#x62A5;&#x9519; `error Prefer default export     ......    import/prefer-default-export`
+</code></pre>
+<ul>
+<li><pre><code>&#x67E5;&#x8BE2;&#x4E86;&#x4E00;&#x4E9B;&#x8D44;&#x6599;&#x540E;&#x53D1;&#x73B0;&#x662F;&#x56E0;&#x4E3A;,&#x8FD9;&#x4E2A;&#x5355;&#x4E00;&#x63A5;&#x53E3;&#x5E76;&#x4E0D;&#x662F;&#x8BBE;&#x7F6E;&#x4E3A;&#x9ED8;&#x8BA4;&#x7684;&#x3002;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x53C2;&#x6570;`default`&#x3002;
+</code></pre>
+</li>
+</ul>
+</li>
 <li>&#x66F4;&#x6539;&#x540E;&#x5982;&#x4E0B;</li>
 </ul>
-<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runBlock</span>(<span class="hljs-params">$log</span>) </span>{</span><br><span class="line">  $log.debug(<span class="hljs-string">&apos;runBlock end&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="title function_">runBlock</span>(<span class="hljs-params">$log</span>) {</span><br><span class="line">  $log.<span class="title function_">debug</span>(<span class="hljs-string">&apos;runBlock end&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>&#x5177;&#x4F53;&#x539F;&#x56E0;&#x6709;&#x5F85;&#x8BE6;&#x7EC6;&#x8FFD;&#x7A76;&#x3002;&#x76EE;&#x524D;&#x8BA4;&#x4E3A;&#x662F;&#x5F53;&#x8F93;&#x51FA;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6DFB;&#x52A0;<code>default</code>&#x3002;</li>
+<li><pre><code>&#x5177;&#x4F53;&#x539F;&#x56E0;&#x6709;&#x5F85;&#x8BE6;&#x7EC6;&#x8FFD;&#x7A76;&#x3002;&#x76EE;&#x524D;&#x8BA4;&#x4E3A;&#x662F;&#x5F53;&#x8F93;&#x51FA;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6DFB;&#x52A0;`default`&#x3002;
+</code></pre>
+</li>
 </ul>
 <blockquote>
-<p>&#x53C2;&#x8003;</p>
-<ul>
-<li><a href="http://exploringjs.com/es6/ch_modules.html">es6&#x2026;</a></li>
-<li><a href="https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md">eslint-plugin-import</a></li>
-</ul>
+<p>&#x53C2;&#x8003;<br>*	<a href="http://exploringjs.com/es6/ch_modules.html">es6&#x2026;</a><br>*	<a href="https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md">eslint-plugin-import</a></p>
 </blockquote>
 </body></html>
         <!-- 引入打赏图片即显示打赏功能 -->
