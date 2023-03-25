@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>心随律动 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content=".hexo-douban-tabs {     margin-bottom: 15px;     margin-top: 15px; }  .hexo-douban-tab {     padding: 5px;     text-decoration: none !important; }  .hexo-douban-active {     background:">
+<meta property="og:type" content="website">
+<meta property="og:title" content="心随律动">
+<meta property="og:url" content="http://kyriejoshua.github.io/songs/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content=".hexo-douban-tabs {     margin-bottom: 15px;     margin-top: 15px; }  .hexo-douban-tab {     padding: 5px;     text-decoration: none !important; }  .hexo-douban-active {     background:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s34213947.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s29689862.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s29376688.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s34380827.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s3288667.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s4625358.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s34265941.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s29972618.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s34248367.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s34246925.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s33535651.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s34189342.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s34064826.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s33632802.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s34083868.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s28023229.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s34059950.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s33783862.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s3078358.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s33981843.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s2718029.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s33980140.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s34266011.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s34016336.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s33477874.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s32303415.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s29465451.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s29451755.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s29446503.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s27811205.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s29172124.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s29219095.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s29149313.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s3743777.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s27992073.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s28967134.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s28849275.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s28836865.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s4628715.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s4420058.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s1489695.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s4622066.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s4112723.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s3886689.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s2404966.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s3737076.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s3750422.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s4597133.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s8932514.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s3522345.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s4598636.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s4619342.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s1943885.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s1456874.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s2982879.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s4613563.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s29265961.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s3169796.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s3815469.jpg">
+<meta property="og:image" content="https://img9.doubanio.com/view/subject/m/public/s3899296.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s3292023.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s2591057.jpg">
+<meta property="og:image" content="https://img1.doubanio.com/view/subject/m/public/s3726558.jpg">
+<meta property="og:image" content="https://img2.doubanio.com/view/subject/m/public/s4565542.jpg">
+<meta property="article:author" content="朱征原">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img1.doubanio.com/view/subject/m/public/s34213947.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            心随律动
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2023-03-25T14:10:52.877Z" itemprop="datePublished">3月 25 2023</time>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            几秒 读完 (约 0 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <blockquote>
+    <p></p>
+</blockquote>
+
+<style>
+    
+.hexo-douban-tabs {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.hexo-douban-tab {
+    padding: 5px;
+    text-decoration: none !important;
+}
+
+.hexo-douban-active {
+    background: #657b83;
+    color: #fff !important;
+}
+
+.hexo-douban-item {
+    position: relative;
+    clear: both;
+    min-height: 170px;
+    padding: 10px 0;
+    border-bottom: 1px #ddd solid;
+}
+
+@media screen and (max-width: 600px) {
+    .hexo-douban-item {
+        width: 100%;
+    }
+}
+
+.hexo-douban-picture {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 100px;
+}
+
+.hexo-douban-info {
+    padding-left: 120px;
+}
+
+.hexo-douban-meta {
+    overflow: hidden;
+    display: -webkit-box;
+    font-size: 12px;
+    padding-right: 10px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+}
+
+.hexo-douban-comments {
+    font-size: 12px;
+}
+
+.hexo-douban-pagination {
+    margin-top: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.hexo-douban-button {
+    padding: 5px;
+    text-decoration: none !important;
+}
+
+.hexo-douban-button:hover {
+    background: #657b83;
+    color: #fff !important;
+    opacity: 1;
+}
+
+.hexo-douban-hide {
+    display: none;
+}
+
+.hexo-douban-show {
+    display: block;
+}
+
+</style>
+
+<div class="hexo-douban-tabs">
+    <a class="hexo-douban-tab" id="hexo-douban-tab1" href="javascript:;"
+       rel="external">
+        songListening
+        (2)</a>
+    <a class="hexo-douban-tab" id="hexo-douban-tab2" href="javascript:;"
+       rel="external">
+        songWish
+        (1)</a>
+    <a class="hexo-douban-tab" id="hexo-douban-tab3" href="javascript:;"
+       rel="external">
+        songListened
+        (61)</a>
+</div>
+<div>
+    <div id="hexo-douban-item1">
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s34213947.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35889930/"> 杜康</a></div>
+        <div class="hexo-douban-meta">GAI周延 / 专辑 / 说唱 / 数字(Digital) / 种梦音乐D.M.G / 2022-05-06</div>
+        <div class="hexo-douban-meta">2022-06-23</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s29689862.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/27663615/"> Black Panther: The Album (Music From And Inspired By)</a></div>
+        <div class="hexo-douban-meta">黑豹 / Kendrick Lamar / 专辑 / 原声 / Audio CD / Aftermath Records / 2018-02-09</div>
+        <div class="hexo-douban-meta">2018-03-10</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+        <div class="hexo-douban-pagination">
+    <a class="hexo-douban-button hexo-douban-firstpage" href="javascript:;"> top</a>
+    <a class="hexo-douban-button hexo-douban-previouspage" href="javascript:;">prev</a>
+    <span class="hexo-douban-pagenum">1 / 1</span>
+    <a class="hexo-douban-button hexo-douban-nextpage" href="javascript:;">next</a>
+    <a class="hexo-douban-button hexo-douban-lastpage" href="javascript:;">end</a>
+</div>    </div>
+    <div id="hexo-douban-item2">
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s29376688.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26987467/"> 东海岸</a></div>
+        <div class="hexo-douban-meta">MC法老 / 专辑 / 说唱 / CD / 独立发行 / 2016-12-03</div>
+        <div class="hexo-douban-meta">2017-07-30</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+        <div class="hexo-douban-pagination">
+    <a class="hexo-douban-button hexo-douban-firstpage" href="javascript:;"> top</a>
+    <a class="hexo-douban-button hexo-douban-previouspage" href="javascript:;">prev</a>
+    <span class="hexo-douban-pagenum">1 / 1</span>
+    <a class="hexo-douban-button hexo-douban-nextpage" href="javascript:;">next</a>
+    <a class="hexo-douban-button hexo-douban-lastpage" href="javascript:;">end</a>
+</div>
+    </div>
+    <div id="hexo-douban-item3">
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s34380827.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/36195604/"> 天蝎座效应</a></div>
+        <div class="hexo-douban-meta">PSY.P / EP / 说唱 / 数字(Digital) / RYCE MUSIC GROUP白米范（北京）文化传播有限公司 / 2022-12-23</div>
+        <div class="hexo-douban-meta">2023-01-12 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s3288667.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3239827/"> 差不多先生</a></div>
+        <div class="hexo-douban-meta">MC热狗 MC HotDog / 专辑 / 说唱 / CD / 滚石唱片 / 2008-10-17</div>
+        <div class="hexo-douban-meta">2022-12-24 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s4625358.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/5965099/"> I Need a Doctor</a></div>
+        <div class="hexo-douban-meta">I Need a Doctor / Dr. Dre / Eminem / Skylar Grey / 单曲 / 说唱 / 数字(Digital) / Interscope Recoeds / 2011-02-01</div>
+        <div class="hexo-douban-meta">2022-12-24 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s34265941.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35937990/"> 最伟大的作品</a></div>
+        <div class="hexo-douban-meta">周杰伦 Jay Chou / 专辑 / 流行 / 数字(Digital) / 杰威尔音乐 / Sony Music / 2022-07-15</div>
+        <div class="hexo-douban-meta">2022-12-24 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s29972618.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/30427005/"> 诗眠 | Insomnia</a></div>
+        <div class="hexo-douban-meta">PO8 / 专辑 / 说唱 / 数字(Digital) / 自主发行 / 2017-08-15</div>
+        <div class="hexo-douban-meta">2022-12-24 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s34248367.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35874201/"> 姚中二</a></div>
+        <div class="hexo-douban-meta">Mr. Yao&#39;s 8th Grade Syndrome / MC HotDog / MC热狗 / 专辑 / 说唱 / CD / StreetVoice/本色音乐 / 2022-06-23</div>
+        <div class="hexo-douban-meta">2022-06-26 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s34246925.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35936405/"> 社区生活</a></div>
+        <div class="hexo-douban-meta">谢帝 / 专辑 / 说唱 / 数字(Digital) / 第四音乐 / 2022-06-18</div>
+        <div class="hexo-douban-meta">2022-06-23 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s33535651.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/34907302/"> Mr.Enjoy Da Money</a></div>
+        <div class="hexo-douban-meta">KnowKnow / 专辑 / 说唱 / 数字(Digital) / 88rising / 2019-12-12</div>
+        <div class="hexo-douban-meta">2022-04-15 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s34189342.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35806268/"> Humble Swag</a></div>
+        <div class="hexo-douban-meta">马思唯 MASIWEI / 专辑 / 说唱 / 数字(Digital) / StreetVoice / A Few Good Kids Records / 2022-04-13</div>
+        <div class="hexo-douban-meta">2022-04-14 / ★★☆☆☆ 较差</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s34064826.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35592142/"> 幸存者的负罪感</a></div>
+        <div class="hexo-douban-meta">王以太 / 艾热 / 专辑 / 说唱 / CD / 第四音乐 / 2021-09-09</div>
+        <div class="hexo-douban-meta">2022-03-22 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s33632802.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35050666/"> 演.说.家</a></div>
+        <div class="hexo-douban-meta">王以太 / 专辑 / 说唱 / CD / 第四音乐 / 2019-10-24</div>
+        <div class="hexo-douban-meta">2022-03-22 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s34083868.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35722101/"> 信徒</a></div>
+        <div class="hexo-douban-meta">谢帝 / 专辑 / 说唱 / 数字(Digital) / 第四音乐 / 2021-12-31</div>
+        <div class="hexo-douban-meta">2022-03-21 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s28023229.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26339045/"> To Pimp a Butterfly</a></div>
+        <div class="hexo-douban-meta">破茧成蝶 / Kendrick Lamar / 专辑 / 说唱 / Audio CD / Interscope Records / 2015-03-16</div>
+        <div class="hexo-douban-meta">2022-02-24 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s34059950.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35688748/"> 莫欺少年穷</a></div>
+        <div class="hexo-douban-meta">电影《雄狮少年》片尾曲 / 九连真人 / 单曲 / 原声 / 数字(Digital) / 太合麦田 / 2021-12-06</div>
+        <div class="hexo-douban-meta">2022-01-20 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s33783862.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35296537/"> 阿民（Ah-Min）</a></div>
+        <div class="hexo-douban-meta">九连真人 / 专辑 / 摇滚 / 数字(Digital) / 渡乐文化 / 2020-12-23</div>
+        <div class="hexo-douban-meta">2022-01-20 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s3078358.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3066401/"> Here I Stand</a></div>
+        <div class="hexo-douban-meta">Usher / Import / 放克/灵歌/R&amp;B / Audio CD / ARISTA USA (Sony BMG) / 2008-5-27</div>
+        <div class="hexo-douban-meta">2022-01-12 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s33981843.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35148000/"> DONDA</a></div>
+        <div class="hexo-douban-meta">Kanye West / 专辑 / 说唱 / 数字(Digital) / G.O.O.D. Music / Def Jam / 2021-08-29</div>
+        <div class="hexo-douban-meta">2022-01-11 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s2718029.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1452146/"> Confessions</a></div>
+        <div class="hexo-douban-meta">爱的告白 / Usher / 专辑 / 流行 / CD / La Face / 2004-03-23</div>
+        <div class="hexo-douban-meta">2022-01-11 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s33980140.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35578015/"> 蝴蝶的罪恶感</a></div>
+        <div class="hexo-douban-meta">PO8 / 专辑 / 说唱 / 数字(Digital) / 听度TILDAWN / 2021-08-27</div>
+        <div class="hexo-douban-meta">2021-12-30 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s34266011.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/27014505/"> DAMN.</a></div>
+        <div class="hexo-douban-meta">Kendrick Lamar / 专辑 / 说唱 / Audio CD / Polydor Group / 2017-04-21</div>
+        <div class="hexo-douban-meta">2021-12-30 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s34016336.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/35624738/"> 24時 · Am</a></div>
+        <div class="hexo-douban-meta">肖佳 Jony J / 专辑 / 说唱 / 数字(Digital) / SHOOC.Studio / 2021-10-13</div>
+        <div class="hexo-douban-meta">2021-12-29 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s33477874.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/34815690/"> 说好不哭</a></div>
+        <div class="hexo-douban-meta">Won&#39;t Cry / 周杰伦 Jay Chou / 阿信 / 单曲 / 流行 / 数字(Digital) / 杰威尔音乐 / 2019-09-16</div>
+        <div class="hexo-douban-meta">2019-09-17 / ★★☆☆☆ 较差</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s32303415.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/33424955/"> 废物</a></div>
+        <div class="hexo-douban-meta">MC HotDog / 专辑 / 说唱 / 数字(Digital) / StreetVoice / 本色音乐 / 2019-06-05</div>
+        <div class="hexo-douban-meta">2019-06-17 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s29465451.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/27059513/"> Black Cab</a></div>
+        <div class="hexo-douban-meta">黑车司机 / Higher Brothers / 专辑 / 说唱 / 数字(Digital) / StreetVoice/CXSHXNLY Music LLC / 2017-06-01</div>
+        <div class="hexo-douban-meta">2017-06-01 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s29451755.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/27045743/"> Oh My Gosh</a></div>
+        <div class="hexo-douban-meta">Tomsize / EP / 电子 / 数字(Digital) / Self-Released / 2013-04-02</div>
+        <div class="hexo-douban-meta">2017-05-18 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s29446503.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/27040585/"> 李志、电声与管弦乐</a></div>
+        <div class="hexo-douban-meta">李志 / 专辑 / 摇滚 / 数字(Digital) / 自由落体文化 / 2017-05-16</div>
+        <div class="hexo-douban-meta">2017-05-16 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s27811205.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26259626/"> 1701</a></div>
+        <div class="hexo-douban-meta">李志 / 专辑 / 民谣 / 数字(Digital) / 独立发行 / 2014-11-13</div>
+        <div class="hexo-douban-meta">2017-01-03 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s29172124.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26920951/"> Baby, До свидания（达尼亚）</a></div>
+        <div class="hexo-douban-meta">朴树 / 单曲 / 民谣 / 数字(Digital) / 不晚音乐工作室 / 2016-11-25</div>
+        <div class="hexo-douban-meta">2016-11-26 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s29219095.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26935523/"> 在每一条伤心的应天大街上</a></div>
+        <div class="hexo-douban-meta">李志 / 专辑 / 摇滚 / CD / 自由落体文化 / 2016-11-20</div>
+        <div class="hexo-douban-meta">2016-11-24 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s29149313.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26777721/"> 我的滑板鞋2016</a></div>
+        <div class="hexo-douban-meta">华晨宇 / 单曲 / 流行 / 数字(Digital) / 天娱传媒 / 2016-11-14</div>
+        <div class="hexo-douban-meta">2016-11-21 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s3743777.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1958731/"> 梵高先生</a></div>
+        <div class="hexo-douban-meta">B&amp;BⅡ / 李志 / CD / 民谣 / CD / 口袋唱片 / 2007-01-11</div>
+        <div class="hexo-douban-meta">2016-11-09 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s27992073.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26310288/"> i/O</a></div>
+        <div class="hexo-douban-meta">李志 / 专辑 / 摇滚 / 数字(Digital) / 独立发行 / 2015-01-21</div>
+        <div class="hexo-douban-meta">2016-11-09 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s28967134.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26853262/"> 李志北京不插电现场 2016.5.29</a></div>
+        <div class="hexo-douban-meta">李志 / 专辑 / 民谣 / 数字(Digital) / 独立发行 / 2016-08-11</div>
+        <div class="hexo-douban-meta">2016-11-09 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s28849275.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26826144/"> Versus</a></div>
+        <div class="hexo-douban-meta">Pg.lost / 专辑 / 摇滚 / Audio CD / Pelagic Records / 2016-09-16</div>
+        <div class="hexo-douban-meta">2016-09-14</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s28836865.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/26812952/"> 周杰伦的床边故事</a></div>
+        <div class="hexo-douban-meta">Jay Chou&#39;s Bedtime Stories / 周杰伦 / 专辑 / 流行 / CD / 杰威尔音乐 / 2016-06-24</div>
+        <div class="hexo-douban-meta">2016-06-28 / ★★★☆☆ 还行</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s4628715.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3105555/"> E=MC²</a></div>
+        <div class="hexo-douban-meta">爱的相对论 / Mariah Carey / 专辑 / 放克/灵歌/R&amp;B / CD / Island / 2008-04-15</div>
+        <div class="hexo-douban-meta">2014-04-17 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s4420058.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/5322559/"> Love The Way You Lie</a></div>
+        <div class="hexo-douban-meta">Eminem / Rihanna / Single / 说唱 / Audio CD / Interscope (Universal) / 2010-08-20</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s1489695.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1449814/"> Stan</a></div>
+        <div class="hexo-douban-meta">Eminem / CD-single / Enhanced / Import / 说唱 / Audio CD / Universal Import / 2001-02-20</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s4622066.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1394841/"> 哈狗帮</a></div>
+        <div class="hexo-douban-meta">MC HotDog / 专辑 / 说唱 / CD / 魔岩唱片 / 2001</div>
+        <div class="hexo-douban-meta">2013-10-06</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s4112723.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3541050/"> Dead And Gone</a></div>
+        <div class="hexo-douban-meta">T.I Ft. Justin Timberlake / Single /Import / 说唱 / 数字(Digital) / T.I Ft. Justin Timberlake / 2009</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s3886689.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3264084/"> Freedom</a></div>
+        <div class="hexo-douban-meta">Akon / Album / 放克/灵歌/R&amp;B / Audio CD / Universal / 2008-11-25</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s2404966.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1465941/"> Wake Up</a></div>
+        <div class="hexo-douban-meta">MC HotDog / 专辑 / 说唱 / CD / 滚石唱片 / 2006-01-19</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s3737076.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1401853/"> 七里香</a></div>
+        <div class="hexo-douban-meta">Common Jasmin Orange / 周杰伦 / 专辑 / 流行 / CD / 上海声像出版社 / 2004</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s3750422.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1403307/"> 范特西</a></div>
+        <div class="hexo-douban-meta">Fantasy / 周杰伦 / 专辑 / 流行 / CD / BMG / 2001-09-14</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s4597133.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1395092/"> 黑色柳丁</a></div>
+        <div class="hexo-douban-meta">Black Tangerine / 陶喆 / 专辑 / 流行 / CD / Shock Records Co. Ltd / 2002-08-09</div>
+        <div class="hexo-douban-meta">2013-10-06</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s8932514.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1422300/"> Jay</a></div>
+        <div class="hexo-douban-meta">周杰伦 / 专辑 / 流行 / Audio CD / BMG / 2000-11-13</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s3522345.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1407536/"> 樂之路</a></div>
+        <div class="hexo-douban-meta">Ultrasound 1997-2003 / 乐之路 / 陶喆 / 选集 / 流行 / CD / 金牌大風 / 2003-08-08</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s4598636.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1403832/"> 八度空间</a></div>
+        <div class="hexo-douban-meta">The Eight Dimensions / 周杰伦 / 专辑 / 流行 / CD / 湖南金锋音像出版社 / 2002-07-19</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s4619342.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/5958336/"> Price Tag (feat. B.o.B)</a></div>
+        <div class="hexo-douban-meta">Jessie J / EP / 流行 / 数字(Digital) / Universal Republic Records / 2011-01-28</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s1943885.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/2210561/"> 依然范特西</a></div>
+        <div class="hexo-douban-meta">Still Fantasy / 周杰伦 / 专辑 / 流行 / CD / 新索音乐 / 2006-09-05</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s1456874.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1436975/"> 十一月的萧邦</a></div>
+        <div class="hexo-douban-meta">November&#39;s Chopin / 周杰伦 / 专辑 / 流行 / CD / 上海声像出版社 / 2005-11-01</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s2982879.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3005450/"> E=MC²</a></div>
+        <div class="hexo-douban-meta">爱的方程式 / Mariah Carey / 专辑 / 放克/灵歌/R&amp;B / CD / Island / 2008-04-16</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s4613563.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/5356873/"> Who You Are</a></div>
+        <div class="hexo-douban-meta">Jessie J / 专辑 / 流行 / Audio CD / Island / 2011-02-28</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s29265961.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1406522/"> 叶惠美</a></div>
+        <div class="hexo-douban-meta">葉惠美 / 周杰伦 / 专辑 / 流行 / CD / Sony Music / 2003-07-31</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s3169796.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1406094/"> 七</a></div>
+        <div class="hexo-douban-meta">陈奕迅 / 选集 / 流行 / CD / EEG / 2003-11-20</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s3815469.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1455203/"> Free Loop</a></div>
+        <div class="hexo-douban-meta">Daniel Powter / Single / 流行 / Audio CD / Warner Bros UK / 2005-11-14</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img9.doubanio.com/view/subject/m/public/s3899296.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1410613/"> 阿岳正传</a></div>
+        <div class="hexo-douban-meta">Useless Guy / 张震岳 / 选集 / 流行 / CD / 滚石唱片 / 2004-06-24</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s3292023.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/3222423/"> 魔杰座</a></div>
+        <div class="hexo-douban-meta">Capricorn / 周杰伦 / 专辑 / 放克/灵歌/R&amp;B / CD / 新力博德曼 / 2008-10-09</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★☆ 推荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s2591057.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/2134548/"> 思念是一种病</a></div>
+        <div class="hexo-douban-meta">OK / 张震岳 Csun Yuk / 专辑 / 流行 / CD / 滚石唱片 / 2007-07-06</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img1.doubanio.com/view/subject/m/public/s3726558.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/1407700/"> 寻找周杰伦</a></div>
+        <div class="hexo-douban-meta">周杰伦 / EP / 流行 / 音乐CD / 上海声像出版社 / 2003-12-1</div>
+        <div class="hexo-douban-meta">2013-10-06 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+            <div class="hexo-douban-item">
+    <div class="hexo-douban-picture"><img src="https://img2.doubanio.com/view/subject/m/public/s4565542.jpg" loading="lazy" referrerPolicy="no-referrer" /></div>
+    <div class="hexo-douban-info">
+        <div class="hexo-douban-title"><a target="_blank" href="https://music.douban.com/subject/2153895/"> OK</a></div>
+        <div class="hexo-douban-meta">張震嶽 / 专辑 / 流行 / Audio CD / 滚石唱片公司 / 2007-06-29</div>
+        <div class="hexo-douban-meta">2013-08-17 / ★★★★★ 力荐</div>
+        <div class="hexo-douban-comments"></div>
+    </div>
+</div>
+        
+        <div class="hexo-douban-pagination">
+    <a class="hexo-douban-button hexo-douban-firstpage" href="javascript:;"> top</a>
+    <a class="hexo-douban-button hexo-douban-previouspage" href="javascript:;">prev</a>
+    <span class="hexo-douban-pagenum">1 / 1</span>
+    <a class="hexo-douban-button hexo-douban-nextpage" href="javascript:;">next</a>
+    <a class="hexo-douban-button hexo-douban-lastpage" href="javascript:;">end</a>
+</div>    </div>
+
+</div>
+
+<script>
+    /**
+     * Created by myths on 18-2-8.
+     */
+
+    // ======== index ========
+    Element.prototype.siblings = function () {
+        let siblingElement = [];
+        let sibs = this.parentNode.children;
+        for (let i = 0; i < sibs.length; i++) {
+            if (sibs[i] !== this) {
+                siblingElement.push(sibs[i]);
+            }
+        }
+        return siblingElement;
+    };
+
+    function tabClick() {
+        //修改标签样式
+        this.classList.add('hexo-douban-active');
+        let sibs = this.siblings();
+        for (let j = 0; j < sibs.length; j++) {
+            sibs[j].classList.remove('hexo-douban-active');
+        }
+        //显示对应板块
+        let itemId = this.id.replace('tab', 'item');
+        let target = document.getElementById(itemId);
+        target.classList.remove('hexo-douban-hide');
+        target.classList.add('hexo-douban-show');
+        sibs = document.getElementById(itemId).siblings();
+        for (let k = 0; k < sibs.length; k++) {
+            sibs[k].classList.remove('hexo-douban-show');
+            sibs[k].classList.add('hexo-douban-hide');
+        }
+    }
+
+    function initIndex() {
+        let tabs = document.getElementsByClassName("hexo-douban-tab");
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].onclick = tabClick;
+            tabs[i].onclick.apply(tabs[i]);
+        }
+        tabs[2].click();
+    }
+
+    initIndex();
+
+    // ======== pagination ========
+
+    let item_per_page = 30;
+
+    function makePageNum(num, arr) {
+        return (num + 1) + ' / ' + (Math.ceil(arr.length / item_per_page === 0 ? 1 : Math.ceil(arr.length / item_per_page)));
+    }
+
+    function firstBtn() {
+        let sibs = this.parentNode.siblings();
+        displayPage(sibs, 0);
+        this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText = makePageNum(0, sibs);
+    }
+
+    function previousBtn() {
+        let sibs = this.parentNode.siblings();
+        let currNum = this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText;
+        currNum = currNum.substr(0, currNum.indexOf('/') - 1);
+        currNum = parseInt(currNum, 10) - 1;
+        if (currNum > 0) {
+            currNum--;
+        }
+        displayPage(sibs, currNum);
+        this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText = makePageNum(currNum, sibs);
+    }
+
+    function nextBtn() {
+        let sibs = this.parentNode.siblings();
+        let currNum = this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText;
+        currNum = currNum.substr(0, currNum.indexOf('/') - 1);
+        currNum = parseInt(currNum, 10) - 1;
+        if (currNum < Math.ceil(sibs.length / item_per_page) - 1) {
+            currNum++;
+        }
+        displayPage(sibs, currNum);
+        this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText = makePageNum(currNum, sibs);
+    }
+
+    function lastBtn() {
+        let sibs = this.parentNode.siblings();
+        displayPage(sibs, Math.ceil(sibs.length / item_per_page) - 1);
+        this.parentNode.getElementsByClassName('hexo-douban-pagenum')[0].innerText = makePageNum(Math.ceil(sibs.length / item_per_page) - 1 === -1 ? 0 : Math.ceil(sibs.length / item_per_page) - 1, sibs);
+    }
+
+    function displayPage(arr, num) {
+        for (let i = 0; i < arr.length; i++) {
+            if (Math.floor(i / item_per_page) === num) {
+                arr[i].classList.remove('hexo-douban-hide');
+            } else {
+                arr[i].classList.add('hexo-douban-hide');
+            }
+        }
+    }
+
+    function initPagination() {
+        let firstpages = document.getElementsByClassName("hexo-douban-firstpage");
+        let previouspages = document.getElementsByClassName("hexo-douban-previouspage");
+        let nextpages = document.getElementsByClassName("hexo-douban-nextpage");
+        let lastpages = document.getElementsByClassName("hexo-douban-lastpage");
+        let pagenums = document.getElementsByClassName("hexo-douban-pagenum");
+
+        for (let i = 0; i < firstpages.length; i++) {
+            //add listener
+            firstpages[i].onclick = firstBtn;
+            previouspages[i].onclick = previousBtn;
+            nextpages[i].onclick = nextBtn;
+            lastpages[i].onclick = lastBtn;
+
+            //set page num
+            let size = pagenums[i].parentNode.siblings().length;
+            pagenums[i].innerText = '1 / ' + (Math.ceil(size / item_per_page) === 0 ? 1 : Math.ceil(size / item_per_page));
+            firstpages[i].click();
+        }
+    }
+
+    initPagination();
+
+
+</script>
+
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>
