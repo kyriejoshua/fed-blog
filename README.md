@@ -8,7 +8,8 @@
   * ~~hexo v3.9.0~~ 多次构建后，豆瓣使用可能会不稳定，估计是频繁调用接口问题，太多次会无法调用接口。
     * 接口调用失败后，豆瓣读书通过手动添加 cookies 的方式可以调用。先访问豆瓣，再复制 Cookie, 放入 headers 中。电影还未尝试。
     * 豆瓣分页 30
-* **node v13.12.0**
+* **node v14.19.0**
+  * ~~node v13.12.0~~
   * ~~node v8.9.4~~
 
 ### Table of Contents
@@ -30,8 +31,7 @@
   * `npm run build` 串行运行了相关的部署脚本。
   * `npm run publish` 也可以执行部署，依次执行 `prepublish`、`publish`、`postpublish`.
     * ~~执行时理论上应当按顺序执行 `prepublish`、`prepare`、`prepublishOnly`、`publish`. 但中间两个没有执行，似乎是 npm 版本的问题~~。
-  * 部署电影和书时可能会耗时较长-3mins 左右。电影页面已生成，但不提供入口。入口自寻。
-  * 长时间不使用豆瓣功能，cookie 会失效，需要重新注入，在相应生成器里(book-generator)进行保存。
+  * 部署电影和书是异步的，首次可能会超过 1 小时。建议覆盖生成。
 
 #### Others
 
