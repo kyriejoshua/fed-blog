@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>你可能还不知道的 flex 属性细节 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="众所周知，flex 布局是如今最常见的布局方式之一。但在我们设置单个元素的属性的时候，通常只用到flex 的一个值，或者使用若干个值，却不了解它的具体计算逻辑，只知道它会填充。这篇文章，尝试解读 flex 属性的作用和算法。推荐：★★★☆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你可能还不知道的 flex 属性细节">
+<meta property="og:url" content="http://kyriejoshua.github.io/2020/08/20/something-you-need-know-about-flex/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="众所周知，flex 布局是如今最常见的布局方式之一。但在我们设置单个元素的属性的时候，通常只用到flex 的一个值，或者使用若干个值，却不了解它的具体计算逻辑，只知道它会填充。这篇文章，尝试解读 flex 属性的作用和算法。推荐：★★★☆">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2020/08/20/something-you-need-know-about-flex/unphoto.jpg">
+<meta property="article:published_time" content="2020-08-20T14:05:41.000Z">
+<meta property="article:modified_time" content="2020-08-20T14:05:41.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="CSS3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2020/08/20/something-you-need-know-about-flex/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            你可能还不知道的 flex 属性细节
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2020-08-20T14:05:41.000Z" itemprop="datePublished">8月 20 2020</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CSS/">CSS</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 分钟 读完 (约 1455 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<p><img src="/2020/08/20/something-you-need-know-about-flex/unphoto.jpg"><br>众所周知，flex 布局是如今最常见的布局方式之一。但在我们设置单个元素的属性的时候，通常只用到flex 的一个值，或者使用若干个值，却不了解它的具体计算逻辑，只知道它会填充。这篇文章，尝试解读 flex 属性的作用和算法。<br>推荐：★★★☆</p>
+<span id="more"></span>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#flex%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89">flex 属性定义</a></li>
+<li><a href="#flex%E5%B1%9E%E6%80%A7%E5%88%86%E9%85%8D">flex 属性分配</a></li>
+<li><a href="#flex%E7%AE%97%E6%B3%95">flex 算法</a></li>
+<li><a href="#flex%E5%AE%9E%E8%B7%B5">flex 实践</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<h3 id="flex属性定义"><a href="#flex属性定义" class="headerlink" title="flex属性定义"></a>flex属性定义</h3><ul>
+<li>目前我们已知，flex 是三个属性的简写。这三个属性按顺序分别为 <code>flex-grow</code>, <code>flex-shrink</code>, <code>flex-basis</code>. 他们的含义分别是——用我自己的理解来解释<ul>
+<li>父元素容器宽度<strong>富余</strong>时，分配多余的宽度的比例，单位是数字</li>
+<li>父元素容器宽度<strong>不足</strong>时，分配欠缺的宽度的比例，单位是数字</li>
+<li>父元素容器宽度分配的基准值，也就是最小的<strong>计算单位</strong>，数值是宽度</li>
+</ul>
+</li>
+<li>这样表达不知是否容易理解，实际这和我自己之前的理解是相悖的，之前我一直以为是按比例分配的是父元素整个容器的宽度，其实不然。不知是否有小伙伴和我一样理解有误。</li>
+</ul>
+<h3 id="flex属性分配"><a href="#flex属性分配" class="headerlink" title="flex属性分配"></a>flex属性分配</h3><ul>
+<li>flex 设置为 1 的时候。其三个元素的默认值是 <code>1, 1, auto</code>.</li>
+<li>可以理解为大家平分。</li>
+<li>这里不多赘述，这是我们最常用的方式。</li>
+<li>这篇文章主要讨论的是它们的分配逻辑，计算方式。</li>
+<li>下面就用公式和实例来详细解释个中的含义。</li>
+</ul>
+<h3 id="flex算法"><a href="#flex算法" class="headerlink" title="flex算法"></a>flex算法</h3><ul>
+<li>这里要注意的是，主要关注点在于区分父元素容器还有没有富余的情况。打个比方，就是你爷爷有没有留下多余的地给孩子们分，如果有，就使用 <code>flex-grow</code>, <code>flex-basis</code> 计算，不然就使用 <code>flex-shrink</code>, <code>flex-basis</code></li>
+<li>是的，没看错。不管在哪种情况下，实际只有两个属性是生效的，有一个属性不在计算范围之内，需要略过。</li>
+<li>纳入计算的总的田地（宽度），是超出父容器的，或者少于父容器的部分。<ul>
+<li><strong>那么什么时候子元素的总和会出现以上两种情况呢，因为默认 flex 布局本身是适应的。答案就是设置了 flex-basis 的情况，手动设置的 flex-basis 之和超出了父元素的宽度值。</strong></li>
+<li>下面是子元素宽度之和少于父元素的情况下( <code>child_width1 + child_width2 + ... &lt; parent_width</code>)，计算的方式。这里为了方便理解，设定是两个子元素，实际上多个子元素的算法也是完全一样的。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 超出的宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> extra_all_width = parent_width - (flex_basis1 + flex_basis2);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 假设有两个子元素，则下面是两者各自的总宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> basic_width1 = flex_grow1 * flex_basis1;</span><br><span class="line"><span class="hljs-keyword">const</span> basic_width2 = flex_grow2 * flex_basis2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 总宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> all_width = basic_width1 + basic_width2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 富余的宽度的具体分配，按各自的比例，乘以超出的总宽度来分配</span></span><br><span class="line"><span class="hljs-keyword">const</span> extra_width1 = (basic_width1) / all_width * extra_all_width;</span><br><span class="line"><span class="hljs-keyword">const</span> extra_width2 = (basic_width2) / all_width * extra_all_width;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 基准宽度加上超出的分配到的宽度，就是最终宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> width1 = flex_basis1 + extra_width1;</span><br><span class="line"><span class="hljs-keyword">const</span> width2 = flex_basis2 + extra_width2;</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>有了以上的算法，那么就会比较容易推算出父元素宽度不足的情况下( <code>child_width1 + child_width2 &gt; parent_width</code>)的计算方式。比例的参考值从 <code>flex-grow</code> 改为 <code>flex-shrink</code></li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 缺少的宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> shortage_all_width = (flex_basis1 + flex_basis2) - parent_width;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 假设有两个子元素，则下面是两者各自的总宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> basic_width1 = flex_shrink1 * flex_basis1;</span><br><span class="line"><span class="hljs-keyword">const</span> basic_width2 = flex_shrink2 * flex_basis2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 总宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> all_width = basic_width1 + basic_width2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 缺少的宽度的具体分配，按各自的比例，乘以缺少的总宽度来分配</span></span><br><span class="line"><span class="hljs-keyword">const</span> shortage_width1 = (basic_width1) / all_width * shortage_all_width;</span><br><span class="line"><span class="hljs-keyword">const</span> shortage_width2 = (basic_width2) / all_width * shortage_all_width;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 基准宽度减去超出的分配到的宽度，就是最终宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> width1 = flex_basis1 - shortage_width1;</span><br><span class="line"><span class="hljs-keyword">const</span> width2 = flex_basis2 - shortage_width2;</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="flex实践"><a href="#flex实践" class="headerlink" title="flex实践"></a>flex实践</h3><ul>
+<li>有了以上的算法，那么来计算宽度就轻而易举了。</li>
+<li>这里罗列了设定了父元素宽度，且有两个子元素的情况。分别是宽度超出和不足的情况。</li>
+</ul>
+<figure class="highlight html hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="hljs-language-css"></span></span><br><span class="line"><span class="hljs-language-css">    * {</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;</span></span><br><span class="line"><span class="hljs-language-css">    }</span></span><br><span class="line"><span class="hljs-language-css">    <span class="hljs-selector-class">.container</span> {</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">width</span>: <span class="hljs-number">600px</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">display</span>: flex;</span></span><br><span class="line"><span class="hljs-language-css">    }</span></span><br><span class="line"><span class="hljs-language-css">    <span class="hljs-selector-class">.left</span> {</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">500px</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">background</span>: red;</span></span><br><span class="line"><span class="hljs-language-css">    }</span></span><br><span class="line"><span class="hljs-language-css">    <span class="hljs-selector-class">.right</span> {</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">flex</span>: <span class="hljs-number">2</span> <span class="hljs-number">1</span> <span class="hljs-number">400px</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">background</span>: blue;</span></span><br><span class="line"><span class="hljs-language-css">    }</span></span><br><span class="line"><span class="hljs-language-css"></span></span><br><span class="line"><span class="hljs-language-css">    <span class="hljs-selector-class">.left1</span> {</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">200px</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">background</span>: yellow;</span></span><br><span class="line"><span class="hljs-language-css">    }</span></span><br><span class="line"><span class="hljs-language-css">    <span class="hljs-selector-class">.right1</span> {</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">flex</span>: <span class="hljs-number">2</span> <span class="hljs-number">1</span> <span class="hljs-number">100px</span>;</span></span><br><span class="line"><span class="hljs-language-css">      <span class="hljs-attribute">background</span>: olivedrab;</span></span><br><span class="line"><span class="hljs-language-css">    }</span></span><br><span class="line"><span class="hljs-language-css">  </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>计算宽度不足的场景，套用下以上的公式。</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 缺少的宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> shortage_all_width = (<span class="hljs-number">500</span> + <span class="hljs-number">400</span>) - <span class="hljs-number">600</span>; <span class="hljs-comment">// 300</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 假设有两个子元素，则下面是两者各自的总宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> basic_width1 = <span class="hljs-number">2</span> * <span class="hljs-number">500</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> basic_width2 = <span class="hljs-number">1</span> * <span class="hljs-number">400</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 总宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> all_width = <span class="hljs-number">1000</span> + <span class="hljs-number">400</span>; <span class="hljs-comment">// 1400</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 缺少的宽度的具体分配，按各自的比例，乘以缺少的总宽度来分配</span></span><br><span class="line"><span class="hljs-keyword">const</span> shortage_width1 = <span class="hljs-number">1000</span> / <span class="hljs-number">1400</span> * <span class="hljs-number">300</span>; <span class="hljs-comment">// 214.28</span></span><br><span class="line"><span class="hljs-keyword">const</span> shortage_width2 = <span class="hljs-number">400</span> / <span class="hljs-number">1400</span> * <span class="hljs-number">300</span> <span class="hljs-comment">// 85.72</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 基准宽度减去超出的分配到的宽度，就是最终宽度</span></span><br><span class="line"><span class="hljs-keyword">const</span> width1 = <span class="hljs-number">500</span> - <span class="hljs-number">214.28</span>; <span class="hljs-comment">// 285.72</span></span><br><span class="line"><span class="hljs-keyword">const</span> width2 = <span class="hljs-number">400</span> - <span class="hljs-number">82.72</span>; <span class="hljs-comment">// 314.28</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>这里实践下来，相信是比较容易理解的了。那么在以上的代码里，还剩下一个宽度富余的场景，各位有兴趣可以自行计算一下子元素 <code>left1</code>, <code>right1</code>的宽度。</li>
+<li>如果以上有计算错误或理解有误的地方，欢迎指正。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<ul>
+<li><a href="http://ddrv.cn/a/125011">flex 布局</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Flex">伸缩性</a></li>
+<li><a href="https://www.w3.org/TR/css-flexbox/#main-size">css-flexbox</a></li>
+</ul>
+</blockquote>
+<!-- 2.5h -->
+
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/CSS3/">#CSS3</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2021/05/10/the-map-the-weakmap-the-set-and-the-weakset/">可以了解一下 Map、 WeakMap、 Set 和 WeakSet 的</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020/07/11/my-choice-of-notes/">我的笔记选择之路</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2020/08/20/something-you-need-know-about-flex/';
+        this.page.identifier = '2020/08/20/something-you-need-know-about-flex/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

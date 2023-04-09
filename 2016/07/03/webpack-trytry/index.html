@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>webpack小试牛刀 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。  经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack小试牛刀">
+<meta property="og:url" content="http://kyriejoshua.github.io/2016/07/03/webpack-trytry/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。  经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/07/03/webpack-trytry/unphoto.jpeg">
+<meta property="article:published_time" content="2016-07-03T08:03:09.000Z">
+<meta property="article:modified_time" content="2016-07-03T08:03:09.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2016/07/03/webpack-trytry/unphoto.jpeg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            webpack小试牛刀
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-07-03T08:03:09.000Z" itemprop="datePublished">7月 3 2016</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Tools/">Tools</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            21 分钟 读完 (约 3219 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<img src="/2016/07/03/webpack-trytry/unphoto.jpeg" class="" title="monica my baby">
+
+<blockquote>
+近段时间公司要做一个h5的小项目。一开始我不知道从哪儿下手。在一位前辈的指导下，我用了webpack来打包整理项目。
+
+<p>经过不断的入坑尝试之后终于搭建起了一个小项目，虽然还有部分小坑，不过至少跑起来还可以，这里做一个简单总结。</p>
+</blockquote>
+
+<span id="more"></span>
+
+<ul>
+<li><p>webpack是近期比较火的一款模块加载器兼打包工具，能把各种资源，包括图片，js，样式等都作为模块来处理。<a href="http://webpack.github.io/">官网点这里</a></p>
+</li>
+<li><p>优势：</p>
+<ul>
+<li>资源管理功能强大</li>
+<li>以commonJS的形式来书写脚本，也兼容AMD/CMD</li>
+<li>模块化思想。可生成公共模块或者按需加载</li>
+<li>能替代部分gulp/grunt的工作</li>
+<li>支持开发过程中实时打包</li>
+<li>插件机制完善，扩展性强</li>
+</ul>
+</li>
+<li><p>安装：</p>
+<ul>
+<li><code>npm install webpack -g</code></li>
+<li>或者一般把依赖写入package.json</li>
+<li>依次运行<code>npm init</code> <code>npm install webpack --save-dev</code></li>
+</ul>
+</li>
+<li><p>目录结构</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">build</span><br><span class="line">node_modules</span><br><span class="line">src</span><br><span class="line">-page</span><br><span class="line"> -home</span><br><span class="line">  -home.<span class="hljs-property">html</span></span><br><span class="line">  -home.<span class="hljs-property">less</span></span><br><span class="line">  -index.<span class="hljs-property">js</span></span><br><span class="line">  -img</span><br><span class="line">-img</span><br><span class="line">-common</span><br><span class="line">-index.<span class="hljs-property">js</span></span><br><span class="line">-index.<span class="hljs-property">html</span></span><br><span class="line">-all.<span class="hljs-property">less</span></span><br><span class="line">package.<span class="hljs-property">json</span></span><br><span class="line">webpack.<span class="hljs-property">config</span>.<span class="hljs-property">js</span></span><br><span class="line">readme.<span class="hljs-property">md</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>src下是开发文件，用于开发环境</p>
+<ul>
+<li>page下的是各个模块，每个模块内有自己的js、img、html、less</li>
+<li>img存放公用的图片</li>
+<li>common存放公用的js</li>
+</ul>
+</li>
+<li><p>build下是src的文件编译好的文件，用于生产环境</p>
+</li>
+<li><p>项目设计思路</p>
+<ul>
+<li>这是个比较简单的项目，没有使用像angularjs，react这样的框架，只用了jQuery，最初的构想就是简单，上手快</li>
+<li>基于现在流行的模块化思想，将所有模块放在src下的page里，每个文件夹即一个模块，也就是一个页面</li>
+<li>一个common存放公用的方法和配置文件等</li>
+<li>index.html是入口页面，all.less是共用的样式，每个页面(模块里)都自己独立的css样式，只是先在每个样式文件里先引入all.less</li>
+</ul>
+</li>
+<li><p>配置：</p>
+<ul>
+<li>通常项目下会配置一个webpack.config.js的文件，作用类似gulp中的gulpfile.js ，这是默认配置文件，当然也可以修改，这是我的配置</li>
+</ul>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> fse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs-extra'</span>); <span class="hljs-comment">//引入nodejs相关</span></span><br><span class="line">fse.<span class="title function_">copySync</span>(<span class="hljs-string">'./src'</span>, <span class="hljs-string">'./build'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> dirnames = {};</span><br><span class="line"><span class="hljs-keyword">var</span> dirs = fs.<span class="title function_">readdirSync</span>(<span class="hljs-string">'./src/page'</span>);</span><br><span class="line"><span class="hljs-comment">// 判断是否是生产环境，不是的话则是开发环境，判断缘由是调试时的入口和要上线时是不一样的</span></span><br><span class="line"><span class="hljs-keyword">var</span> isProduction = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {</span><br><span class="line">  <span class="hljs-keyword">return</span> process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">'production'</span> || process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">'development'</span>;</span><br><span class="line">};</span><br><span class="line"><span class="hljs-comment">// 监听所有js文件变化</span></span><br><span class="line">dirs.<span class="title function_">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">ele, index</span>){</span><br><span class="line">  <span class="hljs-keyword">var</span> dir = <span class="hljs-string">'./src/page/'</span> + ele;</span><br><span class="line">  <span class="hljs-keyword">var</span> status = fs.<span class="title function_">statSync</span>(dir);</span><br><span class="line">  dirnames[<span class="hljs-string">'page/index'</span>] = [<span class="hljs-string">'./src/page/index.js'</span>];</span><br><span class="line">  <span class="hljs-keyword">if</span> (status.<span class="title function_">isDirectory</span>()){</span><br><span class="line">	 dirnames[<span class="hljs-string">'page/'</span> + ele + <span class="hljs-string">'/index'</span>] = [];</span><br><span class="line">     dirnames[<span class="hljs-string">'page/'</span> + ele + <span class="hljs-string">'/index'</span>].<span class="title function_">push</span>(dir + <span class="hljs-string">'/index.js'</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="hljs-keyword">return</span> dirnames;</span><br><span class="line">});</span><br><span class="line"><span class="hljs-comment">// 修复低版本node编译时报错的问题</span></span><br><span class="line"><span class="hljs-keyword">var</span> <span class="title class_">Promise</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'es6-promise'</span>).<span class="hljs-property">Promise</span>;</span><br><span class="line"><span class="hljs-built_in">require</span>(<span class="hljs-string">'es6-promise'</span>).<span class="title function_">polyfill</span>();</span><br><span class="line"><span class="hljs-comment">// 将内部样式改为外部样式的插件，暂时不用</span></span><br><span class="line"><span class="hljs-comment">// var ExtractTextPlugin = require("extract-text-webpack-plugin");</span></span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)</span><br><span class="line"><span class="variable language_">module</span>.<span class="hljs-property">exports</span> = {</span><br><span class="line">  <span class="hljs-attr">entry</span>: dirnames,</span><br><span class="line">  <span class="hljs-attr">output</span>:{</span><br><span class="line">    <span class="hljs-attr">path</span>: path.<span class="title function_">resolve</span>(__dirname + <span class="hljs-string">'/build'</span>),</span><br><span class="line">    <span class="hljs-attr">filename</span>: <span class="hljs-string">'[name].js'</span></span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-attr">module</span>: {</span><br><span class="line">    <span class="hljs-attr">loaders</span>: [</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader')},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css!less'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'url?limit=8192'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> },</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'babel'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> },</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.json$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'json-loader'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> }</span><br><span class="line">    ]</span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-attr">resolve</span>: {</span><br><span class="line">  	<span class="hljs-comment">// 自动扩展文件后缀名，在文件中可以直接require模块而不写后缀名</span></span><br><span class="line">    <span class="hljs-attr">extensions</span>: [<span class="hljs-string">''</span>, <span class="hljs-string">'.js'</span>, <span class="hljs-string">'.json'</span>],</span><br><span class="line">    <span class="hljs-comment">// 模块别名定义，方便直接引入文件</span></span><br><span class="line">    <span class="hljs-attr">alias</span>: {</span><br><span class="line">      <span class="hljs-comment">// page: 'src/page',</span></span><br><span class="line">      <span class="hljs-attr">page</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="hljs-string">'src/page'</span>),</span><br><span class="line">      <span class="hljs-attr">feed</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="hljs-string">'src/common/feed'</span>),</span><br><span class="line">      <span class="hljs-attr">config</span>: path.<span class="title function_">resolve</span>(_dirname, <span class="hljs-string">'src/common/config'</span>)</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-attr">plugins</span>: [</span><br><span class="line">    <span class="hljs-keyword">new</span> webpack.<span class="title class_">DefinePlugin</span>({</span><br><span class="line">      <span class="hljs-string">'process.env'</span> : {</span><br><span class="line">        <span class="hljs-string">'NODE_ENV'</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> || <span class="hljs-string">'dev'</span>)</span><br><span class="line">      }</span><br><span class="line">    }),</span><br><span class="line">    <span class="hljs-keyword">new</span> webpack.<span class="hljs-property">optimize</span>.<span class="title class_">CommonsChunkPlugin</span>(<span class="hljs-string">'vendors.js)</span></span><br><span class="line"><span class="hljs-string">  ],</span></span><br><span class="line"><span class="hljs-string">  externals: {</span></span><br><span class="line"><span class="hljs-string">	'</span>jquery<span class="hljs-string">': '</span>jQuery<span class="hljs-string">'	// 将jQuery赋值为jquery</span></span><br><span class="line"><span class="hljs-string">  }</span></span><br><span class="line"><span class="hljs-string">};</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>这个项目最初的考虑是利用模块化思想，将每个页面都分割成一个个模块，然后每个模块有着自己独立的js和img还有样式文件</p>
+</li>
+<li><p><strong>entry</strong>：入口可以是一个或多个资源合并而成。接受数组和对象，这里以对象的形式放入。然后这里因为加入了实时刷新的webpack-dev-server插件，所以加了生产环境还是线上环境的判断.webpack-dev-server下文详细述说</p>
+</li>
+<li><p><strong>chunk</strong>:被entry所依赖的额外的代码块，也可以包含一个或多个文件</p>
+</li>
+<li><p>webpack的入口文件是多个的。这里引用了nodejs的方法，利用nodejs可以操控文件的优势，先复制不需要编译的文件，节约编译时间。然后找出所有index.js来编译并存放在各自的文件夹下。<strong>这里要说明是一开始的思路可能没有考虑全面，用复制文件的方式来写会导致html无法随编译刷新，用html-webpack-plugin也无济于事，日后再解决</strong> ——已解决，看最下。</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> dirnames = {};</span><br><span class="line"><span class="hljs-keyword">var</span> dirs = fs.<span class="title function_">readdirSync</span>(<span class="hljs-string">'./src/page'</span>);</span><br><span class="line"><span class="hljs-comment">// 监听所有js文件变化</span></span><br><span class="line">dirs.<span class="title function_">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">ele, index</span>){</span><br><span class="line">  <span class="hljs-keyword">var</span> dir = <span class="hljs-string">'./src/page/'</span> + ele;</span><br><span class="line">  <span class="hljs-keyword">var</span> status = fs.<span class="title function_">statSync</span>(dir);</span><br><span class="line">  dirnames[<span class="hljs-string">'page/index'</span>] = [<span class="hljs-string">'./src/page/index.js'</span>];</span><br><span class="line">  <span class="hljs-keyword">if</span> (status.<span class="title function_">isDirectory</span>()){</span><br><span class="line">	 dirnames[<span class="hljs-string">'page/'</span> + ele + <span class="hljs-string">'/index'</span>] = [];</span><br><span class="line">     dirnames[<span class="hljs-string">'page/'</span> + ele + <span class="hljs-string">'/index'</span>].<span class="title function_">push</span>(dir + <span class="hljs-string">'/index.js'</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="hljs-keyword">return</span> dirnames;</span><br><span class="line">});</span><br><span class="line"><span class="hljs-comment">// 修复低版本node编译时报错的问题</span></span><br><span class="line"><span class="hljs-keyword">var</span> <span class="title class_">Promise</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'es6-promise'</span>).<span class="hljs-property">Promise</span>;</span><br><span class="line"><span class="hljs-built_in">require</span>(<span class="hljs-string">'es6-promise'</span>).<span class="title function_">polyfill</span>();</span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)</span><br><span class="line"><span class="variable language_">module</span>.<span class="hljs-property">exports</span> = {</span><br><span class="line">  <span class="hljs-attr">entry</span>: dirnames,</span><br><span class="line">  ......</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+<li><p><strong>output</strong>: 指输出到哪个目录下，我的项目里就是每个模块对应有着自己的index.js文件，path指的是生成文件的存放目录，filename文件赋值<code>[name].js</code>，会生成相应的文件名，最终存放在build/下</p>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">output</span>:{</span><br><span class="line">    <span class="hljs-attr">path</span>: path.<span class="title function_">resolve</span>(__dirname + <span class="hljs-string">'/build'</span>),</span><br><span class="line">    <span class="hljs-attr">filename</span>: <span class="hljs-string">'[name].js'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li><p><strong>loaders</strong>: 这是webpack比较重要的一部分，模块加载器，因为是小项目，在这里我使用的插件并不多，css文件用style-loader和css-loader来处理，less用less-loader来处理，图片用url-loader来处理，目前还支持es6，有babel-loader支持。其中<code>-loader</code>可以省略</p>
+</li>
+<li><p>所有加载器还是通过npm来下载。例如url-loader，通过<code>npm install url-loader --save-dev</code>下载，它会根据需要将样式中引用的图片转化为base64编码</p>
+</li>
+<li><p>再如less-loader,它会从右向左寻找文件并进行编译，最终将生成的css放在页面的style里</p>
+</li>
+<li><p>其中exclude参数表示需要排除的查找目录,include是包含的查找目录，让webpack只编译包含的目录或排除掉部分目录，可以大大加快它的编译速度</p>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">module</span>: {</span><br><span class="line">    <span class="hljs-attr">loaders</span>: [</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader')},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'style!css!less'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> }, <span class="hljs-comment">// ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')},</span></span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg)$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'url?limit=8192'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> },</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'babel'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> },</span><br><span class="line">      { <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.json$/</span>, <span class="hljs-attr">loader</span>: <span class="hljs-string">'json-loader'</span>, <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span> }</span><br><span class="line">    ]</span><br><span class="line">  }</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p><strong>resolve</strong>则看注释即可</p>
+</li>
+<li><p><strong>definePlugin</strong>插件，用于判断是生产环境还是线上环境，在部署时或者切换环境时非常有用</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> webpack.<span class="title class_">DefinePlugin</span>({</span><br><span class="line">  <span class="hljs-string">'process.env'</span> : {</span><br><span class="line">    <span class="hljs-string">'NODE_ENV'</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> || <span class="hljs-string">'dev'</span>)</span><br><span class="line">  }</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>providePlugin</strong>: 通常情况下我们都需要先require相关资源，并赋值给变量才可以使用，比如要在js顶部引入<code>var $ = require('jquery')</code>才可以使用$,而在每个页面都这样操作很繁琐。于是可以利用该插件一次定义，处处使用。无须再在页面顶部引入。</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> webpack.<span class="title class_">ProvidePlugin</span>({</span><br><span class="line">	<span class="hljs-attr">$</span>: <span class="hljs-string">'jquery'</span>,</span><br><span class="line">	<span class="hljs-attr">jQuery</span>: <span class="hljs-string">'jquery'</span>,</span><br><span class="line">	<span class="hljs-string">'window.jQuery'</span>: <span class="hljs-string">'jquery'</span>,</span><br><span class="line">	<span class="hljs-string">'_'</span>: <span class="hljs-string">'lodash'</span></span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+<li><p><strong>alias</strong>:别名(请求重定向)。定义别名可以方便文件快速查找并加快编译速度。文件查找的时间大大缩减。之前我是这么写的</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> feed = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../common/feed/index'</span>); <span class="hljs-comment">// 一个存放公用方法的文件,每个页面都写长长的这么一句</span></span><br><span class="line">然而现在是这样</span><br><span class="line"><span class="hljs-keyword">var</span> feed = <span class="hljs-built_in">require</span>(<span class="hljs-string">'feed/index'</span>);</span><br><span class="line">或者它会去找该文件夹下面的index.<span class="hljs-property">js</span>，所以可以更简单</span><br><span class="line"><span class="hljs-keyword">var</span> feed = <span class="hljs-built_in">require</span>(<span class="hljs-string">'feed'</span>);</span><br><span class="line">不只是书写方便了，而且webpack的编译也更快了</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+<li><p><strong>commonsChunk</strong>:将公共模块提取出来,利用浏览器缓存机制提高页面加载效率。避免每个文件都引用一次，影响加载速度</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> webpack.<span class="hljs-property">optimize</span>.<span class="title class_">CommonsChunkPlugin</span>(<span class="hljs-string">'vendors.js)</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>uglifyjs</strong>:将生产环境中的js代码进行压缩和混淆,缩小文件加快请求速度</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack.<span class="hljs-property">optimize</span>.<span class="title class_">UglifyJsPlugin</span>({<span class="hljs-attr">minimize</span>: <span class="hljs-literal">true</span>})</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+<li><p><strong>externals</strong>:为避免第三方库或框架被合成或打包成公共模块浪费资源。可以采用cdn引入的方式。这就需要进行一些设置</p>
+<ul>
+<li>首先在页面的html里引入cdn上的文件</li>
+</ul>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="hljs-string">"https://code.jquery.com/jquery-1.11.1.min.js"</span> integrity=<span class="hljs-string">"sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE="</span> crossorigin=<span class="hljs-string">"anonymous"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>然后在webpack.config.js里设置</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">externals</span>: {</span><br><span class="line">	<span class="hljs-string">'jquery'</span>: <span class="hljs-string">'jQuery'</span>	<span class="hljs-comment">// 将jQuery赋值为jquery</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="运行-webpack"><a href="#运行-webpack" class="headerlink" title="运行 webpack"></a>运行 webpack</h3><ul>
+<li>可以直接运行<code>webpack</code>执行一次性编译，建议运行时加上以下参数</li>
+<li><code>--display-error-details</code> 方便查看出错时的报错信息</li>
+<li><code>--progess --color</code> 输出呈彩色，进度条显示编译进度</li>
+<li><code>-p</code> 生产环境压缩代码</li>
+</ul>
+<h4 id="HTML页面引入"><a href="#HTML页面引入" class="headerlink" title="HTML页面引入"></a>HTML页面引入</h4><ul>
+<li>直接在html里加入 <code>&lt;script type='text/javascript' src='index.js'&gt;</code>即可</li>
+</ul>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><ul>
+<li><p>HTML中不引入样式，是因为在这里就引入了。在页面顶部加上<code>require('../[name].less')</code></p>
+</li>
+<li><p><code>[name]</code>指代当前less的文件名，我的做法是在每个less里引入一个公用的all.less,然后不同页面的js里引入各自的less，webpack会自动编译less并放在页面的style里</p>
+<ul>
+<li>   其实还尝试过使用<code>ExtractTextPlugin.extract('style-loader', 'css-loader')}</code> 插件，将页面顶部的样式改为外部文件引入，但因为开始时设计的偏差，改动起来比较麻烦，最后作罢</li>
+</ul>
+</li>
+<li><p>这是个小项目，只引入了jquery和自己的公用的一个库 <code>reqiure('feed')</code></p>
+</li>
+<li><p>通过process.env.NODE_ENV的值判断开发环境的接口，是引用测试的接口还是线上的接口，它的值不同时会引用不同的js文件</p>
+</li>
+<li><p>所以最终每个index.js的顶部会有这么几行</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">require</span>(<span class="hljs-string">'./style.less'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> feed = <span class="hljs-built_in">require</span>(<span class="hljs-string">'feed'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> url = <span class="hljs-built_in">require</span>(<span class="hljs-string">'config/env/'</span> + process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span>);</span><br><span class="line"><span class="hljs-comment">// 执行该页面的逻辑代码</span></span><br><span class="line">......</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="如何自动刷新-使用webpack-dev-server"><a href="#如何自动刷新-使用webpack-dev-server" class="headerlink" title="如何自动刷新 使用webpack-dev-server"></a>如何自动刷新 使用webpack-dev-server</h4><ul>
+<li><p>webpack-dev-server是一个静态轻量的express资源服务器，只用于开发环境</p>
+</li>
+<li><p>它的作用就是把编译后的静态文件全部保存在内存里，而不会写到文件目录内</p>
+</li>
+<li><p>安装:<code>npm install webpack-dev-server --save-dev</code></p>
+</li>
+<li><p>这里采用了双服务器模式，一个后端服务器和一个资源服务器</p>
+</li>
+<li><p>运行 <code>NODE_ENV=local webpack-dev-server --inline --hot --devtool --content-base build/</code> 得到的entry应当是这样的</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">entry</span>:</span><br><span class="line">  {</span><br><span class="line">    <span class="hljs-string">'page/index'</span>: [</span><br><span class="line">	<span class="hljs-string">'webpack-dev-server/client?http://localhost:8080'</span>,</span><br><span class="line">	<span class="hljs-string">'webpack/hot/dev-server'</span>,</span><br><span class="line">	<span class="hljs-string">'./src/page/index.js'</span></span><br><span class="line">	]</span><br><span class="line">  }</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>NODE_ENV</strong> 作为环境变量，决定启用使用测试接口或是线上接口</p>
+</li>
+<li><p>–hot 选项的工作其实就是把webpack/hot/dev-server加到了entry中，如果成功了，运行命令后的控制台里会有以下信息</p>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="variable constant_">HMR</span>] <span class="title class_">Waiting</span> <span class="hljs-keyword">for</span> update signal <span class="hljs-keyword">from</span> <span class="variable constant_">WDS</span>...</span><br><span class="line">[<span class="variable constant_">WDS</span>] <span class="title class_">Hot</span> <span class="title class_">Module</span> <span class="title class_">Replacement</span> enabled.</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>采用 –inline 模式，它的工作其实就是把<code>webpack-dev-server/client?http://localhost:8080</code>加到entry中</p>
+</li>
+<li><p>–content-base 把build/下的内容作为静态资源服务</p>
+</li>
+<li><p>–devtool eval 配置devtool的值为eval，用于查看编译后的源代码，eval 不支持生产环境查看源代码，但编译速度快，另一个常用的值是source-map，支持生产环境，但相对慢</p>
+</li>
+<li><p>打开 <code>localhost:8080/webpack-dev-server/page/index.html</code>查看</p>
+</li>
+</ul>
+<h4 id="package-json-配置"><a href="#package-json-配置" class="headerlink" title="package.json 配置"></a>package.json 配置</h4><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">script</span>: {</span><br><span class="line">  <span class="hljs-string">"dev"</span>: <span class="hljs-string">"rm -rf build &amp;&amp; NODE_ENV=local webpack-dev-server --inline --hot --devtool eval --progress --colors --content-base build/"</span>,</span><br><span class="line">  <span class="hljs-string">"web"</span>: <span class="hljs-string">"NODE_ENV=development webpack --progress --colors --display-error-details"</span>,</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>运行<code>npm run dev</code> 开发环境下</li>
+<li><code>npm run web</code> 测试环境下</li>
+</ul>
+<h4 id="目前遗留问题"><a href="#目前遗留问题" class="headerlink" title="目前遗留问题"></a>目前遗留问题</h4><ul>
+<li>hot热加载未生效</li>
+<li><em>html文件更改无法刷新同步到页面</em><ul>
+<li>该问题已解决。出现问题的原因是加载在页面上的是编译好的build下面的文件，但html支持的监听刷新是开发文件，所以只要更改运行脚本即可——将build改为src，如下：</li>
+<li><code>"dev": "rm -rf build &amp;&amp; NODE_ENV=local webpack-dev-server --inline --hot --devtool eval --progress --colors --content-base src/"</code></li>
+</ul>
+</li>
+<li>多页面项目没有很好的方案去构建自动化</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>这是自己的第一个独立项目，绝大部分工作都是自己完成的，前辈指导了一部分，后来就全部自己做了。当然还是并不太成熟，遗留几个问题目前找不到解决办法。webpack给我的体会是编译速度非常快，或许也和现在项目中的依赖比较少有关。不管怎样，这个项目目前还会维护下去，会不定期更新，解决遗留问题。</li>
+</ul>
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/webpack/">#webpack</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2016/07/17/how-to-clear-huge-files-in-git/">如何在git仓库中彻底清除大文件</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2016/06/23/talk-about-JavaScript-API-design/">浅谈JavaScript API设计原则</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2016/07/03/webpack-trytry/';
+        this.page.identifier = '2016/07/03/webpack-trytry/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>初识 Three.js(上) —— 基础概念一览 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识 Three.js(上) —— 基础概念一览">
+<meta property="og:url" content="http://kyriejoshua.github.io/2017/11/23/the-usage-of-threejs/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/11/23/the-usage-of-threejs/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/11/23/the-usage-of-threejs/reward.jpeg">
+<meta property="article:published_time" content="2017-11-23T11:45:14.000Z">
+<meta property="article:modified_time" content="2017-11-23T11:45:14.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="WebGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2017/11/23/the-usage-of-threejs/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            初识 Three.js(上) —— 基础概念一览
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-11-23T11:45:14.000Z" itemprop="datePublished">11月 23 2017</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            12 分钟 读完 (约 1759 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<p><img src="/2017/11/23/the-usage-of-threejs/unphoto.jpg"></p>
+<p>近期在项目中有规划 3D 组件的需求。在发现 echarts-gl 不能满足需求后，我在d3等一众第三方库中无所适从。最终我决定挑战一下 Three.js. 当然在一开始，我遇到了很多麻烦，所幸到了临近最后时，我解决了绝大多数的问题。我在未学习 webgl 的情况下直接使用 threejs, 其实并不是个较好的方案，却是能较快出结果的方案。这篇文章记录了我使用 Three.js 的痛苦和收获。</p>
+<span id="more"></span>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li>[简单介绍](#Three.js 是什么)</li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5">基础概念</a><ul>
+<li><a href="#Scene">Scene(场景)</a></li>
+<li><a href="#Renderer">Renderer(渲染器)</a></li>
+<li><a href="#Camera">Camera(相机)</a></li>
+<li><a href="#Geometry">Geometry(几何模型)</a></li>
+<li><a href="#Material">Material(材料)</a></li>
+<li><a href="#Light">Light(光源)</a></li>
+<li><a href="#Animation">Animation(动画)</a></li>
+</ul>
+</li>
+<li><a href="#Demo">Demo</a></li>
+</ul>
+<h3 id="Three-js-是什么"><a href="#Three-js-是什么" class="headerlink" title="Three.js 是什么"></a>Three.js 是什么</h3><ul>
+<li>我在初次见到 Three.js 的时候并不理解它是一种怎样的存在。只知道使用它可以做出各式各样炫酷，无所不能的 3D 效果。当时我的同事提醒了我，他说这是一个类似 jquery 的库，封装了 webgl 的各式各样的 api. 因此更加友好，也更加方便。它让你可以绕过 webgl 基础这部分，直接创建 3D 效果。但你仍然要知道，这是一个捷径，是临时的方式。如果要切实使用好 Three, 还是必须得学好 webgl. 即使里面所有的基础 api 可能不会在 Three 中体现出来，但 webgl 的实现思路，里面的知识点仍然是值得借鉴和学习的。</li>
+<li><a href="https://threejs.org/docs/">Three.js</a></li>
+</ul>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><ul>
+<li>一定有人迫不及待地跃跃欲试了。但是且慢，在我尝试写代码之前，Three 的中文文档的寻找就耗去我不少时间。就目前而言，似乎还未找到官方的中文文档，教程之类的地方。只有部分翻译的文档。我最终只好硬着头皮阅读英文文档。所以若是理解有出入，请大胆指出。</li>
+</ul>
+<h4 id="Scene"><a href="#Scene" class="headerlink" title="Scene"></a><a href="https://threejs.org/docs/index.html#api/scenes/Scene">Scene</a></h4><ul>
+<li>就像 <code>canvas.getContext('2d')</code>获取上下文 一样，创建 3D 组件也需要一个上下文环境。</li>
+<li>通常情况下，这个场景不需要做什么配置。</li>
+<li><code>const scene = new THREE.scene()</code></li>
+<li><a href="https://github.com/mrdoob/three.js/blob/master/src/scenes/Scene.js">源码</a></li>
+</ul>
+<h4 id="Renderer"><a href="#Renderer" class="headerlink" title="Renderer"></a><a href="https://threejs.org/docs/index.html#api/constants/Renderer">Renderer</a></h4><ul>
+<li><code>WebGLRenderer</code> 渲染器使用 WebGL 来绘制场景。这个渲染器比 <code>CanvasRenderer</code>有着更好的性能。</li>
+<li><code>const renderer = new THREE.WebGLRenderer()</code> 使用 <code>webgl</code> 来渲染。</li>
+<li><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js">WebGLRenderer</a></li>
+</ul>
+<h4 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a><a href="https://threejs.org/docs/index.html#api/cameras/Camera">Camera</a></h4><ul>
+<li>Three 为我们提供了多个相机，包括正交相机，透视相机，还有立方体相机等等。</li>
+<li><strong>正交相机</strong>，则是类似一个长方体，我们透过这个长方体去看事物。此时，看到的事物是平面的，也就是没有立体感。和我们看 2d 的 <code>canvas</code> 类似。<ul>
+<li><code>const camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 1, 1000)</code></li>
+</ul>
+</li>
+<li><em>每个参数分别代表相机视锥体左面，右面，上面，下面，前面，后面。</em></li>
+<li><strong>透视相机</strong>，遵循近大远小的原则。和人肉眼所见相似。我们用以下方法来创建一个视角为 75°，占满屏幕大小，并且从离相机 1 个单位处开始渲染，到 500 的地方停止。<ul>
+<li><code>const camera = new THREE.PerpestiveCamera(75, window.innerHeight/window.innerWidth, 1, 500)</code></li>
+<li>四个参数的含义分别为<em>相机视锥体垂直视角</em>，<em>相机视锥体宽高比</em>，<em>相机视锥体近裁剪面</em>，<em>相机视锥体远裁剪面</em>。</li>
+</ul>
+</li>
+<li><a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/Camera.js">源码</a></li>
+</ul>
+<h4 id="Geometry"><a href="#Geometry" class="headerlink" title="Geometry"></a><a href="https://threejs.org/docs/index.html#api/core/Geometry">Geometry</a></h4><ul>
+<li>模型是构成物体的基本元素。它决定物体的形式。每个几何模型都基于基础类<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js">Geometry</a>.</li>
+<li>常见的几何模型有球模型(<code>SphereGeometry</code>)、盒子模型(<code>BoxGeometry</code>)、平面模型(<code>PlaneGeometry</code>)、环状模型(<code>RingGeometry</code>)、文本模型(<code>TextGeometry</code>)等等。</li>
+<li>我们可以使用<code>const sphereGeometry = new THREE.SphereGeometry(1, 1, 8)</code> 来创建一个球体模型或使用<code>const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)</code>立方体模型。</li>
+<li><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/Geometries.js">Geometry</a></li>
+</ul>
+<h4 id="Material"><a href="#Material" class="headerlink" title="Material"></a><a href="https://threejs.org/docs/index.html#api/materials/Material">Material</a></h4><ul>
+<li>材料用来描述物体的外观和构成部分。用于决定一个物体以何种形式来渲染。例如球体的颜色，表面光滑度。</li>
+<li><code>Material</code>是材料的基础类。其他材料都基于此类。</li>
+<li>常用的材料有基础网孔材料(MeshBasicMaterial)、兰伯特网孔材料(MeshLambertMaterial)、Phong网孔材料(MeshPhongMaterial)等等。</li>
+<li>使用<code>const sphereMaterial = new THREE.MeshBasicMaterial({color: '0x000000'})</code> 来渲染黑色的表面。</li>
+<li>当形状和材料两项都创建好的时候，就可以来创建一个完整的物体。<ul>
+<li><code>const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)</code></li>
+</ul>
+</li>
+<li><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js">源码</a></li>
+</ul>
+<h4 id="Light"><a href="#Light" class="headerlink" title="Light"></a><a href="https://threejs.org/docs/index.html#api/lights/Light">Light</a></h4><ul>
+<li>光源通过光照的强度和范围去影响场景中的部分对象，主要是对不同材质的对象产生影响。</li>
+<li><code>Light</code>是光源的基础类。其他光源都基于此类。</li>
+<li>常见的光源有环境光源(<code>AmbientLight</code>)、平行光源(<code>DirectionLight</code>)、点光源(<code>PointLight</code>)等。<ul>
+<li>环境光源对所有对象产生影响。</li>
+<li>平行光仅对<code>MeshLambertMaterial</code>和<code>MeshPhongMaterial</code>材质的对象产生影响。</li>
+<li>点光源同上，仅对<code>MeshLambertMaterial</code>和<code>MeshPhongMaterial</code>两种材质产生影响。</li>
+</ul>
+</li>
+<li>以点光源为例，我们创建一个简单的点光源。</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> light = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">PointLight</span>(<span class="hljs-number">0xffffff</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>) <span class="hljs-comment">// 光照颜色，光照强度，光照范围</span></span><br><span class="line">light.<span class="hljs-property">position</span>.<span class="title function_">set</span>(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>)</span><br><span class="line">scene.<span class="title function_">add</span>(light)</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/Light.js">源码</a></li>
+</ul>
+<h4 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h4><ul>
+<li>最后，让这一切动起来，需要动画来运行。</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">function</span> <span class="title function_">animation</span>(<span class="hljs-params"></span>) {</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(animation)</span><br><span class="line">  renderer.<span class="title function_">render</span>(scene, camera)</span><br><span class="line">  <span class="hljs-comment">// do something</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://codepen.io/kyriejoshua/pen/BJNoVK?editors=0110">Demo</a></h3><ul>
+<li>在了解所有基本的要素之后，让我们来实现一个简单的动画吧——一个旋转的立方体。</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> <span class="variable constant_">THREE</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'three.js'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> body = <span class="variable language_">document</span>.<span class="hljs-property">body</span></span><br><span class="line"><span class="hljs-keyword">const</span> scene = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Scene</span>()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 新建渲染器并设置大小</span></span><br><span class="line"><span class="hljs-keyword">const</span> renderer = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">WebGLRenderer</span>()</span><br><span class="line">renderer.<span class="title function_">setSize</span>(<span class="variable language_">window</span>.<span class="hljs-property">innerWidth</span>, <span class="variable language_">window</span>.<span class="hljs-property">innerHeight</span>)</span><br><span class="line">body.<span class="title function_">appendChild</span>(renderer.<span class="hljs-property">domElement</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 设置相机和位置，并将视线转向场景中央</span></span><br><span class="line"><span class="hljs-keyword">const</span> camera = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">PerspectiveCamera</span>(<span class="hljs-number">75</span>, <span class="variable language_">window</span>.<span class="hljs-property">innerHeight</span> / <span class="variable language_">window</span>.<span class="hljs-property">innerWidth</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1000</span>)</span><br><span class="line">camera.<span class="hljs-property">position</span>.<span class="title function_">set</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>)</span><br><span class="line">camera.<span class="title function_">lookAt</span>(scene.<span class="hljs-property">position</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 新建一个立方体</span></span><br><span class="line"><span class="hljs-keyword">const</span> cubeGeometry = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">BoxGeometry</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)</span><br><span class="line"><span class="hljs-keyword">const</span> cubeMaterial = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>({ <span class="hljs-attr">color</span>: <span class="hljs-number">0x123abc</span> })</span><br><span class="line"><span class="hljs-keyword">const</span> cube = <span class="hljs-keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(cubeGeometry, cubeMaterial)</span><br><span class="line">scene.<span class="title function_">add</span>(cube)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 旋转立方体</span></span><br><span class="line"><span class="hljs-keyword">function</span> <span class="title function_">animation</span>(<span class="hljs-params"></span>) {</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(animation)</span><br><span class="line"></span><br><span class="line">  renderer.<span class="title function_">render</span>(scene, camera)</span><br><span class="line">  cube.<span class="hljs-property">rotation</span>.<span class="hljs-property">z</span> += <span class="hljs-number">0.01</span></span><br><span class="line">  cube.<span class="hljs-property">rotation</span>.<span class="hljs-property">y</span> += <span class="hljs-number">0.01</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="title function_">animation</span>()</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+<br>
+
+<blockquote><p><a href="http://techbrood.com/threejs/docs/#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF(Scene">中文文档</a></p>
+</blockquote>
+
+<hr>
+<img src="/2017/11/23/the-usage-of-threejs/reward.jpeg" class="" title="Thanks">
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/WebGL/">#WebGL</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/12/19/how-to-create-a-solar-system-using-by-threejs/">初识 Threejs(下) —— 实现一个太阳系模型</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2017/10/07/the-introduction-of-sublime-text-plugins/">Sublime Text 3 高效插件配置</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2017/11/23/the-usage-of-threejs/';
+        this.page.identifier = '2017/11/23/the-usage-of-threejs/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

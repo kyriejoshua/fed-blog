@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>个人git使用手册 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="git安装 主要针对Mac环境下 安装说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人git使用手册">
+<meta property="og:url" content="http://kyriejoshua.github.io/2016/03/03/my-gitbook/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="git安装 主要针对Mac环境下 安装说明">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2016/03/03/my-gitbook/unphoto.jpeg">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-1.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-3.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-4.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-5.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-1.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-2.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-3.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-4.png">
+<meta property="og:image" content="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-5.png">
+<meta property="article:published_time" content="2016-03-03T11:03:09.000Z">
+<meta property="article:modified_time" content="2016-03-03T11:03:09.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2016/03/03/my-gitbook/unphoto.jpeg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            个人git使用手册
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-03-03T11:03:09.000Z" itemprop="datePublished">3月 3 2016</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Git/">Git</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            26 分钟 读完 (约 3887 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<img src="/2016/03/03/my-gitbook/unphoto.jpeg" class="" title="jake">
+
+<h3 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h3><ul>
+<li>主要针对Mac环境下</li>
+<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">安装说明</a></li>
+</ul>
+<span id="more"></span>
+
+<h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><ul>
+<li>以下通常在测试时需要，因为需要连上主机 命令行里的输入方法（如果能在页面上做最好还是在网页上）</li>
+<li>命令行里输入 <code>cat ~/.ssh/id_rsa.pub</code> 查看密钥、公钥方法</li>
+<li>输入 <code>vim ~/.ssh/authorized_keys</code> 在内容里编辑，加上自己的公钥，这样可以方便以后每次测试或者做其他事时不再需要每次都输入密码（首先要输入密码进入 如<code>ssh root@10.0.0.246</code> 根据提示输入密码 ）</li>
+<li>更详细的见以下链接<ul>
+<li><a href="https://help.github.com/articles/generating-ssh-keys/"><code>SSH使用说明</code></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="使用git"><a href="#使用git" class="headerlink" title="使用git"></a>使用git</h3><ul>
+<li>理解git的三种状态：已暂存、已修改、已提交 文件常常处于这三种状态之一</li>
+<li>熟悉git的常用命令</li>
+<li>如果提交文件时有需要编译的文件，就下载相应的编译 例如，在终端中输入：<code>npm intall -g coffee-script</code></li>
+<li>强烈推荐翻墙使用，下载更快，更方便</li>
+<li>git常用命令(自己不太熟的)：<code>git merge</code>-合并、<code>git revert</code>-回到某次提交的状态并产生一次新的提交、<code>git reset</code>-撤销某次提交 、、、、、、</li>
+</ul>
+<p>git 遇到问题<code>error:bad line length character</code></p>
+<ul>
+<li><p>权限问题，或者修改Host</p>
+<p>###查看历史提交记录</p>
+<p>*格式为作者，修改距离现在多久/提交时间：提交说名 -简短的哈希字串 展示分支合并、历史<br>*<code>git log --pretty=format:"%an, %ar/%cd : %s -%h" --graph</code><br>*格式基本同上</p>
+<ul>
+<li><code>git log --pretty=format:"%h - %an, %ar/%cd : %s"</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="撤销操作"><a href="#撤销操作" class="headerlink" title="撤销操作"></a>撤销操作</h3><h5 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h5><ul>
+<li><p>取消文件的暂存<br>*<code>git reset HEAD &lt;file&gt;</code>来取消暂存</p>
+</li>
+<li><p>撤销对文件的修改 <strong>！不推荐使用，不能还原</strong></p>
+</li>
+<li><p><code>git checkout --&lt;file&gt;</code></p>
+<p> #####补充提交<br> *补充提交，会覆盖上次的提交，并不会产生一次新的提交<br> *提交前用<code>git add &lt;file&gt;</code>加上补充的文件<br> *<code>git commit --amend</code></p>
+</li>
+</ul>
+<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><ul>
+<li>   查看远程仓库<br>  *<code>git remote -v</code> 显示读写远程仓库使用的git保存的简写与其对应的URL<br>  *<code>git remote show origin</code> &gt;查看远程仓库的更多信息<br>  *添加远程仓库<ul>
+<li><code>git remote add &lt;shortname&gt;&lt;url&gt;</code>例如：<code>git remote add pb http://www.google.com</code><br>*可以用pb来代替整个url 例如：<code>git fetch pb</code> 拉取远程仓库</li>
+</ul>
+</li>
+</ul>
+<h5 id="从远程仓库抓取和拉取"><a href="#从远程仓库抓取和拉取" class="headerlink" title="从远程仓库抓取和拉取"></a>从远程仓库抓取和拉取</h5><ul>
+<li>   <code>git fetch [remote-name]</code> 并不会自动合并<br>  *<code>git pull</code> 会自动合并,相当于先执行<code>git fetch</code>再执行<code>git merge</code></li>
+</ul>
+<h5 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h5><ul>
+<li><p>`git push [remote-name] [branch-name]</p>
+<p>#####远程仓库的移除和重命名<br>*修改远程仓库的简写名</p>
+</li>
+<li><p><code>git remote rename</code> 例如： <code>git remote rename pb paul</code> &gt;将pb重命名为paul <strong>!这个操作也会修改远程分支的名字</strong><br> *移除远程仓库</p>
+<ul>
+<li><code>git remote rm</code>	例如：<code>git remote rm paul</code></li>
+</ul>
+<p>###打标签</p>
+<p>#####列出标签</p>
+</li>
+<li><p>git tag</p>
+<p> ###git别名</p>
+<p> *用于修改git操作的别名，使操作更方便</p>
+</li>
+<li><p>运行<code>git config --global alias.logpregra 'log --pretty=format:"%an, %ar/%cd : %s -%h" --graph'</code></p>
+<ul>
+<li><code>git logpregra</code>就等价于 <code>git log --pretty=format:"%an, %ar/%cd : %s -%h" --graph</code><br>*常用的还有 <code>git config --glabal alias.ci commit</code>、<code>git config --global alias.co checkout</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="定义外部命令"><a href="#定义外部命令" class="headerlink" title="定义外部命令"></a>定义外部命令</h5><ul>
+<li><p>替换外部命令而不是子命令时，在命令前面加一个__‘！’__号<br>*<code>git config --global alias.visual '!gitk'</code><br>*定义<code>git visual</code>为gitk的别名</p>
+<p>###分支简介</p>
+</li>
+</ul>
+<h5 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h5><ul>
+<li>   运行<code>git log --oneline --decorate --graph --all</code>	查看提交历史、各个分支的指向以及项目的分支分叉情况<br>  *在本机上已配置为<code>git logoneall</code></li>
+</ul>
+<h5 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h5><ul>
+<li>   <code>git branch -d [branch-name]</code><ul>
+<li>如<code>git branch -d watch-pro</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h5><ul>
+<li>   当有冲突存在时<br>  *其中之一方法利用图形化工具来解决冲突，运行<code>git mergetool</code> &gt;git中默认的合并工具是opendiff</li>
+</ul>
+<h5 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h5><ul>
+<li>   <code>git branch --merged</code> 查看哪些分支已经合并到当前分支<br>  *查看所有包含未合并工作的分支，<br>  *<code>git branch --no-merged</code><br>  *使用<code>git branch -d</code>命令来删除未合并的工作时会失败，因为它还未合并<br>  *但如果确实想丢掉那些工作，可以用<code>-D</code>选项强制删除</li>
+</ul>
+<h3 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h3><ul>
+<li><p>远程分支以 (remote)/(branch)形式命名</p>
+</li>
+<li><p>运行<code>git ls-remote (remote)</code> 来显式地获得远程引用的完整列表 &gt;就是远程的所有分支,或者使用<code>git branch -a</code>来查看远程分支，似乎这个比前者更有效</p>
+</li>
+<li><p>更换远程分支的名字 <code>git clone -o booyah</code> 那么远程分支的名字就会是 booya/master</p>
+</li>
+<li><p>更新远程仓库到本地的命令 <code>git fetch teamone</code> 抓取远程仓库teamone有而本地没有的数据</p>
+</li>
+<li><p><em>假如刚刚克隆了一个仓库，想要获取一个远程分支，先在当前分支下pull，保证是最新的，然后运行<code>git checkout -b index-pro origin/index-pro</code></em></p>
+</li>
+<li><p><em>这样你就有一个同名分支index-pro和远程的分支index-pro同步了</em></p>
+</li>
+</ul>
+<h5 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h5><ul>
+<li><p>推送本地的分支到服务器上 <code>git push origin servefix</code>等同于 <code>git push origin servefix:servefix</code> 如果不想让远程的分支重名  可以这样<code>git push origin servefix:awesomebranch</code></p>
+<p>####如何避免每次输入密码</p>
+</li>
+<li><p>如果你正在使用 HTTPS URL 来推送，Git 服务器会询问用户名与密码。 默认情况下它会在终端中提示服务器是否允许你进行推送。</p>
+</li>
+<li><p>如果不想在每一次推送时都输入用户名与密码，你可以设置一个 “credential cache”。 最简单的方式就是将其保存在内存中几分钟，可以简单地运行 <code>git config --global credential.helper cache</code> 来设置它。</p>
+</li>
+</ul>
+<hr>
+<h5 id="跟踪分支（上游分支）：与远程分支有直接关系的本地分支"><a href="#跟踪分支（上游分支）：与远程分支有直接关系的本地分支" class="headerlink" title="跟踪分支（上游分支）：与远程分支有直接关系的本地分支"></a>跟踪分支（上游分支）：与远程分支有直接关系的本地分支</h5><ul>
+<li>在远程跟踪分支之上建立本地的分支进行工作 <code>git checkout -b [branch] [remotename][branch]</code></li>
+<li>例如 <code>git checkout -b serverfix origin/serverfix</code></li>
+<li>可以用<code>--track</code>快捷方式</li>
+<li>例如 <code>git checkout --track origin/serverfix</code></li>
+<li>设置本地分支与远程分支为不同的名字</li>
+<li><code>git checkout -b sf origin/serverfix</code> 本地分支sf会从origin/serverfix拉取</li>
+<li>设置本地已有的分支跟踪一个新的拉取下来的远程分支，或者修正正在跟踪的上游分支，可以使用<code>-u</code>和<code>--set-upstream-to</code>选项运行 <code>git branch</code></li>
+<li>例如 <code>git branch -u origin/serverfix</code></li>
+<li>查看设置的所有跟踪分支 运行<code>git branch -vv</code></li>
+</ul>
+<h5 id="上游快捷方式"><a href="#上游快捷方式" class="headerlink" title="上游快捷方式"></a>上游快捷方式</h5><ul>
+<li>当设置好跟踪分支后，可以通过 @{upstream} 或 @{u} 快捷方式来引用它。 所以在 master 分支时并且它正在跟踪 origin/master 时，如果愿意的话可以使用 <code>git merge @{u}</code> 来取代 <code>git merge origin/master</code>。</li>
+</ul>
+<hr>
+<h5 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h5><ul>
+<li>通常在通过远程分支做完所有工作了以后操作，一般这个删除只是删除了指向服务器的指针，并不会删除数据，服务器会保存一段时间的数据，直到垃圾回收运行，也容易恢复</li>
+<li><code>git push origin --delete serverfix</code></li>
+</ul>
+<h3 id="git分支-变基"><a href="#git分支-变基" class="headerlink" title="git分支-变基"></a>git分支-变基</h3><ul>
+<li>   git中整合来自不同分支的修改主要有两种方法：<code>merge</code>和<code>rebase</code><br>  *<strong>变基即在新分支上引入补丁和修改，然后在原分支上再应用一次</strong><ul>
+<li>运行<code>git checkout [branch-name]</code><br>*<code>git rebase master</code><br>*然后合并 <code>git checkout master</code><br>*<code>git merge [branch-name]</code><br>*变基使得提交历史更整洁</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>图例说明</em></strong></p>
+<hr>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-1.png" alt="变基例子"><br>*	将client的修改合并到主分支并发布，但暂时不合并server的修改<br>   *这时可以使用 <code>git rebase</code>命令的<code>--onto</code>选项，选中在client分支里但不在server分支里的修改，在master分支上重演<br>   *<code>git rebase --onto master server client</code><br>   *取出client分支，找出处于client分支和server分支的共同祖先之后的修改，然后把它们在master分支上重演一遍。<br>   *然后可以快进合并master分支了<br>   *<code>git checkout master</code><br>   *<code>git merge client</code></p>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-3.png" alt="变基后合并"></p>
+<ul>
+<li>   接下来再把server分支中的修改也整合进来，使用<code>git rebase [basebranch] [topicbranch]</code><br>  *<code>git rebase master server</code></li>
+</ul>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-4.png" alt="合并另一分支"></p>
+<ul>
+<li>   然后再合并主分支master<br>  *<code>git checkout master</code><br>  *<code>git merge server</code></li>
+</ul>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/interesting-rebase-5.png" alt="效果图"></p>
+<h5 id="变基的风险-不太理解"><a href="#变基的风险-不太理解" class="headerlink" title="变基的风险(不太理解)"></a>变基的风险(不太理解)</h5><ul>
+<li>   <strong>不要对在仓库外有副本的分支执行变基</strong></li>
+</ul>
+<p><em><strong>图例说明</strong></em></p>
+<hr>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-1.png" alt="3-36.克隆仓库并开始开发"></p>
+<ul>
+<li>接下来，有人向中央服务器提交了修改，其中包括合并。然后你抓取了远程分支的修改，将其合并到本地的开发分支，然后提交历史就会变成这样。</li>
+</ul>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-2.png" alt="3-37.抓取别人的提交，合并到自己的开发分支"></p>
+<ul>
+<li>   刚才的那个人又把合并操作回滚，改用变基，然后又用<code>git push --force</code>命令覆盖了服务器上的提交历史。之后你再从服务器抓取更新，会发现多出来些新的提交。</li>
+</ul>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-3.png" alt="3-38.有人推送了经过变基的提交，并丢弃了你的本地开发所基于的一些提交"></p>
+<ul>
+<li>   如果此时执行<code>git pull</code>,会合并来自两条提交历史的内容，生产成一个新的合并提交，如下图。</li>
+</ul>
+<p><img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-4.png" alt="3-39.你将相同的内容又合并了一次，生成了一次新的提交"></p>
+<ul>
+<li>   如果现在执行<code>git log</code>命令，会发现有两个提交的作者，日期，日志是<strong>一样</strong>的。<ul>
+<li>而且如果将这堆推送到服务器上，那么实际上是将那些已经被变基抛弃的提交又找回来。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h5 id="用变基解决变基"><a href="#用变基解决变基" class="headerlink" title="用变基解决变基"></a>用变基解决变基</h5><ul>
+<li><p>如果你拉取被覆盖过的更新并将你手头的工作基于此进行变基的话，一般情况下git都能成功分辨出哪些是你的修改，并把它们应用到新分支上。<br>*如果遇到图3-38的情境，如果没有执行合并，而是执行<code>git rebase teamone/master</code>,git 会:</p>
+<ul>
+<li>   <em>检查哪些提交是我们的分支上独有的（C2，C3，C4，C6，C7）</em><br>  *<em>检查其中哪些提交不是合并操作的结果（C2，C3，C4）</em><br>  *<em>检查哪些提交在对方覆盖更新时并没有被纳入目标分支（只有 C2 和 C3，因为 C4 其实就是 C4’）</em><br>  *<em>把查到的这些提交应用在 teamone/master 上面</em><br>  *会得到下图的结果<br>  *<img src="http://git-scm.com/book/en/v2/book/03-git-branching/images/perils-of-rebasing-5.png" alt="3-40.在一个被变基然后强制推送的分支上再次执行变基"></li>
+</ul>
+<p>*要使得方案有效，需要对方变基时确保C4<code>和C4几乎是一样的。否则变基操作将无法识别，并新建另一个类似 C4 的补丁（而这个补丁很可能无法整洁的整合入历史，因为补丁中的修改已经存在于某个地方了）。 *在本例中另一种简单的方法是使用 </code>git pull –rebase<code>命令而不是直接</code>git pull<code>。 又或者你可以自己手动完成这个过程，先 </code>git fetch<code>，再 </code>git rebase teamone/master<code>。 *如果你习惯使用 </code>git pull<code>，同时又希望默认使用选项</code>–rebase<code>，你可以执行这条语句 </code>git config –global pull.rebase true<code>来更改</code>pull.rebase<code> 的默认配置。 *__只要你把变基命令当作是在推送前清理提交使之整洁的工具，并且只在从未推送至共用仓库的提交上执行变基命令，你就不会有事。__ *如果某些情形下决议要这么做，一定要通知每个人执行</code>git pull –rebase`命令，这样虽然不能避免伤痛，但能有所缓解。<br>*	<em><strong>总的原则是：只对还没有推送或分享给别人的本地修改执行变基操作清理历史，从不对已推送至别处的提交执行变基操作，这样才能享受到两种方式带来的便利。</strong></em></p>
+</li>
+</ul>
+<h3 id="子模块！"><a href="#子模块！" class="headerlink" title="子模块！"></a>子模块！</h3><ul>
+<li>新克隆一个项目时，会克隆相应的子模块，但是子模块内容为空。运行<code>git submodule init</code>初始化</li>
+<li>再运行<code>git submodule update</code>同步</li>
+<li>如果是在一个项目中新增子模块<code>git submodule add git@code.gomrwind:FrontEnd/ui.git</code></li>
+<li>假如成功了 运行<code>git status</code>会看到</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">new</span> <span class="hljs-attr">file</span>: .<span class="hljs-property">gitmodules</span></span><br><span class="line"><span class="hljs-keyword">new</span> <span class="hljs-attr">file</span>: ui</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>然后可以<code>cat .gitmodules</code>查看配置</li>
+<li>应当如下</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="hljs-string">"src/ui"</span>]</span><br><span class="line">path = src/ui</span><br><span class="line">url = git@code.<span class="hljs-property">gomrwind</span>.<span class="hljs-property">com</span>:<span class="title class_">FrontEnd</span>/ui.<span class="hljs-property">git</span></span><br><span class="line">branch = master</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><em>要注意的是！如果之前有下过提示出错等，要更改.git中的config配置。还有.git下的modules下的相对应文件夹需要删除<code>rm -rf files</code></em></li>
+<li><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97">点这里学习</a></li>
+</ul>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块的相关命令时出现以下问题：</span><br><span class="line"><span class="hljs-attr">fatal</span>: <span class="title class_">Needed</span> a single revision</span><br><span class="line"><span class="title class_">Unable</span> to find current revision <span class="hljs-keyword">in</span> submodule path</span><br><span class="line">运行命令删除错误的文件，重新更新：</span><br><span class="line">	* rm -rf [模块文件名]</span><br><span class="line">	* git submodule update --init</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果在运行子模块相关命令时出现以下问题</span><br><span class="line"><span class="hljs-attr">fatal</span>: reference is not a <span class="hljs-attr">tree</span>: 16effe6cfd27ff78b04ff95e9103514e6dcf5cb3</span><br><span class="line"><span class="title class_">Unable</span> to checkout <span class="hljs-string">'16effe6cfd27ff78b04ff95e9103514e6dcf5cb3'</span> <span class="hljs-keyword">in</span> submodule path 	<span class="hljs-string">'gezbox/lib/NotificationStyles'</span></span><br><span class="line"><span class="title class_">Failed</span> to recurse into submodule path <span class="hljs-string">'src/ui'</span></span><br><span class="line">切换分支到master,再拷贝一个分支作为对比，这是子模块有修改导致的。确认修改后再在那个分支上提交更新。</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）"><a href="#服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）" class="headerlink" title="服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）"></a>服务器上的git-协议（本地协议、HTTP协议、SSH协议、GIT协议）</h3><h5 id="本地协议"><a href="#本地协议" class="headerlink" title="本地协议"></a>本地协议</h5><ul>
+<li>最基本的协议</li>
+<li>运行<code>git clone /opt/git/project.git</code></li>
+<li>或者执行<code>git clone file:///opt/git/project.git</code></li>
+<li>推荐使用前者</li>
+<li>增加一个本地版本库到现有的git项目，执行<code>git remote add local_proj /opt/git/project.git</code></li>
+</ul>
+<h5 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h5><h2 id="注意点！！！"><a href="#注意点！！！" class="headerlink" title="注意点！！！"></a>注意点！！！</h2><ul>
+<li>新建一个项目时，要新建一个文件 .gitignore 里面设置哪些文件不随git提交</li>
+<li>如果忘记了，在之后再添加时或再次修改时。 最好重新克隆到本地。然后依次运行<code>git rm --cached .</code> <code>git add .</code> <code>git commit -m ".gitignore is now working"</code></li>
+<li>先把所有文件从版本控制中删除，然后再重新加回来，提交上传后新的.gitignore就生效了<ul>
+<li>git rm –cached .`表示哪些文件不随git提交</li>
+</ul>
+</li>
+<li>如果有错误提示 <code>could not get git status --porcelain</code> 很有可能是因为忘记添加.gitignre。执行一遍上述操作</li>
+<li><code>could not get git status --porcelain</code> 这样的错误提示，我的理解是上传的文件数量过多导致的。在.gitignore忘记加入时将node_modules等文件也上传，node_modules内容过多大概就导致了这个报错。甚至会导致无法使用<code>git commit</code></li>
+</ul>
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/git/">#git</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2016/05/03/make-your-Sublime-Text-different/">如何让你的 Sublime Text 独具一格</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-next">
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2016/03/03/my-gitbook/';
+        this.page.identifier = '2016/03/03/my-gitbook/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

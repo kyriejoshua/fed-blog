@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>单测入门笔记 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。推荐：★★★">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单测入门笔记">
+<meta property="og:url" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。推荐：★★★">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/unphoto.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/testing.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/reward.jpeg">
+<meta property="article:published_time" content="2018-06-29T02:02:28.000Z">
+<meta property="article:modified_time" content="2018-06-29T02:02:28.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="Unit-Testing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/unphoto.jpeg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            单测入门笔记
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-06-29T02:02:28.000Z" itemprop="datePublished">6月 29 2018</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Unit-Testing/">Unit-Testing</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            20 分钟 读完 (约 2970 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<p><img src="/2018/06/29/learning-unit-testing/unphoto.jpeg"></p>
+<p>以前因为技术氛围和开发需求等种种原因限制，还没有写过单元测试。近期入职一家技术氛围较好，并且推崇单测的公司。所以也有必要了解和熟悉下单测(单元测试)。<br>推荐：★★★</p>
+<span id="more"></span>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#%E5%8D%95%E6%B5%8B%E6%98%AF%E4%BB%80%E4%B9%88">单测是什么</a></li>
+<li><a href="#%E5%8D%95%E6%B5%8B%E6%A1%86%E6%9E%B6%E6%A6%82%E8%A7%88">单测框架概览</a></li>
+<li><a href="#%E4%B8%8A%E6%89%8BJest">上手 Jest</a></li>
+<li><a href="#%E6%96%AD%E8%A8%80">断言</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8C%B9%E9%85%8D%E5%99%A8">使用匹配器</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E5%BC%82%E6%AD%A5%E4%BB%A3%E7%A0%81">测试异步代码</a><ul>
+<li><a href="#%E6%B5%8B%E8%AF%95%E5%9B%9E%E8%B0%83">测试回调</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95Promise">测试Promise</a></li>
+<li><a href="#resolves-rejects"><code>.resolves/.rejects</code></a></li>
+<li><a href="#.resolves/.rejects">async/await</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9C%A8React%E4%B8%AD%E4%BD%BF%E7%94%A8">在 React 中使用</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+<li><a href="#Issues">Issues</a></li>
+</ul>
+<h3 id="单测是什么"><a href="#单测是什么" class="headerlink" title="单测是什么"></a>单测是什么</h3><ul>
+<li>单测是至对程序中最小单元的验证和检查。具体化些，就是对一个模块，一个函数的验证。再应用到 React 项目中，通常是对 reducer 的验证。</li>
+</ul>
+<h3 id="单测框架概览"><a href="#单测框架概览" class="headerlink" title="单测框架概览"></a>单测框架概览</h3><ul>
+<li>js 的单测框架选择也并不少，常用的有 Mocha，Jest，Jasmine 等。最近的项目里主要是 Jest 和 Mocha，其中 Jest 更多。下面说下自己对这两者的区别的一些初步理解。<ul>
+<li>Mocha 是现在较为成熟，生态较完善的单测框架。</li>
+<li>Jest 由 Facebook 出品，由 Jasmine 演化而来。相对 Mocha 诞生较晚，但背后有着 Facebook 的支持，可见生态社区也会越来越完善。而且和 React 搭配使用也会更友好。</li>
+</ul>
+</li>
+</ul>
+<h3 id="上手Jest"><a href="#上手Jest" class="headerlink" title="上手Jest"></a>上手<a href="http://jestjs.io/docs/zh-Hans/getting-started">Jest</a></h3><ul>
+<li><p>项目中 Mocha 和 Jest 都有，但 Jest 似乎更多。目前准备写的也是应用了 Jest 的项目，所以准备先入门 Jest。</p>
+</li>
+<li><p>首先新建一个项目 unit-test 并初始化，然后安装相关依赖。</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir unit-test</span><br><span class="line">npm init</span><br><span class="line">npm install jest</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在 package 中添加相应脚本。</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scripts: {</span><br><span class="line">  "test": "jest"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>项目中已有了 Jest. 此时我们来测试一个简单的加法函数。</p>
+</li>
+<li><p>新建一个 index.js.</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">function</span> <span class="title function_">sum</span>(<span class="hljs-params">a, b</span>) {</span><br><span class="line">  <span class="hljs-keyword">return</span> a + b</span><br><span class="line">}</span><br><span class="line"><span class="variable language_">module</span>.<span class="hljs-property">exports</span> = sum</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>再创建一个 index.test.js 用于验证。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> sum = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./index'</span>)</span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'1 + 2 equals to 3'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="title function_">expect</span>(<span class="title function_">sum</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)).<span class="title function_">toBe</span>(<span class="hljs-number">3</span>)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>然后运行测试，观察输出。</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run test</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>如果验证通过的话，可以在终端看到如下通过提示。</p>
+</li>
+</ul>
+<img src="/2018/06/29/learning-unit-testing/testing.png" class="" title="unit-testing">
+
+<ul>
+<li><p>至此，一个简单的测试完成了。</p>
+</li>
+<li><p>不过通常情况下，我们会结合 ES6，React 使用，所以会配合上 Babel，需要安装其他依赖。</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-jest babel-core regenerator-runtime babel-preset-env babel-preset-react</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>然后添加一个 babel 配置文件 .babelrc.</p>
+<figure class="highlight json hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-punctuation">{</span></span><br><span class="line">  <span class="hljs-attr">"presets"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"env"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"react"</span><span class="hljs-punctuation">]</span></span><br><span class="line"><span class="hljs-punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>然后我们就可以使用 ES6 语法了。可以将原来的 <code>require</code> 改为 <code>import</code> 等。</p>
+</li>
+</ul>
+<h3 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h3><ul>
+<li><p>在上述的测试用例中，有一句断言 —— <code>expect(sum(1, 2)).toBe(2)</code></p>
+</li>
+<li><p>实际上，在每个测试中，都至少有一句断言来判断执行结果是否与预期的一致。目前的断言库语义化都做的很好，如同上面这句话，很容易理解这是期望的结果和执行的结果的比较逻辑。</p>
+</li>
+<li><p>像常用的 Mocha 有着自己的断言库 Chai, 而 Jest 我目前还不确定是引用了什么断言库，看起来好像它本身就支持。</p>
+</li>
+<li><p>而断言的写法，也是以 <code>expect</code> 开头，然后以匹配器方法调用作为结果。包括下文提到的一些匹配器方法 <code>toEqual</code> 等等。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">expect</span>(<span class="title function_">func</span>(..<span class="hljs-property">args</span>)).<span class="title function_">toBe</span>(res)</span><br><span class="line"><span class="title function_">expect</span>(<span class="title function_">func</span>(..<span class="hljs-property">args</span>)).<span class="title function_">toEqual</span>(obj)</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="使用匹配器"><a href="#使用匹配器" class="headerlink" title="使用匹配器"></a>使用匹配器</h3><ul>
+<li><p>刚才我们使用 <code>expect(sum(1, 2))</code> 来输出期望的值，再用 <code>toBe</code> 方法来比较值是否相等。这里 <code>toBe</code> 就是相应的匹配器。</p>
+</li>
+<li><p><code>toBe</code> 内部使用 <code>Object.is</code> 方法来判断，该方法和全等(<code>===</code>)判断类似，但略有不同。例如 <code>Object.is</code> 会区分 -0 和 +0，但不会区分 <code>Number.NaN</code> 和 <code>NaN</code>.</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(-<span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-comment">// false</span></span><br><span class="line">-<span class="hljs-number">0</span> === <span class="hljs-number">0</span> <span class="hljs-comment">// true</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="title class_">Number</span>.<span class="hljs-property">NaN</span>, <span class="title class_">NaN</span>) <span class="hljs-comment">// true</span></span><br><span class="line"><span class="title class_">Number</span>.<span class="hljs-property">NaN</span> === <span class="title class_">NaN</span> <span class="hljs-comment">// false</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>toBe</code> 方法通常可以用来比较数字，字符串等基本类型。但如果要比较对象等引用类型。可以使用 <code>toEqual</code>,它会递归比较对象中的值。下面来试着使用下 <code>toEqual</code> 方法。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'比较对象相等'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="hljs-keyword">const</span> data = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">'2'</span> }</span><br><span class="line">  <span class="title function_">expect</span>(data).<span class="title function_">toEqual</span>({ <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">'2'</span> })</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>相应的，在各类型中还有对应的匹配器方法，例如使用 <code>toBeNull</code> 来匹配 <code>null</code>，使用 <code>toBeCloseTo</code> 来匹配浮点数，使用 <code>toMatch</code> 来匹配正则字符串，使用 <code>toContain</code> 来匹配数组是否包含某项等等。这些都可在 <a href="http://jestjs.io/docs/zh-Hans/getting-started">Jest</a> 官网上找到。</p>
+</li>
+</ul>
+<h3 id="测试异步代码"><a href="#测试异步代码" class="headerlink" title="测试异步代码"></a>测试异步代码</h3><h4 id="测试回调"><a href="#测试回调" class="headerlink" title="测试回调"></a>测试回调</h4><ul>
+<li><p>异步代码中常见的有测试回调，例如有 <code>fetchData</code> 的函数，传入 <code>callback</code> 回调函数。按照之前的理解，测试方式是这样的</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">function</span> <span class="title function_">fetchData</span>(<span class="hljs-params">callback</span>) {</span><br><span class="line">  <span class="hljs-keyword">const</span> data = <span class="hljs-string">'async data'</span></span><br><span class="line">  <span class="title function_">callback</span>(data)</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// 有问题的写法</span></span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试回调'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="hljs-keyword">function</span> <span class="title function_">callback</span>(<span class="hljs-params">data</span>) {</span><br><span class="line">    <span class="title function_">expect</span>(<span class="title function_">callback</span>(data)).<span class="title function_">toBe</span>(<span class="hljs-string">'async data'</span>)</span><br><span class="line">  }</span><br><span class="line">  <span class="title function_">fetchData</span>(callback)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>由于 <code>fetchData</code> 的执行是异步的，所以当该测试执行完毕时，它还没有执行结束，也就无法测试。</p>
+</li>
+<li><p>Jest 本身在测试回调函数时提供了一个参数用来标识内部函数是否执行行结束。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试回调'</span>, <span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> {</span><br><span class="line">  <span class="hljs-keyword">function</span> <span class="title function_">callback</span>(<span class="hljs-params">data</span>) {</span><br><span class="line">    <span class="title function_">expect</span>(data).<span class="title function_">toBe</span>(<span class="hljs-string">'async data'</span>)</span><br><span class="line">    <span class="title function_">done</span>()</span><br><span class="line">  }</span><br><span class="line">  <span class="title function_">fetchData</span>(callback)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>这样，当 <code>done</code> 函数执行结束时，测试才执行完毕。而如果 <code>done</code> 没有执行，那也意味着其中哪里出现了问题。</p>
+</li>
+</ul>
+<h4 id="测试Promise"><a href="#测试Promise" class="headerlink" title="测试Promise"></a>测试Promise</h4><ul>
+<li><p>同样的，这样测试 <code>Promise</code> 也无法生效，结果并不会报错。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">function</span> <span class="title function_">handleData</span>(<span class="hljs-params">data</span>) {</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {</span><br><span class="line">    <span class="variable language_">window</span>.<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="title function_">resolve</span>({ <span class="hljs-attr">res</span>: data.<span class="hljs-property">res</span> + <span class="hljs-number">1</span> }, <span class="hljs-number">3000</span>))</span><br><span class="line">  })</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// 错误示范</span></span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 Promise 代码'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="title function_">handleData</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> }).<span class="title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {</span><br><span class="line">    <span class="title function_">expect</span>(data).<span class="title function_">toEqual</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> })</span><br><span class="line">  })</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>要测试 <code>Promise</code>, 只需要在 Jest 测试中返回一个 <code>Promise</code> 即可。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 Promise 代码'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="title function_">handleData</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> }).<span class="title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {</span><br><span class="line">    <span class="title function_">expect</span>(data).<span class="title function_">toEqual</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> })</span><br><span class="line">  })</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>当然，<code>Promise</code> 还会有刻意测试错误的情况。于是我们想当然的又会觉得加上 <code>return</code> 就可以了。下面这段代码，我们来测试是否执行了 <code>reject</code> 方法，这时我们传入一个错误的参数再执行。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">function</span> <span class="title function_">handleDataReject</span>(<span class="hljs-params">data</span>) {</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {</span><br><span class="line">    <span class="variable language_">window</span>.<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {</span><br><span class="line">      <span class="hljs-keyword">if</span> (<span class="title class_">Object</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">toString</span>.<span class="title function_">call</span>(data) !== <span class="hljs-string">'[object Object]'</span>) {</span><br><span class="line">        <span class="title function_">reject</span>(<span class="hljs-string">'Type Error!!!'</span>)</span><br><span class="line">      }</span><br><span class="line">      <span class="title function_">resolve</span>({ <span class="hljs-attr">res</span>: data.<span class="hljs-property">res</span> + <span class="hljs-number">1</span>})</span><br><span class="line">    }, <span class="hljs-number">3000</span>)</span><br><span class="line">  })</span><br><span class="line">}</span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 Promise reject 代码'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="title function_">handleDataReject</span>(<span class="hljs-string">'test rejected'</span>).<span class="title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {</span><br><span class="line">    <span class="title function_">expect</span>(data).<span class="title function_">toMatch</span>(<span class="hljs-string">'Type Error!!!'</span>)</span><br><span class="line">  })</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>这里确实执行通过了。但如果我们把一个正确的参数传进去，是否能验证错误的情况呢，答案是不会的。例如我们把刚刚的 <strong><code>test rejected</code></strong> 字符串改为 <strong><code>{ res: 1 }</code></strong> 作为参数传入的时候，其实也检测不出错误的执行。</p>
+</li>
+<li><p>因为在测试错误的情况的时候，<code>fulfilled</code> 状态也是不会在测试中被检出的。换句话说，当执行正确的时候，<code>Promise</code> 不会跑到 <code>catch</code> 后续这个函数中，也就会被检测通过。但这里我们需要测试的是异常的情况，所以必须还是需要补充上一句后续断言是否执行的语句 <code>expect.assertions(1)</code>。它并不会抛出测试的错误，但它会提示你有一句断言没有执行，这时候你就知道了，刚才那段对象作为参数执行的代码并没有走到 <code>catch</code> 函数中。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 Promise reject 代码'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="title function_">handleDataReject</span>(<span class="hljs-string">'test rejected'</span>).<span class="title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {</span><br><span class="line">    <span class="title function_">expect</span>(data).<span class="title function_">toMatch</span>(<span class="hljs-string">'Type Error!!!'</span>)</span><br><span class="line">  })</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="resolves-rejects"><a href="#resolves-rejects" class="headerlink" title=".resolves/.rejects"></a><code>.resolves/.rejects</code></h4><ul>
+<li><p><code>.resolves/.rejects</code> 是对上述更简化的写法。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 resolves 代码'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="title function_">expect</span>(<span class="title function_">handleDataReject</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">1</span> })).<span class="hljs-property">resolves</span>.<span class="title function_">toEqual</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> })</span><br><span class="line">})</span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 rejects 代码'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="title function_">expect</span>(<span class="title function_">handleDataReject</span>(<span class="hljs-string">'test rejected'</span>)).<span class="hljs-property">rejects</span>.<span class="title function_">toMatch</span>(<span class="hljs-string">'Type Error!!!'</span>)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="Async-x2F-Await"><a href="#Async-x2F-Await" class="headerlink" title="Async/Await"></a>Async/Await</h4><ul>
+<li><p>这里的用法其实与它们本身的用法类似。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 async 代码'</span>, <span class="hljs-keyword">async</span> () =&gt; {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> <span class="title function_">handleDataReject</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">1</span> })</span><br><span class="line">  <span class="title function_">expect</span>(data).<span class="title function_">toEqual</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> })</span><br><span class="line">})</span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 async error 代码'</span>, <span class="hljs-keyword">async</span> () =&gt; {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">try</span> {</span><br><span class="line">    <span class="hljs-keyword">await</span> <span class="title function_">handleDataReject</span>(<span class="hljs-string">'test rejected'</span>)</span><br><span class="line">  } <span class="hljs-keyword">catch</span>(e) {</span><br><span class="line">    <span class="title function_">expect</span>(e).<span class="title function_">toMatch</span>(<span class="hljs-string">'Type Error!!!'</span>)  </span><br><span class="line">  }</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>由于使用了同步写法，这时候不需要再 <code>return</code> 了。当然，我们还是可以使用 <code>.resolves/rejects</code> 来做一些写法上的优化。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 async 代码'</span>, <span class="hljs-keyword">async</span> () =&gt; {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">await</span> <span class="title function_">expect</span>(<span class="title function_">handleDataReject</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">1</span> })).<span class="hljs-property">resolves</span>.<span class="title function_">toEqual</span>({ <span class="hljs-attr">res</span>: <span class="hljs-number">2</span> })</span><br><span class="line">})</span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'测试 async error 代码'</span>, <span class="hljs-keyword">async</span> () =&gt; {</span><br><span class="line">  expect.<span class="title function_">assertions</span>(<span class="hljs-number">1</span>)</span><br><span class="line">  <span class="hljs-keyword">await</span> <span class="title function_">expect</span>(<span class="title function_">handleDataReject</span>(<span class="hljs-string">'test rejected'</span>)).<span class="hljs-property">rejects</span>.<span class="title function_">toMatch</span>(<span class="hljs-string">'Type Error!!!'</span>)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="在React中使用"><a href="#在React中使用" class="headerlink" title="在React中使用"></a>在React中使用</h3><ul>
+<li><p>通过以上的内容，我们对单测有了一个比较初步的了解。</p>
+</li>
+<li><p>但在实际项目中，我们通常会在 React 中来使用 Jest。而在 React 中书写单测，自己接触较多的是基于 Reducer 的。</p>
+</li>
+<li><p>下面来写一个 React 中的单测，假设我们有一个列表数据获取逻辑(假设没有异步请求)，然后我们要对它进行一个验证。</p>
+</li>
+<li><p>首先是 Reducer. 会有一个 reducer.js 文件</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 初始数据</span></span><br><span class="line"><span class="hljs-keyword">const</span> initialState = {</span><br><span class="line">  <span class="hljs-attr">listData</span>: {</span><br><span class="line">    <span class="hljs-attr">data</span>: {}</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// reducer 将 listData 保存</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="title function_">ListReducer</span>(<span class="hljs-params">state = initialState, action</span>) {</span><br><span class="line">  <span class="hljs-keyword">switch</span>(action.<span class="hljs-property">type</span>) {</span><br><span class="line">    <span class="hljs-attr">case</span>: <span class="hljs-string">'LIST_DATA'</span>:</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>({}, state, {</span><br><span class="line">        <span class="hljs-attr">listData</span>: action.<span class="hljs-property">data</span></span><br><span class="line">        <span class="hljs-attr">listStatus</span>: <span class="hljs-string">'success'</span></span><br><span class="line">      })</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>然后编写相应的单测。reducer.test.js</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">ListReducer</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./reducer'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// mock 数据</span></span><br><span class="line"><span class="hljs-keyword">const</span> initialState = {</span><br><span class="line">  <span class="hljs-attr">listData</span>: {</span><br><span class="line">    <span class="hljs-attr">data</span>: {}</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// action</span></span><br><span class="line"><span class="hljs-keyword">const</span> listData = {</span><br><span class="line">  <span class="hljs-attr">type</span>: <span class="hljs-string">'LIST_DATA'</span>,</span><br><span class="line">  <span class="hljs-attr">listData</span>: {</span><br><span class="line">    <span class="hljs-attr">data</span>: {</span><br><span class="line">      <span class="hljs-attr">name</span>: <span class="hljs-string">'kyrie'</span>,</span><br><span class="line">      <span class="hljs-attr">age</span>: <span class="hljs-number">21</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 处理后的数据</span></span><br><span class="line"><span class="hljs-keyword">const</span> listDataReducer = {</span><br><span class="line">  <span class="hljs-attr">listData</span>: {</span><br><span class="line">    <span class="hljs-attr">data</span>: {</span><br><span class="line">      <span class="hljs-attr">name</span>: <span class="hljs-string">'kyrie'</span>,</span><br><span class="line">      <span class="hljs-attr">age</span>: <span class="hljs-number">21</span></span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="hljs-attr">listStatus</span>: <span class="hljs-string">'success'</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="hljs-string">'获取列表'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="hljs-keyword">const</span> state = <span class="title class_">ListReducer</span>(initialState, listData)</span><br><span class="line">  <span class="title function_">expect</span>(state).<span class="title function_">toEqual</span>(listDataReducer)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>当然，这里的例子非常简单，运行 <code>npm run test</code> 也能轻易通过。但在实际项目里，Reducer 的处理可能会复杂的多，相应的书写也会更加复杂。上述是一个单个的测试，真实项目中，或许是按模块来组织的。每个模块中有相应的多个 Reducer. 那就需要用到测试套件(test suite) —— <code>describe</code> 块，其中会含有多个测试用例(test case), 即 <code>it</code> 块。</p>
+</li>
+<li><p><code>describe</code> 函数的第一个参数是测试套件名，第二个是要执行的回调函数。</p>
+</li>
+<li><p><code>it</code> 函数同理，它作为独立的测试用例，是测试的最小单位。</p>
+</li>
+<li><p>于是整理后如下：</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">describe</span>(<span class="hljs-string">'获取列表模块测试'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">  <span class="title function_">it</span>(<span class="hljs-string">'获取列表'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> state = <span class="title class_">ListReducer</span>(initialState, listData)</span><br><span class="line">    <span class="title function_">expect</span>(state).<span class="title function_">toEqual</span>(listDataReducer)</span><br><span class="line">  })</span><br><span class="line">  <span class="title function_">it</span>(<span class="hljs-string">'获取列表失败'</span>, <span class="hljs-function">() =&gt;</span> {</span><br><span class="line">    <span class="hljs-comment">// do sth</span></span><br><span class="line">  })</span><br><span class="line">  <span class="hljs-comment">// 更多的测试用例</span></span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>整理后整个模块的内容都在 <code>describe</code> 套件内，组织起一个个测试用例。显而易见，这样更容易梳理和回顾。</p>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>有些时候，项目里没有单测也能基本良好运行，就像我从前做过的项目一样。但这未必是好事。因为单测带来的，其实更多的是对业务的思考和设计。假如我们决定要写单测，那么在写该模块时，就应提前想到多个可能的场景，从而避免未知的错误，同时自己也会对当前业务有着更好的理解。另一方面，就像我现在所做的，其实通过写单测，可以去熟悉相应的业务模块的<em><strong>所有场景</strong></em>，这会比直接阅读业务代码会更熟悉的多。</li>
+<li><strong>上述代码对应的仓库 <a href="https://github.com/kyriejoshua/unit-testing">unit-testing</a></strong>.</li>
+</ul>
+<h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a><a href="https://github.com/facebook/jest/issues">Issues</a></h3><h4 id="目前碰到的一些问题整理，基于-22-4-3"><a href="#目前碰到的一些问题整理，基于-22-4-3" class="headerlink" title="目前碰到的一些问题整理，基于 ^22.4.3."></a>目前碰到的一些问题整理，基于 ^22.4.3.</h4><ol>
+<li>在运行 <code>npm run test</code> 时</li>
+</ol>
+  <figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> { <span class="title class_">Modal</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'antd'</span> <span class="hljs-comment">// 这样引入时会报 CSS 相关的报错</span></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">Modal</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'antd/lib/modal'</span> <span class="hljs-comment">// 这样才不会报错</span></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">Modal</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'../../../node_modules/antd/lib/modal'</span> <span class="hljs-comment">// 或者这样也不会报错</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>排查发现是 Jest 无法解析 CSS。搜索部分结果，有人给出了<a href="https://www.jianshu.com/p/bf8070c33824">方案</a>，官方也提供了解决<a href="https://jestjs.io/docs/en/webpack">方案</a>。目前发现可以解决。</li>
+</ul>
+<h5 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h5><ul>
+<li>redux-mock-store 了解。</li>
+</ul>
+<hr>
+<img src="/2018/06/29/learning-unit-testing/reward.jpeg" class="" title="Thanks">
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Unit-Testing/">#Unit-Testing</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2018/07/29/understanding-history-in-react-router/">理解 react-router 中的 history</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2018/06/11/the-questions-in-interview-part2/">面试题整理-2018</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2018/06/29/learning-unit-testing/';
+        this.page.identifier = '2018/06/29/learning-unit-testing/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

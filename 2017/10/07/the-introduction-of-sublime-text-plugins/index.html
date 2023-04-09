@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Sublime Text 3 高效插件配置 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="不久前，sublime text 官方推出了一次大更新。这次更新几乎时隔一年，而且有重大改动，虽然我早用 dev 版提前体验了新版本，但也借此机会再鼓捣了下自己的工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sublime Text 3 高效插件配置">
+<meta property="og:url" content="http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="不久前，sublime text 官方推出了一次大更新。这次更新几乎时隔一年，而且有重大改动，虽然我早用 dev 版提前体验了新版本，但也借此机会再鼓捣了下自己的工具。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/material.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/da.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/reward.jpeg">
+<meta property="article:published_time" content="2017-10-07T12:52:57.000Z">
+<meta property="article:modified_time" content="2017-10-07T12:52:57.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="sublime">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Sublime Text 3 高效插件配置
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-10-07T12:52:57.000Z" itemprop="datePublished">10月 7 2017</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Tools/">Tools</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 分钟 读完 (约 1218 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<p><img src="/2017/10/07/the-introduction-of-sublime-text-plugins/unphoto.jpg"></p>
+<p>不久前，sublime text 官方推出了一次大更新。这次更新几乎时隔一年，而且有重大改动，虽然我早用 dev 版提前体验了新版本，但也借此机会再鼓捣了下自己的工具。</p>
+<span id="more"></span>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#%E6%8F%92%E4%BB%B6">Sublime Text 插件</a></li>
+<li><a href="#%E4%B8%8B%E8%BD%BD">Sublime Text 下载</a></li>
+</ul>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><h4 id="1-Git"><a href="#1-Git" class="headerlink" title="1. Git"></a>1. <a href="https://packagecontrol.io/packages/SublimeLinter">Git</a></h4><ul>
+<li>在 sublime 内使用 git.</li>
+<li>因为我个人是在终端使用 git. 所以日常 git 不会在这里提交。但有一个比较实用的功能是查看当前文件的修改历史。比在终端里用 <code>git log -- [file]</code> 查看会方便一些。</li>
+<li>在命令面板输入 <code>git log current file</code> 可以查看当前文件修改历史，查看有谁改过当前这个文件和具体改动了什么。</li>
+</ul>
+<h4 id="2-Git-blame"><a href="#2-Git-blame" class="headerlink" title="2. Git blame"></a>2. <a href="https://packagecontrol.io/packages/Git%20blame">Git blame</a></h4><ul>
+<li>查看当前行的修改历史。比前一个插件更加具体，直接查看当前行的最近一次改动负责人和提交记录。</li>
+<li>git 插件也有该功能，但使用起来不如这个方便。</li>
+</ul>
+<h4 id="3-GitGutter"><a href="#3-GitGutter" class="headerlink" title="3. GitGutter"></a>3. <a href="https://packagecontrol.io/packages/GitGutter">GitGutter</a></h4><h5 id="3-1-Modific"><a href="#3-1-Modific" class="headerlink" title="3.1 Modific"></a>3.1 <a href="https://packagecontrol.io/packages/Modific">Modific</a></h5><ul>
+<li>在行号前形象地显示当前的改动差异。</li>
+<li>后者也是一个可以显示改动的插件——但是它还支持 SVN 等。可选其一使用。</li>
+</ul>
+<h4 id="4-SublimeLinter、SublimeLinter-contrib-eslint"><a href="#4-SublimeLinter、SublimeLinter-contrib-eslint" class="headerlink" title="4. SublimeLinter、SublimeLinter-contrib-eslint"></a>4. <a href="https://packagecontrol.io/packages/SublimeLinter">SublimeLinter</a>、<a href="https://packagecontrol.io/packages/SublimeLinter-contrib-eslint">SublimeLinter-contrib-eslint</a></h4><h5 id="4-1-Babel"><a href="#4-1-Babel" class="headerlink" title="4.1 Babel"></a>4.1 <a href="https://packagecontrol.io/packages/Babel">Babel</a></h5><ul>
+<li>sublime 编辑器内可以配合 eslint 使用来检查代码规范或是代码风格。只是要两个插件配合使用。</li>
+<li>两个插件下载完毕即可使用。</li>
+<li>如果没有生效的话，可以打开 sublimelinter 的用户设置检查 node 的路径是否正确，或者是否安装了相应的版本。</li>
+<li><a href="http://www.sublimelinter.com/en/latest/">sublimelinter</a> 官网还有更多使用配置。</li>
+<li>该插件对使用 jsx 语法的 js 文件支持不太友好，所以你可能还需要这一个插件 Babel 来解析文件。</li>
+</ul>
+<h4 id="5-React-ES6-Snippets"><a href="#5-React-ES6-Snippets" class="headerlink" title="5. React ES6 Snippets"></a>5. <a href="https://packagecontrol.io/packages/React%20ES6%20Snippets">React ES6 Snippets</a></h4><h5 id="5-1-React-Snippets"><a href="#5-1-React-Snippets" class="headerlink" title="5.1 React Snippets"></a>5.1 <a href="https://packagecontrol.io/packages/ReactJS%20Snippets">React Snippets</a></h5><ul>
+<li>写 react 非常实用的 snippets.</li>
+<li>如果还没有使用 ES6 的话，那就使用后者。</li>
+<li>其他框架自然也有。<a href="https://packagecontrol.io/packages/AngularJS">AngularJS</a>、<a href="https://packagecontrol.io/packages/Vuejs%20Snippets">Vuejs Snippets</a>、<a href="https://packagecontrol.io/packages/Vue%20Syntax%20Highlight">Vue Syntax Highlight</a>、<a href="https://packagecontrol.io/packages/jQuery">j​Query</a>.</li>
+</ul>
+<h4 id="6-DocBlockr"><a href="#6-DocBlockr" class="headerlink" title="6. DocBlockr"></a>6. <a href="https://packagecontrol.io/packages/DocBlockr">DocBlockr</a></h4><ul>
+<li>友好的注释插件。支持 Javascript, PHP, CoffeeScript, Actionscript, C &amp; C++ 等。</li>
+</ul>
+<h4 id="7-cssDOC"><a href="#7-cssDOC" class="headerlink" title="7. cssDOC"></a>7. <a href="https://packagecontrol.io/packages/cssDOC">cssDOC</a></h4><ul>
+<li>右键在 MDN 上查询属性相关信息。快捷方便。</li>
+</ul>
+<h5 id="7-1-CSS3"><a href="#7-1-CSS3" class="headerlink" title="7.1 CSS3"></a>7.1 <a href="https://packagecontrol.io/packages/CSS3">CSS3</a></h5><ul>
+<li>CSS3 自动补全，高亮，检查插件。</li>
+</ul>
+<h5 id="7-2-CSS-Format"><a href="#7-2-CSS-Format" class="headerlink" title="7.2 CSS Format"></a>7.2 <a href="https://packagecontrol.io/packages/CSS%20Format">CSS Format</a></h5><ul>
+<li>CSS 格式化插件，统一格式。</li>
+</ul>
+<h4 id="8-SyncedSideBar"><a href="#8-SyncedSideBar" class="headerlink" title="8. SyncedSideBar"></a>8. <a href="https://packagecontrol.io/packages/SyncedSideBar">SyncedSideBar</a></h4><ul>
+<li>打开文件时侧边栏定位到当前文件。在查看文件时会十分方便。</li>
+</ul>
+<h4 id="9-BracketHighlighter"><a href="#9-BracketHighlighter" class="headerlink" title="9. BracketHighlighter"></a>9. <a href="https://packagecontrol.io/packages/BracketHighlighter">BracketHighlighter</a></h4><h5 id="9-1-BracketGuard"><a href="#9-1-BracketGuard" class="headerlink" title="9.1 BracketGuard"></a>9.1 <a href="https://packagecontrol.io/packages/BracketGuard">BracketGuard</a></h5><ul>
+<li>高亮括号对应项。</li>
+<li>后者高亮使用错误的括号。</li>
+</ul>
+<h4 id="10-Material-Theme、DA-UI"><a href="#10-Material-Theme、DA-UI" class="headerlink" title="10. Material Theme、DA UI"></a>10. <a href="https://packagecontrol.io/packages/Material%20Theme">Material Theme</a>、<a href="https://packagecontrol.io/packages/DA%20UI">DA UI</a></h4><ul>
+<li>最后推荐两款清爽的浅色主题。以下是效果图。</li>
+</ul>
+<img src="/2017/10/07/the-introduction-of-sublime-text-plugins/material.png" class="" title="Material Theme">
+<br>
+<img src="/2017/10/07/the-introduction-of-sublime-text-plugins/da.png" class="" title="DA UI Theme">
+
+<ul>
+<li>清爽干净的 UI,是不是对最新版 sublime 已经跃跃欲试了呢。</li>
+</ul>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><h4 id="Sublime-Text-在此。"><a href="#Sublime-Text-在此。" class="headerlink" title="Sublime Text 在此。"></a><a href="https://www.sublimetext.com/3">Sublime Text</a> 在此。</h4><h5 id="嫌-sublime-万年不更的小伙伴可以下载-dev-版-，其实暗地里啊，它更新地比-vsc-还勤呢。"><a href="#嫌-sublime-万年不更的小伙伴可以下载-dev-版-，其实暗地里啊，它更新地比-vsc-还勤呢。" class="headerlink" title="嫌 sublime 万年不更的小伙伴可以下载 dev 版 ，其实暗地里啊，它更新地比 vsc 还勤呢。"></a>嫌 sublime 万年不更的小伙伴可以下载 <a href="https://www.sublimetext.com/3dev">dev 版</a> ，其实暗地里啊，它更新地比 vsc 还勤呢。</h5><h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><ul>
+<li><p>在这个 vsc 分了半边天的代码工具里，我还是对 sublime 情有独钟。甚至我对 vim 也有着自己的偏爱。即便 vsc 或者 webstorm 方便到了令人发指的地步，我也希望还有人能坚守 sublime 等轻量级编辑器的阵地。因为我喜欢这个鼓捣的过程，喜欢把自己需要的东西一步一步手动加上去的过程，在这个过程中，会更加理解自己需要什么，不需要什么，对那些新增的插件的下载和使用也会有新的理解。而且我也相信有许多程序员和我有着相同的癖好。</p>
+</li>
+<li><p>偶尔我也会试用 vsc，但确实用不习惯。在丝滑流畅这一点上，它和 sublime 比还有一定的差距。而它相较于 sublime 的优势在我使用时却没有明显体会。类似直接查看函数的定义的功能，我反而认为自己去寻找可以更了解项目的整体结构。最终还是一句话，自己使用起来最舒服的工具就是最适合自己的工具。</p>
+</li>
+</ul>
+<hr>
+<img src="/2017/10/07/the-introduction-of-sublime-text-plugins/reward.jpeg" class="" title="Thanks">
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/sublime/">#sublime</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/11/23/the-usage-of-threejs/">初识 Three.js(上) —— 基础概念一览</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2017/09/23/css3d-study/">CSS3 实现🎲旋转教程</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2017/10/07/the-introduction-of-sublime-text-plugins/';
+        this.page.identifier = '2017/10/07/the-introduction-of-sublime-text-plugins/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

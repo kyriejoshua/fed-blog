@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>浅谈 react-router 实现原理 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈 react-router 实现原理">
+<meta property="og:url" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="从上篇文章可以知道，react-router 本质上，利用了 history api 的 pushState, replaceState 方法来控制路由地址，然后使用 popstate, hashchange 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。推荐：★★★★">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/unphoto.jpg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-road.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/react-router-stack.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/reward.jpeg">
+<meta property="article:published_time" content="2019-01-03T13:59:22.000Z">
+<meta property="article:modified_time" content="2019-01-03T13:59:22.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="React-Router">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2019/01/03/understanding-react-router/unphoto.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            浅谈 react-router 实现原理
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-01-03T13:59:22.000Z" itemprop="datePublished">1月 3 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/React/">React</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            28 分钟 读完 (约 4231 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<p><img src="/2019/01/03/understanding-react-router/unphoto.jpg"></p>
+<p>从<a href="/2018/07/29/understanding-history-in-react-router">上篇文章</a>可以知道，<code>react-router</code> 本质上，利用了 <code>history api</code> 的 <code>pushState</code>, <code>replaceState</code> 方法来控制路由地址，然后使用 <code>popstate</code>, <code>hashchange</code> 事件来监听变化，从而做出相应的视图变化。这篇文章要讲的，就是视图变化的逻辑这部分。<br>推荐：★★★★</p>
+<span id="more"></span>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#%E5%BC%95%E5%AD%90">引子</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6">组件</a><ul>
+<li><a href="#Link">Link</a></li>
+<li><a href="#Router">Router</a></li>
+<li><a href="#Router">Router</a></li>
+<li><a href="#Route">Route</a></li>
+<li><a href="#Switch">Switch</a></li>
+<li><a href="#withRouter">withRouter</a></li>
+</ul>
+</li>
+<li><a href="#react-router%E4%B8%8Ereact-router-dom">react-router与react-router-dom</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+<li><a href="#%E9%81%97%E7%95%99%E7%9A%84%E5%9D%91">遗留的坑</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
+<li>如上所说，其实在 <code>history</code> 与 <code>react-router</code> 之间，核心就差了视图如何变化的逻辑部分。</li>
+<li>在了解到内部原理之前，我理解的流程图是这样的。</li>
+</ul>
+<img src="/2019/01/03/understanding-react-router/react-router.png" class="">
+
+<ul>
+<li>接下来我们来慢慢找出这剩余的部分。然后来看看和最初的印象有什么不同。</li>
+<li>注意：这里的所有代码均基于 <a href="https://github.com/ReactTraining/react-router/tree/v4.2.2"><code>react-router</code></a> 的 v4+ 版本。</li>
+</ul>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
+<li><p>我最初的想法是查看调用栈来观察路由和视图的变化关系。于是写了一个组件，点击事件调用 <code>pushState</code>/<code>replaceState</code> 方法来手动更新浏览器地址，但是却发现，不会有什么变化。其实这符合预期，这个方法本身就只会更新地址，而不会更新页面，不会让页面重新加载。</p>
+</li>
+<li><p>因此，让我们还是从组件入手。</p>
+</li>
+<li><p>从<a href="https://github.com/ReactTraining/react-router/tree/v4.2.2/packages/react-router-dom/modules">这里</a>可以看到有许多组件。我们着重分析其中的 <code>Link</code>、<code>Router</code>、<code>Route</code>、<code>Switch</code>. 剩余的也就顺理成章去理解了。</p>
+</li>
+</ul>
+<h4 id="Link"><a href="#Link" class="headerlink" title="Link"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/Link.js">Link</a></h4><ul>
+<li><p><code>Link</code> 是 <code>react-router-dom</code> 提供的一个组件。用来实现路由间的切换。至于 <code>react-router-dom</code> 和 <code>react-router</code> 的关系后文会说。</p>
+</li>
+<li><p>那为什么 <code>Link</code> 就可以轻松做到跳转呢。让我们一步步来看 <code>Link</code> 里都有什么。</p>
+</li>
+<li><p>打印出 <code>Link</code>，简化后，主要是以下的部分。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * The public API for rendering a history-aware &lt;a&gt;.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">class</span> <span class="title class_">Link</span> <span class="hljs-keyword">extends</span> <span class="title class_ inherited__">React.Component</span> {</span><br><span class="line">  <span class="hljs-keyword">static</span> defaultProps = {</span><br><span class="line">    <span class="hljs-attr">replace</span>: <span class="hljs-literal">false</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 参数都是必传的</span></span><br><span class="line">  <span class="hljs-keyword">static</span> contextTypes = {</span><br><span class="line">    <span class="hljs-attr">router</span>: <span class="title class_">PropTypes</span>.<span class="title function_">shape</span>({</span><br><span class="line">      <span class="hljs-attr">history</span>: <span class="title class_">PropTypes</span>.<span class="title function_">shape</span>({</span><br><span class="line">        <span class="hljs-attr">push</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">func</span>.<span class="hljs-property">isRequired</span>,</span><br><span class="line">        <span class="hljs-attr">replace</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">func</span>.<span class="hljs-property">isRequired</span>,</span><br><span class="line">        <span class="hljs-attr">createHref</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">func</span>.<span class="hljs-property">isRequired</span></span><br><span class="line">      }).<span class="hljs-property">isRequired</span></span><br><span class="line">    }).<span class="hljs-property">isRequired</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  handleClick = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">onClick</span>)</span><br><span class="line">      <span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="title function_">onClick</span>(event)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (</span><br><span class="line">      !event.<span class="hljs-property">defaultPrevented</span> &amp;&amp; <span class="hljs-comment">// onClick prevented default</span></span><br><span class="line">      event.<span class="hljs-property">button</span> === <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-comment">// ignore right clicks</span></span><br><span class="line">      !<span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">target</span> &amp;&amp; <span class="hljs-comment">// let browser handle "target=_blank" etc.</span></span><br><span class="line">      !<span class="title function_">isModifiedEvent</span>(event) <span class="hljs-comment">// ignore clicks with modifier keys</span></span><br><span class="line">    ) {</span><br><span class="line">      event.<span class="title function_">preventDefault</span>()</span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">const</span> { history } = <span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span></span><br><span class="line">      <span class="hljs-keyword">const</span> { replace, to } = <span class="variable language_">this</span>.<span class="hljs-property">props</span></span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">if</span> (replace) {</span><br><span class="line">        history.<span class="title function_">replace</span>(to)</span><br><span class="line">      } <span class="hljs-keyword">else</span> {</span><br><span class="line">        history.<span class="title function_">push</span>(to)</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">const</span> { replace, to, innerRef, ...props } = <span class="variable language_">this</span>.<span class="hljs-property">props</span> <span class="hljs-comment">// eslint-disable-line no-unused-vars</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> href = <span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span>.<span class="hljs-property">history</span>.<span class="title function_">createHref</span>(</span><br><span class="line">      <span class="hljs-keyword">typeof</span> to === <span class="hljs-string">'string'</span> ? { <span class="hljs-attr">pathname</span>: to } : to</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span> <span class="hljs-attr">href</span>=<span class="hljs-string">{href}</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{innerRef}/</span>&gt;</span></span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>可以很明确的看到，<code>Link</code> 标签本质上返回的是 <code>a</code> 标签。只是对 <code>onClick</code> 方法做了处理。</p>
+</li>
+<li><p>而在 <code>click</code> 方法里，最主要的处理就是<strong>禁用默认事件</strong>，也就是阻止 <code>a</code> 标签默认的跳转 <code>href</code> 的行为。避免直接跳转页面。然后使用 <code>history</code> 的 <code>push</code>(<code>pushState</code>) 和 <code>replace</code>(<code>replaceState</code>) 方法进行跳转。</p>
+</li>
+<li><p><strong><code>push</code> 方法里除了核心的 <code>pushState</code> 逻辑，还有另一个核心操作 <code>setState</code>.</strong> <a href="https://github.com/ReactTraining/history/blob/v4.6.0/modules/createBrowserHistory.js">详情可见</a> 在它的逻辑里，它调用了之前注册的方法。后文会提到。</p>
+</li>
+<li><p>这里的 <code>history</code> 就是上篇文章分析的 <code>history</code>，只不过在 <code>react-router</code> 库里，它被当成 <code>props</code> 的部分，由最上层往下传递。至于为何这样做，是可以更好的管理 <code>history</code>, 和在组件里进行 <code>diff</code> 比对从而去做其他处理。上篇文末有说明。</p>
+</li>
+<li><p>然后观察传入给 <code>a</code> 的参数 <code>to</code>. 它接受 <code>String</code> 或者 <code>Object</code>. 通常我们会以 <code>String</code> 的形式传入。但最终它会被包装成类似 <code>{ pathname: to }</code> 这样的格式。</p>
+</li>
+<li><p>其实这个组件本质上做的事情，和我们在引子里理解的内容类似。基于 <code>history</code> 的操作，那么接收方是如何去根据变化而渲染组件的呢。来看看其他的重要组件。</p>
+</li>
+<li><p><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/Link.md?1546863412144"><strong>Link 文档</strong></a></p>
+</li>
+</ul>
+<h4 id="Router"><a href="#Router" class="headerlink" title="Router"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Router.js">Router</a></h4><ul>
+<li><p><code>Router</code> 是 <code>react-router</code> 里最常用的组件之一，它接收 <code>history</code> 和 <code>children</code> 两个参数。</p>
+</li>
+<li><p>这个组件属于较底层的组件，实际应用的时候可能会使用基于它扩展后的组件，来应对不同场景下的需求。例如在官方文档里，列举了以下几个具体的组件。</p>
+<ul>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/BrowserRouter.md"><code>&lt;BrowserRouter&gt;</code></a></li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/HashRouter.md"><code>&lt;HashRouter&gt;</code></a></li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/MemoryRouter.md"><code>&lt;MemoryRouter&gt;</code></a></li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-native/docs/api/NativeRouter.md"><code>&lt;NativeRouter&gt;</code></a></li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/docs/api/StaticRouter.md"><code>&lt;StaticRouter&gt;</code></a></li>
+<li><code>BrowserRouter</code> 是在现代浏览器里使用较多的组件，它在支持 <code>HTML5</code> 的 <code>history API</code> 的地方使用。通过独立的包 <code>react-router-dom</code> 提供。其余组件做的事情类似，只是使用方式略有不同，这里不再赘述。</li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Router.md"><strong>这里是具体的文档</strong></a><br><span></span><br><span></span></li>
+</ul>
+</li>
+<li><p>通常情况下，<code>Router</code> 作为父组件，包裹着 <code>Route</code> 和 <code>Switch</code> 等组件。</p>
+</li>
+<li><p>观察它的源码。它本质上也是 <code>React</code> 组件。在渲染的时候，注册监听了事件。下文细说。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * The public API for putting history on context.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">class</span> <span class="title class_">Router</span> <span class="hljs-keyword">extends</span> <span class="title class_ inherited__">React.Component</span> {</span><br><span class="line">  <span class="hljs-keyword">static</span> propTypes = {</span><br><span class="line">    <span class="hljs-attr">history</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span>.<span class="hljs-property">isRequired</span>,</span><br><span class="line">    <span class="hljs-attr">children</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">node</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">static</span> contextTypes = {</span><br><span class="line">    <span class="hljs-attr">router</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">static</span> childContextTypes = {</span><br><span class="line">    <span class="hljs-attr">router</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span>.<span class="hljs-property">isRequired</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getChildContext</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">return</span> {</span><br><span class="line">      <span class="hljs-attr">router</span>: {</span><br><span class="line">        ...<span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span>,</span><br><span class="line">        <span class="hljs-attr">history</span>: <span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">history</span>,</span><br><span class="line">        <span class="hljs-attr">route</span>: {</span><br><span class="line">          <span class="hljs-attr">location</span>: <span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">history</span>.<span class="hljs-property">location</span>,</span><br><span class="line">          <span class="hljs-attr">match</span>: <span class="variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">match</span></span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  state = {</span><br><span class="line">    <span class="hljs-attr">match</span>: <span class="variable language_">this</span>.<span class="title function_">computeMatch</span>(<span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">history</span>.<span class="hljs-property">location</span>.<span class="hljs-property">pathname</span>)</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">computeMatch</span>(<span class="hljs-params">pathname</span>) {</span><br><span class="line">    <span class="hljs-keyword">return</span> {</span><br><span class="line">      <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,</span><br><span class="line">      <span class="hljs-attr">url</span>: <span class="hljs-string">'/'</span>,</span><br><span class="line">      <span class="hljs-attr">params</span>: {},</span><br><span class="line">      <span class="hljs-attr">isExact</span>: pathname === <span class="hljs-string">'/'</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentWillMount</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">const</span> { children, history } = <span class="variable language_">this</span>.<span class="hljs-property">props</span></span><br><span class="line">    <span class="hljs-comment">// Do this here so we can setState when a &lt;Redirect&gt; changes the</span></span><br><span class="line">    <span class="hljs-comment">// location in componentWillMount. This happens e.g. when doing</span></span><br><span class="line">    <span class="hljs-comment">// server rendering using a &lt;StaticRouter&gt;.</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="hljs-property">unlisten</span> = history.<span class="title function_">listen</span>(<span class="hljs-function">() =&gt;</span> {</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setState</span>({</span><br><span class="line">        <span class="hljs-attr">match</span>: <span class="variable language_">this</span>.<span class="title function_">computeMatch</span>(history.<span class="hljs-property">location</span>.<span class="hljs-property">pathname</span>)</span><br><span class="line">      })</span><br><span class="line">    })</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">unlisten</span>()</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">const</span> { children } = <span class="variable language_">this</span>.<span class="hljs-property">props</span></span><br><span class="line">    <span class="hljs-keyword">return</span> children ? <span class="title class_">React</span>.<span class="hljs-property">Children</span>.<span class="title function_">only</span>(children) : <span class="hljs-literal">null</span></span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="title class_">Router</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在静态 <code>props</code> 里可以看到，<code>history</code> 是必须的。印证了我们的常规用法。生成 <code>history</code> 后再作为上下文传入组件内，向下传递给子组件。<code>&lt;Router history={history}&gt;</code></p>
+</li>
+<li><p>然后在生命周期 <code>componentWillMount</code> 里，使用 <code>history.listen</code> 注册了 <code>setState</code> 事件。当路由变化时，会自动触发 <code>history</code> 内的 <code>setState</code> 事件，进而触发当前传入的更新 <code>state</code> 的事件。原理就是上文的 <code>Link</code> 的内部逻辑，加上之前分析的 <code>history</code> 的 <code>push</code> 方法里的逻辑和事件订阅发布逻辑。</p>
+<ul>
+<li>注意这里，使用箭头函数保证 <code>this</code> 的指向仍是 <code>Router</code>.</li>
+<li>当 <code>Link</code> 点击事件触发时，实际上调用的是当前的 <code>this.setState({ match: this.computeMatch(history.location.pathname) })</code> 方法。</li>
+<li>此时返回的 <code>match</code> 是形如 <code>{ path: '/', url: '/', params: {}, isExact: pathname === '/'}</code> 的对象。</li>
+<li><code>return { router: { route: { match: this.state.match } } }</code> 通过 <code>getChildContext</code> 方法以上下文 <code>context</code> 的方式传给子组件 <code>route</code>.</li>
+</ul>
+</li>
+<li><p>这就一部分解释了为什么 <code>Link</code> 里，点击后的事件，会导致当前 <code>Router</code> 的 <code>state</code> 的变化，进而改变 <code>context.router</code> 里的内容。然后将此传递给子组件 <code>Route</code>.</p>
+</li>
+<li><p>然后它返回一个解绑函数。在组件卸载 <code>componentWillUnmount</code> 时调用 <code>unlisten</code> 卸载。</p>
+</li>
+<li><p><em>到这里，这就是动作变化引起视图变化的核心逻辑了。接下来是，视图如何根据传入的值匹配应当显示的组件。</em></p>
+</li>
+<li><p><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/context.router.md"><strong>context.router 的简单介绍</strong></a></p>
+</li>
+</ul>
+<h4 id="Route"><a href="#Route" class="headerlink" title="Route"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Route.js">Route</a></h4><ul>
+<li><p>首先了解下基本的用法。<code>Route</code> 组件是允许传入几种不同类型的值的。</p>
+</li>
+<li><p><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Route.md"><strong>文档</strong></a></p>
+</li>
+<li><p><strong><code>component</code></strong>: 直接将组件传入。当路由匹配的时候才会渲染，将 <code>props</code> 作为参数传入，然后创建元素。</p>
+<ul>
+<li><code>&lt;Route path='/' exact component={Main}/&gt;</code></li>
+<li>创建方式：<code>React.createElement(props)</code></li>
+</ul>
+</li>
+</ul>
+<p><span></span></p>
+<ul>
+<li><strong><code>render</code></strong>: 返回一个函数，可以直接是包装后的组件，或者直接是元素。直接调用。<ul>
+<li><code>&lt;Route path='/home' render={() =&gt; &lt;Home/&gt;} /&gt;</code></li>
+<li>创建方式：<code>render(props)</code></li>
+</ul>
+</li>
+</ul>
+<p><span></span></p>
+<ul>
+<li><p><strong><code>children</code></strong>: 一个函数，和 <code>render</code> 类似。但它在任何情况下，只要传入值就会渲染。它接收的 <code>props</code> 和其他方式相同，除了在不匹配的情况下，<code>match</code> 的值为 <code>null</code> 这点不同。它的业务场景，可能是用于一些固定显示在页面的组件，然后通过 <code>match</code> 的值来控制样式。</p>
+</li>
+<li><p>以下是简化的 <code>Route</code> 源码。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> matchPath <span class="hljs-keyword">from</span> <span class="hljs-string">'./matchPath'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * The public API for matching a single path and rendering.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">class</span> <span class="title class_">Route</span> <span class="hljs-keyword">extends</span> <span class="title class_ inherited__">React.Component</span> {</span><br><span class="line">  <span class="hljs-keyword">static</span> contextTypes = {</span><br><span class="line">    <span class="hljs-attr">router</span>: <span class="title class_">PropTypes</span>.<span class="title function_">shape</span>({</span><br><span class="line">      <span class="hljs-attr">history</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span>.<span class="hljs-property">isRequired</span>,</span><br><span class="line">      <span class="hljs-attr">route</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span>.<span class="hljs-property">isRequired</span>,</span><br><span class="line">      <span class="hljs-attr">staticContext</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span></span><br><span class="line">    })</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getChildContext</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">return</span> {</span><br><span class="line">      <span class="hljs-attr">router</span>: {</span><br><span class="line">        ...<span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span>,</span><br><span class="line">        <span class="hljs-attr">route</span>: {</span><br><span class="line">          <span class="hljs-attr">location</span>: <span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">location</span> || <span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span>.<span class="hljs-property">route</span>.<span class="hljs-property">location</span>,</span><br><span class="line">          <span class="hljs-attr">match</span>: <span class="variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">match</span></span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  state = {</span><br><span class="line">    <span class="hljs-attr">match</span>: <span class="variable language_">this</span>.<span class="title function_">computeMatch</span>(<span class="variable language_">this</span>.<span class="hljs-property">props</span>, <span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span>)</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">computeMatch</span>(<span class="hljs-params">{ computedMatch, location, path, strict, exact, sensitive }, router</span>) {</span><br><span class="line">    <span class="hljs-keyword">if</span> (computedMatch)</span><br><span class="line">      <span class="hljs-keyword">return</span> computedMatch <span class="hljs-comment">// &lt;Switch&gt; already computed the match for us</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> { route } = router</span><br><span class="line">    <span class="hljs-keyword">const</span> pathname = (location || route.<span class="hljs-property">location</span>).<span class="hljs-property">pathname</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> path ? <span class="title function_">matchPath</span>(pathname, { path, strict, exact, sensitive }) : route.<span class="hljs-property">match</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentWillReceiveProps</span>(<span class="hljs-params">nextProps, nextContext</span>) {</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setState</span>({</span><br><span class="line">      <span class="hljs-attr">match</span>: <span class="variable language_">this</span>.<span class="title function_">computeMatch</span>(nextProps, nextContext.<span class="hljs-property">router</span>)</span><br><span class="line">    })</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">const</span> { match } = <span class="variable language_">this</span>.<span class="hljs-property">state</span></span><br><span class="line">    <span class="hljs-keyword">const</span> { children, component, render } = <span class="variable language_">this</span>.<span class="hljs-property">props</span></span><br><span class="line">    <span class="hljs-keyword">const</span> { history, route, staticContext } = <span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span></span><br><span class="line">    <span class="hljs-keyword">const</span> location = <span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">location</span> || route.<span class="hljs-property">location</span></span><br><span class="line">    <span class="hljs-keyword">const</span> props = { match, location, history, staticContext }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      component ? ( <span class="hljs-comment">// component prop gets first priority, only called if there's a match</span></span><br><span class="line">        match ? <span class="title class_">React</span>.<span class="title function_">createElement</span>(component, props) : <span class="hljs-literal">null</span></span><br><span class="line">      ) : render ? ( <span class="hljs-comment">// render prop is next, only called if there's a match</span></span><br><span class="line">        match ? <span class="title function_">render</span>(props) : <span class="hljs-literal">null</span></span><br><span class="line">      ) : children ? ( <span class="hljs-comment">// children come last, always called</span></span><br><span class="line">        <span class="hljs-keyword">typeof</span> children === <span class="hljs-string">'function'</span> ? (</span><br><span class="line">          <span class="title function_">children</span>(props)</span><br><span class="line">        ) : !<span class="title function_">isEmptyChildren</span>(children) ? (</span><br><span class="line">          <span class="title class_">React</span>.<span class="hljs-property">Children</span>.<span class="title function_">only</span>(children)</span><br><span class="line">        ) : (</span><br><span class="line">          <span class="hljs-literal">null</span></span><br><span class="line">        )</span><br><span class="line">      ) : (</span><br><span class="line">        <span class="hljs-literal">null</span></span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="title class_">Route</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在 <code>Route</code> 组件里，首先我们看到 <code>render</code> 里，由组件的内容类型来决定渲染是 <code>component</code> 或 <code>render</code> 或 <code>children</code>. 然后由 <code>this.state.match</code> 这个字段决定了当前的元素是否渲染。</p>
+</li>
+<li><p>接着在上述源码里，<code>this.state.match</code> 字段是在 <code>componentWillReceiveProps</code> 和初始化里可以看到。而这个变量，由一个比较重要的函数 <code>computeMatch</code> 返回。它是用来对比当前路由是否匹配，依此来决定渲染组件或者不渲染。它的具体的值下文会讲到。</p>
+</li>
+<li><p><code>computeMatch</code> 接收 <code>nextProps</code> 和 <code>context.router</code> 作为参数。首先判断是否处于 <code>Switch</code> 组件中，如果在其中，则直接走 <code>Switch</code> 安排的逻辑，它有着自己的一套计算匹配逻辑。否则，则继续判断。</p>
+</li>
+<li><p>接下来的核心判断，是获取 <code>pathname</code>, 通过 <code>props.location</code> || <code>context.router.route.pathname</code> 获取。然后将其作为参数，传入另一个重要方法 <code>matchPath</code> 中，做计算匹配的逻辑。</p>
+</li>
+<li><p>当然，有一些参数作为辅助判断，例如 <code>exact</code>、<code>sensitive</code>、<code>strict</code>等。</p>
+</li>
+<li><p><code>matchPath</code> 是外部引入的，独立的一个文件包装的方法。可以直接看源码。</p>
+</li>
+<li><p><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/matchPath.js"><strong><code>matchPath</code>源码</strong></a>和<a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/matchPath.md"><strong>文档</strong></a></p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> pathToRegexp <span class="hljs-keyword">from</span> <span class="hljs-string">'path-to-regexp'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> patternCache = {}</span><br><span class="line"><span class="hljs-keyword">const</span> cacheLimit = <span class="hljs-number">10000</span></span><br><span class="line"><span class="hljs-keyword">let</span> cacheCount = <span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title function_">compilePath</span> = (<span class="hljs-params">pattern, options</span>) =&gt; {</span><br><span class="line">  <span class="hljs-keyword">const</span> cacheKey = <span class="hljs-string">`<span class="hljs-subst">${options.end}</span><span class="hljs-subst">${options.strict}</span><span class="hljs-subst">${options.sensitive}</span>`</span></span><br><span class="line">  <span class="hljs-keyword">const</span> cache = patternCache[cacheKey] || (patternCache[cacheKey] = {})</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">if</span> (cache[pattern])</span><br><span class="line">    <span class="hljs-keyword">return</span> cache[pattern]</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">const</span> keys = []</span><br><span class="line">  <span class="hljs-keyword">const</span> re = <span class="title function_">pathToRegexp</span>(pattern, keys, options)</span><br><span class="line">  <span class="hljs-keyword">const</span> compiledPattern = { re, keys }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">if</span> (cacheCount &lt; cacheLimit) {</span><br><span class="line">    cache[pattern] = compiledPattern</span><br><span class="line">    cacheCount++</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">return</span> compiledPattern</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Public API for matching a URL pathname to a path pattern.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title function_">matchPath</span> = (<span class="hljs-params">pathname, options = {}</span>) =&gt; {</span><br><span class="line">  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">'string'</span>)</span><br><span class="line">    options = { <span class="hljs-attr">path</span>: options }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">const</span> { path = <span class="hljs-string">'/'</span>, exact = <span class="hljs-literal">false</span>, strict = <span class="hljs-literal">false</span>, sensitive = <span class="hljs-literal">false</span> } = options</span><br><span class="line">  <span class="hljs-keyword">const</span> { re, keys } = <span class="title function_">compilePath</span>(path, { <span class="hljs-attr">end</span>: exact, strict, sensitive })</span><br><span class="line">  <span class="hljs-keyword">const</span> match = re.<span class="title function_">exec</span>(pathname)</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">if</span> (!match)</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">const</span> [ url, ...values ] = match</span><br><span class="line">  <span class="hljs-keyword">const</span> isExact = pathname === url</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">if</span> (exact &amp;&amp; !isExact)</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">return</span> {</span><br><span class="line">    path, <span class="hljs-comment">// the path pattern used to match</span></span><br><span class="line">    <span class="hljs-attr">url</span>: path === <span class="hljs-string">'/'</span> &amp;&amp; url === <span class="hljs-string">''</span> ? <span class="hljs-string">'/'</span> : url, <span class="hljs-comment">// the matched portion of the URL</span></span><br><span class="line">    isExact, <span class="hljs-comment">// whether or not we matched exactly</span></span><br><span class="line">    <span class="hljs-attr">params</span>: keys.<span class="title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">memo, key, index</span>) =&gt;</span> {</span><br><span class="line">      memo[key.<span class="hljs-property">name</span>] = values[index]</span><br><span class="line">      <span class="hljs-keyword">return</span> memo</span><br><span class="line">    }, {})</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> matchPath</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong><code>matchPath</code> 通过返回一个对象，来确定路由是否匹配。(官方文档有关于这个对象的介绍<a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/match.md">match</a>)如果匹配，则返回一个包含 <code>path</code>, <code>url</code>, <code>isExact</code>, <code>params</code> 等属性的对象。否则，则返回 <code>null</code>.</strong></p>
+</li>
+<li><p><strong>判断的主要逻辑是通过正则。</strong></p>
+</li>
+<li><p>引入了外部的独立的库 <a href="https://github.com/pillarjs/path-to-regexp"><strong><code>path-to-regexp</code></strong></a> 来将地址转化成正则。</p>
+<ul>
+<li><code>compilePath</code> 方法里： <code>const re = pathToRegexp(pattern, keys, options)</code></li>
+<li><code>const { re, keys } = compilePath(path, { end: exact, strict, sensitive })</code></li>
+<li><code>const match = re.exec(pathname)</code></li>
+<li><strong>这里的返回对象，最终在 <code>Route</code> 组件的 <code>render</code> 中起到了决定性的作用。每一个 <code>Route</code> 都会根据这个 <code>match</code> 对象来判断，符合则渲染，不符合则返回 <code>null</code>.</strong></li>
+</ul>
+</li>
+</ul>
+<p><span></span></p>
+<ul>
+<li><code>compilePath</code> 中可以看到，除了上述常规判断以外，加了一层缓存逻辑。<code>cache[pattern]</code> 保存了上次的记录，可以直接从缓存中读取。只是属性名比较奇怪，类似 <code>truefalsefalse</code> 的形式。这里不确定只是幽默还是有意义的设计。</li>
+</ul>
+<h4 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/Switch.js?1546508592999">Switch</a></h4><ul>
+<li><p>观察 <code>Switch</code> 的源码可以发现，它本质上也是调用了 <code>matchPath</code> 来判断匹配结果。</p>
+</li>
+<li><p><code>{ computedMatch: match }</code> 作为入参传入，呼应了上文的判断。</p>
+</li>
+<li><p><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/Switch.md?1546863502437"><strong>这里是文档</strong></a></p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> matchPath <span class="hljs-keyword">from</span> <span class="hljs-string">'./matchPath'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * The public API for rendering the first &lt;Route&gt; that matches.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">class</span> <span class="title class_">Switch</span> <span class="hljs-keyword">extends</span> <span class="title class_ inherited__">React.Component</span> {</span><br><span class="line">  <span class="hljs-keyword">static</span> contextTypes = {</span><br><span class="line">    <span class="hljs-attr">router</span>: <span class="title class_">PropTypes</span>.<span class="title function_">shape</span>({</span><br><span class="line">      <span class="hljs-attr">route</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">object</span>.<span class="hljs-property">isRequired</span></span><br><span class="line">    }).<span class="hljs-property">isRequired</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="hljs-params"></span>) {</span><br><span class="line">    <span class="hljs-keyword">const</span> { route } = <span class="variable language_">this</span>.<span class="hljs-property">context</span>.<span class="hljs-property">router</span></span><br><span class="line">    <span class="hljs-keyword">const</span> { children } = <span class="variable language_">this</span>.<span class="hljs-property">props</span></span><br><span class="line">    <span class="hljs-keyword">const</span> location = <span class="variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">location</span> || route.<span class="hljs-property">location</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">let</span> match, child</span><br><span class="line">    <span class="title class_">React</span>.<span class="hljs-property">Children</span>.<span class="title function_">forEach</span>(children, <span class="hljs-function"><span class="hljs-params">element</span> =&gt;</span> {</span><br><span class="line">      <span class="hljs-keyword">if</span> (!<span class="title class_">React</span>.<span class="title function_">isValidElement</span>(element)) <span class="hljs-keyword">return</span></span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">const</span> { <span class="hljs-attr">path</span>: pathProp, exact, strict, sensitive, <span class="hljs-keyword">from</span> } = element.<span class="hljs-property">props</span></span><br><span class="line">      <span class="hljs-keyword">const</span> path = pathProp || <span class="hljs-keyword">from</span></span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">if</span> (match == <span class="hljs-literal">null</span>) {</span><br><span class="line">        child = element</span><br><span class="line">        match = path ? <span class="title function_">matchPath</span>(location.<span class="hljs-property">pathname</span>, { path, exact, strict, sensitive }) : route.<span class="hljs-property">match</span></span><br><span class="line">      }</span><br><span class="line">    })</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> match ? <span class="title class_">React</span>.<span class="title function_">cloneElement</span>(child, { location, <span class="hljs-attr">computedMatch</span>: match }) : <span class="hljs-literal">null</span></span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="title class_">Switch</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="withRouter"><a href="#withRouter" class="headerlink" title="withRouter"></a><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/modules/withRouter.js?1546862447071">withRouter</a></h3><ul>
+<li><p><code>withRouter</code> 是一个高阶组件。个人理解，它比较像是 <code>react-redux</code> 的 <code>Provider</code> 组件。它将原生的组件传入，然后通过 <code>Route</code> 包装，沿用 <code>props</code> 当前的组件，返回这个包装后的组件。</p>
+<figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> hoistStatics <span class="hljs-keyword">from</span> <span class="hljs-string">'hoist-non-react-statics'</span></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">Route</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./Route'</span></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">* A public higher-order component to access the imperative API</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title function_">withRouter</span> = (<span class="hljs-params">Component</span>) =&gt; {</span><br><span class="line">  <span class="hljs-keyword">const</span> <span class="title function_">C</span> = (<span class="hljs-params">props</span>) =&gt; {</span><br><span class="line">    <span class="hljs-keyword">const</span> { wrappedComponentRef, ...remainingProps } = props</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      <span class="hljs-language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">render</span>=<span class="hljs-string">{routeComponentProps</span> =&gt;</span> (</span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Component</span> {<span class="hljs-attr">...remainingProps</span>} {<span class="hljs-attr">...routeComponentProps</span>} <span class="hljs-attr">ref</span>=<span class="hljs-string">{wrappedComponentRef}/</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">      )}/&gt;</span></span><br><span class="line">    )</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  C.<span class="hljs-property">displayName</span> = <span class="hljs-string">`withRouter(<span class="hljs-subst">${Component.displayName || Component.name}</span>)`</span></span><br><span class="line">  C.<span class="hljs-property">WrappedComponent</span> = <span class="title class_">Component</span></span><br><span class="line">  C.<span class="hljs-property">propTypes</span> = {</span><br><span class="line">    <span class="hljs-attr">wrappedComponentRef</span>: <span class="title class_">PropTypes</span>.<span class="hljs-property">func</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="title function_">hoistStatics</span>(C, <span class="title class_">Component</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> withRouter</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>目前在项目中我还没有用到它，等用到的时候，再来补充下具体的使用场景。</p>
+</li>
+<li><p><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router/docs/api/withRouter.md?1546862742594"><strong>这里是文档</strong></a></p>
+</li>
+</ul>
+<h4 id="react-router与react-router-dom"><a href="#react-router与react-router-dom" class="headerlink" title="react-router与react-router-dom"></a><code>react-router</code>与<code>react-router-dom</code></h4><ul>
+<li><p>好了，现在来补充这两个库的不同。</p>
+</li>
+<li><p><code>react-router</code> 是一个底层的库，任何其他的基于 <code>React</code> 的路由库都基于它。但是在实际应用中，我们可能要对不同的场景做一些细分，以便更好地使用它们。</p>
+</li>
+<li><p>于是，就有了为现代浏览器提供的 <code>react-router-dom</code>. 观察代码可以发现，它的核心组件，例如 <code>Route</code>、<code>Switch</code>、<code>withRouter</code> 都是从 <code>react-router</code> 直接引入的。</p>
+<ul>
+<li>另外，例如 <a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/BrowserRouter.js"><code>BrowserRouter</code></a> 这个组件则是在内部自己创建了 <code>history</code>, 从而略去了手动创建。它本质上仍然是 <code>Router</code>, 外加一个自给自足的过程。</li>
+<li><a href="https://github.com/ReactTraining/react-router/blob/v4.2.2/packages/react-router-dom/modules/BrowserRouter.js#L19"><code>history = createHistory(this.props)</code></a></li>
+</ul>
+</li>
+<li><p>除此之外，自然还有在 <code>React-Native</code> 中使用的 <code>react-router-native</code>, 以及结合 <code>redux</code> 使用的 <code>react-router-redux</code> 等等。</p>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>在了解完这么多组件的内容和原理后，相信我们对于 <code>react-router</code> 的实现，有了一定的清晰思路了。我们会发现，最终总结的和最初理解的不一样。其实就是自己的理解在一开始是不完善的，甚至有些误解。这个时候，让我们再把流程图再重新梳理，画一遍。下面是简略的更新逻辑过程。</li>
+</ul>
+<img src="/2019/01/03/understanding-react-router/react-router-road.png" class="">
+
+<ul>
+<li>下面是一张调用栈的图，或许可以更直观地展示调用了哪些方法以及它们的执行顺序。以 <code>Link</code> 的点击事件流程为例。</li>
+</ul>
+<img src="/2019/01/03/understanding-react-router/react-router-stack.png" class="">
+
+<h3 id="遗漏的坑"><a href="#遗漏的坑" class="headerlink" title="遗漏的坑"></a>遗漏的坑</h3><ul>
+<li>到此，主要的逻辑就解释完毕了。</li>
+<li>以下是遗留的几个待完成的 TODO. 可能会马上补上也可能需要点时间，但最终，我会补上的。<ul>
+<li><code>react-router</code> 或 <code>history</code> 在 <code>node</code> 中的应用。</li>
+<li><a href="https://github.com/pillarjs/path-to-regexp"><strong><code>path-to-regexp</code></strong></a> 的原理及为何使用缓存。<ul>
+<li><input checked="" disabled="" type="checkbox"> 使用缓存来节约内存空间。2019-06 补坑。</li>
+</ul>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <code>popstate</code> 和 <code>hashchange</code> 最后到底在哪些地方进行了调用和应用。<ul>
+<li>在上篇 history 的文章已有说明。2019-06 补坑。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote><p><a href="https://juejin.im/post/5a7e9ee7f265da4e7832949c">[译]简明React Router v4教程</a><br><a href="https://github.com/fi3ework/blog/issues/21">前端路由实现及 react-router v4 源码分析</a></p>
+</blockquote>
+
+<hr>
+<img src="/2019/01/03/understanding-react-router/reward.jpeg" class="" title="Thanks">
+
+<!-- 1h + 1h + 0.8h + 1h + 1h + 0.8h + 0.6h + 0.2h + 0.5h + 0.6h -->
+<!-- 7h -->
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/React-Router/">#React-Router</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/10/25/translate-jira-suck-article/">「翻译」16 个理由说明为啥 Jira 工作流这么难用</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2018/11/23/the-compatibility-issues-in-macos-mojave/">升级 MacOs Mojave 后的兼容问题解决</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2019/01/03/understanding-react-router/';
+        this.page.identifier = '2019/01/03/understanding-react-router/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

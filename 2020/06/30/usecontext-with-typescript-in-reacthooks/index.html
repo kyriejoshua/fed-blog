@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>项目中 React hooks + context + ts 实战及体会 - Deadpool Front-end</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="前端 前端痴汉 前端博客 前端分享 技术 技术成长 成长之路">
+
+
+
+
+
+    <meta name="description" content="引言：随着小伙伴们使用 hooks 越来越多，项目的复杂度也随之变化。有必要考虑下实际业务中，当前的 mobx 是否还能坚挺的适配 hooks + ts 的组合。推荐：★★★★">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目中 React hooks + context + ts 实战及体会">
+<meta property="og:url" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/index.html">
+<meta property="og:site_name" content="Deadpool Front-end">
+<meta property="og:description" content="引言：随着小伙伴们使用 hooks 越来越多，项目的复杂度也随之变化。有必要考虑下实际业务中，当前的 mobx 是否还能坚挺的适配 hooks + ts 的组合。推荐：★★★★">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/unphoto.jpeg">
+<meta property="og:image" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/mobx-size.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/props.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/states.png">
+<meta property="og:image" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/reward.jpeg">
+<meta property="article:published_time" content="2020-06-30T09:20:29.000Z">
+<meta property="article:modified_time" content="2020-06-30T09:20:29.000Z">
+<meta property="article:author" content="朱征原">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/unphoto.jpeg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+            <a class="navbar-item "
+               href="/books">Books</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            项目中 React hooks + context + ts 实战及体会
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2020-06-30T09:20:29.000Z" itemprop="datePublished">6月 30 2020</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/React/">React</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            28 分钟 读完 (约 4254 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><hr>
+
+<p><img src="/2020/06/30/usecontext-with-typescript-in-reacthooks/unphoto.jpeg"><br>引言：随着小伙伴们使用 <code>hooks</code> 越来越多，项目的复杂度也随之变化。有必要考虑下实际业务中，当前的 <code>mobx</code> 是否还能坚挺的适配 <code>hooks</code> + ts 的组合。<br>推荐：★★★★</p>
+<span id="more"></span>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9">如何选择</a></li>
+<li><a href="#%E8%80%83%E9%87%8F%E7%BB%B4%E5%BA%A6">考量维度</a></li>
+<li><a href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%9A%84%E9%80%89%E6%8B%A9">最佳实践</a></li>
+<li><a href="#%E4%B8%9A%E5%8A%A1%E5%AE%9E%E6%88%98">业务实战</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+<h3 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h3><p>个人对于数据流方案的考虑，出于以下几点，不分先后顺序，只是作为考虑的维度，来探索有什么数据流方案，可能会比当前的更适合；或者其他的方案，虽然当下不适合，但却能够提供给我们更多的选择空间和思考。</p>
+<ul>
+<li>引入包的成本。</li>
+<li>学习成本。</li>
+<li>和 <code>hooks</code> 的适配能力，以及是否兼容 <code>class</code> 写法。</li>
+<li>与 ts 的支持能力。</li>
+<li>可维护性。</li>
+<li>当前以及未来可能的生态，扩展能力。</li>
+</ul>
+<h3 id="考量维度"><a href="#考量维度" class="headerlink" title="考量维度"></a>考量维度</h3><h4 id="引入成本"><a href="#引入成本" class="headerlink" title="引入成本"></a>引入成本</h4><ul>
+<li>这个其实比较好理解，这个包的大小，以及压缩后的大小是考量的维度，这里自然是越小越好的。尤其是，某些库需要考虑的不仅仅是它本身，还有它与 <code>React</code> 结合所需要引入的库。</li>
+</ul>
+<h4 id="学习成本"><a href="#学习成本" class="headerlink" title="学习成本"></a>学习成本</h4><ul>
+<li>就目前而言，学习成本最低的自然是项目中已经用到的 <code>mobx</code>。大家已经熟悉了它的运作方式和写法。与 <code>hooks</code> 的结合相对来说也是容易上手的。</li>
+</ul>
+<h4 id="适配能力，兼容-class"><a href="#适配能力，兼容-class" class="headerlink" title="适配能力，兼容 class"></a>适配能力，兼容 <code>class</code></h4><ul>
+<li>在实际的生产环境项目里，<code>class</code> 和 <code>hooks</code> 还是混合使用的。已存在的项目大多数还是以 <code>class</code> 写法运行，因此这个数据流方案最好能够兼容 <code>class</code> 写法，以便我们还是可以方便的更新和维护它。</li>
+</ul>
+<h4 id="支持-ts"><a href="#支持-ts" class="headerlink" title="支持 ts"></a>支持 ts</h4><ul>
+<li>现在我们组内的新项目必须是 ts 项目，所以这一点不可或缺。</li>
+</ul>
+<h4 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h4><ul>
+<li>我理解的这一点，是指异常捕获方面，可调试性。当我遇到非期望的错误时，我是否可以很快的调试，定位到问题。</li>
+<li>还有一点即是说，这个库是否长期有效，这点很重要。因为一个项目，很重要的是稳定。大多数项目并非是朝生暮死的。长期运行的项目，使用了某个库，结果一年后这个库没有人维护了，那是万万不可的，后续迁移的成本，维护的成本都是成倍增长的。</li>
+</ul>
+<h4 id="生态以及扩展能力"><a href="#生态以及扩展能力" class="headerlink" title="生态以及扩展能力"></a>生态以及扩展能力</h4><ul>
+<li>生态就是上手成本和解决问题的速度。</li>
+<li>前者是说，有一个比较好的文档社区，例子浅显易懂好上手。</li>
+<li>后者则是，踩坑，填坑的速度。具体比如说，当你遇到一个问题的时候，你在这个社区里搜索，你的坑有人踩过，并且有方案解决，或者即使没有现成的解决方案，你提出来，社区里的小伙伴们也能愉快地协助你来解决完成。这就是一个比较好的生态。</li>
+<li>我所理解的生态还包括一点，就是它的扩展能力，时下 ts 是比较流行的 js 扩展方式，那么未来是否还有其他可能呢，就像当年的 <code>coffeescript</code> 而来的过渡。或者与其他组件库搭配，形成更强大的能力。</li>
+</ul>
+<h3 id="最佳实践的选择"><a href="#最佳实践的选择" class="headerlink" title="最佳实践的选择"></a>最佳实践的选择</h3><ul>
+<li>有关方案的选择——最好是，根据不同的项目规模，业务复杂度，来结合使用不同的数据流方案，当然，一种方案能解决所有问题自然是最好的。</li>
+</ul>
+<h4 id="目前的实际情况"><a href="#目前的实际情况" class="headerlink" title="目前的实际情况"></a>目前的实际情况</h4><p><code>mobx</code> 的结论</p>
+<ul>
+<li>目前看下来，<code>mobx</code> 结合 <code>hooks</code> 还是完全可以应付的了实际业务的。兼容 <code>hooks</code> 和 <code>class</code> 的写法，应该也支持 ts 写法（这个我自己还没实践，并不完全确认）</li>
+<li>那么为什么还是要考虑其他方案呢，因为 <code>mobx</code> 还是有点大了。这个插件展示了具体大小，<code>mobx</code> 与 <code>mobx-react</code> 加起来有近 70k 的大小。</li>
+</ul>
+<img src="/2020/06/30/usecontext-with-typescript-in-reacthooks/mobx-size.png" class="" title="体积大小">
+
+<ul>
+<li>而且，个人觉得，<code>mobx</code> 对于数据变更的溯源并不是那么清楚，它是订阅式的。在使用 <code>hooks</code> 的情况下，推崇函数式编程，这不是与某个数据流理念很符合么，没错，就是 <code>redux</code>。</li>
+</ul>
+<h4 id="新的选择"><a href="#新的选择" class="headerlink" title="新的选择"></a>新的选择</h4><ul>
+<li>实际上，<code>hooks</code> 的能力使得原生的 <code>context</code> 可以发挥出近似 <code>redux</code> 的效果了。</li>
+<li>相比 <code>redux</code>，它最大的好处是不用再引入 <code>redux</code> 相关的库，大大减少了包体积，以及不需要使用繁琐的 <code>connect</code>, <code>mapStateToProps</code> 等方法。因为是原生的，所以可以即插即用，兼容性良好，无缝衔接 ts。</li>
+<li>学习成本较低，因为几乎和 <code>redux</code> 一致，使用过 <code>redux</code> 就一定会使用它。</li>
+<li>当然，缺点也是有的，就是相比而言，它继承了 <code>redux</code> 样板代码多的特性。但同时却也保证了数据的流向是清楚的，可追溯的。</li>
+<li>具体的优缺点，下面会引入一个具体的案例。各位可以自行判断。</li>
+</ul>
+<h4 id="其他选择"><a href="#其他选择" class="headerlink" title="其他选择"></a>其他选择</h4><ul>
+<li>其他方案当然也有，社区里 <a href="https://github.com/lostpebble/pullstate"><code>pullstate</code></a> 、<a href="https://github.com/diegohaz/constate"> <code>constate</code></a>、<a href="https://github.com/facebookexperimental/Recoil"><code>recoil</code></a> 等。但这些无一不是生态不够完善，就是不能完美兼容 <code>hooks</code> 现有的和旧有的 <code>class</code> 写法兼容，或者不能很好和 ts 适配，又或者方案本身还不够成熟，达不到能在生产环境里使用的程度。</li>
+</ul>
+<h3 id="业务实战"><a href="#业务实战" class="headerlink" title="业务实战"></a>业务实战</h3><ul>
+<li>下面我们以一个实际案例，来看看两者有什么区别，以及如何使用它们。</li>
+</ul>
+<h4 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h4><ul>
+<li>现在有一个列表页面，包含条件搜索，权限操作，弹窗处理等等。<ul>
+<li><a href="http://20200602-toolbox-beiyan-hr.yangtuojia.com/front-static/teamBuilding">页面地址</a> - 需内网访问</li>
+</ul>
+</li>
+<li>这里我们有一个很常见的场景，就是在一个列表页面内。搜索条件组件和表格展示组件是平级的两个页面子组件，它们会共享<strong>搜索参数</strong> <code>searchParams</code> 这个数据，且搜索参数需要传递给他们的子组件，在这里，就是对应到表格的子组件——弹窗。</li>
+<li>搜索的逻辑很好理解了，特别说明一下弹窗这里就是需要将当前搜索条件中的一部分也带过来，用在默认的查询参数上。</li>
+<li>现在我们结合原有的代码，对它进行一些改造。先来看一下原始代码。</li>
+</ul>
+<h4 id="现有逻辑"><a href="#现有逻辑" class="headerlink" title="现有逻辑"></a>现有逻辑</h4><ul>
+<li>这是页面中， 组合搜索和表格的入口页面。这里我们统统使用原生的 <code>hooks</code> 和 ts 实现。</li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> <span class="title class_">TeamBuilding</span>: <span class="title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="title class_">MyProps</span>&gt; = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> [searchParams, setSearchParams] = <span class="title function_">useState</span>(<span class="hljs-literal">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 请求团建费数据</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> <span class="hljs-variable">values</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="title function_">onSearch</span> = (<span class="hljs-params">values</span>) =&gt; {</span><br><span class="line">        <span class="title function_">setSearchParams</span>(values);</span><br><span class="line">        <span class="hljs-comment">// do sth...</span></span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        <span class="hljs-language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"remind-main"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">Search</span> <span class="hljs-attr">onSearch</span>=<span class="hljs-string">{onSearch}</span> <span class="hljs-attr">handleSearchData</span>=<span class="hljs-string">{setSearchParams}</span> /&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">AdminTable</span> <span class="hljs-attr">searchParams</span>=<span class="hljs-string">{searchParams}</span> /&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>我们将 <code>searchParams</code> 这个搜索条件保存在最上层，也就是页面层级，供表格和搜索两个组件共用，其中搜索组件负责修改这个参数，而表格则仅仅是使用这个参数，当前这里是通过 <code>props</code> 的方式传递给表格。</li>
+<li><code>setSearchParams</code> 方法则是提供了修改它的能力。</li>
+<li>表格的核心逻辑：</li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> <span class="title class_">AdminTable</span>: <span class="title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="title class_">TableProps</span>&gt; = <span class="hljs-function">(<span class="hljs-params">{ onSearch, tableData, searchParams = {} }</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> { year, deptId } =  searchParams || {};</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 团队核销</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="title function_">handleUseWalfare</span> = (<span class="hljs-params"></span>) =&gt; {</span><br><span class="line">        <span class="hljs-keyword">const</span> data = {</span><br><span class="line">            <span class="hljs-attr">type</span>: <span class="variable constant_">WALFARE_TYPE</span>,</span><br><span class="line">            deptId,</span><br><span class="line">            year,</span><br><span class="line">        };</span><br><span class="line">        <span class="title function_">handleUseWalfareApi</span>(data)</span><br><span class="line">            .<span class="title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {</span><br><span class="line">                res.<span class="hljs-property">code</span> === <span class="hljs-number">200</span> &amp;&amp; message.<span class="title function_">success</span>(<span class="hljs-string">'核销成功'</span>);</span><br><span class="line">                <span class="title function_">onSearch</span>(searchParams);</span><br><span class="line">            });</span><br><span class="line">    };</span><br><span class="line">    <span class="hljs-comment">// 注入该方法，供表格内部使用</span></span><br><span class="line">    <span class="hljs-keyword">const</span> columns = <span class="title function_">columnsFn</span>(handleUseWalfare);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-language-xml"><span class="hljs-tag">&lt;&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"admin-table"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">Table</span> <span class="hljs-attr">columns</span>=<span class="hljs-string">{columns}</span> <span class="hljs-attr">bordered</span> <span class="hljs-attr">pagination</span>=<span class="hljs-string">{false}</span> <span class="hljs-attr">rowKey</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>/&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">PersonalWelfareModal</span> <span class="hljs-attr">year</span>=<span class="hljs-string">{year}</span> /&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">    <span class="hljs-tag">&lt;/&gt;</span></span>;</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>可以看到，上述所说的搜索条件参数，是提供给一个实际操作交互里作为参数使用的，需要获取其中的某些字段当作参数，同时操作成功后又需要以同样参数进行刷新。</li>
+<li>然后会将其中的属性 <code>year</code>, 继续传给弹窗组件使用。因为弹窗组件内的搜索也需要默认参数年份。</li>
+<li>整体大概就是这么个样子</li>
+</ul>
+<img src="/2020/06/30/usecontext-with-typescript-in-reacthooks/props.png" class="" title="状态管理">
+
+<ul>
+<li>这里的繁琐就是在处理的时候，需要将状态抽离到最上层，然后层层传递 props。</li>
+</ul>
+<h4 id="改造代码"><a href="#改造代码" class="headerlink" title="改造代码"></a>改造代码</h4><ul>
+<li>下面我们使用原生 <code>context</code>，和 <code>hooks</code> 中的 <code> useReducer</code> 的能力，来将这段逻辑改造成类 <code>redux</code> 的效果。</li>
+<li>原始上下文需要初始值，这里因为用到了 ts. 所以我们用 ts 的方式定义初始值，并建立上下文。这部分是完全新增的一个文件。</li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="title class_">IState</span> {</span><br><span class="line">    searchParams?: {</span><br><span class="line">        year?: <span class="hljs-built_in">string</span>,</span><br><span class="line">        deptId?: <span class="hljs-built_in">number</span></span><br><span class="line">    };</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-attr">initialState</span>: <span class="title class_">IState</span> = {</span><br><span class="line">    <span class="hljs-attr">searchParams</span>: {}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">interface</span> <span class="title class_">IContextProps</span> {</span><br><span class="line">    <span class="hljs-attr">state</span>: <span class="title class_">IState</span>,</span><br><span class="line">    <span class="hljs-attr">dispatch</span>: <span class="title class_">Dispatch</span>&lt;<span class="title class_">TAction</span>&gt;;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="title class_">TeamBuildingContext</span> = createContext&lt;<span class="title class_">IContextProps</span>&gt;({ <span class="hljs-attr">state</span>: initialState, <span class="hljs-attr">dispatch</span>: <span class="hljs-function">() =&gt;</span> {} });</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title class_">TeamBuildingProvider</span>: <span class="title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="title class_">MyProps</span>&gt; = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> [state, dispatch] = <span class="title function_">useReducer</span>(reducer, initialState);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        <span class="hljs-language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TeamBuildingContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{{state,</span> <span class="hljs-attr">dispatch</span>}}&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            {props.children}</span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">TeamBuildingContext.Provider</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="title class_">TeamBuildingProvider</span>;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>可以看到，这个文件的作用是建立上下文，以及给这个上下文传入一个初始状态和更新方法。</li>
+<li>注意上下文 <code> TeamBuildContext</code> 是需要导出的，然后需要维护的值以 <code>value</code> 的形式传入。</li>
+<li>这里面只有 <code>reducer</code> 是外部导入的，我们一步步来看。</li>
+<li>为了方便演示，而且这次只是以一个数据为例子，我就把 <code>action</code> 和 <code>type</code> 以及 <code>reducer</code> 的定义，通通放在一个文件里了。下面就是：</li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> { <span class="title class_">Reducer</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="variable constant_">UPDATE_PARAMS</span> = <span class="hljs-string">'UPDATE_PARAMS'</span>;</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="variable constant_">UPDATE_PARAMS</span> = <span class="hljs-keyword">typeof</span> <span class="variable constant_">UPDATE_PARAMS</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="title class_">IDispatch</span> {</span><br><span class="line">    <span class="hljs-attr">type</span>: <span class="variable constant_">UPDATE_PARAMS</span>;</span><br><span class="line">    <span class="hljs-attr">payload</span>: <span class="hljs-built_in">object</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> updateParams = (<span class="hljs-attr">payload</span>: <span class="hljs-built_in">object</span>): <span class="hljs-function"><span class="hljs-params">IDispatch</span> =&gt;</span></span><br><span class="line">    ({</span><br><span class="line">        payload,</span><br><span class="line">        <span class="hljs-attr">type</span>: <span class="variable constant_">UPDATE_PARAMS</span></span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="title class_">TAction</span> = <span class="title class_">IDispatch</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">reducer</span>: <span class="title class_">Reducer</span>&lt;<span class="title class_">IState</span>, <span class="title class_">TAction</span>&gt; = (<span class="hljs-attr">prevState</span>: <span class="title class_">IState</span>, <span class="hljs-attr">action</span>: <span class="title class_">TAction</span>): <span class="hljs-function"><span class="hljs-params">IState</span> =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> { <span class="hljs-keyword">type</span>, payload } = action;</span><br><span class="line">    <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {</span><br><span class="line">        <span class="hljs-keyword">case</span> <span class="hljs-attr">UPDATE_PARAMS</span>:</span><br><span class="line">            <span class="hljs-keyword">return</span> { ...prevState, <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">searchParams</span>: payload };</span><br><span class="line">        <span class="hljs-attr">default</span>:</span><br><span class="line">            <span class="hljs-keyword">return</span> prevState;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>可以看到，这是一个很经典的 <code>reducer</code> 写法。根据不同 <code>type</code>，匹配不同操作，并将操作后的新状态进行返回。</li>
+<li>由于我们这里只对一个参数进行操作，所以相应的 <code>action</code> 和 <code>type</code> 也只写了一个。</li>
+<li>然后接下来看看使用的地方，需要对原来的代码进行一些修改。为了方便，我重新定义了一个入口文件 <code>index.js</code>，把原先的入口组件改造成了 <code>TeamBuildContainer.js</code> 作为容器。这样就可以将提供上下文的能力与业务组件进行解耦。</li>
+<li>这是入口文件 <code>index.js</code></li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">TeamBuildingProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">"./TeamBuildContext"</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">TeamBuildContainer</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./TeamBuildContainer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title class_">TeamBuildingHooks</span>: <span class="title class_">React</span>.<span class="hljs-property">FC</span> = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        <span class="hljs-language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TeamBuildingProvider</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">TeamBuildContainer</span> {<span class="hljs-attr">...props</span>} /&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">TeamBuildingProvider</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="title class_">TeamBuildingHooks</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>很简单，只做了一件事，就是引入刚刚新增的上下文 <code>TeamBuildingProvider</code> 组件，进行包裹。</li>
+<li>这样我们就可以在子组件内使用导入的 <code>TeamBuildingContext</code> 上下文，获取我们所需的  <code>dispatch</code> 方法和 <code>state</code> 值。</li>
+<li>下面是改造后的 <code>TeamBuildContainer.js</code></li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> <span class="title class_">TeamBuildingProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">"./TeamBuildContext"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title class_">TeamBuildingContainer</span>: <span class="title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="title class_">MyProps</span>&gt; = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> {dispatch} = <span class="title function_">useContext</span>(<span class="title class_">TeamBuildingContext</span>);</span><br><span class="line">  	<span class="hljs-keyword">const</span> <span class="title function_">dispatchCb</span> = (<span class="hljs-params">payload = {}, <span class="hljs-keyword">type</span></span>) =&gt; dispatch &amp;&amp; <span class="title function_">dispatch</span>({payload, <span class="hljs-keyword">type</span> });</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 请求团建费数据</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> <span class="hljs-variable">values</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="title function_">onSearch</span> = (<span class="hljs-params">values</span>) =&gt; {</span><br><span class="line">        <span class="title function_">dispatchCb</span>(values, <span class="variable constant_">UPDATE_PARAMS</span>);</span><br><span class="line">        <span class="hljs-comment">// do sth...</span></span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        <span class="hljs-language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"remind-main"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">Search</span> <span class="hljs-attr">onSearch</span>=<span class="hljs-string">{onSearch}</span> /&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">AdminTable</span> <span class="hljs-attr">onSearch</span>=<span class="hljs-string">{onSearch}</span> /&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="title class_">Form</span>.<span class="title function_">create</span>()(<span class="title class_">TeamBuildingContainer</span>);</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>在这个页面中，我们需要使用 <code>dispatch</code> 来更新数据，但不需要直接使用状态，所以只用取出  <code>dispatch</code> 。 <strong><code>useContext</code></strong>  方法为我们提供了这样的能力。</li>
+<li>可以明显的看到，这里不需要使用 <code>props</code> 的方式传递数据了。</li>
+<li>再看看 <code>adminTable</code> 中是怎么取用数据的吧。</li>
+</ul>
+<figure class="highlight typescript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> { <span class="title class_">TeamBuildingContext</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">"./../../TeamBuildContext"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="title class_">AdminTable</span>: <span class="title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="title class_">TableProps</span>&gt; = <span class="hljs-function">(<span class="hljs-params">{ onSearch }</span>) =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">const</span> { state } = <span class="title function_">useContext</span>(<span class="title class_">TeamBuildingContext</span>);</span><br><span class="line">    <span class="hljs-comment">// 这里要设置初始值，不然会报错，主要是因为自动生成的接口字段对应的 ts 接口没有设置可选项，具体见 useWelfare.ts</span></span><br><span class="line">    <span class="hljs-keyword">const</span> { year = <span class="hljs-string">'2020'</span>, deptId = <span class="hljs-number">67</span> } = state.<span class="hljs-property">searchParams</span> || {};</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 团队核销</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="title function_">handleUseWalfare</span> = (<span class="hljs-params"></span>) =&gt; {</span><br><span class="line">        <span class="hljs-keyword">const</span> data = {</span><br><span class="line">            <span class="hljs-attr">type</span>: <span class="variable constant_">WALFARE_TYPE</span>,</span><br><span class="line">            deptId,</span><br><span class="line">            year,</span><br><span class="line">        };</span><br><span class="line">        <span class="title function_">handleUseWalfareApi</span>(data)</span><br><span class="line">            .<span class="title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {</span><br><span class="line">                res.<span class="hljs-property">code</span> === <span class="hljs-number">200</span> &amp;&amp; message.<span class="title function_">success</span>(<span class="hljs-string">'核销成功'</span>);</span><br><span class="line">                <span class="title function_">onSearch</span>(state);</span><br><span class="line">            });</span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> columns = <span class="title function_">columnsFn</span>(handleUseWalfare);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-language-xml"><span class="hljs-tag">&lt;&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"admin-table"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">Table</span> <span class="hljs-attr">columns</span>=<span class="hljs-string">{columns}</span> <span class="hljs-attr">bordered</span> <span class="hljs-attr">pagination</span>=<span class="hljs-string">{false}</span> <span class="hljs-attr">rowKey</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>/&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">PersonalWelfareModal</span>/&gt;</span></span></span><br><span class="line"><span class="hljs-language-xml">    <span class="hljs-tag">&lt;/&gt;</span></span>;</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>表格中取用的逻辑是完全类似的，这次 <code>useContext</code> 中我们只需要 <code>state</code>。</li>
+<li>以此类推，在表格内的弹窗 <code>PersonalWelfareModal</code> 组件中，我们可以以完全一样的方式来取用 <code>state</code> 中我们所需的字段，而无需 <code>props</code> 传递。</li>
+<li>以上，就是我们对原始逻辑的一次完整改造了。</li>
+<li>我们使用了先前就有的 <code>context</code>, 和这次 <code>hooks</code> 新提供的 <code>useContext</code>, <code>useReducer</code> 等 api，达到了类似 <code>redux</code> 处理的效果。</li>
+<li>这里我列举的只是一个比较常见的例子，不一定是最恰当的。这次业务里只是涉及到两层 <code>props</code> 的传递，实际业务中肯定有更多层级的传递，或是跨层级的共享。但最终，我们使用它的方式和理念一致的。</li>
+</ul>
+<h4 id="使用体验"><a href="#使用体验" class="headerlink" title="使用体验"></a>使用体验</h4><ul>
+<li>相较于原生的组织方式，使用 <code>context</code> + ts 使得我们在创建时就约束好了数据格式 —— <code>initialState</code>。</li>
+<li>然后在需要取用数据的地方，或者需要更新数据的地方，使用 <code>useContext</code> 取出，进行预期的操作。</li>
+<li>至于具体的更新数据逻辑，则统一在 <code>reducer</code> 里定义。实现了展示层和逻辑层的解耦。当然，这里的例子十分小，具体业务里要实现这样的解耦，还需要做其他的统筹管理的努力。但从最终效果来说，理应是明显的。</li>
+<li>这里我并没有很深入的去使用，但至少在目前的场景里，我理解使用 <code>context</code> 的状态管理是模块化的。只要创建 <code>context</code> 得当，那么每个模块都是独立分割的，很适合在一个模块里去统筹管理。它不像 <code>redux</code> 是在全局的顶层进行注入，需要使用的地方去  <code>connect</code>   连接；也不像 <code>mobx</code>，尽管也可以做到模块化，但通常会在顶层入口注入所有 <code>store</code>.</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>事到如今，我们再来回顾一下，它在我自己总结的上述考量维度里，哪些是做的好的，哪些是做的不好的。以及怎么去权衡。</li>
+<li>引入包的成本：<ul>
+<li>这点上，它无疑是最好的，因为它是天生内置，自带可以使用的，没有任何冗余依赖。</li>
+</ul>
+</li>
+<li>学习成本：<ul>
+<li>在仅仅使用过 <code>mobx</code> 数据管理方案的小伙伴身上，确实需要一点学习成本，不过它本身函数式的思想，和 <code>hooks</code> 的写法一脉相承，相信这点成本是相对容易克服的。</li>
+<li>至于已经写过  <code>redux</code> 的小伙伴，自然是可以无缝衔接了。</li>
+</ul>
+</li>
+<li>适配能力，兼容能力：<ul>
+<li>这在上文已经体现很明显了，<code>hooks</code> 中是无须担心的。至于还在 <code>class</code> 的业务，可以使用 <code>context</code> ，但方式并不是类 <code>redux</code> 的方式了，这算是一个小缺憾把。不过，在使用 <code>class</code> 的项目中，基本上我们已经内置了 <code>mobx</code> 的方案了。</li>
+</ul>
+</li>
+<li>支持 ts 的能力：<ul>
+<li>上述例子中我们也可以看到了，这显然是无须担心的。</li>
+</ul>
+</li>
+<li>可维护性：<ul>
+<li>显而易见，只要 <code>hooks</code> 还在，这个方案就会一直随着它的更新而存在，不必担心有一天它突然不能使用了。</li>
+</ul>
+</li>
+<li>生态以及扩展能力：<ul>
+<li>由于是官方的亲生儿子，所以相信这一块的社区必定不少，我也是从网上搜索到了类似的例子，才能在生产项目里快速写出以上的无缝衔接代码。而且因为是天生的，它的扩展能力，例如我们对它的定制也应当是容易的，方便的。</li>
+</ul>
+</li>
+<li>综上，个人推荐在新的 <code>hooks</code> + ts 项目里，完全可以使用这个方案来实践。前提当然是我们没有非常巨大的量的数据需要处理，控制。</li>
+<li>至于现有的项目，可以仍然使用 <code>mobx</code>，并同时在写 <code>hooks</code> 的时候使用这套方案。</li>
+<li>也可以按项目大小的类型来区分，如下：</li>
+</ul>
+<img src="/2020/06/30/usecontext-with-typescript-in-reacthooks/states.png" class="" title="状态管理">
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://medium.com/@suraj.kc/state-management-with-react-hooks-in-typescript-84b70b6c3fb9">State Management with React Hooks in TypeScript</a></li>
+</ul>
+<!--7h-->
+
+<hr>
+<img src="/2020/06/30/usecontext-with-typescript-in-reacthooks/reward.jpeg" class="" title="Thanks">
+</body></html>
+        <!-- 引入打赏图片即显示打赏功能 -->
+        
+            <div class="page-reward">
+  <a href="javascript:;" class="page-reward-btn tooltip-top">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">赏</span>
+    <span class="tooltip-content">
+      <span class="tooltip-text">
+        <span class="tooltip-inner">
+          <div class="reward-box">
+          </div>
+        </span>
+      </span>
+    </span>
+  </div>
+  </a>
+</div>
+
+        
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/React/">#React</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020/07/11/my-choice-of-notes/">我的笔记选择之路</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020/06/13/learning-about-symbol/">被人忽视的 es6 重要类型 symbol 简单入门</a>
+            
+        </span>
+    </div>
+    
+    <script>
+    // 打赏相关逻辑
+    var img = document.body.querySelector('img[title="Thanks"]');
+    if (img && img.style) {
+        var reward = document.body.querySelector('.page-reward-btn');
+        img.className += ' reward-qrcode';
+        var className = img.getAttribute('class');
+        img.style.display = 'none';
+        img.style.width = '200px';
+        reward.addEventListener('click', function () {
+            if (img.style.display === 'none' || className === 'pay-hide') {
+                $('img.reward-qrcode').fadeIn('slow');
+            } else {
+                $('img.reward-qrcode').fadeOut();
+            }
+        })
+    }
+    </script>
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://kyriejoshua.github.io/2020/06/30/usecontext-with-typescript-in-reacthooks/';
+        this.page.identifier = '2020/06/30/usecontext-with-typescript-in-reacthooks/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'deadpool-frontend' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2023 朱征原&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/kyriejoshua/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <!-- 纯 css3 实现 🎲 -->
+<div id="dice" class="dice" title="🎲 点我就消失">
+  <div class="dice-content">
+    <!-- 1 -->
+    <div class="dice-face dice-pos-top">
+      <span class="dice-point"></span>
+    </div>
+    <!-- 2 -->
+    <div class="dice-face dice-pos-left flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="dice-face dice-pos-front flex flex-column jc-sa">
+      <div class="flex jc-fs">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-fe">
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="dice-face dice-pos-back flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="dice-face dice-pos-right flex flex-column jc-sa">
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-c">
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="dice-face dice-pos-bottom">
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+      <div class="flex flex-column jc-sa">
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+        <span class="dice-point"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>
